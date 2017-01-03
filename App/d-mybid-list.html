@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的竞标</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的竞标</h1>
+			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
+		</header>
+		<div class="order1-top">
+			<ul>
+				<li class="order1-top-list active4">全部</li>
+				<li class="order1-top-list">已投标</li>
+				<li class="order1-top-list">已中标</li>
+				<li class="order1-top-list">已完成</li>
+			</ul>
+		</div>
+		<div class="dm-list-m">
+			<ul class="dm-list-tol">
+				<li class="dm-list-tol1">
+					<div class="dm-list-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="dm-list-list2 l">
+						<p>检修名称</p>
+						<p>李四 | 15236256585</p>
+						<p>已投标<span>2</span>次</p>
+						<p>投标金额：<span>￥1，000</span></p>
+					</div>
+					<div class="dm-list-list3 r">
+						<p>消缺</p>
+						<p></p>
+						<p>已投标</p>
+						<p id="timer">12:12:12</p>
+					</div>
+				</li>
+				<li class="dm-list-tol1">
+					<div class="dm-list-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="dm-list-list2 l">
+						<p>检修名称</p>
+						<p>李四 | 15236256585</p>
+						<p>已投标<span>2</span>次</p>
+						<p>投标金额：<span>￥1，000</span></p>
+					</div>
+					<div class="dm-list-list3 r">
+						<p>消缺</p>
+						<p></p>
+						<p>已中标</p>
+						<p id="timer">12:12:12</p>
+					</div>
+				</li>
+				<li class="dm-list-tol1">
+					<div class="dm-list-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="dm-list-list2 l">
+						<p>检修名称</p>
+						<p>李四 | 15236256585</p>
+						<p>已投标<span>2</span>次</p>
+						<p>投标金额：<span>￥1，000</span></p>
+					</div>
+					<div class="dm-list-list3 r">
+						<p>消缺</p>
+						<p></p>
+						<p>已投标</p>
+						<p id="timer">12:12:12</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$(".order1-top ul").on("click", "li", function() {
+				$(".order1-top ul").children("li").removeClass('active4');
+				$(this).addClass("active4");
+			});
+			$(".order1-top ul").find("li").eq(0).click(function() {
+				$(".mes").show();
+				$(".notice").hide();
+			});
+			$(".order1-top ul").find("li").eq(1).click(function() {
+				$(".notice").show();
+				$(".mes").hide();
+			});
+		});
+	</script>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>附近-业主</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header class="fujin-header">
+			<a href="###"><i class="icon iconfont icon-fanhui"></i></a>
+			<form action="" method="post" class="fy-serch-tol">
+				<div class="fy-serch">
+					<input type="text" name="" id="" placeholder="请输入服务商的名称" />
+				</div>
+				<a href="###"><span>搜索</span></a>
+			</form>
+		</header>
+		<div class="fujinyz-tol">
+			<ul class="fujinyz-tol-t">
+				<li class="">分类 <i class="icon iconfont icon-xiangxia"></i></li>
+				<li class="">距离<i class="icon iconfont icon-xiangxia"></i></li>
+			</ul>
+		</div>
+		<div class="fujinyz-hide" style="display: none;">
+			<div class="abbr" style="display: none;">
+				<ul class="abbr-one">
+					<li class="abbr-onelist1 active1">供应商</li>
+					<li class="abbr-onelist1">校园代理</li>
+					<li class="abbr-onelist1">推广注册</li>
+				</ul>
+			</div>
+			<div class="abbr" style="display: none;">
+				<ul class="abbr-one">
+					<li class="abbr-onelist2 active1">由近及远</li>
+					<li class="abbr-onelist2">由远及近</li>
+				</ul>
+			</div>
+		</div>
+		<div class="fujinyz-one">
+			<ul>
+				<li class="fujinyz-one-t clearfix">
+					<div class="fujinyz-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="fujinyz-list2 l">
+						<p>检修企业名称</p>
+						<p class="fujinyz-list2-m"><span><i class="icon iconfont icon-xingye"></i>五金行业</span><span><i class="icon iconfont icon-qian"></i>1000万</span><span><i class="icon iconfont icon-geren-copy"></i>0-20人</span></p>
+						<p><span class="l">地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+						<p class="fujinyz-word2">简介：成立于1949年，走过长征路</p>
+					</div>
+				</li>
+				<li class="fujinyz-one-t clearfix">
+					<div class="fujinyz-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="fujinyz-list2 l">
+						<p>检修工程师</p>
+						<p>李三 | 15236252635</p>
+						<p><span>地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+						<p class="fujinyz-word2">项目经历：致力打假三十年，从未得手</p>
+					</div>
+				</li>
+				<li class="fujinyz-one-t clearfix">
+					<div class="fujinyz-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="fujinyz-list2 l">
+						<p>检修企业名称</p>
+						<p class="fujinyz-list2-m"><span><i class="icon iconfont icon-xingye"></i>五金行业</span><span><i class="icon iconfont icon-qian"></i>1000万</span><span><i class="icon iconfont icon-geren-copy"></i>0-20人</span></p>
+						<p><span class="l">地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+						<p class="fujinyz-word2">简介：成立于1949年，走过长征路</p>
+					</div>
+				</li>
+				<li class="fujinyz-one-t clearfix">
+					<div class="fujinyz-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="fujinyz-list2 l">
+						<p>检修工程师</p>
+						<p>李三 | 15236252635</p>
+						<p><span>地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+						<p class="fujinyz-word2">项目经历：致力打假三十年，从未得手</p>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(".fujinyz-tol-t li").click(function() {
+			if($(this).hasClass("this")) {
+				$(this).removeClass("this");
+				//		$(this).find("i").removeClass("fa-caret-up").addClass("fa-sort-desc");
+				$(".fujinyz-hide").hide();
+			} else {
+				$(".fujinyz-hide").show();
+				var y = $(this).index();
+				$(".abbr").hide();
+				$(".abbr").eq(y).show();
+				/*-----------------------------------*/
+				//alert(y);
+				//		$(".abbr").eq(y).find(".second_list ul").eq(0).show();
+				/*-----------------------------------*/
+				$(".fujinyz-tol-t li").removeClass("this");
+				$(".fujinyz-hide").show();
+				//		$(".mall-cate li i").removeClass("fa-caret-up").addClass("fa-sort-desc");
+				$(this).addClass("this");
+				//		$(this).find("i").addClass("fa-caret-up").removeClass("fa-sort-desc");
+			}
+		})
+		$(".abbr-onelist1").click(function() {
+			$(".abbr-onelist1").removeClass("active1");
+			$(this).addClass("active1");
+		})
+		$(".abbr-onelist2").click(function() {
+				$(".abbr-onelist2").removeClass("active1");
+				$(this).addClass("active1");
+			})
+			//		限制字数
+		$(function() {
+			//限制字符个数
+			$(".fujinyz-word1").each(function() {
+				var maxwidth = 7;
+				if($(this).text().length > maxwidth) {
+					$(this).text($(this).text().substring(0, maxwidth));
+					$(this).html($(this).html() + '…');
+				}
+			});
+			$(".fujinyz-word2").each(function() {
+				var maxwidth = 14;
+				if($(this).text().length > maxwidth) {
+					$(this).text($(this).text().substring(0, maxwidth));
+					$(this).html($(this).html() + '…');
+				}
+			});
+		});
+	</script>
+
+</html>

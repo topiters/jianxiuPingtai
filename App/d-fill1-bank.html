@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>填写银行卡信息</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">填写银行卡信息</h1>
+			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>-->
+		</header>
+		<p class="bb1-word">请输入手机 <span>15236252536</span>收到的短信验证码</p>
+		<div class="fb1-t">
+			<span>校验码</span>
+			<input type="text" name="" id="" value="" class="fb1-input"/>
+			<span class="r">重发校验码</span>
+		</div>
+		<button class="fb1-btn">下一步</button>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$('.fb1-input').bind({
+				focus: function() {
+					$('.fb1-btn').css('background','#4eb145')
+				},
+				blur: function() {
+					$('.fb1-btn').css('background','#ccc')
+				},
+			})
+		})
+	</script>
+</html>

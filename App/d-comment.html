@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>评价</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">评价</h1>
+			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
+		</header>
+		<div class="com-main">
+			<div class="com-top clearfix">
+				<textarea id="area" name="" placeholder="亲，请您对这次购物留下宝贵的意见吧..."></textarea>
+				<p class="r"><span id="text-count">200</span>/200</p>
+			</div>
+			<div class="com-point">
+				<p>项目评分</p>
+				<div class="com-point1 clearfix">
+					<span class="l">描述相符</span>
+					<div class="star-tol r">
+						<i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i>
+					</div>
+				</div>
+				<div class="com-point1 clearfix">
+					<span class="l">项目难度</span>
+					<div class="star-tol r">
+						<i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i>
+					</div>
+				</div>
+				<div class="com-point1 clearfix">
+					<span class="l">配合程度</span>
+					<div class="star-tol r">
+						<i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i><i class="icon iconfont icon-star"></i>
+					</div>
+				</div>
+			</div>
+			<div class="com-sure">
+				<a href="###">确定</a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(".star-tol i").click(function() {
+			$(this).nextAll().attr({
+				"class": "icon iconfont icon-star"
+			});
+			$(this).attr({
+				"class": "icon iconfont icon-xingxing2"
+			}).prevAll().attr({
+				"class": "icon iconfont icon-xingxing2"
+			});
+		});
+	</script>
+
+</html>

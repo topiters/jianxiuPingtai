@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<select class="m-wrap span6" name="task_type" data-placeholder="Select Task Type" tabindex="-1">
+			<option value=""></option>
+			<option value="TASK_DEVICEGROUP">Task To Device Group</option>
+			<option value="TASK_DEVICE">Task To Device</option>
+			<option value="TASK_USERGROUP">Task To User Group</option>
+			<option value="TASK_USER">Task To User</option>
+		</select>
+	</body>
+	<script src="js/select2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$("select").select2({
+			placeholder: "select a option",
+			allowClear: true
+		});
+	</script>
+
+</html>

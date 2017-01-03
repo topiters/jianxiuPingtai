@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-transparent">
+			<span>郑州</span>
+			<a><span class="mui-icon mui-icon-arrowdown"></span></a>
+			<div class="index-serch">
+				<input type="search" placeholder="请输入关键词">
+			</div>
+			<span class="put r" style="margin: 0.2rem 0.1rem 0 0;">发布</span>
+		</header>
+		<div class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop">
+				<!--支持循环，需要重复图片节点-->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img src="img/d9d90c5024e40a4502860d3bf7184cde.jpg" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="img/lunbo.png" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="img/1eca34d5534a658febcec7ca2a723f94.jpg" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="img/c6538c150f3d4f043a1e382a3a3ef9a0.jpg" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="img/d9d90c5024e40a4502860d3bf7184cde.jpg" /></a>
+				</div>
+				<!--支持循环，需要重复图片节点-->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img src="img/lunbo.png" /></a>
+				</div>
+			</div>
+		</div>
+		<div class="index-new">
+			<div class="new-l">
+				<img src="img/zuixin-01.png" />
+			</div>
+			<i class="icon iconfont icon-shengyin"></i>
+			<span>新闻新闻新闻新闻...</span>
+		</div>
+		<div class="index-tol">
+			<div class="index-tol-list">
+				<img src="img/caigou-01.png" />
+				<span>采购任务</span>
+			</div>
+			<div class="index-tol-list">
+				<img src="img/jianxiu-01.png" />
+				<span>检修任务</span>
+			</div>
+			<div class="index-tol-list">
+				<img src="img/gaojia-01.png" />
+				<span>高价悬赏</span>
+			</div>
+			<div class="index-tol-list">
+				<img src="img/fujin-01.png" />
+				<span>附近GO</span>
+			</div>
+		</div>
+		<div class="index-task">
+			<div class="index-taskt clearfix">
+				<span class="l">任务推荐</span>
+				<span class="r">更多></span>
+			</div>
+			<div class="index-taskd">
+				<ul class="task-tol">
+					<li class="task-tol1">
+						<div class="task-list1 l">
+							<img src="img/logo-01.jpg" />
+						</div>
+						<div class="task-list2 l">
+							<p>检修名称</p>
+							<p>李三 | 15236252635</p>
+							<p>已有<span>2</span>人投标</p>
+							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+						</div>
+						<div class="task-list3 r">
+							<p>消缺</p>
+							<p></p>
+							<p id="timer"></p>
+							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+						</div>
+						<div class="task-list4">
+							<img src="img/bid-01.png" />
+						</div>
+					</li>
+					<li class="task-tol2">
+						<div class="task-list1 l">
+							<img src="img/logo-01.jpg" />
+						</div>
+						<div class="task-list2 l">
+							<p>检修名称</p>
+							<p>已有<span>3</span>人抢单</p>
+							<p>发布时间：<span>12-12 12:12</span></p>
+							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+						</div>
+						<div class="task-list3 r">
+							<p>￥400.00</p>
+							<p>5人</p>
+							<p></p>
+							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+						</div>
+						<div class="task-list4">
+							<img src="img/qiangdan-01.png" />
+						</div>
+					</li>
+					<li class="task-tol1">
+						<div class="task-list1 l">
+							<img src="img/logo-01.jpg" />
+						</div>
+						<div class="task-list2 l">
+							<p>检修名称</p>
+							<p>李三 | 15236252635</p>
+							<p>已有<span>2</span>人投标</p>
+							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+						</div>
+						<div class="task-list3 r">
+							<p>消缺</p>
+							<p></p>
+							<p id="timer"></p>
+							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+						</div>
+						<div class="task-list4">
+							<img src="img/bid-01.png" />
+						</div>
+					</li>
+					<li class="task-tol2">
+						<div class="task-list1 l">
+							<img src="img/logo-01.jpg" />
+						</div>
+						<div class="task-list2 l">
+							<p>检修名称</p>
+							<p>已有<span>3</span>人抢单</p>
+							<p>发布时间：<span>12-12 12:12</span></p>
+							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+						</div>
+						<div class="task-list3 r">
+							<p>￥400.00</p>
+							<p>5人</p>
+							<p></p>
+							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+						</div>
+						<div class="task-list4">
+							<img src="img/qiangdan-01.png" />
+						</div>
+					</li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+		<!--发布弹框-->
+		<div class="jx-alert1">
+			<div class="jx-alert1-t">
+				<div class="jx-alert1-t1">
+					<img src="img/shouye-01.png" />
+				</div>
+				<div class="jx-alert1-t2">
+					<a href="###">
+						<p><i class="icon iconfont icon-caigou"></i><span>发布采购任务</span></p>
+					</a>
+				</div>
+				<div class="jx-alert1-t3">
+					<a href="###">
+						<p><i class="icon iconfont icon-weixiuyuanyin"></i><span>发布检修任务</span></p>
+					</a>
+				</div>
+				<span class="cha"><i class="icon iconfont icon-cha"></i></span>
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="###">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="###">
+				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="###">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+
+	</body>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var gallery = mui('.mui-slider');
+		gallery.slider({
+			interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+		});
+
+		$(function() {
+			//限制字符个数
+			$(".cut_str").each(function() {
+				var maxwidth = 10;
+				if($(this).text().length > maxwidth) {
+					$(this).text($(this).text().substring(0, maxwidth));
+					$(this).html($(this).html() + '…');
+				}
+			});
+		});
+		//		var timer = null;
+		//		function timer() {
+		//			var ts = (new Date(2016, 11, 30, 9, 0, 0)) - (new Date()); //计算剩余的毫秒数
+		//			var hh = parseInt(ts / 1000 / 60 / 60, 10); //计算剩余的小时数  
+		//			var mm = parseInt(ts / 1000 / 60 % 60, 10); //计算剩余的分钟数  
+		//			var ss = parseInt(ts / 1000 % 60, 10); //计算剩余的秒数  
+		//			hh = checkTime(hh);
+		//			mm = checkTime(mm);
+		//			ss = checkTime(ss);
+		//			document.getElementById("timer").innerHTML =hh + ":" + mm + ":" + ss;
+		//			setInterval("timer()", 1000);
+		//		}
+		//
+		//		function checkTime(i) {
+		//			if(i < 10) {
+		//				i = "0" + i;
+		//			}
+		//			return i;
+		//		}
+		//		timer();
+		$(".put").click(function() {
+			$(".jx-alert1").show();
+		});
+		$(".cha").click(function() {
+			$(".jx-alert1").hide();
+		});
+	</script>
+
+</html>

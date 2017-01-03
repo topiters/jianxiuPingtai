@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>充值</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">充值</h1>
+			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>-->
+		</header>
+		<div class="dm1-main">
+			<div class="dm1-main-t clearfix">
+				<div class="dm1-main-t1 l">
+					<img src="img/jianhang-1.png" />
+				</div>
+				<div class="dm1-main-t2 l">
+					<p>中国建设银行</p>
+					<p>尾号 <span>8192</span></p>
+				</div>
+				<i class="icon iconfont icon-jiantouyoujiantou r" style="margin: 0.25rem 0 0 0;"></i>
+			</div>
+			<p class="dm1-main-m">
+				改卡本次最多可充值<span>10,000</span>元
+			</p>
+			<div class="dm1-main-d">
+				<span>金额</span>
+				<input type="text" name="" id="" placeholder="请输入充值金额" class="input_test"/>
+			</div>
+			<button class="dm1-main-btn">确定</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$('.input_test').bind({
+				focus: function() {
+					$('.dm1-main-btn').css('background','#4eb145')
+				},
+				blur: function() {
+					$('.dm1-main-btn').css('background','#ccc')
+				},
+			})
+		})
+	</script>
+
+</html>

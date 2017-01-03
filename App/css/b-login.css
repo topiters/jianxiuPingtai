@@ -1,0 +1,136 @@
+.l-main{
+	width: 5.6rem;
+	margin: 0 auto;
+	margin-top: 2rem;
+}
+.icon-3 ,.icon-suo , .icon-shouji1 , .icon-weixin ,.icon-geren-copy ,.icon-key{
+	font-size: 0.4rem;
+	vertical-align: middle;
+}
+.l-main1 , .l-main2{
+	padding: 0.2rem 0.2rem;
+	border: 1px solid #ddd;
+	margin-top: 0.2rem;
+}
+.l-main1 input , .l-main2 input{
+	border: 0;
+	background-color: #fff;
+	margin-left: 0.1rem;
+	width: 4rem;
+}
+.l-btn{
+	display: block;
+	margin: 0 auto;
+	margin-top: 0.5rem;
+	width: 5.6rem;
+	height: 0.9rem;
+	background-color: #4EB145;
+	color: #fff;
+}
+.l-main3{
+	margin: 0.2rem 0 0 0;
+}
+.l-main3 span:nth-child(2){
+	color: #4EB145;
+}
+.l-main4-t{
+	text-align: center;
+	margin-top: 2.6rem;
+}
+.l-main4-t span{
+	vertical-align: middle;
+}
+.l-main4-t span:nth-child(1) , .l-main4-t span:nth-child(3){
+	display: inline-block;
+	width: 1.8rem;
+	height: 0.01rem;
+	border: 1px solid #e4e4e4;
+}
+.l-main5{
+	width: 3.4rem;
+	height: 0.9rem;
+	margin: 0.4rem auto 0;
+	display: flex;
+}
+.l-main5-list{
+	flex: 1;
+	text-align: center;
+}
+.l-main5-list img{
+	width: 0.9rem;
+	height: 0.9rem;
+}
+.l-suibian{
+	margin: 0.2rem 0.2rem 0 0;
+	color: #4EB145;
+}
+/*手机动态登录*/
+.p-main{
+	width: 5.6rem;
+	margin: 0 auto;
+	margin-top: 2rem;
+}
+.p-main1 , .p-main2{
+	padding: 0.2rem 0.2rem;
+	border: 1px solid #ddd;
+	margin-top: 0.2rem;
+}
+.p-main1 input , .p-main2 input{
+	border: 0;
+	background-color: #fff;
+	margin-left: 0.1rem;
+	width: 2.6rem;
+}
+.p-main2 span{
+	padding: 0 0 0 0.1rem;
+	display: inline-block;
+	border-left: 1px solid #e4e4e4;
+	color: #4EB145;
+}
+.p-btn{
+	display: block;
+	margin: 0 auto;
+	margin-top: 0.5rem;
+	width: 5.6rem;
+	height: 0.9rem;
+	background-color: #4EB145;
+	color: #fff;
+}
+/*注册*/
+.r-main{
+	width: 5.6rem;
+	margin: 0 auto;
+	margin-top: 2rem;
+}
+.r-main1 , .r-main2 ,.r-main3 ,.r-main4 ,.r-main5{
+	padding: 0.2rem 0.2rem;
+	border: 1px solid #ddd;
+	margin-top: 0.2rem;
+}
+.r-main1 input , .r-main2 input , .r-main4 input{
+	border: 0;
+	background-color: #fff;
+	margin-left: 0.1rem;
+	width: 4rem;
+}
+.r-main3 input{
+	border: 0;
+	background-color: #fff;
+	margin-left: 0.1rem;
+	width: 2.6rem;
+}
+.r-main3 span{
+	padding: 0 0 0 0.1rem;
+	display: inline-block;
+	border-left: 1px solid #e4e4e4;
+	color: #4EB145;
+}
+.r-btn{
+	display: block;
+	margin: 0 auto;
+	margin-top: 0.5rem;
+	width: 5.6rem;
+	height: 0.9rem;
+	background-color: #4EB145;
+	color: #fff;
+}

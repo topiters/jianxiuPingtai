@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>发布-检修任务</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body style="background-color: #f4f4f4;">
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">发布检修任务</h1>
+			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
+		</header>
+		<form action="" method="post" class="fabu1-tol">
+			<div class="fabu1-one">
+				<span class="fabu1-onebasic">基本信息</span>
+				<ul class="fabu1-one-mes">
+					<li>
+						<span>检修名称：</span>
+						<input type="text" name="" id="" placeholder="请输入要采购的物质名称" />
+					</li>
+					<li>
+						<span>风机厂家：</span>
+						<select id="fabu1-one-sel" data-placeholder="请选择风机厂家" tabindex="-1">
+							<option value=""></option>
+							<option value="item-1">item-1</option>
+							<option value="item-2">item-2</option>
+							<option value="item-3">item-3</option>
+							<option value="item-4">item-4</option>
+						</select>
+					</li>
+					<li>
+						<span>设备型号：</span>
+						<select id="fabu1-one-sel" data-placeholder="请选择设备型号" tabindex="-1">
+							<option value=""></option>
+							<option value="item-1">item-1</option>
+							<option value="item-2">item-2</option>
+							<option value="item-3">item-3</option>
+							<option value="item-4">item-4</option>
+						</select>
+					</li>
+				</ul>
+			</div>
+			<div class="jx1-two">
+				<ul class="fabu1-one-mes">
+					<li>
+						<span>检修类型：</span>
+						<input type="radio" name="name1" id="" />竞价
+						<input type="radio" name="name1" id="" />抢单
+					</li>
+					<li>
+						<span>检修性质：</span>
+						<select id="fabu1-one-sel" data-placeholder="请选择检修性质" tabindex="-1">
+							<option value=""></option>
+							<option value="item-1">消缺</option>
+							<option value="item-2">定检</option>
+							<option value="item-3">大修</option>
+							<option value="item-4">小修</option>
+						</select>
+					</li>
+					<li>
+						<span>发生时间：</span>
+						<input type="text" data-options='{}' class="result" id="result" placeholder="请输入故障发生时间" />
+					</li>
+					<li class="fabu1-special clearfix">
+						<span>故障描述:</span>
+						<textarea name="" rows="" cols="" placeholder="故障描述，请尽可能的描述你的故障情况"></textarea>
+					</li>
+					<li class="fabu1-special clearfix">
+						<span>检修历史:</span>
+						<textarea name="" rows="" cols="" placeholder="请输入你的检修历史"></textarea>
+						<span class="r">选填</span>
+					</li>
+				</ul>
+			</div>
+			<div class="fabu1-one">
+				<span class="fabu1-onebasic">工作时间</span>
+				<ul class="fabu1-one-mes">
+					<li>
+						<span>开始时间：</span>
+						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择开始时间" />
+					</li>
+					<li>
+						<span>结束时间：</span>
+						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择结束时间" />
+					</li>
+					<li style="display: none;">
+						<span>检修费用：</span>
+						<input type="text" data-options='{}' class="result" id="result" placeholder="请输入检修检修金额" />元
+					</li>
+					<li>
+						<span>风场位置：</span>
+						<input type="text" value="郑州市索克时代" />
+					</li>
+				</ul>
+			</div>
+			<div class="fabu1-one">
+				<span class="fabu1-onebasic">特殊要求</span>
+				<div class="fabu1-special clearfix">
+					<span>特殊要求</span>
+					<textarea name="" rows="" cols="" placeholder="请输入你对服务商的要求"></textarea>
+				</div>
+			</div>
+			<div class="fabu1-attach">
+				<span class="fabu1-onebasic">上传附件</span>
+				<div class="mui-content">
+					<div class="fabu1-special">
+						<div id='image-list' class="row image-list"></div>
+					</div>
+				</div>
+			</div>
+			<div class="fabu1-foot">
+				<button>确认发布</button>
+			</div>
+		</form>
+	</body>
+	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/select2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$("select").select2({
+			placeholder: "select a option",
+			allowClear: true
+		});
+		(function($) {
+			$.init();
+			var btns = $('.result');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					/*
+					 * 首次显示时实例化组件
+					 * 示例为了简洁，将 options 放在了按钮的 dom 上
+					 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+					 */
+					var picker = new $.DtPicker(options);
+					var result = $(this)[0];
+					picker.show(function(rs) {
+						/*
+						 * rs.value 拼合后的 value
+						 * rs.text 拼合后的 text
+						 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+						 * rs.m 月，用法同年
+						 * rs.d 日，用法同年
+						 * rs.h 时，用法同年
+						 * rs.i 分（minutes 的第二个字母），用法同年
+						 */
+						result.value = rs.text;
+						/* 
+						 * 返回 false 可以阻止选择框的关闭
+						 * return false;
+						 */
+						/*
+						 * 释放组件资源，释放后将将不能再操作组件
+						 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+						 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+						 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+						 */
+						picker.dispose();
+					});
+				}, false);
+			});
+		})(mui);
+	</script>
+
+</html>

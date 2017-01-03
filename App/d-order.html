@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>订单中心</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单中心</h1>
+			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
+		</header>
+		<div class="order1-top">
+			<ul>
+				<li class="order1-top-list active4">全部</li>
+				<li class="order1-top-list">待发货</li>
+				<li class="order1-top-list">发货中</li>
+				<li class="order1-top-list">已收货</li>
+				<li class="order1-top-list">待评价</li>
+			</ul>
+		</div>
+		<div class="order1-m">
+			<ul class="order1-tol">
+				<li class="order1-tol1">
+					<div class="order1-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="order1-list2 l">
+						<p>采购名称</p>
+						<p>型&nbsp;&nbsp;号: <span>FGJ-256</span></p>
+						<p>状&nbsp;&nbsp;态: <span>待发货</span></p>
+						<p>合&nbsp;&nbsp;计: <span>￥15,000.00</span></p>
+					</div>
+				</li>
+				<li class="order1-tol1">
+					<div class="order1-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="order1-list2 l">
+						<p>采购名称</p>
+						<p>型&nbsp;&nbsp;号: <span>FGJ-256</span></p>
+						<p>状&nbsp;&nbsp;态: <span>待收货</span></p>
+						<p>合&nbsp;&nbsp;计: <span>￥15,000.00</span></p>
+					</div>
+				</li>
+				<li class="order1-tol1">
+					<div class="order1-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="order1-list2 l">
+						<p>采购名称</p>
+						<p>型&nbsp;&nbsp;号: <span>FGJ-256</span></p>
+						<p>状&nbsp;&nbsp;态: <span>待评价</span></p>
+						<p>合&nbsp;&nbsp;计: <span>￥15,000.00</span></p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$(".order1-top ul").on("click", "li", function() {
+				$(".order1-top ul").children("li").removeClass('active4');
+				$(this).addClass("active4");
+			});
+			$(".order1-top ul").find("li").eq(0).click(function() {
+				$(".mes").show();
+				$(".notice").hide();
+			});
+			$(".order1-top ul").find("li").eq(1).click(function() {
+				$(".notice").show();
+				$(".mes").hide();
+			});
+		});
+	</script>
+
+</html>

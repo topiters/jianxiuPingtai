@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>检修任务</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">检修任务</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
+		</header>
+		<div class="order1-top">
+			<ul>
+				<li class="order1-top-list active4">全部</li>
+				<li class="order1-top-list">未开始</li>
+				<li class="order1-top-list">投标中</li>
+				<li class="order1-top-list">已中标</li>
+				<li class="order1-top-list">已完成</li>
+			</ul>
+		</div>
+		<div class="dml-list-m">
+			<ul class="dml1-one">
+				<li class="dml1-one-t clearfix">
+					<div class="dml1-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="dml1-list2 l">
+						<p>检修名称</p>
+						<p>联系人: <span>李四</span></p>
+						<p>联系电话: <span>13252632569</span></p>
+						<p>发布时间：2016-12-12 12:12</p>
+					</div>
+					<div class="dml1-list3 r">
+						<p>￥400</p>
+						<p>已抢单</p>
+						<p>消缺</p>
+						<p></p>
+					</div>
+					<div class="dml1-list4 l">
+						<p class="clearfix"><span class="l">地址：</span><span class="l">郑州市索克时代大厦</span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+					</div>
+				</li>
+				<li class="dml1-one-t clearfix">
+					<div class="dml1-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="dml1-list2 l">
+						<p>检修名称</p>
+						<p>联系人: <span>李四</span></p>
+						<p>联系电话: <span>13252632569</span></p>
+						<p>发布时间：2016-12-12 12:12</p>
+					</div>
+					<div class="dml1-list3 r">
+						<p>￥400</p>
+						<p>已抢单</p>
+						<p>消缺</p>
+						<p></p>
+					</div>
+					<div class="dml1-list4 l">
+						<p class="clearfix"><span class="l">地址：</span><span class="l">郑州市索克时代大厦</span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+					</div>
+				</li>
+				<li class="dml1-one-t clearfix">
+					<div class="dml1-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="dml1-list2 l">
+						<p>检修名称</p>
+						<p>联系人: <span>李四</span></p>
+						<p>联系电话: <span>13252632569</span></p>
+						<p>发布时间：2016-12-12 12:12</p>
+					</div>
+					<div class="dml1-list3 r">
+						<p>￥400</p>
+						<p>已抢单</p>
+						<p>消缺</p>
+						<p></p>
+					</div>
+					<div class="dml1-list4 l">
+						<p class="clearfix"><span class="l">地址：</span><span class="l">郑州市索克时代大厦</span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$(".order1-top ul").on("click", "li", function() {
+				$(".order1-top ul").children("li").removeClass('active4');
+				$(this).addClass("active4");
+			});
+			$(".order1-top ul").find("li").eq(0).click(function() {
+				$(".mes").show();
+				$(".notice").hide();
+			});
+			$(".order1-top ul").find("li").eq(1).click(function() {
+				$(".notice").show();
+				$(".mes").hide();
+			});
+		});
+	</script>
+
+</html>

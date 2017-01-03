@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>绑定银行卡</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">绑定银行卡</h1>
+			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>-->
+		</header>
+		<p class="bb1-word">请绑定持卡人本人银行卡</p>
+		<div class="bb1-t">
+			<dl>
+				<dt>
+					<span>持卡人</span>
+					<input type="text" name="" id="" value="" />
+					<i class="icon iconfont icon-tishi1 r" style="color: #4EB145;font-size: 0.35rem;"></i>
+				</dt>
+				<dt>
+					<span>卡号</span>
+					<input type="text" name="" id="" placeholder="银行卡号" class="bb1-input"/>
+				</dt>
+			</dl>
+			<button class="bb1-btn">下一步</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$('.bb1-input').bind({
+				focus: function() {
+					$('.bb1-btn').css('background','#4eb145')
+				},
+				blur: function() {
+					$('.bb1-btn').css('background','#ccc')
+				},
+			})
+		})
+	</script>
+</html>
