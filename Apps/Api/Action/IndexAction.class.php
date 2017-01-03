@@ -14,16 +14,16 @@ class IndexAction extends BaseAction {
 	 * 
 	 */
     public function index(){
-   		$ads = D('Home/Ads');
-   		$areaId2 = $this->getDefaultCity();
+   		$ads = D('Api/Ads');
+   		//$areaId2 = $this->getDefaultCity();
    		//获取分类
-		$gcm = D('Home/GoodsCats');
-		$catList = $gcm->getGoodsCatsAndGoodsForIndex($areaId2);
-		$this->assign('catList',$catList);
+		//$gcm = D('Api/GoodsCats');
+		//$catList = $gcm->getGoodsCatsAndGoodsForIndex($areaId2);
+		//$this->assign('catList',$catList);
    		//分类广告
-   		$catAds = $ads->getAdsByCat($areaId2);
-   		$this->assign('catAds',$catAds);
-   		$this->assign('ishome',1);
+   		//$catAds = $ads->getAdsByCat($areaId2);
+   		//$this->assign('catAds',$catAds);
+   		//$this->assign('ishome',1);
    		/* if(I("changeCity")){
    			echo $_SERVER['HTTP_REFERER'];
    		}else{
@@ -34,14 +34,14 @@ class IndexAction extends BaseAction {
      * 广告记数
      */
     public function access(){
-    	$ads = D('Home/Ads');
+    	$ads = D('Api/Ads');
     	$ads->statistics((int)I('id'));
     }
     /**
      * 切换城市
      */
     public function changeCity(){
-    	$m = D('Home/Areas');
+    	$m = D('Api/Areas');
     	$areaId2 = $this->getDefaultCity();
     	$provinceList = $m->getProvinceList();
     	$cityList = $m->getCityGroupByKey();

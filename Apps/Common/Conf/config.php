@@ -6,16 +6,18 @@
 	    'PAGE_SIZE'=>15,
 		'DB_TYPE'=>'mysql',
 	    'DB_HOST'=>'localhost',
-	    'DB_NAME'=>'wstmall',
+	    'DB_NAME'=>'jianxiu',
 	    'DB_USER'=>'root',
 	    'DB_PWD'=>'root',
 	    'DB_PREFIX'=>'wst_',
-	    'DEFAULT_C_LAYER' =>  'Action',
+	    'DEFAULT_C_LAYER' =>'Action',
 	    'DEFAULT_CITY' => '440100',
 	    'DATA_CACHE_SUBDIR'=>true,
         'DATA_PATH_LEVEL'=>2, 
 	    'SESSION_PREFIX' => 'WSTMALL',
         'COOKIE_PREFIX'  => 'WSTMALL',
+		'MODULE_ALLOW_LIST'    => array('Home','Admin','User'),
+		'DEFAULT_MODULE'       =>    'Api',
 		'LOAD_EXT_CONFIG' => 'wst_config'
 	);
 ?>

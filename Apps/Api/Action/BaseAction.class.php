@@ -13,14 +13,14 @@ class BaseAction extends Controller {
 	public function __construct(){
 		parent::__construct();
 		//初始化系统信息
-		$m = D('Home/System');
+		$m = D('Api/System');
 		$GLOBALS['CONFIG'] = $m->loadConfigs();
-		WSTAutoByCookie();
+		//WSTAutoByCookie();
 		//$this->assign("WST_USER",session('WST_USER'));
 	//	$this->assign("WST_IS_LOGIN",(session('WST_USER.userId')>0)?1:0);
-		//$areas= D('Home/Areas');
-		//$areaId2 = $this->getDefaultCity();
-	//	$currArea = $areas->getArea($areaId2);
+		//$areas= D('Api/Areas');
+	  //  $areaId2 = $this->getDefaultCity();
+		//$currArea = $areas->getArea($areaId2);
 		//$this->assign('currArea',$currArea);
    		//$this->assign('searchType',(int)I("searchType",1));
    		//$this->assign('CONF',$GLOBALS['CONFIG']);
