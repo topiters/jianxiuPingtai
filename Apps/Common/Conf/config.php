@@ -16,8 +16,8 @@
         'DATA_PATH_LEVEL'=>2, 
 	    'SESSION_PREFIX' => 'WSTMALL',
         'COOKIE_PREFIX'  => 'WSTMALL',
-		'MODULE_ALLOW_LIST'    => array('Home','Admin','User'),
-		'DEFAULT_MODULE'       =>    'Api',
+		'MODULE_ALLOW_LIST'    => array('Home','Admin','User','Api'),
+		'DEFAULT_MODULE'       =>'Api',
 		'LOAD_EXT_CONFIG' => 'wst_config'
 	);
 ?>
