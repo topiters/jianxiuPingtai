@@ -1,13 +1,16 @@
 <?php
-namespace Home\Action;
+namespace Api\Action;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 会员控制器
- */
+*  用户控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年1月6日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class UsersAction extends BaseAction {
     /**
      * 跳去登录界面
@@ -61,7 +64,7 @@ class UsersAction extends BaseAction {
 		if(!$this->checkVerify("4") && ($GLOBALS['CONFIG']["captcha_model"]["valueRange"]!="" && strpos($GLOBALS['CONFIG']["captcha_model"]["valueRange"],"3")>=0)){			
 			$rs["status"]= -1;//验证码错误
 		}else{
-			$m = D('Home/Users');			
+			$m = D('Api/Users');			
 			$res = $m->checkLogin();
 			if (!empty($res)){
 				if($res['userFlag'] == 1){
@@ -86,53 +89,143 @@ class UsersAction extends BaseAction {
 	 * 新用户注册
 	 */
 	public function toRegist(){
-		
-		$m = D('Home/Users');
-		$res = array();
-		$nameType = (int)I("nameType");
-		if($nameType!=3 && !$this->checkVerify("3")){			
-			$res['status'] = -4;
-			$res['msg'] = '验证码错误!';
-		}else{			
-			$res = $m->regist();
-			if($res['userId']>0){//注册成功			
-				//加载用户信息				
-				$user = $m->get($res['userId']);
-				if(!empty($user))session('WST_USER',$user);
+		$m = D('Api/Users');
+		$data = array();
+		//$verify = new \Think\Verify();
+		//$ve=$verify->check(I('verify'));
+		 
+		/* if( $ve == false){
+			$res['status']='-4';
+			$res["msg"] = '验证码不正确!';
+			echo json_encode($res);
+			return false;
+		} */
+		$userPhone=I('userPhone');
+		$smscode=I('smscode');
+		$times=time();//当前时间
+		$time2=session('VerifyCode_userPhone_Time');
+	/* 	if( ($times-$time2)>60){
+			
+			$data["msg"] = '短信验证码超时!';
+			$data = array('status'=>self::API_CODE_EXPIRES,'msg'=>$data);
+			$this->stringify($data);
+			return false;
 				
-			}
+		} 
+		
+		$VerifyCode_userPhone=session('VerifyCode_userPhone');
+		if($smscode!=$VerifyCode_userPhone){
+				
+			
+			$data["msg"] = '短信验证码输入错误!';
+			$data = array('status'=>self::API_SCODE_ERROR,'msg'=>$data);
+			$this->stringify($data);
+			
+			return false;
+				
+		}*/
+		
+	    $crs =$m->checkUserPhone($userPhone);
+	   // print_r( $crs)  ;
+	   // exit;
+        if($crs['status']==1){//等于1不存在
+	    	$data["msg"] = '该账号已存在!';
+	    	$data = array('status'=>self::API_PHONE_EXIST_ERROR,'msg'=>$data);
+	    	$this->stringify($data);
+	    	return false;
+	    }
+		$res = $m->regist();
+		if($res['userId']>0){//注册成功
+			//加载用户信息
+			$user = $m->get($res['userId']);
+			if(!empty($user))session('WST_USER',$user);
+		
 		}
-		echo json_encode($res);
+		$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$res);
+		$this->stringify($data);
+		
 
 	}
     
  	/**
 	 * 获取验证码
 	 */
+/**
+	 * 获取验证码
+	 */
 	public function getPhoneVerifyCode(){
+	
+		vendor ('Sms.CCPRestSDK' );
 		$userPhone = WSTAddslashes(I("userPhone"));
-		$rs = array();
-		if(!preg_match("#^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$#",$userPhone)){
-			$rs["msg"] = '手机号格式不正确!';
-			echo json_encode($rs);
+		$data = array();
+		//
+		if(!preg_match('/^[1]+[3,4,5,7,8]+\d{9}$/', $userPhone)){
+			$data["msg"] = '手机号格式不正确!';
+			
+			$data = array('status'=>self::API_PHONE_ERROR,'msg'=>$data);
+			$this->stringify($data);
+			//echo json_encode($rs);
 			exit();
 		}
-		$m = D('Home/Users');
-		$rs = $m->checkUserPhone($userPhone,(int)session('WST_USER.userId'));
-		if($rs["status"]!=1){
-			$rs["msg"] = '手机号已存在!';
-			echo json_encode($rs);
+		$m = D('Api/Users');
+		$rs = $m->checkUserPhone($userPhone);//不存在返回1,
+		if($rs["status"]==1){//等于1，不存在
+			$data["msg"] = '手机号已存在!';
+			$data = array('status'=>self::API_PHONE_EXIST_ERROR,'msg'=>$data);
+			$this->stringify($data);
 			exit();
 		}
 		$phoneVerify = rand(100000,999999);
-		$msg = "欢迎您注册成为".$GLOBALS['CONFIG']['mallName']."会员，您的注册验证码为:".$phoneVerify."，请在30分钟内输入。【".$GLOBALS['CONFIG']['mallName']."】";
-		$rv = D('Home/LogSms')->sendSMS(0,$userPhone,$msg,'getPhoneVerifyByRegister',$phoneVerify);
-		if($rv['status']==1){
+		
+		
+		//主帐号
+		$accountSid='aaf98f894c9d994b014ca1fd595e0358';
+		//主帐号Token
+		$accountToken='9964514651ed42ad8d37a50c5e711f52';
+		//应用Id
+		$appId='8aaf0708592adca6015938cb509c0419';
+		//请求地址，格式如下，不需要写https://
+		$serverIP='app.cloopen.com';
+		//请求端口
+		$serverPort='8883';
+		//REST版本号
+		$softVersion='2013-12-26';
+		$to=$userPhone;
+		$tempId="146693";
+		$datas=array($phoneVerify,'60s');
+		
+		$rest = new \REST($serverIP,$serverPort,$softVersion);
+		$rest->setAccount($accountSid,$accountToken);
+		$rest->setAppId($appId);
+		
+		// 发送模板短信
+		//echo "Sending TemplateSMS to $to <br/>";
+		$result = $rest->sendTemplateSMS($to,$datas,$tempId);
+		if($result == NULL ) {
+			echo "result error!";
+			break;
+		}
+		if($result->statusCode!=0) {
+			echo "error code :" . $result->statusCode . "<br>";
+			echo "error msg :" . $result->statusMsg . "<br>";
+			//TODO 添加错误处理逻辑
+		}else{
+			//echo "Sendind TemplateSMS success!<br/>";
+			// 获取返回信息
+			$smsmessage = $result->TemplateSMS;
+		//	echo "dateCreated:".$smsmessage->dateCreated."<br/>";
+			//echo "smsMessageSid:".$smsmessage->smsMessageSid."<br/>";
 			session('VerifyCode_userPhone',$phoneVerify);
 			session('VerifyCode_userPhone_Time',time());
-			//$rs["phoneVerifyCode"] = $phoneVerify;
+			$data["msg"]="数据成功加载...";
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
+			$this->stringify($data);
+			
+			//TODO 添加成功处理逻辑
 		}
-		echo json_encode($rv);
+		
+		
+		
 	}
    /**
     * 会员中心页面
@@ -157,7 +250,7 @@ class UsersAction extends BaseAction {
 	public function editPass(){
 		$this->isLogin();
 		$USER = session('WST_USER');
-		$m = D('Home/Users');
+		$m = D('Api/Users');
    		$rs = $m->editPass($USER['userId']);
     	$this->ajaxReturn($rs);
 	}
@@ -166,13 +259,13 @@ class UsersAction extends BaseAction {
 	 */
 	public function toEdit(){
 		$this->isLogin();
-		$m = D('Home/Users');
+		$m = D('Api/Users');
 		$obj["userId"] = session('WST_USER.userId');
 		$user = $m->getUserById($obj);
 	
 		//判断会员等级
 		$USER = session('WST_USER');
-		$rm = D('Home/UserRanks');
+		$rm = D('Api/UserRanks');
 		$USER["userRank"] = $rm->getUserRank();
 		session('WST_USER',$USER);
 		
@@ -186,7 +279,7 @@ class UsersAction extends BaseAction {
 	 */
 	public function editUser(){
 		$this->isLogin();
-		$m = D('Home/Users');
+		$m = D('Api/Users');
 		$obj["userId"] = session('WST_USER.userId');
 		$data = $m->editUser($obj);
 		
@@ -197,7 +290,7 @@ class UsersAction extends BaseAction {
 	 * 判断手机或邮箱是否存在
 	 */
 	public function checkLoginKey(){
-		$m = D('Home/Users');
+		$m = D('Api/Users');
 		$key = I('clientid');
 		$userId = (int)session('WST_USER.userId');
 		$rs = $m->checkLoginKey(I($key),$userId);
@@ -232,7 +325,7 @@ class UsersAction extends BaseAction {
     				$this->error('验证码错误！');
     			}
     			$loginName = WSTAddslashes(I('loginName'));
-    			$m = D('Home/Users');
+    			$m = D('Api/Users');
     			$info = $m->checkAndGetLoginInfo($loginName);
     			if ($info != false) {
     				session('findPass',array('userId'=>$info['userId'],'loginName'=>$loginName,'userPhone'=>$info['userPhone'],'userEmail'=>$info['userEmail'],'loginSecret'=>$info['loginSecret']) );
@@ -258,7 +351,7 @@ class UsersAction extends BaseAction {
                 $loginPwd = I('loginPwd');
                 $repassword = I('repassword');
                 if ($loginPwd == $repassword) {
-	                $rs = D('Home/Users')->resetPass();
+	                $rs = D('Api/Users')->resetPass();
 			    	if($rs['status']==1){
 			    	    $this->display('default/forget_pass4');
 			    	}else{
@@ -286,7 +379,7 @@ class UsersAction extends BaseAction {
 		$USER['phoneVerify'] = $phoneVerify;
         session('findPass',$USER);
 		$msg = "您正在重置登录密码，验证码为:".$phoneVerify."，请在30分钟内输入。【".$GLOBALS['CONFIG']['mallName']."】";
-		$rv = D('Home/LogSms')->sendSMS(0,session('findPass.userPhone'),$msg,'getPhoneVerify',$phoneVerify);
+		$rv = D('Api/LogSms')->sendSMS(0,session('findPass.userPhone'),$msg,'getPhoneVerify',$phoneVerify);
 		$rv['time']=30*60;
 		$this->ajaxReturn($rv);
 	}
@@ -300,13 +393,13 @@ class UsersAction extends BaseAction {
 		$rs = array('status'=>-1);
 		if (session('findPass.phoneVerify') == $phoneVerify ) {
 			//获取用户信息
-			$user = D('Home/Users')->checkAndGetLoginInfo(session('findPass.userPhone'));
+			$user = D('Api/Users')->checkAndGetLoginInfo(session('findPass.userPhone'));
 			$rs['u'] = $user;
 			if(!empty($user)){
 				$rs['status'] = 1;
 				$keyFactory = new \Think\Crypt();
 			    $key = $keyFactory->encrypt("0_".$user['userId']."_".time(),C('SESSION_PREFIX'),30*60);
-				$rs['url'] = "http://".$_SERVER['HTTP_HOST'].U('Home/Users/toResetPass',array('key'=>$key));
+				$rs['url'] = "http://".$_SERVER['HTTP_HOST'].U('Api/Users/toResetPass',array('key'=>$key));
 			}
 		}
 		$this->ajaxReturn($rs);
@@ -319,7 +412,7 @@ class UsersAction extends BaseAction {
 		$rs = array('status'=>-1);
 		$keyFactory = new \Think\Crypt();
 		$key = $keyFactory->encrypt("0_".session('findPass.userId')."_".time(),C('SESSION_PREFIX'),30*60);
-		$url = "http://".$_SERVER['HTTP_HOST'].U('Home/Users/toResetPass',array('key'=>$key));
+		$url = "http://".$_SERVER['HTTP_HOST'].U('Api/Users/toResetPass',array('key'=>$key));
 		$html="您好，会员 ".session('findPass.loginName')."：<br>
 		您在".date('Y-m-d H:i:s')."发出了重置密码的请求,请点击以下链接进行密码重置:<br>
 		<a href='".$url."'>".$url."</a><br>
@@ -370,7 +463,7 @@ class UsersAction extends BaseAction {
      */
     public function toScoreList(){
     	$this->isUserLogin();
-    	$um = D('Home/Users');
+    	$um = D('Api/Users');
     	$user = $um->getUserById(array("userId"=>session('WST_USER.userId')));
     	$this->assign("userScore",$user['userScore']);
     	$this->assign("umark","toScoreList");
@@ -382,7 +475,7 @@ class UsersAction extends BaseAction {
      */
     public function getScoreList(){
     	$this->isUserLogin();
-    	$m = D('Home/UserScore');
+    	$m = D('Api/UserScore');
     	$rs = $m->getScoreList();
     	$this->ajaxReturn($rs);
     }
@@ -403,23 +496,23 @@ class UsersAction extends BaseAction {
     	//得到access_token验证值
     	$accessToken = $qq->getToken();
     	if(!$accessToken){
-    		$this->redirect("Home/Users/login");
+    		$this->redirect("Api/Users/login");
     	}
     	//得到用户的openid(登陆用户的识别码)和Client_id
     	$arr = $qq->getClientId($accessToken);
     	if(isset($arr['client_id'])){
     		$clientId = $arr['client_id'];
     		$openId = $arr['openid'];
-    		$um = D('Home/Users');
+    		$um = D('Api/Users');
     		//已注册，则直接登录
     		if($um->checkThirdIsReg(1,$openId)){
     			$obj["openId"] = $openId;
     			$obj["userFrom"] = 1;
     			$rd = $um->thirdLogin($obj);
     			if($rd["status"]==1){
-    				$this->redirect("Home/Index/index");
+    				$this->redirect("Api/Index/index");
     			}else{
-    				$this->redirect("Home/Users/login");
+    				$this->redirect("Api/Users/login");
     			}
     		}else{
     			//未注册，则先注册
@@ -429,10 +522,10 @@ class UsersAction extends BaseAction {
     			$obj["userFrom"] = 1;
     			$obj["userPhoto"] = $arr["figureurl_2"];
     			$um->thirdRegist($obj);
-    			$this->redirect("Home/Index/index");
+    			$this->redirect("Api/Index/index");
     		}
     	}else{
-    		$this->redirect("Home/Users/login");
+    		$this->redirect("Api/Users/login");
     	}
     }
     
@@ -451,21 +544,21 @@ class UsersAction extends BaseAction {
     	$accessToken = $wx->getToken();
     	
     	if(!$accessToken){
-    		$this->redirect("Home/Users/login");
+    		$this->redirect("Api/Users/login");
     	}
     	//得到用户的openid(登陆用户的识别码)和Client_id
     	$openId = $wx->getOpenId();
     	if($openId!=""){
-    		$um = D('Home/Users');
+    		$um = D('Api/Users');
     		//已注册，则直接登录
     		if($um->checkThirdIsReg(2,$openId)){
     			$obj["openId"] = $openId;
     			$obj["userFrom"] = 2;
     			$rd = $um->thirdLogin($obj);
     			if($rd["status"]==1){
-    				$this->redirect("Home/Index/index");
+    				$this->redirect("Api/Index/index");
     			}else{
-    				$this->redirect("Home/Users/login");
+    				$this->redirect("Api/Users/login");
     			}
     		}else{
     			//未注册，则先注册
@@ -475,10 +568,10 @@ class UsersAction extends BaseAction {
     			$obj["userFrom"] = 2;
     			$obj["userPhoto"] = $arr["headimgurl"];
     			$um->thirdRegist($obj);
-    			$this->redirect("Home/Index/index");
+    			$this->redirect("Api/Index/index");
     		}
     	}else{
-    		$this->redirect("Home/Users/login");
+    		$this->redirect("Api/Users/login");
     	}
     }
     

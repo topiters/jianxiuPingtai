@@ -1,13 +1,16 @@
 <?php
-namespace Home\Action;
+namespace Api\Action;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 商品控制器
- */
+*  商品控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年1月3日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class GoodsAction extends BaseAction {
 	
 	
@@ -15,9 +18,9 @@ class GoodsAction extends BaseAction {
 	 * 商品列表
 	 */
     public function getGoodsList(){
-   		$mgoods = D('Home/Goods');
-   		$mareas = D('Home/Areas');
-   		$mcommunitys = D('Home/Communitys');
+   		$mgoods = D('Api/Goods');
+   		$mareas = D('Api/Areas');
+   		$mcommunitys = D('Api/Communitys');
    		//获取默认城市及县区
    		$areaId2 = $this->getDefaultCity();
    		$districts = $mareas->getDistricts($areaId2);
@@ -97,7 +100,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function getGoodsDetails(){
 
-		$goods = D('Home/Goods');
+		$goods = D('Api/Goods');
 		$kcode = I("kcode");
 		$scrictCode = md5(base64_encode("wstmall".date("Y-m-d")));
 		
@@ -127,12 +130,12 @@ class GoodsAction extends BaseAction {
 			$goodsDetails['goodsDesc'] = htmlspecialchars_decode($goodsDetails['goodsDesc']);
 			
 			
-			$areas = D('Home/Areas');
+			$areas = D('Api/Areas');
 			$shopId = intval($goodsDetails["shopId"]);
 			$obj["shopId"] = $shopId;
 			$obj["areaId2"] = $this->getDefaultCity();
 			$obj["attrCatId"] = $goodsDetails['attrCatId'];
-			$shops = D('Home/Shops');
+			$shops = D('Api/Shops');
 			$shopScores = $shops->getShopScores($obj);
 			$this->assign("shopScores",$shopScores);
 			
@@ -156,9 +159,9 @@ class GoodsAction extends BaseAction {
 				cookie("viewGoods",$viewGoods,25920000);
 			}
 			//获取关注信息
-			$m = D('Home/Favorites');
+			$m = D('Api/Favorites');
 			$this->assign("favoriteGoodsId",$m->checkFavorite($goodsId,0));
-			$m = D('Home/Favorites');
+			$m = D('Api/Favorites');
 			$this->assign("favoriteShopId",$m->checkFavorite($shopId,1));
 			//客户端二维码
 			$this->assign("qrcode",base64_encode("{type:'goods',content:'".$goodsId."',key:'wstmall'}"));
@@ -178,7 +181,7 @@ class GoodsAction extends BaseAction {
 		$data['goodsId'] = (int)I('goodsId');
 		$data['isBook'] = (int)I('isBook');
 		$data['goodsAttrId'] = (int)I('goodsAttrId');
-		$goods = D('Home/Goods');
+		$goods = D('Api/Goods');
 		$goodsStock = $goods->getGoodsStock($data);
 		echo json_encode($goodsStock);
 		
@@ -190,7 +193,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function getServiceCommunitys(){
 		
-		$areas = D('Home/Areas');
+		$areas = D('Api/Areas');
 		$serviceCommunitys = $areas->getShopCommunitys();
 		echo json_encode($serviceCommunitys);
 	}
@@ -202,9 +205,9 @@ class GoodsAction extends BaseAction {
 		$this->isShopLogin();
 		$USER = session('WST_USER');
 		//获取商家商品分类
-		$m = D('Home/ShopsCats');
+		$m = D('Api/ShopsCats');
 		$this->assign('shopCatsList',$m->queryByList($USER['shopId'],0));
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
     	$page = $m->queryOnSaleByPage($USER['shopId']);
     	$pager = new \Think\Page($page['total'],$page['pageSize']);
     	$page['pager'] = $pager->show();
@@ -222,9 +225,9 @@ class GoodsAction extends BaseAction {
 		$this->isShopLogin();
 		$USER = session('WST_USER');
 		//获取商家商品分类
-		$m = D('Home/ShopsCats');
+		$m = D('Api/ShopsCats');
 		$this->assign('shopCatsList',$m->queryByList($USER['shopId'],0));
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
     	$page = $m->queryUnSaleByPage($USER['shopId']);
     	$pager = new \Think\Page($page['total'],$page['pageSize']);
     	$page['pager'] = $pager->show();
@@ -242,9 +245,9 @@ class GoodsAction extends BaseAction {
 		$this->isShopLogin();
 		$USER = session('WST_USER');
 		//获取商家商品分类
-		$m = D('Home/ShopsCats');
+		$m = D('Api/ShopsCats');
 		$this->assign('shopCatsList',$m->queryByList($USER['shopId'],0));
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
     	$page = $m->queryPenddingByPage($USER['shopId']);
     	$pager = new \Think\Page($page['total'],$page['pageSize']);
     	$page['pager'] = $pager->show();
@@ -262,18 +265,18 @@ class GoodsAction extends BaseAction {
 		$this->isShopLogin();
 		$USER = session('WST_USER');
 		//获取商品分类信息
-		$m = D('Home/GoodsCats');
+		$m = D('Api/GoodsCats');
 		$this->assign('goodsCatsList',$m->queryByList());
-		$sm = D('Home/ShopsCats');
+		$sm = D('Api/ShopsCats');
 		$pkShopCats = $sm->getCatAndChild($USER['shopId']);
 		$this->assign('pkShopCats',$pkShopCats);
 		//获取商家商品分类
-		$m = D('Home/ShopsCats');
+		$m = D('Api/ShopsCats');
 		$this->assign('shopCatsList',$m->queryByList($USER['shopId'],0));
 		//获取商品类型
-		$m = D('Home/AttributeCats');
+		$m = D('Api/AttributeCats');
 		$this->assign('attributeCatsCatsList',$m->queryByList());
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
 		$object = array();
 		$goodsId = (int)I('id',0);
     	if($goodsId>0){
@@ -292,7 +295,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function edit(){
 		$this->isShopLogin();
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
     	$rs = array();
     	if((int)I('id',0)>0){
     		$rs = $m->edit();
@@ -306,7 +309,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function del(){
 		$this->isShopLogin();
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
 		$rs = $m->del();
 		$this->ajaxReturn($rs);
 	}
@@ -315,7 +318,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function goodsSet(){
 		$this->isShopLogin();
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
 		$rs = $m->goodsSet();
 		$this->ajaxReturn($rs);
 	}
@@ -324,7 +327,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function batchDel(){
 		$this->isShopLogin();
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
 		$rs = $m->batchDel();
 		$this->ajaxReturn($rs);
 	}
@@ -333,7 +336,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function sale(){
 		$this->isShopLogin();
-		$m = D('Home/Goods');
+		$m = D('Api/Goods');
 		$rs = $m->sale();
 		$this->ajaxReturn($rs);
 	}
@@ -345,7 +348,7 @@ class GoodsAction extends BaseAction {
 	 */
 	public function checkGoodsStock(){
 	
-		$m = D('Home/Cart');
+		$m = D('Api/Cart');
 		$catgoods = $m->checkGoodsStock();
 		$this->ajaxReturn($catgoods);
 	
@@ -366,7 +369,7 @@ class GoodsAction extends BaseAction {
 	 * 查询商品属性价格及库存
 	 */
     public function getPriceAttrInfo(){
-    	$goods = D('Home/Goods');
+    	$goods = D('Api/Goods');
 		$rs = $goods->getPriceAttrInfo();
 		$this->ajaxReturn($rs);
     }
@@ -375,7 +378,7 @@ class GoodsAction extends BaseAction {
 	 */
     public function editStock(){
     	$this->isShopLogin();
-    	$m = D('Home/Goods');
+    	$m = D('Api/Goods');
     	$rs = $m->editStock();
     	$this->ajaxReturn($rs);
     }
@@ -385,7 +388,7 @@ class GoodsAction extends BaseAction {
      */
     public function editGoodsBase(){
     	$this->isShopLogin();
-    	$m = D('Home/Goods');
+    	$m = D('Api/Goods');
     	$rs = $m->editGoodsBase();
     	$this->ajaxReturn($rs);
     }
@@ -394,7 +397,7 @@ class GoodsAction extends BaseAction {
      * 获取商品搜索提示列表
      */
     public function getKeyList(){
-    	$m = D('Home/Goods');
+    	$m = D('Api/Goods');
     	$areaId2 = $this->getDefaultCity();
     	$rs = $m->getKeyList($areaId2);
     	$this->ajaxReturn($rs);
@@ -405,7 +408,7 @@ class GoodsAction extends BaseAction {
      */
     public function changSaleStatus(){
     	$this->isShopLogin();
-    	$m = D('Home/Goods');
+    	$m = D('Api/Goods');
     	$rs = $m->changSaleStatus();
     	$this->ajaxReturn($rs);
     }
@@ -429,7 +432,7 @@ class GoodsAction extends BaseAction {
 		if(!$rs){
 			$rv['msg'] = $upload->getError();
 		}else{
-			$m = D('Home/Goods');
+			$m = D('Api/Goods');
     	    $rv = $m->importGoods($rs);
 		}
     	$this->ajaxReturn($rv);
@@ -437,21 +440,21 @@ class GoodsAction extends BaseAction {
     
     public function getGoodsByCat() {
     	$this->isShopLogin();
-    	$m = D('Home/Goods');
+    	$m = D('Api/Goods');
     	$rs = $m->getGoodsByCat();
     	$this->ajaxReturn($rs);
     }
     
     public function getPackageGoods(){
     	$this->isShopLogin();
-    	$m = D('Home/Goods');
+    	$m = D('Api/Goods');
     	$rs = $m->getPackageGoods();
     	$this->ajaxReturn($rs);
     }
     
     public function editGoodsPackages(){
     	$this->isShopLogin();
-    	$m = D('Home/Goods');
+    	$m = D('Api/Goods');
     	$rs = $m->editGoodsPackages();
     	$this->ajaxReturn($rs);
     }
