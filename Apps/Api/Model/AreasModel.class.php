@@ -1,13 +1,16 @@
 <?php
 namespace Api\Model;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 区域服务类
- */
+*  区域服务类
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年1月3日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class AreasModel extends BaseModel {
 	/**
 	  * 获取店铺的服务县区 
@@ -110,21 +113,32 @@ class AreasModel extends BaseModel {
 	   */
 	  public function getDefaultCity(){
 	  	$areaId2 = (int)I('city',0);
+	  	//var_dump($areaId2);
 	  	if($areaId2==0){
+	  		//session('areaId2',NUll);
 	  		$areaId2 = (int)session('areaId2');
+	  		
 	  	}
+	  	//var_dump($areaId2);
 	  	//检验城市有效性
 	  	if($areaId2>0){
 	  		$sql ="SELECT areaId FROM __PREFIX__areas WHERE isShow=1 AND areaFlag = 1 AND areaType=1 AND areaId=".$areaId2;
 	  		$rs = $this->query($sql);
 	  		if($rs[0]['areaId']=='')$areaId2 = 0;
 	  	}else{
+	  		//setcookie("areaId2", $areaId2, -1);
 	  		$areaId2 = (int)$_COOKIE['areaId2'];
+	  		
 	  	}
+	  	
+	  	//var_dump($areaId2);
+	  	//exit;
 	  	//定位城市
 	  	if($areaId2==0){
 	  		//IP定位
 	  		$iparea = WSTIPAddress();
+	  		//var_dump($iparea );
+	  		//exit;
 	  		if(!empty($iparea)){
 	  			$where = array();
 	  			$where['areaName'] = array('like', '%'.$iparea['city'].'%');
@@ -139,10 +153,12 @@ class AreasModel extends BaseModel {
 	  			}
 	  		}else{
 	  			$areaId2 = $GLOBALS['CONFIG']['defaultCity'];
+	  			//var_dump($areaId2);
+	  			//exit;
 	  		}
 	  	}
-	  	session('areaId2',$areaId2);
-	  	setcookie("areaId2", $areaId2, time()+3600*24*90);
+	      session('areaId2',$areaId2);
+	 	setcookie("areaId2", $areaId2, time()+3600*24*90);
 	  	return $areaId2;
 	  
 	  }

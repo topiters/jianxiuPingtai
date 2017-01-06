@@ -1,13 +1,16 @@
 <?php
 namespace Api\Model;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 广告服务类
- */
+*  广告控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年1月3日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class AdsModel extends BaseModel {
 	/**
 	 * 获取广告
@@ -37,10 +40,13 @@ class AdsModel extends BaseModel {
 			//获取所在省份
 			$sql = "select parentId from __PREFIX__areas where areaId=".$areaId2;
 			$rs = $this->queryRow($sql);
+			//var_dump($rs);exit;
 			$areaId1 = $rs['parentId'];
 			$sql = "select adId,adName,adURL,adFile,adPositionId from __PREFIX__ads WHERE (areaId2 = $areaId2 or areaId1 = 0 or areaId1=".$areaId1.")
-					AND adStartDate<='$today' AND adEndDate >='$today' and adPositionId>0 order by adSort asc";
+					AND adStartDate<='$today' AND adEndDate >='$today' and adPositionId='-4' order by adSort asc";
 			$rs = $this->query($sql);
+			//var_dump($sql);
+			//var_dump();exit;
 			$data = array();
 			foreach ($rs as $v){
 				$data[$v['adPositionId']][] = $v;

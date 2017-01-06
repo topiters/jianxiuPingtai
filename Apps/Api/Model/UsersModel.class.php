@@ -1,13 +1,16 @@
 <?php
-namespace Home\Model;
+namespace Api\Model;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 会员服务类
- */
+*  用户model控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年1月6日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class UsersModel extends BaseModel {
 	
      /**
@@ -179,21 +182,16 @@ class UsersModel extends BaseModel {
 	 */
     public function regist(){
     	$rd = array('status'=>-1);	   
-    	
-    	$data = array();
-    	$data['loginName'] = I('loginName','');
-    	$data['loginPwd'] = I("loginPwd");
-    	$data['reUserPwd'] = I("reUserPwd");
-    	$data['protocol'] = (int)I("protocol");
-    	$loginName = $data['loginName'];
-        //检测账号是否存在
-        $crs = $this->checkLoginKey($loginName);
-        if($crs['status']!=1){
-	    	$rd['status'] = -2;
-	    	$rd['msg'] = ($crs['status']==-2)?"不能使用该账号":"该账号已存在";
-	    	return $rd;
-	    }
-    	if($data['loginPwd']!=$data['reUserPwd']){
+    	$udata = array();
+    	$userPhone = 
+    	$udata['loginName'] =WSTAddslashes(I("userPhone"));
+    	$udata['loginPwd'] = I("loginPwd");
+    	//$data['reUserPwd'] = I("reUserPwd");
+    	//$data['protocol'] = (int)I("protocol");
+    	$loginName = $udata['loginName'];
+     
+       
+    	/* if($data['loginPwd']!=$data['reUserPwd']){
     		$rd['status'] = -3;
     		$rd['msg'] = '两次输入密码不一致!';
     		return $rd;
@@ -202,52 +200,30 @@ class UsersModel extends BaseModel {
     		$rd['status'] = -6;
     		$rd['msg'] = '必须同意使用协议才允许注册!';
     		return $rd;
-    	}
-    	foreach ($data as $v){
+    	} */
+    	foreach ($udata as $v){
     		if($v ==''){
     			$rd['status'] = -7;
     			$rd['msg'] = '注册信息不完整!';
     			return $rd;
     		}
     	}
-	    $nameType = (int)I("nameType");
-	    $mobileCode = I("mobileCode");
-		if($nameType==3 && $GLOBALS['CONFIG']['phoneVerfy']==1){//手机号码
-			$verify = session('VerifyCode_userPhone');
-			$startTime = (int)session('VerifyCode_userPhone_Time');
-			if((time()-$startTime)>120){
-				$rd['status'] = -5;
-				$rd['msg'] = '验证码已超过有效期!';
-				return $rd;
-			}
-			if($mobileCode=="" || $verify != $mobileCode){
-				$rd['status'] = -4;
-				$rd['msg'] = '验证码错误!';
-				return $rd;
-			}
-			$loginName = $this->randomLoginName($loginName);
-		}else if($nameType==1){//邮箱注册
-			$unames = explode("@",$loginName);
-			$loginName = $this->randomLoginName($unames[0]);
-		}
-		if($loginName=='')return $rd;//分派不了登录名
-		$data['loginName'] = $loginName;
-	    unset($data['reUserPwd']);
-	    unset($data['protocol']);
+	   
+	
 	    //检测账号，邮箱，手机是否存在
-	    $data["loginSecret"] = rand(1000,9999);
-	    $data['loginPwd'] = md5($data['loginPwd'].$data['loginSecret']);
-	    $data['userType'] = 0;
-	    $data['userName'] = I('userName');
-	    $data['userQQ'] = I('userQQ');
-	    $data['userPhone'] = I('userPhone');
-	    $data['userScore'] = I('userScore');
-		$data['userEmail'] = I("userEmail");
-	    $data['createTime'] = date('Y-m-d H:i:s');
-	    $data['userFlag'] = 1;
+	    $udata["loginSecret"] = rand(1000,9999);
+	    $udata['loginPwd'] = md5($udata['loginPwd'].$udata['loginSecret']);
+	    $udata['userType'] = I('userType');
+	    $udata['userName'] = I('userName');
+	    $udata['userQQ'] = I('userQQ');
+	    $udata['userPhone'] = I('userPhone');
+	    //$data['userScore'] = I('userScore');
+		//$data['userEmail'] = I("userEmail");
+	    $udata['createTime'] = date('Y-m-d H:i:s');
+	    $udata['userFlag'] = 1;
 	    
 	   
-		$rs = $this->add($data);
+		$rs = $this->add($udata);
 		if(false !== $rs){
 			$rd['status']= 1;
 			$rd['userId']= $rs;
@@ -288,16 +264,15 @@ class UsersModel extends BaseModel {
 	/**
 	 * 查询用户手机是否存在
 	 */
-    public function checkUserPhone($userPhone,$userId = 0){
-    	$userId = $userId>0?$userId:(int)I("userId");
+    public function checkUserPhone($userPhone){
+    	
     	$rd = array('status'=>-3);
 		$sql =" userFlag=1 and userPhone='".$userPhone."'";
-		if($userId>0){
-			$sql .= " AND userId <> $userId";
-		}
 		$rs = $this->where($sql)->count();
 	
-	    if($rs==0)$rd['status'] = 1;
+	    if($rs==1){
+	    	$rd['status'] = 1;
+	    }//存在
 	    return $rd;
 	}
 	

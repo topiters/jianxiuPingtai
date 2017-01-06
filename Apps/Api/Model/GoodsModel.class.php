@@ -1,13 +1,16 @@
 <?php
-namespace Home\Model;
+namespace Api\Model;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 商品服务类
- */
+*  产品控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年1月3日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class GoodsModel extends BaseModel {
 	
 	
@@ -1067,6 +1070,42 @@ class GoodsModel extends BaseModel {
 		$rs = $this->query($sql);
 		return $rs;
 	}
+	
+	
+	
+	//该区域最新商品
+	public function getNewList($areaId2){
+		//$keywords = WSTAddslashes(I("keywords"));
+		$m = M('goods');
+		$sql = "select g.*  from __PREFIX__goods g,__PREFIX__shops sp  where (sp.areaId2=$areaId2 or sp.isDistributAll=1) and g.shopId=sp.shopId and goodsStatus=1 and goodsFlag=1 and  isNew=1
+		Order by saleCount desc, goodsName asc limit 10";
+		$rs = $this->query($sql);
+		
+		//var_dump($rs);
+		
+		return $rs;
+	}
+	
+	/**
+	 * 获取店铺商品列表
+	 */
+	public function getHotsGoods($shopId){
+		$hotgoods = S("WST_CACHE_HOT_GOODS_".$shopId);
+		if(!$hotgoods){
+			//热销排名
+			$sql = "SELECT sp.shopName, g.saleCount totalnum, sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice,g.marketPrice, g.goodsSn
+			FROM __PREFIX__goods g,__PREFIX__shops sp
+			WHERE g.shopId = sp.shopId AND g.goodsFlag = 1 AND sp.shopFlag=1 AND sp.shopStatus=1 AND g.isSale = 1 AND g.goodsStatus = 1 AND sp.shopId = $shopId
+			ORDER BY g.saleCount desc limit 5";
+			$hotgoods = $this->query($sql);
+			S("WST_CACHE_HOT_GOODS_".$shopId,$hotgoods,86400);
+		}
+		for($i=0;$i<count($hotgoods);$i++){
+			$hotgoods[$i]["goodsName"] = WSTMSubstr($hotgoods[$i]["goodsName"],0,25);
+		}
+		return  $hotgoods;
+	}
+	
 	
 	
 	/**
