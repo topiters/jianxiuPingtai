@@ -41,48 +41,52 @@ class UsersAction extends BaseAction {
 		echo "1";
 	}
 	
-	/**
-     * 注册界面
-     * 
-     */
-	public function regist(){
-		if(isset($_COOKIE["loginName"])){
-			$this->assign('loginName',$_COOKIE["loginName"]);
-		}else{
-			$this->assign('loginName','');
-		}
-		$this->display('default/regist');
-	}
-
+	
 	/**
 	 * 验证登陆
 	 * 
 	 */
 	public function checkLogin(){
-	    $rs = array();
-	    $rs["status"]= 1;
-		if(!$this->checkVerify("4") && ($GLOBALS['CONFIG']["captcha_model"]["valueRange"]!="" && strpos($GLOBALS['CONFIG']["captcha_model"]["valueRange"],"3")>=0)){			
-			$rs["status"]= -1;//验证码错误
-		}else{
+	    $data = array();
 			$m = D('Api/Users');			
 			$res = $m->checkLogin();
+			//print_r($res);
 			if (!empty($res)){
-				if($res['userFlag'] == 1){
+				if($res['userFlag'] == 1){//成功载入数据。。。
 					session('WST_USER',$res);
 					unset($_SESSION['toref']);
 					if(strripos($_SESSION['refer'],"regist")>0 || strripos($_SESSION['refer'],"logout")>0 || strripos($_SESSION['refer'],"login")>0){
 						$rs["refer"]= __ROOT__;
-					}						
+					}
+					
+					$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$res);
+					$this->stringify($data);	
+					
+				}else if($res['status'] == -2){
+					$data["msg"] = '密码错误!';
+				   $data = array('status'=>self::API_NOTSAME_ERROR,'msg'=>$data);
+				   $this->stringify($data);//登陆失败，密码
+				}else if($res['status'] == -3){
+					
+					$data["msg"] = '该账号被禁用!';
+					$data = array('status'=>self::API_USER_NO_ACCESS,'msg'=>$data);
+					$this->stringify($data);//该账号被禁用
+					
 				}else if($res['status'] == -1){
-					$rs["status"]= -2;//登陆失败，账号或密码错误
+					
+					$data["msg"] = '该账号未注册或账号输入错误!';
+					$data = array('status'=>self::API_USER_NOT_EXISTS,'msg'=>$data);
+					$this->stringify($data);
+					
 				}
+				
+ 	
 			} else {
-				$rs["status"]= -2;//登陆失败，账号或密码错误
+				$data["msg"] = '该账号未注册或账号输入错误!';
+				$data = array('status'=>self::API_DETAIL_NO_EXSITS,'msg'=>$data);
+				$this->stringify($data);
+	
 			}
-			
-			$rs["refer"]= $rs['refer']?$rs['refer']:__ROOT__;
-		}
-		echo json_encode($rs);
 	}
 
 	/**
@@ -104,7 +108,7 @@ class UsersAction extends BaseAction {
 		$smscode=I('smscode');
 		$times=time();//当前时间
 		$time2=session('VerifyCode_userPhone_Time');
-	/* 	if( ($times-$time2)>60){
+		if( ($times-$time2)>120){
 			
 			$data["msg"] = '短信验证码超时!';
 			$data = array('status'=>self::API_CODE_EXPIRES,'msg'=>$data);
@@ -123,7 +127,7 @@ class UsersAction extends BaseAction {
 			
 			return false;
 				
-		}*/
+		}
 		
 	    $crs =$m->checkUserPhone($userPhone);
 	   // print_r( $crs)  ;
@@ -192,7 +196,7 @@ class UsersAction extends BaseAction {
 		$softVersion='2013-12-26';
 		$to=$userPhone;
 		$tempId="146693";
-		$datas=array($phoneVerify,'60s');
+		$datas=array($phoneVerify,'2');
 		
 		$rest = new \REST($serverIP,$serverPort,$softVersion);
 		$rest->setAccount($accountSid,$accountToken);

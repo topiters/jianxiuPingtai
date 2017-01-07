@@ -43,13 +43,13 @@ class BaseAction extends Controller {
 	const API_COUPON_ERROR      = 308;
 	//该验证码已经过期
 	const API_CODE_EXPIRES    = 309;
-	//该优惠券已经下载完了
+	//
 	const API_COUPON_NONUM      = 310;
-	//超过下载该优惠券的限制了！
+	//
 	const API_COUPON_LIMITED    = 311;
-	//非本人的优惠卷
+	//
 	const API_COUPON_OWNSHIP    = 312;
-	//优惠卷不存在
+	//
 	const API_COUPON_NO_EXSITS    = 313;
 	//404
 	const API_PAGE_NO_EXSITS    = 404;
@@ -85,7 +85,7 @@ class BaseAction extends Controller {
 	const API_SCODE_NOTSAME   = 328;
 	//用户名不存在
 	const API_USER_NOT_EXISTS = 329;
-	
+	const API_USER_NO_ACCESS  = 330;
 	
 	
 	public function __construct(){
