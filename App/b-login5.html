@@ -5,17 +5,34 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>登录</title>
-		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/b-login.css" />
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js"></script>
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
+		<style type="text/css">
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+			
+			.mui-btn-block {
+				width: 80%;
+				display: inline-block;
+				border: 0;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
 	</head>
 
 	<body style="background-color: #fff;">
@@ -24,34 +41,184 @@
 			<h1 class="mui-title">注册</h1>
 			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">登录</button>
 		</header>
-		<form action="" method="post">
 			<div class="r-main">
 				<div class="r-main1">
 					<i class="icon iconfont icon-geren-copy"></i>
-					<input type="text" name="" id="" placeholder="昵称" />
+					<input type="text" name="" id="nicheng" placeholder="昵称" />
 				</div>
 				<div class="r-main2">
 					<i class="icon iconfont icon-shouji1"></i>
 					<!--<i class="icon iconfont icon-suo"></i>-->
-					<input type="password" name="" id="" placeholder="请输入手机号" />
+					<input type="text" name="" id="phone" placeholder="请输入手机号" />
 				</div>
 				<div class="r-main3">
 					<i class="icon iconfont icon-key"></i>
-					<input type="password" name="" id="" placeholder="请输入验证码" />
-					<span>获取验证码</span>
+					<input type="text" name="" id="yzm-shu" placeholder="请输入验证码" />
+					<span id="yzm">获取验证码</span>
 				</div>
 				<div class="r-main4">
 					<i class="icon iconfont icon-suo"></i>
-					<input type="password" name="" id="" placeholder="请输入密码" />
+					<input type="password" name="" id="pasword" placeholder="请输入密码" />
 				</div>
 				<div class="r-main5">
 					<i class="icon iconfont icon-geren-copy"></i>
-					<input type="password" name="" id="" placeholder="业主" />
+					<button id='showUserPicker' class="mui-btn mui-btn-block" type='button'>请选择用户类型</button>
+					<!--<input type="password" name="" id="" placeholder="业主" />-->
 				</div>
-				<button class="r-btn">注册并登陆</button>
+				<button class="r-btn" id="r-btn">注册并登陆</button>
 			</div>
-		</form>
-
+			
 	</body>
-
+	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				//普通示例
+				var userPicker = new $.PopPicker();
+				userPicker.setData([{
+					value: "yezhu",
+					text: "业主"
+				}, {
+					value: 'aaa',
+					text: '供应商'
+				}, {
+					value: 'lj',
+					text: '检修企业'
+				}, {
+					value: 'ymt',
+					text: '检修工程师'
+				}]);
+				var showUserPickerButton = doc.getElementById('showUserPicker');
+				//					var userResult = doc.getElementById('userResult');
+				showUserPickerButton.addEventListener('tap', function(event) {
+					userPicker.show(function(items) {
+						var str = items[0]['text'].replace("/\"/gi", '');
+						showUserPickerButton.innerText = str;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+				//-----------------------------------------
+			});
+		})(mui, document);
+	</script>
+	<script>
+	(function($, doc) {
+  		$.init({
+  			beforeback: function(){
+				mui.currentWebview.close();
+			}
+  		});
+  		$.plusReady(function() {
+  			var rbtn = document.getElementById('r-btn');//获取注册按钮
+  			var yzmbtn = document.getElementById('yzm');//验证码按钮  
+  			var regphone =/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+				
+  			//获取验证码文本框中的值
+  			//点击进行下一步操作（验证）
+  			rbtn.addEventListener('tap',function(){
+  				var nicheng = document.getElementById('nicheng').value;//昵称
+  				var mobile = document.getElementById('phone').value;//手机号
+				var pasword = document.getElementById('pasword').value;//获取密码
+			    var yzmshu = document.getElementById('yzm-shu').value;//获取手机验证码
+			    var typeone = document.getElementById('showUserPicker').innerHTML;//获取注册类型
+//			    alert(nicheng);
+//			    alert(mobile);
+//			    alert(pasword);
+//			    alert(typeone);
+//nicheng==""||mobile==""||pasword==""||yzmshu==""||typeone==""
+  				if(nicheng==""||mobile==""||pasword==""||yzmshu==""||typeone==""){
+  					mui.toast('请将信息填写完整');
+  					return false;
+  				}else if(!regphone.test(mobile)){
+  					mui.toast('手机号错误！');
+  					return false;
+  				}else{
+  					mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Users&a=toRegist',{
+					    data:{
+						    userName:nicheng,
+						    userPhone:mobile,
+						    loginPwd:pasword,
+						    smscode:yzmshu,
+						    userType:typeone
+					    },
+					  	dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型 
+						timeout:10000,//超时时间设置为10秒；               
+						success:function(data){	
+//							这没走!!!!!!!!!!!!!!!!!!我也不知道为啥!!!!!!!!!
+							//18738157987
+//							alert('success');
+							alert(JSON.stringify(data));
+							if(data.status==200){
+								mui.toast(data.msg);
+//								mui.currentWebview.close();
+							}else{
+								switch(data.code){
+									case 1:mui.toast(data.msg);break;
+									case 2:mui.toast(data.msg);break;
+									case 3:mui.toast(data.msg);break;
+								}
+							}														
+						}
+		        	});
+  				}
+  			});
+  			//点击获取短信验证码
+  			yzmbtn.addEventListener('tap',function(){
+  				var nicheng = document.getElementById('nicheng').value;//昵称
+  				var mobile = document.getElementById('phone').value;//手机号
+  				if(nicheng==""||mobile==""){
+  					mui.toast('请将信息填写完整');
+  					return false;
+  				}else if(!regphone.test(mobile)){
+					mui.toast('手机号错误！');
+				}else{
+					var val = this;
+				    getyam(val); 
+					mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Users&a=getPhoneVerifyCode',{
+					    data:{
+					    	userPhone:mobile
+					    },
+					  	dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型 
+						timeout:10000,//超时时间设置为10秒；               
+						success:function(data){	
+							alert(JSON.stringify(data));
+							if(data.status==200){
+								mui.toast(data.msg);
+							}else{
+								switch(data.code){
+									case 1:mui.toast(data.msg);break;
+									case 2:mui.toast(data.msg);break;
+									case 3:mui.toast(data.msg);break;
+								}
+							}														
+						}
+		        	});
+				}
+  			});
+//			var countyzm = 60;  
+//			function getyam(val) { 
+//				if (countyzm < 0) { 
+//					val.removeAttribute('disabled');
+//					val.setAttribute('value','发送短信验证码');
+//					countyzm = 60; 
+//					var d = val.getAttribute('disabled');
+//					return false;
+//				} else { 
+//					val.setAttribute('disabled',true);
+//					val.setAttribute('value',"重新发送(" + countyzm + ")");
+//					countyzm--; 					
+//					var d = val.getAttribute('disabled');
+//				} 
+//				setTimeout(function() { 
+//					getyam(val);
+//				},1000) ;
+//			} 
+  		});
+  	})(mui,document);
+  	
+</script>
 </html>
