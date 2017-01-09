@@ -239,14 +239,7 @@ class UsersAction extends BaseAction {
 		$this->redirect("Orders/queryByPage");
 	}
 	
-   /**
-    * 跳到修改用户密码
-    */
-	public function toEditPass(){
-		$this->isLogin();
-		$this->assign("umark","toEditPass");
-		$this->display("default/users/edit_pass");
-	}
+  
 	
 	/**
 	 * 修改用户密码
@@ -256,6 +249,10 @@ class UsersAction extends BaseAction {
 		$USER = session('WST_USER');
 		$m = D('Api/Users');
    		$rs = $m->editPass($USER['userId']);
+   		
+   		
+   		
+   		
     	$this->ajaxReturn($rs);
 	}
 	/**

@@ -1,176 +1,136 @@
-<!DOCTYPE >
+<!DOCTYPE html>
 <html lang="zh-cn">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="shortcut icon" href="favicon.ico"/>
-<title>首页 - {$CONF['mallTitle']}</title>
-<meta name="keywords" content="{$CONF['mallKeywords']}" />
-<meta name="description" content="{$CONF['mallDesc']}" />
-<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/common.css" />
-<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/index.css" />
-<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/base.css" />
-<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/head.css" />
-</head>
-
-
-
-<body>
-	<include file="./Apps/Home/View/default/header_common.html" />
-	<!----加载广告start----->
-	<div class="wst-ad" >
-		<div class="wst-slide" id="wst-slide">
-			<ul class="wst-slide-items">
-				<volist name=":WSTAds(-1)" id="vo" key="k">
-				<li style="z-index: 1;"><a target="_blank" onclick="addAccess({$vo['adId']})" href="{$vo['adURL']}">
-						<img class='lazyImg' data-original="__ROOT__/{$vo['adFile']}" height="360" width="100%" title="{$vo['adName']}" />
-				</a></li>
-				</volist>
-			</ul>
-			<div class="wst-slide-numbox">
-				<div class="wst-slide-controls">
-			  		<?php if($ishome == 1){ ?>
-			  		<volist name=":WSTAds(-1)" id="vo" key="k" >
-			  			<if condition="$k eq 1">
-			  		 		<span class="curr">{$k}</span>
-			  		  	<else/>
-			  		    	<span class="">{$k}</span>
-			  		 	</if>
-					</volist>
-					<?php } ?>
-				</div>
-			</div>
+	<head>
+  		<meta charset="utf-8">
+      	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+      	<link rel="shortcut icon" href="favicon.ico"/>
+      	<title>用户登录 - {$CONF['mallTitle']}</title>
+      	<meta name="keywords" content="{$CONF['mallKeywords']}" />
+      	<meta name="description" content="{$CONF['mallDesc']},用户登录" />
+     	<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/common.css">
+     	<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/base.css" />
+		<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/head.css" />
+     	<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/login.css">
+     	
+   	</head>
+   	<body>
+   	
+   			<div class='wst-login'>
+		    	<div class="w1" id="entry">
+		        	<div class="mc " id="bgDiv" style="position:relative">
+		        	<div><a style="text-decoration: none;font-size:65px;color:red;position:absolute;top:160px;left:60px;" href="{:U('Index/index')}">表单测试</a></div>
+		            <div class="form">
+					
+					  <div class="item fore1" style="position:relative;">
+		                    <span>用户名</span><span id="errmsg" style="color:red;position:absolute;top:0px;left:100px;"></span>
+		                    <div class="item-ifo">
+		                        <input id="userName" name="userName" class="text"  tabindex="1" value="" autocomplete="off" type="text"/>
+		                        <input id="userName" name="userName" class="text"  tabindex="1" value="" autocomplete="off" type="text"/>
+		                        <div class="i-name ico"></div>                       
+		                    </div>
+		                </div> 
+		                <div class="item fore1" style="position:relative;">
+		                    <span>手机号</span><span id="errmsg" style="color:red;position:absolute;top:0px;left:100px;"></span>
+		                    <div class="item-ifo">
+		                        <input id="userPhone" name="userPhone" class="text"  tabindex="1" value="" autocomplete="off" type="text"/>
+		                        <div class="i-name ico"></div>                       
+		                    </div>
+		                </div>               
+		                <div class="item fore2">
+		                    <span>密码</span>
+		                    <div class="item-ifo">                       
+		                        <input id="loginPwd" name="loginPwd" class="text" tabindex="2" autocomplete="off" type="password"/>                      
+		                        <div class="i-pass ico"></div>            
+		                    </div>
+		                </div>
+		                <div class="item fore3 " id="o-authcode">
+		                    <span>验证码</span>
+		                    <div class="item-ifo">
+		                        <input id="smscode" style="ime-mode:disabled" name="smscode" class="text text-1" tabindex="6" autocomplete="off" maxlength="6" type="text"/>
+			                    <label class="img">
+			                		<img style='vertical-align:middle;cursor:pointer;height:39px;' class='verifyImg'  onclick='javascript:getVerifyCode()'/> 
+								</label>      	
+			              		<label class="ftx23">&nbsp;看不清？<a   onclick='javascript:getVerifyCode()'>换一张</a></label>
+		                    </div>
+		                </div>
+						 <div class="item fore1" style="position:relative;">
+		                    <span>用户类型</span><span id="errmsg" style="color:red;position:absolute;top:0px;left:100px;"></span>
+		                    <div class="item-ifo">
+		                        <input id="userType" name="userType" class="text"   value="" autocomplete="off" type="text"/>
+		                        <div class="i-name ico"></div>                       
+		                    </div>
+		                </div> 
+						    <div class="item login-btn2013">
+		                    <input class="btn-img btn-entry" id="loginsubmit" value="登录" tabindex="8" onclick="checkLoginInfo();"/>
+		                </div>
+		                <div class="item fore4" id="autoentry">
+		                    <div class="item-ifo">
+		                        <input class="checkbox" id="rememberPwd" name="rememberPwd" checked="checked" type="checkbox"/>
+		                        <label class="mar">记住密码</label>                                      
+		                        <label class="mar"><a href="{:U('Users/forgetPass')}">忘记密码?</a></label>
+		                        <label><a href="javascript:regist();" >免费注册</a></label>
+		                        <div class="wst-clear"></div>
+		                        <div style="min-height:10px;">
+		                        <if condition="$CONF['isOpenQQLogin'] eq 1 or $CONF['isOpenWxLogin'] eq 1"><label>第三方登录&nbsp;</label></if>
+		                        <if condition="$CONF['isOpenQQLogin'] eq 1">
+		                        <a id="qqAuthorizationUrl" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id={$CONF['qqAppId']}&redirect_uri={$qqBackUrl}" class="qq">
+		                        	<img src="__ROOT__/Apps/Home/View/default/images/qq_logo.png" alt="QQ登录" border="0" height="35">
+		                        </a>
+		                        </if>
+		                        <if condition="$CONF['isOpenWxLogin'] eq 1">
+		                        <a id="qqAuthorizationUrl" href="https://open.weixin.qq.com/connect/qrconnect?appid={$CONF['wxAppId']}&redirect_uri={$wxBackUrl}&response_type=code&scope=snsapi_login&state=<?php echo time();?>#wechat_redirect" class="qq">
+		                        	<img src="__ROOT__/Apps/Home/View/default/images/wx_logo.png" alt="微信登录" border="0" height="35">
+		                        </a>
+		                        </if>
+		                        </div>
+		                    </div>
+		            	</div>
+		            
+		            </div> 
+		        </div>
+		    </div>
 		</div>
-	</div>
-	<div class='wst-clear'></div>
-	<!----加载商品楼层start----->
-		<!-------------F1层---------------->
-		<div class="wst-container">
-		<volist name="catList" key="k1" id="vo1">
-		<div class="wst-floor">
-			<div class="wst-fl-left wst-fl{$k1}" style="position: relative;">
-				<div class="wst-fl-catbox">
-					<volist name="catAds[$vo1['catId']]" id="vo" key="kv"> 
-					<a onclick="addAccess({$vo['adId']})" href="{$vo['adURL']}" target="_blank"> 
-						<img class='lazyImg' data-original="__ROOT__/{$vo['adFile']}" height="275" width="210" title="{$vo['adName']}" />
-					</a> 
-					</volist>
-				</div>
-				<div class="wst-fl-head"
-					style="background: url(__ROOT__/Apps/Home/View/default/images/{$k1}fhd.png) no-repeat 100% 100%;">
-					<a
-						href="{:U('Home/Goods/getGoodsList/',array('c1Id'=>$vo1['catId']))}">
-						<span style="font-size: 18px;">F{$k1}</span>{$vo1["catName"]}
-					</a>
-				</div>
-				<div class='wst-cat'>
-					<volist name="vo1['catChildren']" key="k2" id="vo2"> 
-						<volist name="vo2['catChildren']" key="k3" id="vo3"> 
-							<a href="{:U('Home/Goods/getGoodsList/',array('c1Id'=>$vo1['catId'],'c2Id'=>$vo2['catId'],'c3Id'=>$vo3['catId']))}">
-							<li class="wst-cat-left">{$vo3["catName"]}</li>
-							</a> 
-						</volist> 
-					</volist>
-				</div>
-			</div>
-			<div class="wst-fl-right">
-				<div class="wst-fl-nvg{$k1}">
-					<ul>
-						<li id="fl_{$k1}_0" class="wst-fl-tab"
-							onmouseover="gpanelOver(this);">精品推荐</li>
-						<volist name="vo1['catChildren']" key="k2" id="vo2">
-						<li id="fl_{$k1}_{$k2}" class="wst-fl-tab"
-							onmouseover="gpanelOver(this);">{$vo2["catName"]}</li>
-						</volist>
-					</ul>
-				</div>
-				<div>
-					<div id="fl_{$k1}_0_pl" class="wst-goods-container">
-						<volist name="vo1['jpgoods']" key="k2" id="vo2">
-						<li class="wst-goodsbox">
-							<div class="wst-goods-thumb">
-								<a
-									href="{:U('Home/Goods/getGoodsDetails/',array('goodsId'=>$vo2['goodsId']))}">
-									<img class='lazyImg' data-original="__ROOT__/{$vo2['goodsThums']}" width="180" />
-								</a>
-							</div>
-							<div class="wst-goods-thumb-des">
-								<div class="goodsname">
-								<a class="wst-goods-name"
-									href="{:U('Home/Goods/getGoodsDetails/',array('goodsId'=>$vo2['goodsId']))}">{$vo2['goodsName']}</a>
-								</div>
-								<div>
-									<em class="wst-left wst-goods-price" id='shopGoodsPrice_{$vo2["goodsId"]}' dataId='{$vo2["goodsAttrId"]}'>￥{$vo2['shopPrice']|number_format=2}</em>
-									<a href="javascript:addCart({$vo2['goodsId']},0,'{$vo2['goodsThums']}')" class="wst-right <if condition="session('WST_USER.userId') gt 0 ">btnCart</if>"> 
-									<img src="__ROOT__/Apps/Home/View/default/images/btn_addcart.png" width="85" />
-									</a>
-									<div class='wst-clear'></div>
-								</div>
-							</div>
-						</li>
-						</volist>
-						<div class='wst-clear'></div>
-					</div>
-
-
-					<volist name="vo1['catChildren']" key="k2" id="vo2">
-					<div id="fl_{$k1}_{$k2}_pl" class="wst-goods-container"
-						style="display: none;">
-						<volist name="vo2['goods']" key="k3" id="vo3">
-						<li class="wst-goodsbox">
-							<div class="wst-goods-thumb">
-								<a
-									href="{:U('Home/Goods/getGoodsDetails/',array('goodsId'=>$vo3[goodsId]))}">
-									<img class='lazyImg' data-original="__ROOT__/{$vo3['goodsThums']}" width="180" />
-								</a>
-							</div>
-							<div class="wst-goods-thumb-des">
-								<div class="goodsname">
-									<a class="wst-goods-name"
-										href="{:U('Home/Goods/getGoodsDetails/',array('goodsId'=>$vo3[goodsId]))}">{$vo3['goodsName']}</a>
-								</div>
-								<div>
-									<em class="wst-left wst-goods-price" id='shopGoodsPrice_{$vo3["goodsId"]}' dataId='{$vo3["goodsAttrId"]}'>￥{$vo3['shopPrice']|number_format=2}</em>
-									<a href="javascript:addCart({$vo3['goodsId']},0,'{$vo3['goodsThums']}')" class="wst-right <if condition="session('WST_USER.userId') gt 0 ">btnCart</if>" > <img
-										src="__ROOT__/Apps/Home/View/default/images/btn_addcart.png"
-										width="85" />
-									</a>
-									<div class='wst-clear'></div>
-								</div>
-							</div>
-							
-						</li>
-						</volist>
-						<div class='wst-clear'></div>
-					</div>
-					</volist>
-					<div class="wst-fl-recommendshop">
-						<volist name="vo1['recommendShops']" key="k2" id="vo2">
-						<div style="width: 180px; margin-top: 10px;">
-							<div style="width: 180px;">
-								<a
-									href="{:U('Home/Shops/toShopHome/',array('shopId'=>$vo2['shopId']))}">
-									<img class='lazyImg' data-original="__ROOT__/{$vo2['shopImg']}" height="120" width="180" />
-								</a>
-							</div>
-						</div>
-						</volist>
-					</div>
-				</div>
-			</div>
-			<div class='wst-clear'></div>
-		</div>
-		</volist>
-	</div>
-	<include file="./Apps/Home/View/default/footer.html" />
-	<include file="./Apps/Home/View/default/right_cart.html" />
-	<script src="__PUBLIC__/js/common.js"></script>
-    <script src="__ROOT__/Apps/Home/View/default/js/index.js"></script>
-    <script src="__ROOT__/Apps/Home/View/default/js/common.js"></script>
-    <script src="__ROOT__/Apps/Home/View/default/js/global.js" type="text/javascript"></script>
-    <script src="__ROOT__/Apps/Home/View/default/js/head.js" type="text/javascript"></script>
-    <script src="__ROOT__/Apps/Home/View/default/js/goods.js" type="text/javascript"></script>
-</body>
-
-</html>
-
+		<script src="__ROOT__/Apps/Api/View/default/js/jquery.min.js"></script>
+		<script src="__PUBLIC__/plugins/formValidator/formValidator-4.1.3.js"></script>
+      
+      	<script>
+		function getVerifyCode() {
+		  // alert();
+		  var params={};
+		 params.userPhone=$("#userPhone").val();
+		   $.post("{:U('Api/Users/getPhoneVerifyCode')}",params,function(data,textStatus){
+			   			JSON.stringify(data);
+			   		});
+					
+					}
+      	
+      
+		
+		function checkLoginInfo(){	
+	var userName = $.trim($('#userName').val());
+	var loginPwd = $.trim($('#loginPwd').val());
+	var userPhone = $.trim($('#userPhone').val());
+	var smscode  = $.trim($('#smscode').val());
+	var userType = $.trim($('#userType').val());
+	if(userName=="" || loginPwd==""){
+		$("#errmsg").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名及密码不能为空");
+		return false;
+	}
+	/* if(verify==""){
+		$("#errmsg").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码不能为空");
+		return false;
+	} */
+	
+	$.post("{:U('Api/Users/checkLogin')}",{loginName:userName,userPhone:userPhone,loginPwd:loginPwd,smscode:smscode,userType:userType},function(data,textStatus){
+		
+		
+	});
+	return true;
+}
+	</script>
+		
+		
+		
+		
+   	</body>
+</html> 

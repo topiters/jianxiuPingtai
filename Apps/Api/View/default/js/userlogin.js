@@ -22,12 +22,12 @@ function checkLoginInfo(){
 		$("#errmsg").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名及密码不能为空");
 		return false;
 	}
-	if(verify==""){
+	/* if(verify==""){
 		$("#errmsg").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码不能为空");
 		return false;
-	}
+	} */
 	
-	$.post(Think.U('Home/Users/checkLogin'),{loginName:loginName,loginPwd:loginPwd,verify:verify,rememberPwd:rememberPwd},function(data,textStatus){
+	$.post(Think.U('Api/Users/checkLogin'),{loginName:loginName,loginPwd:loginPwd,verify:verify,rememberPwd:rememberPwd},function(data,textStatus){
 		var json = WST.toJson(data);
 		if(json.status=='1'){
 			location.href=json.refer;

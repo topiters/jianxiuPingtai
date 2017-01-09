@@ -1,0 +1,377 @@
+<include file="./Apps/Home/View/default/common_head.html" />
+<style>
+#main{
+	width: 1200px;
+	margin: 30px auto;
+}
+.close_icon{
+	z-index: 8888;
+}
+.model_login span{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #fff;
+}
+</style>
+<script>
+	$(function(){
+		$(".nav_left ul li").click(function(){
+			$(this).addClass('nav_left_li');
+			$(this).siblings().removeClass('nav_left_li');
+		});
+		$(".xianxia_top ul li").click(function(){
+			$(this).addClass('xianxia_top_selected');
+			$(this).siblings().removeClass('xianxia_top_selected');
+		});
+	})
+</script>
+<div id="main">
+    <script>document.body.style.backgroundColor='#fff';</script>
+	<include file="./Apps/Home/View/default/offline_left.html" />
+	
+	
+	<div class="xianxia_right">
+
+		<div class="xianxia_top">
+			<ul>
+	            <li class="xianxia_top_selected">
+	            	全部
+	            </li>
+	            <li class="">
+	            	未举办
+	            </li>
+	            <li class="">
+	            	已举办
+	            </li>
+	        </ul>
+		</div>
+		<div class="xianxia_content">
+			<div class="select_xianxia">
+			
+			
+				<select name="yearId"   id="yearid" >
+					<option value="">举办年份</option>
+					<option value="all">全部</option>
+					<option value="2014">2014年</option>
+					<option value="2015">2015年</option>
+					<option value="2016">2016年</option>
+					<option value="2017">2017年</option>
+				</select>
+				
+				<select name="monthId"  id="monthId" >
+					<option value="">举办月份</option>
+					<option value="all">全部</option>
+					<option value="-1-">1月</option>
+					<option value="-2-">2月</option>
+					<option value="-3-">3月</option>
+					<option value="-4-">4月</option>
+					<option value="-5-">5月</option>
+					<option value="-6-">6月</option>
+					<option value="-7-">7月</option>
+					<option value="-8-">8月</option>
+					<option value="-9-">9月</option>
+				</select>
+				
+				<select name="areaId" id="areaId"  >
+					<option value="">举办地点</option>
+					<option value="all">全部</option>
+					<option value="">苏州</option>
+					<option value="">广州</option>
+					<option value="">杭州</option>
+					<option value="">郑州</option>
+				</select>
+			</div>
+		
+
+
+ 
+
+
+
+
+
+
+
+
+		
+  </form>
+			<div class="data_list_xianxia">
+				<ul>
+				
+				<volist   name="offlist"   id="data">
+					<li>
+						<table>
+							<tr>
+								<td rowspan="3">
+									<a   href="{:U('Offline/details',array('catId'=>$data['offlineId']))}"   target="_blank" > <img width="280" height="160" src="__ROOT__/{$data['offFile']}"   alt="{$data['offlineKey']}" /></a>
+								</td>
+								<td>
+								<a   href="{:U('Offline/details',array('catId'=>$data['offlineId']))}"   target="_blank" >	<h3>{$data['offlineKey']}</h3></a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<font>
+										{$data['offlineContent']}
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<font>讲师：<span>陈东</span></font>
+									<span style="float: right;">
+										<font>时间：<font style="color: #FF7545;">{$data['offStartDate']}至{$data['offEndDate']}</font></font>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<font>地点：<font style="color: #FF7545;">广州</font></font>
+                                   <font>&nbsp;&nbsp;&nbsp;分享到：</font>
+										       <!-- JiaThis Button BEGIN -->
+                                  <!-- JiaThis Button BEGIN -->
+								<div class="jiathis_style"   style="margin-left:300px;">
+									<a class="jiathis_button_qzone"></a>
+									<a class="jiathis_button_tsina"></a>
+									<a class="jiathis_button_weixin"></a>
+									<a class="jiathis_button_cqq"></a>
+									<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+									<a class="jiathis_counter_style"></a>
+								</div>
+								<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+								<!-- JiaThis Button END -->
+																  
+								  
+									</span>
+																	
+								</td>
+							</tr>
+							
+						</table>
+					</li>
+					
+					</volist>
+					
+					<!-- <li>
+						<table>
+							<tr>
+								<td rowspan="3">
+									 <img width="280" height="160" src="__ROOT__/Apps/Home/View/default/img/course/freecourse0.jpg"   alt="存货跌价准备实战宝典" />
+								</td>
+								<td>
+									<h3>中外籍雇员个人所得税合规划与筹划技巧透视(上海)</h3>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<font>
+										本课程将全面梳理企业常见员工个人税问题，探讨我国个税改革趋势。上海地区个税征管执行口径等热门问题。
+										本课程将全面梳理企业常见员工个人税问题，探讨我国个税改革趋势。上海地区个税征管执行口径等热门问题。
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<font>讲师：<span>陈东</span></font>
+									<span style="float: right;">
+										<font>时间：<font style="color: #FF7545;">2016年09月21日</font></font>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<font>地点：<font style="color: #FF7545;">广州</font></font>	
+									</span>
+																	
+								</td>
+							</tr>
+							
+						</table>
+					</li>
+					<li>
+						<table>
+							<tr>
+								<td rowspan="3">
+									 <img width="280" height="160" src="__ROOT__/Apps/Home/View/default/img/course/freecourse0.jpg"   alt="存货跌价准备实战宝典" />
+								</td>
+								<td>
+									<h3>中外籍雇员个人所得税合规划与筹划技巧透视(上海)</h3>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<font>
+										本课程将全面梳理企业常见员工个人税问题，探讨我国个税改革趋势。上海地区个税征管执行口径等热门问题。
+										本课程将全面梳理企业常见员工个人税问题，探讨我国个税改革趋势。上海地区个税征管执行口径等热门问题。
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<font>讲师：<span>陈东</span></font>
+									<span style="float: right;">
+										<font>时间：<font style="color: #FF7545;">2016年09月21日</font></font>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<font>地点：<font style="color: #FF7545;">广州</font></font>	
+									</span>
+																	
+								</td>
+							</tr>
+							
+						</table>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+ <script type="text/javascript" src="__ROOT__/Apps/Home/View/default/js/jquery-1.9.0.js"></script> 
+	<script src="__PUBLIC__/js/think.js"></script>
+	
+<script>
+	$(function(){
+		$("input[name='mobile_login']").click(function(){
+			//登录成功之后
+			//先让非导航的右边显示登录之后的样子
+			$("#feinav_dlzq").css({"display":"none"});
+			$("#feinav_dlzh").css({"display":"block"});//显示用户信息
+			//再让黑色导航的右边显示登录之后的样子
+			$(".head_dhzx").css({"display":"none"});
+			$("#user_nodl").css({"display":"none"});
+			$("#login_dl").css({"display":"block"});
+			
+	var loginName = $.trim($('#loginName').val());
+	var loginPwd = $.trim($('#loginPwd').val());
+	var chPhone = /^1[2-9]{1}[0-9]{9}$/;
+	var regemail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+   //  alert(loginName);
+   
+   //判断是否手机号
+	 if($.isNumeric(loginName)){
+	    if(chPhone.test(loginName)){
+		checkl(loginName,loginPwd);
+		  //return true;
+	     }else{
+		 alert('不是有效的手机号');
+		 return false;
+		 } 
+	  
+	  
+	  }else{
+	   //是否邮箱
+	     if(loginName.indexOf("@")!=-1){
+				 if(regemail.test(loginName)){
+				 
+				 
+				  checkl(loginName,loginPwd);
+				 }else{
+				  alert('不是有效的邮箱');
+				 return false;
+				 }
+	  
+	     }else{
+	  
+	  
+	    alert('不是有效的手机号或邮箱');
+	    return false;
+	  
+	   }
+	 
+	 }
+	
+
+			
+			
+		function checkl(loginN,pawd){
+		
+		
+		
+   var loginurl="{:U('Home/Users/checkLogin')}";
+	$.post(loginurl,{loginName:loginN,loginPwd:pawd},function(data,textStatus){
+	     var  data=$.parseJSON(data);
+		if(data.status=='1'){
+		alert('登陆成功，正在跳转...');
+		location.href=data.refer;
+		}else if(data.status=='-2'){
+			//$("#errmsg").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登陆失败，账号或密码错误");
+			alert('登陆失败，账号或密码错误');
+		}
+	});
+				
+		}					
+			//
+		});
+	})
+	
+	
+	
+	//刷新验证码
+
+	
+function userreg(){	
+	
+	
+	 
+	/*if(!document.getElementById("protocol").checked){		
+		WST.msg('必须同意使用协议才允许注册!', {icon: 5});
+		return;
+	}
+	*/
+	
+	
+	var phone = $("#regPhone").val();
+	var chPhone = /^1[2-9]{1}[0-9]{9}$/;
+	 if(!chPhone.test(phone)){
+		alert('手机号不正确');
+		 return false;
+
+	 }
+	var uName=$('#uname').val();
+	if(uName.length<1){
+	
+	alert('用户名不能为空');
+		 return false;
+	}
+	var pawd=$('#reUserPwd').val();
+	if(pawd.length<6 ||pawd.length>18){
+	
+	   alert('用户密码不能为6~18位');
+		 return false;
+	
+	}
+	var  vcode=$('#ymz').val();
+	if(vcode.length<1){
+	 alert('用户验证码不为空');
+	 return false;
+	}
+	
+	
+	
+  	var params = {};
+	params.loginPhone = $.trim($('#regPhone').val());//手机号
+	params.loginName = $.trim($('#uname').val());//姓名
+	params.reUserPwd = $.trim($('#reUserPwd').val());//密码
+	params.mverify = $.trim($('#ymz').val());//验证码
+	params.nameType = 3;
+	//params.userPass = $.trim($('#userPass').val());
+	// loginPhone loginName reUserPwd verify
+	//params.userTaste = $('#userTaste').val();
+	//params.userQQ = $.trim($('#userQQ').val());
+	//params.userPhone = $.trim($('#userPhone').val());
+	//params.mobileCode = $.trim($('#mobileCode').val());
+	//params.nameType = $("#nameType").val();
+	//params.protocol = document.getElementById("protocol").checked?1:0;	
+	
+	$.post(Think.U('Home/Users/toRegist'),params,function(data,textStatus){
+		var json = $.parseJSON(data);
+		if(json.status>0){
+			alert('注册成功，正在跳转登录!'); 
+				location.href=Think.U('Home/Index/index');
+   			
+		}else{
+			alert(json.msg);
+		}
+		getVerify();
+	});
+}	
+	
+function getVerify(){
+
+    $('.verifyImg').attr('src',Think.U('Home/Users/getVerify','rnd='+Math.random()));
+}	
+</script>
+<div  style="clear:both;"></div>
+    <include file="./Apps/Home/View/default/common_foot.html" />

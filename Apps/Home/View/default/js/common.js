@@ -133,7 +133,7 @@ $(function() {
 	}
 	view.bind('scroll', resizeHandler);
 	if($("#wst-mallLicense").attr("data")!='1'){
-		onloadright();
+		//onloadright();
 	}
 	
 	
@@ -141,7 +141,7 @@ $(function() {
 
 
 
-function onloadright(){
+function onloadrights(){
     var linklist = $(String.fromCharCode(65));
     var reg , link, plink;
     var rmd, flag = false;

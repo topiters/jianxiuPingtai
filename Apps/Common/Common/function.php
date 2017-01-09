@@ -183,7 +183,7 @@ function WSTRootDomain(){
 }
 /**
  * 设置当前页面对象
- * @param int 0-用户  1-商家
+ * @param int 0-业主 1-供应商  2-检修企业  3-检修工程师
  */
 function WSTLoginTarget($target = 0){
 	$WST_USER = session('WST_USER');
@@ -534,6 +534,8 @@ function WSTAutoByCookie(){
  */
 function WSTIPAddress(){
 	$url = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip='.get_client_ip(); 
+	
+	
     $ch = curl_init($url); 
     curl_setopt($ch, CURLOPT_ENCODING ,'utf8'); 
     curl_setopt($ch, CURLOPT_TIMEOUT, 10); 

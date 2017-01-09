@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>{$CONF['shopTitle']['fieldValue']}后台管理中心</title>
+      <title>{$CONF['engineerTitle']['fieldValue']}后台管理中心</title>
       <link href="__PUBLIC__/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <link href="__ROOT__/Apps/Admin/View/css/AdminLTE.css" rel="stylesheet" type="text/css" />
       <link href="__ROOT__/Apps/Admin/View/css/upload.css" rel="stylesheet" type="text/css" />
@@ -36,7 +36,7 @@ dl.areaSelect:hover dd{display: block;}
 dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 </style>
    <script>
-   var shopMap = null;
+   var engineerMap = null;
    var toolBar = null;
    var filetypes = ["gif","jpg","png","jpeg"];
    var ThinkPHP = window.Think = {
@@ -104,11 +104,11 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			onError : "该手机号码已存在。",
 			onWait : "请稍候..."
 		}).defaultPassed().unFormValidator(true);
-		$("#shopSn").formValidator({onShow:"",onFocus:"店铺编号不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺编号不符合要求,请确认"});
-		$("#shopName").formValidator({onShow:"",onFocus:"店铺名称不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:40,onError:"店铺名称长度不符合要求,请确认"}).ajaxValidator({
+		$("#engineerSn").formValidator({onShow:"",onFocus:"工程师编号不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"工程师编号不符合要求,请确认"});
+		$("#engineerName").formValidator({onShow:"",onFocus:"工程师名称不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:40,onError:"工程师名称长度不符合要求,请确认"}).ajaxValidator({
 			dataType : "json",
 			async : true,
-			url :  "{:U('Admin/Shops/checkShopName',array('id'=>$object['shopId']))}",
+			url :  "{:U('Admin/Engineer/checkShopName',array('id'=>$object['engineerId']))}",
 			success : function(data){
 				var json = WST.toJson(data);
 	            if( json.status == "1" ) {
@@ -119,13 +119,13 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 
 			},
 			buttons: $("#dosubmit"),
-			onError : "该店铺名称已被使用",
+			onError : "该工程师名称已被使用",
 			onWait : "请稍候..."
 		});
 		$("#userName").formValidator({onShow:"",onFocus:"请输入店主姓名",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店主姓名不能为空,请确认"});
-		$("#shopCompany").formValidator({onShow:"",onFocus:"请输入公司名称",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"公司名称不能为空,请确认"});
-		$("#shopTel").formValidator({onShow:"",onFocus:"请输入店铺电话",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"店铺电话不能为空,请确认"});
-		$("#shopAddress").formValidator({onShow:"",onFocus:"请输入店铺地址",onCorrect:"输入正确"}).inputValidator({min:1,max:120,onError:"店铺地址不能为空,请确认"});
+		$("#engineerCompany").formValidator({onShow:"",onFocus:"请输入公司名称",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"公司名称不能为空,请确认"});
+		$("#engineerTel").formValidator({onShow:"",onFocus:"请输入工程师电话",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"工程师电话不能为空,请确认"});
+		$("#engineerAddress").formValidator({onShow:"",onFocus:"请输入工程师地址",onCorrect:"输入正确"}).inputValidator({min:1,max:120,onError:"工程师地址不能为空,请确认"});
 		$("#areaId3").formValidator({onFocus:"请选择所属地区"}).inputValidator({min:1,onError: "请选择所属地区"});
 		$("#goodsCatId1").formValidator({onFocus:"请选择所属行业"}).inputValidator({min:1,onError: "请选择所属行业"});
 		$("#bankId").formValidator({onFocus:"请选择所属银行"}).inputValidator({min:1,onError: "请选择所属银行"});
@@ -142,7 +142,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			  }
 		});
 		ShopMapInit();
-		<if condition="$object['shopId'] !=0 ">
+		<if condition="$object['engineerId'] !=0 ">
 		   getAreaList("areaId2",{$object.areaId1},0,{$object.areaId2});
 		   getAreaList("areaId3",{$object.areaId2},1,{$object.areaId3});
 		</if>
@@ -151,12 +151,12 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		initTime('serviceEndTime','{$object['serviceEndTime']}');
 		getCommunitys();
 
-		if ($("input[name='shopStatus']:checked").val() <= -1) {
+		if ($("input[name='engineerStatus']:checked").val() <= -1) {
 			yj_unformValidator();
 		};
 
 		//拒绝申请要求填写拒绝理由
-		$("input[name='shopStatus']").change(function(){
+		$("input[name='engineerStatus']").change(function(){
 			if ($(this).val()<=-1) { //选择拒绝的时候
 				$('#refuseMsg').show();
 				yj_unformValidator();
@@ -168,14 +168,14 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		
 		var uploading = null;
 		uploadFile({
-	    	  server:"{:U('Admin/Shops/uploadPic')}",
+	    	  server:"{:U('Admin/Engineer/uploadPic')}",
 	    	  pick:'#filePicker',
-	    	  formData: {dir:'shops'},
+	    	  formData: {dir:'engineers'},
 	    	  callback:function(f){
 	    		  layer.close(uploading);
 	    		  var json = WST.toJson(f);
 	    		  $('#preview').attr('src',ThinkPHP.DOMAIN+"/"+json.file.savepath+json.file.savethumbname);
-	    		  $('#shopImg').val(json.file.savepath+json.file.savename);
+	    		  $('#engineerImg').val(json.file.savepath+json.file.savename);
 	    		  $('#preview').show();
 		      },
 		      progress:function(rate){
@@ -188,11 +188,11 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		$("#loginName").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#loginPwd").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#userPhone").attr("disabled",true).unFormValidator(true); //解除校验
-		$("#shopSn").attr("disabled",true).unFormValidator(true); //解除校验
-		$("#shopName").attr("disabled",true).unFormValidator(true); //解除校验
+		$("#engineerSn").attr("disabled",true).unFormValidator(true); //解除校验
+		$("#engineerName").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#userName").attr("disabled",true).unFormValidator(true); //解除校验
-		$("#shopCompany").attr("disabled",true).unFormValidator(true); //解除校验
-		$("#shopAddress").attr("disabled",true).unFormValidator(true); //解除校验
+		$("#engineerCompany").attr("disabled",true).unFormValidator(true); //解除校验
+		$("#engineerAddress").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#areaId3").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#goodsCatId3").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#bankId").attr("disabled",true).unFormValidator(true); //解除校验
@@ -205,11 +205,11 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		$("#loginName").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#loginPwd").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#userPhone").attr("disabled",false).unFormValidator(false); //解除校验
-		$("#shopSn").attr("disabled",false).unFormValidator(false); //解除校验
-		$("#shopName").attr("disabled",false).unFormValidator(false); //解除校验
+		$("#engineerSn").attr("disabled",false).unFormValidator(false); //解除校验
+		$("#engineerName").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#userName").attr("disabled",false).unFormValidator(false); //解除校验
-		$("#shopCompany").attr("disabled",false).unFormValidator(false); //解除校验
-		$("#shopAddress").attr("disabled",false).unFormValidator(false); //解除校验
+		$("#engineerCompany").attr("disabled",false).unFormValidator(false); //解除校验
+		$("#engineerAddress").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#areaId3").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#goodsCatId3").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#bankId").attr("disabled",false).unFormValidator(false); //解除校验
@@ -219,38 +219,38 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 	}
    function ShopMapInit(){
 	   var opts = {zoom:$('#mapLevel').val(),longitude:$('#longitude').val(),latitude:$('#latitude').val()};
-	   if(shopMap)return;
-	   $('#shopMap').show();
-	   shopMap = new AMap.Map('mapContainer', {
+	   if(engineerMap)return;
+	   $('#engineerMap').show();
+	   engineerMap = new AMap.Map('mapContainer', {
 			view: new AMap.View2D({
 				zoom:opts.zoom
 			})
 	   });
 	   if(opts.longitude!='' && opts.latitude!=''){
-		   shopMap.setZoomAndCenter(opts.zoom, new AMap.LngLat(opts.longitude, opts.latitude));
+		   engineerMap.setZoomAndCenter(opts.zoom, new AMap.LngLat(opts.longitude, opts.latitude));
 		   var marker = new AMap.Marker({
 				position: new AMap.LngLat(opts.longitude, opts.latitude), //基点位置
 				icon:"http://webapi.amap.com/images/marker_sprite.png"
 		   });
-		   marker.setMap(shopMap);
+		   marker.setMap(engineerMap);
 	   }
-	   shopMap.plugin(["AMap.ToolBar"],function(){		
+	   engineerMap.plugin(["AMap.ToolBar"],function(){		
 			toolBar = new AMap.ToolBar();
-			shopMap.addControl(toolBar);	
+			engineerMap.addControl(toolBar);	
 			toolBar.show();
 	   });
 	   
-	   AMap.event.addListener(shopMap,'click',function(e){
-			shopMap.clearMap();
+	   AMap.event.addListener(engineerMap,'click',function(e){
+			engineerMap.clearMap();
 			$('#longitude').val(e.lnglat.getLng());
 			$('#latitude').val(e.lnglat.getLat());
 			var marker = new AMap.Marker({
 				position: e.lnglat, //基点位置
 				icon:"http://webapi.amap.com/images/marker_sprite.png"
 			});
-			marker.setMap(shopMap);
+			marker.setMap(engineerMap);
 	   });
-	   AMap.event.addListener(shopMap,'zoomchange',function(e){
+	   AMap.event.addListener(engineerMap,'zoomchange',function(e){
 		   $('#mapLevel').val(this.getZoom());
 	   })
    }
@@ -263,9 +263,9 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		   $('#areaId3').html('<option value="">请选择</option>');
 	   }else{
 		   if(t==1 && $('#areaId2').find("option:selected").text()!=''){
-			   shopMap.setZoom(15);
-			   shopMap.setCity($('#areaId2').find("option:selected").text());
-			   $('#showLevel').val(shopMap.getZoom());
+			   engineerMap.setZoom(15);
+			   engineerMap.setCity($('#areaId2').find("option:selected").text());
+			   $('#showLevel').val(engineerMap.getZoom());
 		   }
 	   }
 	   var html = [];
@@ -341,33 +341,33 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
    function edit(){
 	   var params = {};
 	   params.id = $('#id').val();
-	   <if condition="$object['shopId'] ==0 ">
+	   <if condition="$object['engineerId'] ==0 ">
 	   params.loginName = $('#loginName').val();
 	   params.loginPwd = $('#loginPwd').val();
 	   </if>
 	   params.userName = $('#userName').val();
 	   params.userPhone = $('#userPhone').val();
-	   params.shopSn = $('#shopSn').val();
+	   params.engineerSn = $('#engineerSn').val();
 	   params.areaId1 = $('#areaId1').val();
 	   params.areaId2 = $('#areaId2').val();
 	   params.areaId3 = $('#areaId3').val();//地区
 	   params.goodsCatId1 = $('#goodsCatId1').val();
 	   params.isSelf = $("input[name='isSelf']:checked").val();
-	   params.shopName = $('#shopName').val();
-	   params.shopCompany = $('#shopCompany').val();
-	   params.shopStatus = $("input[name='shopStatus']:checked").val();
-	   params.shopImg = $('#shopImg').val();
+	   params.engineerName = $('#engineerName').val();
+	   params.engineerCompany = $('#engineerCompany').val();
+	   params.engineerStatus = $("input[name='engineerStatus']:checked").val();
+	   params.engineerImg = $('#engineerImg').val();
 	   params.latitude = $('#latitude').val();
 	   params.longitude = $('#longitude').val();
 	   params.mapLevel = $('#mapLevel').val();
 	   //拒绝的时候不用上传
-	   if(params.shopImg=='' && params.shopStatus!=-1 ){
-		   Plugins.Tips({title:'信息提示',icon:'error',content:'请上传店铺图片!',timeout:1000});
+	   if(params.engineerImg=='' && params.engineerStatus!=-1 ){
+		   Plugins.Tips({title:'信息提示',icon:'error',content:'请上传工程师图片!',timeout:1000});
 		   return;
 	   }
-	   params.shopTel = $('#shopTel').val();
+	   params.engineerTel = $('#engineerTel').val();
 	   params.qqNo = $('#qqNo').val();
-	   params.shopAddress = $('#shopAddress').val();
+	   params.engineerAddress = $('#engineerAddress').val();
 	   params.deliveryFreeMoney = $('#deliveryFreeMoney').val();
 	   params.deliveryMoney = $('#deliveryMoney').val();
 	   params.avgeCostMoney = $('#avgeCostMoney').val();
@@ -386,13 +386,13 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 	   }
 	   params.statusRemarks = $('#statusRemarks').val();
 	   
-	   if(params.shopStatus==1){
+	   if(params.engineerStatus==1){
 		   if(params.latitude=='' || params.longitude==''){
-			   Plugins.Tips({title:'信息提示',icon:'error',content:'请在地图上标注店铺所在位置!',timeout:1000});
+			   Plugins.Tips({title:'信息提示',icon:'error',content:'请在地图上标注工程师所在位置!',timeout:1000});
 			   return;
 		   }
 	   }
-	   params.shopAtive = $("input[name='shopAtive']:checked").val();
+	   params.engineerAtive = $("input[name='engineerAtive']:checked").val();
 	   params.isDistributAll = $("input[name='isDistributAll']:checked").val();
 	   var relateArea = [0];
 	   var relateCommunity = [0];
@@ -407,21 +407,21 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 	   });
 	   params.relateAreaId=relateArea.join(',');
 	   params.relateCommunityId=relateCommunity.join(',');
-	   if(params.relateAreaId=='0' && params.relateCommunityId=='0' && params.shopStatus!=-1 && params.isDistributAll!=1){
+	   if(params.relateAreaId=='0' && params.relateCommunityId=='0' && params.engineerStatus!=-1 && params.isDistributAll!=1){
 		   Plugins.Tips({title:'信息提示',icon:'error',content:'请选择配送区域!',timeout:1000});
 		   return;
 	   }
 	   //拒绝的时候要求写备注
-	   if(params.shopStatus<=-1 && params.statusRemarks == ''){
+	   if(params.engineerStatus<=-1 && params.statusRemarks == ''){
 		   Plugins.Tips({title:'信息提示',icon:'error',content:'请填写拒绝理由!',timeout:1000});
 		   return;
 	   }
 	   Plugins.waitTips({title:'信息提示',content:'正在提交数据，请稍后...'});
-	   $.post("{:U('Admin/Shops/edit')}",params,function(data,textStatus){
+	   $.post("{:U('Admin/Engineer/edit')}",params,function(data,textStatus){
 			var json = WST.toJson(data);
 			if(json.status=='1'){
 				Plugins.setWaitTipsMsg({ content:'操作成功',timeout:1000,callback:function(){
-				   location.href='{:U("Admin/Shops/$src")}';
+				   location.href='{:U("Admin/Engineer/$src")}';
 				}});
 			}else if(json.status=='-2'){
 				Plugins.closeWindow();
@@ -452,10 +452,10 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
    <body class="wst-page" style="position:relative;">
    		
        <form name="myform" method="post" id="myform" autocomplete="off">
-        <input type='hidden' id='id' value='{$object.shopId}'/>
+        <input type='hidden' id='id' value='{$object.engineerId}'/>
 
         <table class="table table-hover table-striped table-bordered wst-form">
-           <if condition="$object['shopId'] ==0 ">
+           <if condition="$object['engineerId'] ==0 ">
            <tr>
              <th width='150' align='right'>登录账号<font color='red'>*</font>：</th>
              <td><input type='text' id='loginName' name='loginName' class="form-control wst-ipt" value='{$object.loginName}' maxLength='25'/></td>
@@ -466,12 +466,12 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
            </tr>
            </if>
            <tr>
-             <th align='right'>店铺编号<font color='red'>*</font>：</th>
-             <td><input type='text' id='shopSn' class="form-control wst-ipt" value='{$object.shopSn}' maxLength='25'/></td>
+             <th align='right'>工程师编号<font color='red'>*</font>：</th>
+             <td><input type='text' id='engineerSn' class="form-control wst-ipt" value='{$object.engineerSn}' maxLength='25'/></td>
            </tr>
            <tr>
-             <th align='right'>店铺名称<font color='red'>*</font>：</th>
-             <td><input type='text' id='shopName' name="shopName" class="form-control wst-ipt" value='{$object.shopName}' maxLength='25'/></td>
+             <th align='right'>工程师名称<font color='red'>*</font>：</th>
+             <td><input type='text' id='engineerName' name="engineerName" class="form-control wst-ipt" value='{$object.engineerName}' maxLength='25'/></td>
            </tr>
            <tr>
              <th align='right'>店主姓名<font color='red'>*</font>：</th>
@@ -483,7 +483,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
            </tr>
            <tr>
              <th align='right'>公司名称<font color='red'>*</font>：</th>
-             <td><input type='text' id='shopCompany' class="form-control wst-ipt" value='{$object.shopCompany}' maxLength='25'/></td>
+             <td><input type='text' id='engineerCompany' class="form-control wst-ipt" value='{$object.engineerCompany}' maxLength='25'/></td>
            </tr>
            <tr>
              <th align='right'>是否自营店<font color='red'>*</font>：</th>
@@ -497,22 +497,22 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              </td>
            </tr>
            <tr style="height:80px;">
-             <th align='right'>店铺图标<font color='red'>*</font>：</th>
+             <th align='right'>工程师图标<font color='red'>*</font>：</th>
              <td>
              	<div>
 		          	<div id="filePicker" style='margin-left:0px;float:left'>上传图片</div>
              	    <div style='margin-left:5px;float:left'>图片大小:150 x 150 (px)，格式为 gif, jpg, jpeg, png</div>
-             	    <input id="shopImg" name="shopImg" class="text wstipt" tabindex="3" autocomplete="off" type="hidden" value="{$object.shopImg}"/>
+             	    <input id="engineerImg" name="engineerImg" class="text wstipt" tabindex="3" autocomplete="off" type="hidden" value="{$object.engineerImg}"/>
              		<div style="clear:both;"></div>
              	</div>
 	             <div id="preview_Filedata">
-	             	<img id='preview' src='__ROOT__/{$object.shopImg}' ref='__ROOT__/{$object.shopImg}' <if condition="$object['shopImg'] =='' ">style='display:none'<else/>style='width:152px;height:152px;max-width:152px;' </if>/>
+	             	<img id='preview' src='__ROOT__/{$object.engineerImg}' ref='__ROOT__/{$object.engineerImg}' <if condition="$object['engineerImg'] =='' ">style='display:none'<else/>style='width:152px;height:152px;max-width:152px;' </if>/>
 	             </div>
              </td>
            </tr>
            <tr>
-             <th align='right'>店铺电话<font color='red'>*</font>：</th>
-             <td><input type='text' id='shopTel' class="form-control wst-ipt" value='{$object.shopTel}' maxLength='25'/></td>
+             <th align='right'>工程师电话<font color='red'>*</font>：</th>
+             <td><input type='text' id='engineerTel' class="form-control wst-ipt" value='{$object.engineerTel}' maxLength='25'/></td>
            </tr>
            <tr>
              <th align='right'>QQ：</th>
@@ -536,10 +536,10 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              </td>
            </tr>
            <tr>
-             <th align='right'>店铺地址<font color='red'>*</font>：</th>
-             <td><input type='text' id='shopAddress' class="form-control wst-ipt" value='{$object.shopAddress}' maxLength='120'/></td>
+             <th align='right'>工程师地址<font color='red'>*</font>：</th>
+             <td><input type='text' id='engineerAddress' class="form-control wst-ipt" value='{$object.engineerAddress}' maxLength='120'/></td>
            </tr>
-           <tr id='shopMap' style='display:none'>
+           <tr id='engineerMap' style='display:none'>
              <td>&nbsp;</td>
              <td>
              <div id="mapContainer" style='height:400px;width:90%;'>等待地图初始化...</div>
@@ -565,10 +565,10 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              <th align='right'>营业状态<font color='red'>*</font>：</th>
              <td>
              <label>
-             <input type='radio' id='shopAtive1' name='shopAtive' value='1' <if condition="$object['shopAtive'] ==1 ">checked</if> />营业中&nbsp;&nbsp;
+             <input type='radio' id='engineerAtive1' name='engineerAtive' value='1' <if condition="$object['engineerAtive'] ==1 ">checked</if> />营业中&nbsp;&nbsp;
              </label>
              <label>
-             <input type='radio' id='shopAtive0' name='shopAtive' value='0' <if condition="$object['shopAtive'] ==0 ">checked</if> />休息中
+             <input type='radio' id='engineerAtive0' name='engineerAtive' value='0' <if condition="$object['engineerAtive'] ==0 ">checked</if> />休息中
              </label>
              </td>
            </tr>
@@ -658,23 +658,23 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              </td>
            </tr>
             <tr>
-             <th align='right'>店铺状态<font color='red'>*</font>：</th>
+             <th align='right'>工程师状态<font color='red'>*</font>：</th>
              <td>
              <label>
-             <input type='radio' id='shopStatus1' name='shopStatus' value='-2' <if condition="$object['shopStatus'] ==-2 ">checked</if> />已停止&nbsp;&nbsp;
+             <input type='radio' id='engineerStatus1' name='engineerStatus' value='-2' <if condition="$object['engineerStatus'] ==-2 ">checked</if> />已停止&nbsp;&nbsp;
              </label>
              <label>
-             <input type='radio' id='shopStatus0' name='shopStatus' value='-1' <if condition="$object['shopStatus'] ==-1 ">checked</if> />拒绝
+             <input type='radio' id='engineerStatus0' name='engineerStatus' value='-1' <if condition="$object['engineerStatus'] ==-1 ">checked</if> />拒绝
              </label>
              <label>
-             <input type='radio' id='shopStatus2' name='shopStatus' value='0' <if condition="$object['shopStatus'] ==0 ">checked</if> />待审核
+             <input type='radio' id='engineerStatus2' name='engineerStatus' value='0' <if condition="$object['engineerStatus'] ==0 ">checked</if> />待审核
              </label>
              <label>
-             <input type='radio' id='shopStatus3' name='shopStatus' value='1' <if condition="$object['shopStatus'] ==1 ">checked</if> />已审核
+             <input type='radio' id='engineerStatus3' name='engineerStatus' value='1' <if condition="$object['engineerStatus'] ==1 ">checked</if> />已审核
              </label>
              </td>
            </tr>
-           <tr id="refuseMsg" <if condition="$object['shopStatus'] gt -1 ">style='display:none'</if>>
+           <tr id="refuseMsg" <if condition="$object['engineerStatus'] gt -1 ">style='display:none'</if>>
            	 <th>拒绝理由：</th>
            	 <td>
            	 	<input class="form-control wst-ipt" type="text" id="statusRemarks" name="statusRemarks" length="255" value="{$object['statusRemarks']}">
@@ -683,7 +683,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
            <tr>
              <td colspan='2' style='padding-left:250px;'>
                  <button type="submit" class="btn btn-success">保&nbsp;存</button>
-                 <button type="button" class="btn btn-primary" onclick='javascript:location.href="{:U('Admin/Shops/index')}"'>返&nbsp;回</button>
+                 <button type="button" class="btn btn-primary" onclick='javascript:location.href="{:U('Admin/Engineer/index')}"'>返&nbsp;回</button>
              </td>
            </tr>
         </table>

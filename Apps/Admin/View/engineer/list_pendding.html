@@ -21,7 +21,7 @@
 	   Plugins.confirm({title:'信息提示',content:'您确定要删除该商家吗?',okText:'确定',cancelText:'取消',okFun:function(){
 		   Plugins.closeWindow();
 		   Plugins.waitTips({title:'信息提示',content:'正在操作，请稍后...'});
-		   $.post("{:U('Admin/Shops/del')}",{id:id},function(data,textStatus){
+		   $.post("{:U('Admin/Engineer/del')}",{id:id},function(data,textStatus){
 					var json = WST.toJson(data);
 					if(json.status=='1'){
 						Plugins.setWaitTipsMsg({content:'操作成功',timeout:1000,callback:function(){
@@ -63,7 +63,7 @@
   });
    </script>
    <body class='wst-page'>
-      <form method='post' action="{:U('Admin/Shops/queryPeddingByPage')}">
+      <form method='post' action="{:U('Admin/Engineer/queryPeddingByPage')}">
        <div class='wst-tbar'>
     地区：<select id='areaId1' name='areaId1' onchange='javascript:getAreaList("areaId2",this.value,0)'>
                <option value=''>请选择</option>
@@ -74,16 +74,16 @@
              <select id='areaId2' name='areaId2'>
                <option value=''>请选择</option>
              </select>     
-       店铺名称：<input type='text' id='shopName' name='shopName' class='form-control wst-ipt-10' value='{$shopName}'/> 
-       店铺编号：<input type='text' id='shopSn' name='shopSn' class='form-control wst-ipt-10' value='{$shopSn}'/> 
-      店铺状态 ：<select id='shopStatus' name='shopStatus'>
+       店铺名称：<input type='text' id='engineerName' name='engineerName' class='form-control wst-ipt-10' value='{$engineerName}'/> 
+       店铺编号：<input type='text' id='engineerSn' name='engineerSn' class='form-control wst-ipt-10' value='{$engineerSn}'/> 
+      店铺状态 ：<select id='engineerStatus' name='engineerStatus'>
              <option value='-999'>全部</option>
-             <option value='0' <if condition="$shopStatus ==0 ">selected</if>>待审核</option>
-             <option value='-1' <if condition="$shopStatus ==-1 ">selected</if>>拒绝</option>
-             <option value='-2' <if condition="$shopStatus ==-2 ">selected</if>>已停止</option>
+             <option value='0' <if condition="$engineerStatus ==0 ">selected</if>>待审核</option>
+             <option value='-1' <if condition="$engineerStatus ==-1 ">selected</if>>拒绝</option>
+             <option value='-2' <if condition="$engineerStatus ==-2 ">selected</if>>已停止</option>
          </select>
   <button type="submit" class="btn btn-primary glyphicon glyphicon-search">查询</button> 
-       <a class="btn btn-success glyphicon glyphicon-plus" href="{:U('Admin/Shops/toEdit')}" style='float:right'>新增</a>
+       <a class="btn btn-success glyphicon glyphicon-plus" href="{:U('Admin/Engineer/toEdit')}" style='float:right'>新增</a>
        </div>
        </form>
        <div class='wst-page'>
@@ -104,26 +104,26 @@
             <volist name="Page['root']" id="vo" key='i'>
              <tr>
                <td>{$i}</td>
-               <td>{$vo['shopName']}</td>
-               <td>{$vo['shopSn']}&nbsp;</td>
+               <td>{$vo['engineerName']}</td>
+               <td>{$vo['engineerSn']}&nbsp;</td>
                <td>{$vo['userName']}&nbsp;</td>
                <td>{$vo['catName']}&nbsp;</td>
                <td>
-               <if condition="$object['shopAtive'] ==1 "><span class='label label-success'>营业中</span></if>
-               <if condition="$object['shopAtive'] ==0 "><span class='label label-warning'>休息中</span></if>&nbsp;
+               <if condition="$object['engineerAtive'] ==1 "><span class='label label-success'>营业中</span></if>
+               <if condition="$object['engineerAtive'] ==0 "><span class='label label-warning'>休息中</span></if>&nbsp;
                </td>
                <td>
-               <if condition="$vo['shopStatus'] eq -2"><span class='label label-danger wst-label'>已停止</span> </if>
-               <if condition="$vo['shopStatus'] eq -1"><span class='label label-danger wst-label'>拒绝</span>  </if>
-               <if condition="$vo['shopStatus'] eq 0"><span class='label label-primary wst-label'>未审核</span> </if>
-               <if condition="$vo['shopStatus'] eq 1"><span class='label label-success wst-label'>已审核</span>  </if>
+               <if condition="$vo['engineerStatus'] eq -2"><span class='label label-danger wst-label'>已停止</span> </if>
+               <if condition="$vo['engineerStatus'] eq -1"><span class='label label-danger wst-label'>拒绝</span>  </if>
+               <if condition="$vo['engineerStatus'] eq 0"><span class='label label-primary wst-label'>未审核</span> </if>
+               <if condition="$vo['engineerStatus'] eq 1"><span class='label label-success wst-label'>已审核</span>  </if>
                </td>
                <td>
-               <php>if(in_array('dplb_02',$WST_STAFF['grant'])){</php>
-               <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Shops/toEdit',array('id'=>$vo['shopId'],'src'=>'queryPeddingByPage'))}">修改</a>&nbsp;
+               <php>if(in_array('jxgcslb_02',$WST_STAFF['grant'])){</php>
+               <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Engineer/toEdit',array('id'=>$vo['engineerId'],'src'=>'queryPeddingByPage'))}">修改</a>&nbsp;
                <php>}</php>
-               <php>if(in_array('dplb_03',$WST_STAFF['grant'])){</php>
-               <button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="javascript:del({$vo['shopId']})">刪除</buttona>
+               <php>if(in_array('jxgcslb_03',$WST_STAFF['grant'])){</php>
+               <button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="javascript:del({$vo['engineerId']})">刪除</buttona>
                <php>}</php>
                </td>
              </tr>

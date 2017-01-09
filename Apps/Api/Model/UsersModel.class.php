@@ -21,11 +21,14 @@ class UsersModel extends BaseModel {
 	 	$userId = intval($userId?$userId:I('id',0));
 		$user = $this->where("userId=".$userId)->find();
 		if(!empty($user) && $user['userType']==1){
-			//加载商家信息
+			//加载业主信息
 		 	$sp = M('shops');
 		 	$shops = $sp->where('userId='.$user['userId']." and shopFlag=1")->find();
 		 	if(!empty($shops))$user = array_merge($shops,$user);
 		}
+		
+		
+		
 		return $user;
 	 }
 	 
@@ -87,26 +90,57 @@ class UsersModel extends BaseModel {
 	 * 用户登录验证
 	 */
 	public function checkLogin(){
-		$rv = array('status'=>-1);
+		$rv = array('status'=>-1);//账号不存在
 		$loginName = WSTAddslashes(I('loginName'));
 		$userPwd = WSTAddslashes(I('loginPwd'));
-		$rememberPwd = I('rememberPwd');
+		//$rememberPwd = I('rememberPwd');
 		$sql ="SELECT * FROM __PREFIX__users WHERE (loginName='".$loginName."' OR userEmail='".$loginName."' OR userPhone='".$loginName."') AND userFlag=1 and userStatus=1 ";
 		$rss = $this->query($sql);
+		//[loginSecret] => 2269
+        //    [loginPwd] => 2b4422f9a8032911f9e70198758c1c8a
 		if(!empty($rss)){
+			
 			$rs = $rss[0];
-			if($rs['loginPwd']!=md5($userPwd.$rs['loginSecret']))return $rv;
+			//print_r(md5($userPwd.$rs['loginSecret']));exit;
+			if($rs['loginPwd']!=md5($userPwd.$rs['loginSecret'])){ $rv = array('status'=>-2);return $rv;}//密码错误
+			if($rs['userStatus']!=1){ $rv = array('status'=>-3);return $rv;}//禁用
+			
 			if($rs['userFlag'] == 1 && $rs['userStatus']==1){
+				
 				$data = array();
 				$data['lastTime'] = date('Y-m-d H:i:s');
 				$data['lastIP'] = get_client_ip();
 		    	$this->where(" userId=".$rs['userId'])->data($data)->save();
-		    	//如果是店铺则加载店铺信息
-		    	if($rs['userType']>=1){
+		    	
+		    	//如果是业主则加载业主信息
+		    	if($rs['userType']==1){
 		    		$s = M('shops');
 			 		  $shops = $s->where('userId='.$rs['userId']." and shopFlag=1")->find();
 			 		  if(!empty($shops))$rs = array_merge($shops,$rs);
 		    	}
+		    	
+		    	//如果是检修厂商
+		    	if($rs['userType']==2){
+		    		$super = M('supperlier');
+		    		$superOne = $super->where('userId='.$rs['userId']." and supperlierFlag=1")->find();
+		    		if(!empty($superOne))$rs = array_merge($superOne,$rs);
+		    	}
+		    	
+		    	//如果是检修企业
+		    	if($rs['userType']==3){
+		    		$manu = M('manufacturer');
+		    		$manuOne = $super->where('userId='.$rs['userId']." and manufacturerFlag=1")->find();
+		    		if(!empty($manuOne))$rs = array_merge($manu,$rs);
+		    	}
+		    	//如果是检修工程师
+		    	if($rs['userType']==4){
+		    		$manu = M('engineer');
+		    		$manuOne = $super->where('userId='.$rs['userId']." and engineerFlag=1")->find();
+		    		if(!empty($manuOne))$rs = array_merge($manu,$rs);
+		    	}
+		    	
+		    	
+		    	
 		    	//记录登录日志
 				$data = array();
 				$data["userId"] = $rs['userId'];
@@ -115,6 +149,7 @@ class UsersModel extends BaseModel {
 				M('log_user_logins')->add($data);
 				
 			    $rv = $rs;
+			  
 				//记住密码
 				setcookie("loginName", $loginName, time()+3600*24*90);
 				if($rememberPwd == "on"){
@@ -127,8 +162,14 @@ class UsersModel extends BaseModel {
 				}else{		
 					setcookie("loginPwd", null);
 				}
+				
+				
+				
+				
 			}
 		}
+		
+	
 		return $rv;
 	}
 	
@@ -282,7 +323,14 @@ class UsersModel extends BaseModel {
 	public function editPass($id){
 		$rd = array('status'=>-1);
 		$data = array();
-		$data["loginPwd"] = I("newPass");
+		$data["loginPwd"]= I("newPass");//新密码
+		$data["rePwd"] = I("rePass");//确认密码
+		  $oldPass     = I("oldPass");//旧密码
+		  
+		 if($data["rePwd"]!=$data["loginPwd"]){ 
+		 	  $rd['status']= 3;
+		 } 
+		  
 		if($this->checkEmpty($data,true)){
 			$rs = $this->where('userId='.$id)->find();
 			//核对密码
