@@ -72,8 +72,11 @@
                 <option value=''>请选择</option>
                 <option value='0' <if condition="$object['positionType'] == 0 ">selected</if>>PC版</option>
                 <if condition="$CONF['isOpenWeiXin'] == 1 ">
-                <option value='2' <if condition="$object['positionType'] == 2 ">selected</if>>微信版</option>
+                <option value='2' <if condition="$object['positionType'] == 2 ">selected</if>>App版</option>
                 </if>
+				<!--  <option value='3' <if condition="$object['positionType'] ==3 ">selected</if>>App版</option> -->
+				
+				
              </select>
              </td>
            </tr>

@@ -164,24 +164,95 @@
                    </td>
                 </tr>
                 <tr style='border-top:1px solid #dddddd'>
-                   <td rowspan='3' valign='top' width='100'><label><input type='checkbox' class='chk' value='dpgl' onclick='javascript:checkModel(this)'/>店铺管理</label></td>
-                   <td width='90' colspan='2'><label><input type='checkbox' class='chk grant dpgl' id='dpgl_00' value='dpgl_00' onclick='javascript:checkModel(this)'/>查看店铺管理栏目</label></td> 
+                   <td rowspan='3' valign='top' width='100'><label><input type='checkbox' class='chk' value='dpgl' onclick='javascript:checkModel(this)'/>业主管理</label></td>
+                   <td width='90' colspan='2'><label><input type='checkbox' class='chk grant dpgl' id='dpgl_00' value='dpgl_00' onclick='javascript:checkModel(this)'/>查看业主管理栏目</label></td> 
                 </tr>
                 <tr> 
-                   <td width='90'><label><input type='checkbox' class='chk dpgl' value='dplb' onclick='javascript:checkModel(this)'/>店铺列表</label></td>
+                   <td width='90'><label><input type='checkbox' class='chk dpgl' value='dplb' onclick='javascript:checkModel(this)'/>业主列表</label></td>
                    <td>
-                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_00' value='dplb_00'/>店铺列表</label>
-                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_01' value='dplb_01'/>新增店铺</label>
-                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_02' value='dplb_02'/>修改店铺</label>
-                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_03' value='dplb_03'/>删除店铺</label>
+                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_00' value='dplb_00'/>业主列表</label>
+                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_01' value='dplb_01'/>新增业主</label>
+                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_02' value='dplb_02'/>修改业主</label>
+                   <label><input type='checkbox' class='chk grant dpgl dplb' id='dplb_03' value='dplb_03'/>删除业主</label>
                    </td>
                 </tr>
                 <tr>
-                   <td><label><input type='checkbox' class='chk dpgl'  value='dpsh' onclick='javascript:checkModel(this)'/>店铺审核</label></td>
+                   <td><label><input type='checkbox' class='chk dpgl'  value='dpsh' onclick='javascript:checkModel(this)'/>业主审核</label></td>
                    <td>
-                   <label><input type='checkbox' class='chk grant dpgl dpsh' id='dpsh_00' value='dpsh_00'/>店铺列表</label>
+                   <label><input type='checkbox' class='chk grant dpgl dpsh' id='dpsh_00' value='dpsh_00'/>业主列表</label>
                    </td>
                 </tr>
+				
+				
+				
+				
+				
+				 <tr style='border-top:1px solid #dddddd'>
+                   <td rowspan='3' valign='top' width='100'><label><input type='checkbox' class='chk' value='gysgl' onclick='javascript:checkModel(this)'/>供应商管理</label></td>
+                   <td width='90' colspan='2'><label><input type='checkbox' class='chk grant gysgl' id='gysgl_00' value='gysgl_00' onclick='javascript:checkModel(this)'/>查看供应商管理栏目</label></td> 
+                </tr>
+                <tr> 
+                   <td width='90'><label><input type='checkbox' class='chk gysgl' value='gysgl' onclick='javascript:checkModel(this)'/>供应商列表</label></td>
+                   <td>
+                   <label><input type='checkbox' class='chk grant gysgl gyslb' id='gyslb_00' value='gyslb_00'/>供应商列表</label>
+                   <label><input type='checkbox' class='chk grant gysgl gyslb' id='gyslb_01' value='gyslb_01'/>新增供应商</label>
+                   <label><input type='checkbox' class='chk grant gysgl gyslb' id='gyslb_02' value='gyslb_02'/>修改供应商</label>
+                   <label><input type='checkbox' class='chk grant gysgl gyslb' id='gyslb_03' value='gyslb_03'/>删除供应商</label>
+                   </td>
+                </tr>
+                <tr>
+                   <td><label><!-- <input type='checkbox' class='chk dpgl'  value='dpsh' onclick='javascript:checkModel(this)'/>供应商审核</label> --></td>
+                   <td>
+                   <label><!-- <input type='checkbox' class='chk grant dpgl dpsh' id='dpsh_00' value='dpsh_00'/>供应商列表</label> -->
+                   </td>
+                </tr>
+				  				
+				
+				 <tr style='border-top:1px solid #dddddd'>
+                   <td rowspan='3' valign='top' width='100'><label><input type='checkbox' class='chk' value='jxqygl' onclick='javascript:checkModel(this)'/>企业管理</label></td>
+                   <td width='90' colspan='2'><label><input type='checkbox' class='chk grant jxqygl' id='jxqygl_00' value='jxqygl_00' onclick='javascript:checkModel(this)'/>查看检修企业管理栏目</label></td> 
+                </tr>
+                <tr> 
+                   <td width='90'><label><input type='checkbox' class='chk jxqygl' value='jxqygl' onclick='javascript:checkModel(this)'/>企业列表</label></td>
+                   <td>
+                   <label><input type='checkbox' class='chk grant jxqygl jxqylb' id='jxqylb_00' value='jxqylb_00'/>企业列表</label>
+                   <label><input type='checkbox' class='chk grant jxqygl jxqylb' id='jxqylb_01' value='jxqylb_01'/>新增检修企业</label>
+                   <label><input type='checkbox' class='chk grant jxqygl jxqylb' id='jxqylb_02' value='jxqylb_02'/>修改检修企业</label>
+                   <label><input type='checkbox' class='chk grant jxqygl jxqylb' id='jxqylb_03' value='jxqylb_03'/>删除检修企业</label>
+                   </td>
+                </tr>
+                <tr>
+                   <td><label><!-- <input type='checkbox' class='chk dpgl'  value='dpsh' onclick='javascript:checkModel(this)'/>供应商审核</label> --></td>
+                   <td>
+                   <label><!-- <input type='checkbox' class='chk grant dpgl dpsh' id='dpsh_00' value='dpsh_00'/>供应商列表</label> -->
+                   </td>
+                </tr>
+				
+				
+				 <tr style='border-top:1px solid #dddddd'>
+                   <td rowspan='3' valign='top' width='100'><label><input type='checkbox' class='chk' value='jxgcsgl' onclick='javascript:checkModel(this)'/>工程师管理</label></td>
+                   <td width='90' colspan='2'><label><input type='checkbox' class='chk grant jxgcsgl' id='jxgcsgl_00' value='jxgcsgl_00' onclick='javascript:checkModel(this)'/>查看检修工程师管理栏目</label></td> 
+                </tr>
+                <tr> 
+                   <td width='90'><label><input type='checkbox' class='chk jxgcsgl' value='jxgcsgl' onclick='javascript:checkModel(this)'/>工程师列表</label></td>
+                   <td>
+                   <label><input type='checkbox' class='chk grant jxgcsgl jxgcslb' id='jxgcslb_00' value='jxgcslb_00'/>检修工程师列表</label>
+                   <label><input type='checkbox' class='chk grant jxgcsgl jxgcslb' id='jxgcslb_01' value='jxgcslb_01'/>新增检修工程师</label>
+                   <label><input type='checkbox' class='chk grant jxgcsgl jxgcslb' id='jxgcslb_02' value='jxgcslb_02'/>修改检修工程师</label>
+                   <label><input type='checkbox' class='chk grant jxgcsgl jxgcslb' id='jxgcslb_03' value='jxgcslb_03'/>删除检修工程师</label>
+                   </td>
+                </tr>
+                <tr>
+                   <td><label><!-- <input type='checkbox' class='chk dpgl'  value='dpsh' onclick='javascript:checkModel(this)'/>供应商审核</label> --></td>
+                   <td>
+                   <label><!-- <input type='checkbox' class='chk grant dpgl dpsh' id='dpsh_00' value='dpsh_00'/>供应商列表</label> -->
+                   </td>
+                </tr>
+				
+				
+				
+				
+				
                 <tr style='border-top:1px solid #dddddd'>
                    <td rowspan='3' valign='top' width='100'><label><input type='checkbox' value='dqgl' onclick='javascript:checkModel(this)'/>地区管理</label></td>
                    <td width='90' colspan='2'><label><input type='checkbox' class='chk grant dqgl' id='dqgl_00' value='dqgl_00' onclick='javascript:checkModel(this)'/>查看地区管理栏目</label></td>

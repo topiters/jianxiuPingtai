@@ -79,7 +79,7 @@
         <!-- header logo: style can be found in header.less -->
         <header class="header">
             <a href="#" class="logo">
-                WST Mall
+                在线检修系统
             </a>
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
@@ -221,22 +221,98 @@
                         <php>if(in_array('dpgl_00',$WST_STAFF['grant'])){</php>
                         <li class="treeview">
                             <a href="#">
-                                <span>店铺管理</span>
+                                <span>业主管理</span>
                                 <small id='shopsTips' style='display:none' class="badge pull-right bg-green">3</small>
                             </a>
                             <ul class="treeview-menu">
                                 <php>if(in_array('dplb_01',$WST_STAFF['grant'])){</php>
-                                <li><a href="{:U('Admin/Shops/toEdit')}" target='pageContent' >添加店铺</a></li>
+                                <li><a href="{:U('Admin/Shops/toEdit')}" target='pageContent' >添加业主</a></li>
                                 <php>}</php>
                                 <php>if(in_array('dplb_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Shops/index')}" target='pageContent' >店铺列表</a></li>
+					            <li><a href="{:U('Admin/Shops/index')}" target='pageContent' >业主列表</a></li>
 					            <php>}</php>
                                 <php>if(in_array('dpsh_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Shops/queryPeddingByPage')}" target='pageContent' >店铺审核</a></li>
+					            <li><a href="{:U('Admin/Shops/queryPeddingByPage')}" target='pageContent' >业主审核</a></li>
 					            <php>}</php>
                             </ul>
                         </li>
                         <php>}</php>
+						
+						 <php>if(in_array('gysgl_00',$WST_STAFF['grant'])){</php>
+                        <li class="treeview">
+                            <a href="#">
+                                <span>供应商管理</span>
+                                <small id='shopsTips' style='display:none' class="badge pull-right bg-green">3</small>
+                            </a>
+                            <ul class="treeview-menu">
+                                <php>if(in_array('gyslb_01',$WST_STAFF['grant'])){</php>
+                                <li><a href="{:U('Admin/Supperlier/toEdit')}" target='pageContent' >添加业主</a></li>
+                                <php>}</php>
+                                <php>if(in_array('gyslb_00',$WST_STAFF['grant'])){</php>
+					            <li><a href="{:U('Admin/Supperlier/index')}" target='pageContent' >业主列表</a></li>
+					            <php>}</php>
+                               <!--  <php>if(in_array('yzsh_00',$WST_STAFF['grant'])){</php>
+					            <li><a href="{:U('Admin/Shops/queryPeddingByPage')}" target='pageContent' >业主审核</a></li>
+					            <php>}</php> -->
+                            </ul>
+                        </li>
+                        <php>}</php>
+						
+						
+						
+						 <php>if(in_array('jxqygl_00',$WST_STAFF['grant'])){</php>
+                        <li class="treeview">
+                            <a href="#">
+                                <span>检修企业管理</span>
+                                <small id='shopsTips' style='display:none' class="badge pull-right bg-green">3</small>
+                            </a>
+                            <ul class="treeview-menu">
+                                <php>if(in_array('jxqylb_01',$WST_STAFF['grant'])){</php>
+                                <li><a href="{:U('Admin/Manufacturer/toEdit')}" target='pageContent' >添加企业</a></li>
+                                <php>}</php>
+                                <php>if(in_array('jxqylb_00',$WST_STAFF['grant'])){</php>
+					            <li><a href="{:U('Admin/Manufacturer/index')}" target='pageContent' >企业列表</a></li>
+					            <php>}</php>
+                               <!--  <php>if(in_array('yzsh_00',$WST_STAFF['grant'])){</php>
+					            <li><a href="{:U('Admin/Shops/queryPeddingByPage')}" target='pageContent' >业主审核</a></li>
+					            <php>}</php> -->
+                            </ul>
+                        </li>
+                        <php>}</php>
+						
+						
+						 <php>if(in_array('jxgcsgl_00',$WST_STAFF['grant'])){</php>
+                        <li class="treeview">
+                            <a href="#">
+                                <span>检修工程师管理</span>
+                                <small id='shopsTips' style='display:none' class="badge pull-right bg-green">3</small>
+                            </a>
+                            <ul class="treeview-menu">
+                                <php>if(in_array('jxgcslb_01',$WST_STAFF['grant'])){</php>
+                                <li><a href="{:U('Admin/Engineer/toEdit')}" target='pageContent' >添加工程师</a></li>
+                                <php>}</php>
+                                <php>if(in_array('jxgcslb_00',$WST_STAFF['grant'])){</php>
+					            <li><a href="{:U('Admin/Engineer/index')}" target='pageContent' >工程师列表</a></li>
+					            <php>}</php>
+                               <!--  <php>if(in_array('yzsh_00',$WST_STAFF['grant'])){</php>
+					            <li><a href="{:U('Admin/Shops/queryPeddingByPage')}" target='pageContent' >业主审核</a></li>
+					            <php>}</php> -->
+                            </ul>
+                        </li>
+                        <php>}</php>
+						
+						
+					
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
                         <php>if(in_array('dqgl_00',$WST_STAFF['grant'])){</php>
                         <li class="treeview">
                             <a href="pages/calendar.html">
@@ -315,11 +391,11 @@
                         <php>if(in_array('scsz_00',$WST_STAFF['grant'])){</php>
                         <li class="treeview">
                             <a href="#">
-                                <span>商城设置</span>
+                                <span>系统设置</span>
                             </a>
                             <ul class="treeview-menu">
                                 <php>if(in_array('scxx_00',$WST_STAFF['grant'])){</php>
-                                <li><a href="{:U('Admin/Index/toMallConfig')}" target='pageContent' >商城信息</a></li>
+                                <li><a href="{:U('Admin/Index/toMallConfig')}" target='pageContent' >系统信息</a></li>
                                 <php>}</php>
                                 <php>if(in_array('dhgl_00',$WST_STAFF['grant'])){</php>
                                 <li><a href="{:U('Admin/Navs/index')}" target='pageContent' >导航管理</a></li>
