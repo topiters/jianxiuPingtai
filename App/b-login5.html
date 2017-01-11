@@ -53,8 +53,9 @@
 				</div>
 				<div class="r-main3">
 					<i class="icon iconfont icon-key"></i>
-					<input type="text" name="" id="yzm-shu" placeholder="请输入验证码" />
-					<span id="yzm">获取验证码</span>
+					<input type="text" name="" id="yzm-shu" placeholder="请输入验证码" style="display: inline-block;"/>
+					<!--<span id="yzm">获取验证码</span>-->
+					<input type="button" id="yzm" value="发送验证码"/>
 				</div>
 				<div class="r-main4">
 					<i class="icon iconfont icon-suo"></i>
@@ -80,13 +81,13 @@
 					value: "yezhu",
 					text: "业主"
 				}, {
-					value: 'aaa',
+					value: 'gys',
 					text: '供应商'
 				}, {
-					value: 'lj',
+					value: 'jxqy',
 					text: '检修企业'
 				}, {
-					value: 'ymt',
+					value: 'jxgcs',
 					text: '检修工程师'
 				}]);
 				var showUserPickerButton = doc.getElementById('showUserPicker');
@@ -123,10 +124,6 @@
 				var pasword = document.getElementById('pasword').value;//获取密码
 			    var yzmshu = document.getElementById('yzm-shu').value;//获取手机验证码
 			    var typeone = document.getElementById('showUserPicker').innerHTML;//获取注册类型
-//			    alert(nicheng);
-//			    alert(mobile);
-//			    alert(pasword);
-//			    alert(typeone);
 //nicheng==""||mobile==""||pasword==""||yzmshu==""||typeone==""
   				if(nicheng==""||mobile==""||pasword==""||yzmshu==""||typeone==""){
   					mui.toast('请将信息填写完整');
@@ -139,27 +136,33 @@
 					    data:{
 						    userName:nicheng,
 						    userPhone:mobile,
-						    loginPwd:pasword,
 						    smscode:yzmshu,
+						    loginPwd:pasword,
 						    userType:typeone
 					    },
 					  	dataType:'json',//服务器返回json格式数据
 						type:'post',//HTTP请求类型 
 						timeout:10000,//超时时间设置为10秒；               
-						success:function(data){	
-//							这没走!!!!!!!!!!!!!!!!!!我也不知道为啥!!!!!!!!!
-							//18738157987
-//							alert('success');
-							alert(JSON.stringify(data));
+						success:function(data){
+//							alert(JSON.stringify(data));
 							if(data.status==200){
-								mui.toast(data.msg);
+								mui.toast(data.msg.msg);
+								mui.openWindow({
+									url: 'b-login2.html', 
+									id: 'b-login2',
+									show: {
+										autoShow: 'pop-in'
+									},
+									styles: {
+										popGesture: 'hide' 
+									},
+									waiting: {
+										autoShow: false
+									}
+								});
 //								mui.currentWebview.close();
 							}else{
-								switch(data.code){
-									case 1:mui.toast(data.msg);break;
-									case 2:mui.toast(data.msg);break;
-									case 3:mui.toast(data.msg);break;
-								}
+								mui.toast(data.msg.msg);
 							}														
 						}
 		        	});
@@ -174,6 +177,7 @@
   					return false;
   				}else if(!regphone.test(mobile)){
 					mui.toast('手机号错误！');
+					return false;
 				}else{
 					var val = this;
 				    getyam(val); 
@@ -185,38 +189,34 @@
 						type:'post',//HTTP请求类型 
 						timeout:10000,//超时时间设置为10秒；               
 						success:function(data){	
-							alert(JSON.stringify(data));
+//							alert(JSON.stringify(data));
 							if(data.status==200){
-								mui.toast(data.msg);
+								mui.toast(data.msg.msg);
 							}else{
-								switch(data.code){
-									case 1:mui.toast(data.msg);break;
-									case 2:mui.toast(data.msg);break;
-									case 3:mui.toast(data.msg);break;
-								}
+								mui.toast(data.msg.msg);
 							}														
 						}
 		        	});
 				}
   			});
-//			var countyzm = 60;  
-//			function getyam(val) { 
-//				if (countyzm < 0) { 
-//					val.removeAttribute('disabled');
-//					val.setAttribute('value','发送短信验证码');
-//					countyzm = 60; 
-//					var d = val.getAttribute('disabled');
-//					return false;
-//				} else { 
-//					val.setAttribute('disabled',true);
-//					val.setAttribute('value',"重新发送(" + countyzm + ")");
-//					countyzm--; 					
-//					var d = val.getAttribute('disabled');
-//				} 
-//				setTimeout(function() { 
-//					getyam(val);
-//				},1000) ;
-//			} 
+			var countyzm = 60;  
+			function getyam(val) { 
+				if (countyzm < 0) { 
+					val.removeAttribute('disabled');
+					val.setAttribute('value','重发验证码');
+					countyzm = 60; 
+					var d = val.getAttribute('disabled');
+					return false;
+				} else { 
+					val.setAttribute('disabled',true);
+					val.setAttribute('value',"重新发送(" + countyzm + ")");
+					countyzm--; 					
+					var d = val.getAttribute('disabled');
+				} 
+				setTimeout(function() { 
+					getyam(val);
+				},1000) ;
+			} 
   		});
   	})(mui,document);
   	

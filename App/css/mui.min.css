@@ -1345,7 +1345,7 @@ input[type=submit]:enabled:active {
 }
 
 .mui-bar-tab .mui-tab-item.mui-active {
-	color: #007aff
+	color: #4EB145;
 }
 
 .mui-bar-tab .mui-tab-item .mui-icon {
@@ -1464,7 +1464,8 @@ input[type=submit]:enabled:active {
 
 .mui-bar input[type=search] {
 	height: 29px;
-	margin: 6px 0
+	margin: 6px 0;
+	border: 1px solid #e4e4e4;
 }
 
 .mui-bar .mui-input-row .mui-btn {

@@ -30,8 +30,27 @@
 	width: 100%;
 }
 
-.index-new span {
-	vertical-align: middle;
+.index-new .news {
+	display: inline-block;
+	width: 210px;
+	height: 28px;
+	overflow: hidden;
+	position: relative;
+}
+
+.news .list {
+	width: 210px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.news .list li {
+	width: 210px;
+	padding: 3px 0 3px 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .index-tol {
@@ -94,7 +113,7 @@
 .task-tol2 {
 	clear: both;
 	overflow: hidden;
-	padding: 0.4rem 0.2rem;
+	padding: 0.4rem 0.15rem;
 	position: relative;
 }
 
@@ -112,19 +131,22 @@
 
 .task-list2 p {
 	font-size: 0.26rem;
+	height: 0.3rem;
 	color: #666;
-	margin-bottom: 0.1rem;
+	margin-bottom: 0.15rem;
 }
 
 .task-list2 span {
-	color: #4eb145;
+	/*color: #4eb145;*/
 }
 
 .task-list2 p:nth-child(1) {
 	font-size: 0.3rem;
 	color: #333;
 }
-
+.task-tol1 .task-list2 p:nth-child(3) span , .task-tol2 .task-list2 p:nth-child(2) span{
+	color: #4eb145;
+}
 .task-list2 p:last-child {
 	margin-bottom: 0;
 }
@@ -141,7 +163,9 @@
 .task-list3 p:nth-child(2) {
 	color: #fe8d14;
 }
-
+.task-list3 p:nth-child(3){
+	color: #FF3D10;
+}
 .task-list4 {
 	position: absolute;
 	left: 0;
@@ -158,14 +182,21 @@
 /*首页弹框*/
 
 .jx-alert1 {
-	position: absolute;
+	/*position: absolute;
 	left: 0;
-	top: 0;
+	top: 0;*/
 	background: rgba(0, 0, 0, 0.7);
 	width: 6.4rem;
 	/*height: 100%;*/
 	z-index: 20;
 	display: none;
+	/*width: 100%;
+	height: 100%;*/
+	background-color: rgba(0, 0, 0, .5);
+	display: none;
+	position: fixed;
+	top: 0;
+	/*max-width: 640px;*/
 }
 
 .jx-alert1-t {
@@ -179,6 +210,8 @@
 	background-color: #fff;
 	border-radius: 0.08rem;
 	padding: 0.5rem;
+	z-index: 21;
+	display: none;
 }
 
 .jx-alert1-t .cha {
@@ -259,11 +292,13 @@
 
 .pd1-list2 p {
 	font-size: 0.26rem;
-	color: #666;
+	/*color: #666;*/
 	margin-bottom: 0.1rem;
 }
-
-.pd1-list2 span {
+.pd1-list2 p:nth-child(1){
+	font-size: 0.3rem;
+}
+.pd1-list2 p:nth-child(4) span {
 	color: #ff7d0d;
 }
 
@@ -348,11 +383,13 @@
 	line-height: 0.66rem;
 }
 
-.pd1-foot-btn span , .pd1-foot-btn2 span{
+.pd1-foot-btn span,
+.pd1-foot-btn2 span {
 	color: #fff;
 	font-size: 0.32rem;
 }
-.pd1-foot-btn2{
+
+.pd1-foot-btn2 {
 	width: 4rem;
 	height: 0.66rem;
 	background-color: #ccc;
@@ -361,6 +398,7 @@
 	text-align: center;
 	line-height: 0.66rem;
 }
+
 
 /*附近go*/
 
@@ -420,7 +458,9 @@
 	background-color: #fff;
 	border-bottom: 1px solid #e4e4e4;
 }
-
+.fujinyz-tol-t .this{
+	color: #4EB145;
+}
 .fujinyz-tol-t li {
 	display: inline-block;
 	width: 49%;
@@ -445,7 +485,7 @@
 }
 
 .active1 {
-	color: #27A4FD;
+	color: #4EB145;
 }
 
 .fujinyz-one {
@@ -1103,7 +1143,9 @@
 	border-top: 1px solid #e4e4e4;
 }
 
+
 /*抢单任务项目详情*/
+
 .qd1-one {
 	margin-top: 0.85rem;
 	background-color: #fff;
@@ -1136,22 +1178,27 @@
 	width: 4.3rem;
 }
 
-.qd-list2-one{
+.qd-list2-one {
 	height: 0.6rem;
 	font-size: 0.32rem;
 	color: #333;
 	margin-bottom: 0.15rem;
 }
-.qd-list2-one p:nth-child(1){
+
+.qd-list2-one p:nth-child(1) {
 	font-size: 0.32rem;
 }
-.qd-list2-two , .qd-list2-three{
+
+.qd-list2-two,
+.qd-list2-three {
 	font-size: 0.3rem;
 	margin-bottom: 0.15rem;
 }
+
 .qd-list2 p:last-child {
 	margin-bottom: 0;
 }
+
 .jj1-one-d {
 	width: 6.4rem;
 	border-bottom: 1px solid #ddd;
@@ -1179,6 +1226,7 @@
 	font-size: 0.32rem;
 	display: none;
 }
+
 .qd-foot-btn2 {
 	width: 4.6rem;
 	display: block;
@@ -1191,6 +1239,7 @@
 	font-size: 0.32rem;
 	display: none;
 }
+
 .qd-foot-btn3 {
 	width: 4.6rem;
 	display: block;
@@ -1202,9 +1251,11 @@
 	color: #fff;
 	font-size: 0.32rem;
 }
-.qd-foot-btn3 span{
+
+.qd-foot-btn3 span {
 	color: #ff3d10;
 }
+
 
 /*抢单任务项目详情 弹框*/
 
@@ -1231,11 +1282,14 @@
 	border-radius: 0.08rem;
 	padding: 0.5rem;
 }
-.qd-alert1-t p , .qd-alert2-t p{
+
+.qd-alert1-t p,
+.qd-alert2-t p {
 	text-align: center;
 	font-size: 0.36rem;
 	padding: 0.2rem 0;
 }
+
 .cha {
 	position: absolute;
 	right: 0.1rem;
@@ -1266,6 +1320,7 @@
 	border-radius: 0.08rem;
 	padding: 0.5rem 0 0 0;
 }
+
 
 /*图片放大观看*/
 

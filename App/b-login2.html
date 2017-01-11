@@ -26,17 +26,21 @@
 			<div class="l-main">
 				<div class="l-main1">
 					<i class="icon iconfont icon-shouji1"></i>
-					<input type="text" name="" id="" placeholder="请输入手机号" />
+					<input type="text" name="" id="phone" placeholder="请输入手机号" />
 				</div>
 				<div class="l-main2">
 					<i class="icon iconfont icon-suo"></i>
-					<input type="password" name="" id="" placeholder="请输入密码" />
+					<input type="password" name="" id="paslogin" placeholder="请输入密码" />
 				</div>
 				<div class="l-main3 clearfix">
-					<span class="forget l">忘记密码</span>
-					<span class="r">手机登录</span>
+					<a href="###">
+						<span class="forget l">忘记密码</span>
+					</a>
+					<a href="b-login3.html">
+						<span class="r">手机登录</span>
+					</a>
 				</div>
-				<button class="l-btn">立即登陆</button>
+				<button class="l-btn" id="l-btn">立即登陆</button>
 				<div class="l-main4">
 					<div class="l-main4-t">
 						<span></span>
@@ -47,57 +51,118 @@
 				</div>
 				<div class="l-main5">
 					<div class="l-main5-list">
-						<img src="img/qq.png" />
+						<a href="b-login1.html">
+							<img src="img/qq.png" />
+						</a>
 					</div>
 					<div class="l-main5-list">
-						<img src="img/wechat.png" />
+						<a href="b-login4.html">
+							<img src="img/wechat.png" />
+						</a>
 					</div>
 				</div>
 			</div>
 		</form>
 		<a href="###">
-			<span class="l-suibian r">随便逛逛</span>
+			<a href="index.html">
+				<span class="l-suibian r">随便逛逛</span>
+			</a>
 		</a>
 	</body>
 	<script src="js/mui.min.js"></script>
-	<script type="text/javascript">
-		mui.init();
-		mui.plusReady(function() {
-
-			var loginButton = document.getElementsByClassName('l-btn');
-			var regButton = document.getElementById('reg-btn');
-			var forget = document.getElementsByClassName('forget');
-			//点击登录按钮
-			loginButton.addEventListener('tap', function(event) {
-				//			var accountBox = doc.getElementById('account').value;
-				//			var passwordBox = doc.getElementById('password').value;
+	<script>
+		(function($, doc) {
+			$.plusReady(function() {
+				var loginbtn = document.getElementById('l-btn'); //点击登录按钮
+				var forgetpasswd = document.getElementById('forget'); //点击忘记密码
+				var register = document.getElementById('reg-btn'); //注册
 				var regphone = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-				if(!regphone.test(accountBox)) {
-					mui.toast('手机号有误');
-					return false;
-				}
-				if(passwordBox.length < 6) {
-					mui.toast('密码长度至少6位');
-					return false;
-				}
+				//点击登录
+				loginbtn.addEventListener('tap', function() {
+					var mphone = document.getElementById('phone').value; //手机号
+					var loginPwd = document.getElementById('paslogin').value; //密码
+					if(mphone == "" || loginPwd == "") {
+						mui.toast('请将信息填写完整')
+						return false;
+					} else if(!regphone.test(mphone)) {
+						mui.toast('手机号错误！');
+						return false;
+					} else {
+						mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Users&a=checkLogin', {
+							data: {
+								loginName: mphone,
+								loginPwd: loginPwd
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型 
+							timeout: 10000, //超时时间设置为10秒；                
+							success: function(data) {
+								alert(JSON.stringify(data));
+								if(data.status == 200) {
+									var userId = data.responseList.userId; //会员id
+									var loginName = data.responseList.loginName; //登录账号
+									var loginPwd = data.responseList.loginPwd; //登录密码
+									var userinfo = {
+										userId: userId,
+										userPhoto: userPhoto,
+										signCount: signCount,
+										userScore: userScore,
+										userShare: userShare,
+										userUsable: userUsable,
+										userBalance: userBalance,
+										userName: userName
+									};
+									var json_str = JSON.stringify(userinfo);
+									localStorage.setItem("userinfo", json_str);
+									//alert(JSON.stringify(data.msg));
+									if(userId != "" && userId != null) {
+										$.openWindow({
+											url: 'index.html',
+											id: 'index',
+											show: {
+												aniShow: 'pop-in'
+											},
+											styles: {
+												popGesture: 'hide'
+											},
+											waiting: {
+												autoShow: false
+											}
+										});
+									}
+								} else {
+									mui.toast(data.msg.msg);
+								}
+							}
+						});
+					}
 
-				//			mui.ajax('', {
-				//				data: {
-				//					token: '',
-				//					mobile: accountBox,
-				//					password: passwordBox
-				//				},
-				//				dataType: 'json', //服务器返回json格式数据
-				//				type: 'post', //HTTP请求类型 
-				//				timeout: 10000, //超时时间设置为10秒；                
-				//				success: function(data) {
-				//				},
-				//				error: function(data) {
-				//					//alert(JSON.stringify(data));
-				//				}
-				//			});
+				});
+				//点击忘记密码
+				forgetpasswd.addEventListener('tap', function() {
+					$.openWindow({
+						url: 'forgetpasswd.html',
+						id: 'forgetpasswd',
+						preload: true,
+						show: {
+							aniShow: 'pop-in'
+						}
+					});
+				});
+				//点击注册
+				register.addEventListener('tap', function() {
+					$.openWindow({
+						url: 'register.html',
+						id: 'register',
+						preload: true,
+						show: {
+							aniShow: 'pop-in'
+						}
+					});
+				});
 			});
-		})
+
+		})(mui, document);
 	</script>
 
 </html>

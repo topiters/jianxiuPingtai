@@ -30,7 +30,7 @@
 .l-main3{
 	margin: 0.2rem 0 0 0;
 }
-.l-main3 span:nth-child(2){
+.l-main3 a:nth-child(2) span{
 	color: #4EB145;
 }
 .l-main4-t{
@@ -117,13 +117,16 @@
 	border: 0;
 	background-color: #fff;
 	margin-left: 0.1rem;
-	width: 2.6rem;
+	width: 2rem;
 }
-.r-main3 span{
+.r-main3 input:nth-child(3){
 	padding: 0 0 0 0.1rem;
 	display: inline-block;
+	border-style: none;
 	border-left: 1px solid #e4e4e4;
 	color: #4EB145;
+	margin-left: 0.4rem;
+	font-size: 0.3rem;
 }
 .r-btn{
 	display: block;

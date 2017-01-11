@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>附近-供应商看到的</title>
+		<!--公共css  ss-->
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<!--公共css  ee-->
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<!--公共js  ss-->
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共js  ee-->
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a href="###"><i class="icon iconfont icon-fanhui"></i></a>
+			<div class="index-serch">
+				<input type="search" placeholder="请输入关键词">
+			</div>
+			<span class="r" style="margin: 0.2rem 0.1rem 0 0;">搜索</span>
+		</header>
+		<div class="fujinyz3-one">
+			<ul>
+				<li>
+					<div class="fujinyz3-one-t clearfix">
+						<div class="fujinyz3-list1 l">
+							<img src="img/logo-01.jpg" />
+						</div>
+						<div class="task-list2 l">
+							<p class="mingcheng">采购名称采购名称采购名称</p>
+							<p>型&nbsp;&nbsp;号：GPS-326</p>
+							<p>李三 | 15236252635</p>
+							<p>数&nbsp;&nbsp;量：<span style="color: #f08d14;">1000</span>件</p>
+						</div>
+						<div class="task-list3 r">
+							<p></p>
+							<p></p>
+							<p><i class="icon iconfont icon-weizhi"></i><span style="color: #666;">0.3km</span></p>
+							<p id="afg-1" style="color: #FF3D10;" class="settime" endTime="2017-02-05 10:00:00"></p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="fujinyz3-one-t clearfix">
+						<div class="fujinyz3-list1 l">
+							<img src="img/logo-01.jpg" />
+						</div>
+						<div class="task-list2 l">
+							<p>采购名称</p>
+							<p>型&nbsp;&nbsp;号：GPS-326</p>
+							<p>李三 | 15236252635</p>
+							<p>数&nbsp;&nbsp;量：<span style="color: #f08d14;">1000</span>件</p>
+						</div>
+						<div class="task-list3 r">
+							<p></p>
+							<p></p>
+							<p><i class="icon iconfont icon-weizhi"></i><span style="color: #666;">0.3km</span></p>
+							<p id="afg-2" style="color: #FF3D10;" class="settime" endTime="2017-02-05 9:00:00"></p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="fujinyz3-one-t clearfix">
+						<div class="fujinyz3-list1 l">
+							<img src="img/logo-01.jpg" />
+						</div>
+						<div class="task-list2 l">
+							<p>采购名称</p>
+							<p>型&nbsp;&nbsp;号：GPS-326</p>
+							<p>李三 | 15236252635</p>
+							<p>数&nbsp;&nbsp;量：<span style="color: #f08d14;">1000</span>件</p>
+						</div>
+						<div class="task-list3 r">
+							<p></p>
+							<p></p>
+							<p><i class="icon iconfont icon-weizhi"></i><span style="color: #666;">0.3km</span></p>
+							<p id="afg-3" style="color: #FF3D10;" class="settime" endTime="2017-02-05 8:00:00"></p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			//限制字符个数
+			$(".cut_str").each(function() {
+				var maxwidth = 10;
+				if($(this).text().length > maxwidth) {
+					$(this).text($(this).text().substring(0, maxwidth));
+					$(this).html($(this).html() + '…');
+				}
+			});
+		});
+	</script>
+
+</html>

@@ -5,14 +5,19 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>首页</title>
-		<script src="js/mui.min.js"></script>
+		<!--公共css  ss-->
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<!--公共css  ee-->
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<!--公共js  ss-->
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js"></script>
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共js  ee-->
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
@@ -51,12 +56,30 @@
 				</div>
 			</div>
 		</div>
-		<div class="index-new">
-			<div class="new-l">
+		<div class="index-new clearfix">
+			<div class="new-l l">
 				<img src="img/zuixin-01.png" />
 			</div>
-			<i class="icon iconfont icon-shengyin"></i>
-			<span>新闻新闻新闻新闻...</span>
+			<i class="icon iconfont icon-shengyin l"></i>
+			<div class="news l">
+				<ul class="list">
+					<li>
+						<a target="_blank" href="###">永远有多远1？你小子走多远</a>
+					</li>
+					<li>
+						<a target="_blank" href="###">月亮依旧停旷野上,你的身影被越拉越长</a>
+					</li>
+					<li>
+						<a target="_blank" href="###">直到远去的马蹄声响,呼唤你的歌声传四方</a>
+					</li>
+					<li>
+						<a target="_blank" href="###">举头望天只见雁两行,低头泪水为我卸了妆</a>
+					</li>
+					<li>
+						<a target="_blank" href="###">伤心凭栏相思涂满墙,彻夜无眠爱的路太长</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div class="index-tol">
 			<div class="index-tol-list">
@@ -88,7 +111,7 @@
 							<img src="img/logo-01.jpg" />
 						</div>
 						<div class="task-list2 l">
-							<p>检修名称</p>
+							<p class="mingcheng">检修名称检修名称检修名称</p>
 							<p>李三 | 15236252635</p>
 							<p>已有<span>2</span>人投标</p>
 							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
@@ -96,7 +119,7 @@
 						<div class="task-list3 r">
 							<p>消缺</p>
 							<p></p>
-							<p id="timer"></p>
+							<p id="1" class="settime" endTime="2017-02-05 10:00:00"></p>
 							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
 						</div>
 						<div class="task-list4">
@@ -108,7 +131,7 @@
 							<img src="img/logo-01.jpg" />
 						</div>
 						<div class="task-list2 l">
-							<p>检修名称</p>
+							<p class="mingcheng">检修名称</p>
 							<p>已有<span>3</span>人抢单</p>
 							<p>发布时间：<span>12-12 12:12</span></p>
 							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
@@ -128,7 +151,7 @@
 							<img src="img/logo-01.jpg" />
 						</div>
 						<div class="task-list2 l">
-							<p>检修名称</p>
+							<p class="mingcheng">检修名称</p>
 							<p>李三 | 15236252635</p>
 							<p>已有<span>2</span>人投标</p>
 							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
@@ -136,7 +159,7 @@
 						<div class="task-list3 r">
 							<p>消缺</p>
 							<p></p>
-							<p id="timer"></p>
+							<p id="2" class="settime" endTime="2017-02-05 15:45:00"></p>
 							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
 						</div>
 						<div class="task-list4">
@@ -148,7 +171,7 @@
 							<img src="img/logo-01.jpg" />
 						</div>
 						<div class="task-list2 l">
-							<p>检修名称</p>
+							<p class="mingcheng">检修名称</p>
 							<p>已有<span>3</span>人抢单</p>
 							<p>发布时间：<span>12-12 12:12</span></p>
 							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
@@ -168,24 +191,24 @@
 			</div>
 		</div>
 		<!--发布弹框-->
-		<div class="jx-alert1">
-			<div class="jx-alert1-t">
-				<div class="jx-alert1-t1">
-					<img src="img/shouye-01.png" />
-				</div>
-				<div class="jx-alert1-t2">
-					<a href="###">
-						<p><i class="icon iconfont icon-caigou"></i><span>发布采购任务</span></p>
-					</a>
-				</div>
-				<div class="jx-alert1-t3">
-					<a href="###">
-						<p><i class="icon iconfont icon-weixiuyuanyin"></i><span>发布检修任务</span></p>
-					</a>
-				</div>
-				<span class="cha"><i class="icon iconfont icon-cha"></i></span>
+		<div class="jx-alert1"></div>
+		<div class="jx-alert1-t">
+			<div class="jx-alert1-t1">
+				<img src="img/shouye-01.png" />
 			</div>
+			<div class="jx-alert1-t2">
+				<a href="###">
+					<p><i class="icon iconfont icon-caigou"></i><span>发布采购任务</span></p>
+				</a>
+			</div>
+			<div class="jx-alert1-t3">
+				<a href="###">
+					<p><i class="icon iconfont icon-weixiuyuanyin"></i><span>发布检修任务</span></p>
+				</a>
+			</div>
+			<span class="cha"><i class="icon iconfont icon-cha"></i></span>
 		</div>
+
 		<nav class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" href="###">
 				<span class="mui-icon mui-icon-home"></span>
@@ -211,39 +234,97 @@
 
 		$(function() {
 			//限制字符个数
-			$(".cut_str").each(function() {
+			$(".cut_str , .mingcheng").each(function() {
 				var maxwidth = 10;
 				if($(this).text().length > maxwidth) {
 					$(this).text($(this).text().substring(0, maxwidth));
 					$(this).html($(this).html() + '…');
 				}
 			});
+			
+
+			function preventDefaultFn(event) {
+				event.preventDefault();
+			}
+			$(".put").click(function() {
+				//			$(".jx-alert1").show();
+				$('.jx-alert1').fadeIn(500);
+				$('.jx-alert1-t').fadeIn(500);
+				$('body').css('overflow', 'hidden');
+				$('body').on('touchmove', preventDefaultFn);
+			});
+			$('.jx-alert1').click(function() {
+				$(this).fadeOut(500);
+				$('body').off('touchmove', preventDefaultFn);
+				$('.jx-alert1-t').fadeOut(500);
+				$('body').removeAttr('style');
+			})
+			$(".cha").click(function() {
+				$(".jx-alert1").hide();
+			});
 		});
-		//		var timer = null;
-		//		function timer() {
-		//			var ts = (new Date(2016, 11, 30, 9, 0, 0)) - (new Date()); //计算剩余的毫秒数
-		//			var hh = parseInt(ts / 1000 / 60 / 60, 10); //计算剩余的小时数  
-		//			var mm = parseInt(ts / 1000 / 60 % 60, 10); //计算剩余的分钟数  
-		//			var ss = parseInt(ts / 1000 % 60, 10); //计算剩余的秒数  
-		//			hh = checkTime(hh);
-		//			mm = checkTime(mm);
-		//			ss = checkTime(ss);
-		//			document.getElementById("timer").innerHTML =hh + ":" + mm + ":" + ss;
-		//			setInterval("timer()", 1000);
-		//		}
-		//
-		//		function checkTime(i) {
-		//			if(i < 10) {
-		//				i = "0" + i;
-		//			}
-		//			return i;
-		//		}
-		//		timer();
-		$(".put").click(function() {
-			$(".jx-alert1").show();
+	</script>
+	<!--倒计时-->
+	<!--<script type="text/javascript">
+		$(function() {
+			updateEndTime();
 		});
-		$(".cha").click(function() {
-			$(".jx-alert1").hide();
+		//倒计时函数
+		function updateEndTime() {
+			var date = new Date();
+			var time = date.getTime(); //当前时间距1970年1月1日之间的毫秒数
+			$(".settime").each(function(i) {
+				var endDate = this.getAttribute("endTime"); //结束时间字符串
+				//转换为时间日期类型
+				var endDate1 = eval('new Date(' + endDate.replace(/\d+(?=-[^-]+$)/, function(a) {
+					return parseInt(a, 10) - 1;
+				}).match(/\d+/g) + ')');
+
+				var endTime = endDate1.getTime(); //结束时间毫秒数
+				//当前时间和结束时间之间的秒数
+				var lag = (endTime - time) / 1000;
+				if(lag > 0) {
+					var second = Math.floor(lag % 60);
+					var minite = Math.floor(lag / 60 % 60);
+					var hour = Math.floor(lag / 3600);
+					hh = checkTime(hour);
+					mm = checkTime(minite);
+					ss = checkTime(second);
+					$(this).html(hh + ":" + mm + ":" + ss);
+				} else {
+					$(this).removeClass("settime");
+					//					alert($(this).attr("id"));
+					$(this).html("已结束啦!");
+				}
+			});
+			setTimeout("updateEndTime()", 1000);
+		}
+
+		function checkTime(i) {
+			if(i < 10) {
+				i = "0" + i;
+			}
+			return i;
+		}
+	</script>-->
+	<script type="text/javascript">
+		$(function() {
+			var t;
+			t = setInterval(function() {
+				var ul = $(".list");
+				var liHeight = ul.find("li:last").height();
+				ul.animate({
+					marginTop: 0
+						//						liHeight + "px"
+				}, 1000, function() {
+					ul.find("li:last").prependTo(ul);
+					ul.find("li:first").hide();
+					ul.css({
+						marginTop: 0
+					});
+					ul.find("li:first").fadeIn(800);
+				});
+			}, 3000);
 		});
 	</script>
 
