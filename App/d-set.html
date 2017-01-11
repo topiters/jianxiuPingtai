@@ -29,7 +29,7 @@
 						<span class="l">版本更新</span>
 						<span class="r" style="color: #c1c1c1;">已经是最新版本了</span>
 					</li>
-					<li>
+					<li id="myAdvice">
 						<span class="l">意见反馈</span>
 						<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
 					</li>
@@ -54,3 +54,11 @@
 		</div>
 	</body>
 </html>
+<script type="text/javascript">
+	//意见反馈跳转进入详情页面
+		document.getElementById('myAdvice').addEventListener('tap', function() {
+			mui.openWindow({
+			    url:"d-set-opinion.html",
+			});
+		});
+</script>

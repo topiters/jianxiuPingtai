@@ -24,7 +24,7 @@
 
 	<body>
 		<header class="fujin-header">
-			<a href="###"><i class="icon iconfont icon-fanhui"></i></a>
+			<a href="javascript:history.go(-1)"><i class="icon iconfont icon-fanhui"></i></a>
 			<form action="" method="post" class="fy-serch-tol">
 				<div class="fy-serch">
 					<input type="text" name="" id="" placeholder="请输入服务商的名称" />
@@ -55,7 +55,7 @@
 		</div>
 		<div class="fujinyz-one">
 			<ul>
-				<li class="fujinyz-one-t clearfix">
+				<li class="fujinyz-one-t clearfix two">
 					<div class="fujinyz-list1 l">
 						<img src="img/logo-01.jpg" />
 					</div>
@@ -66,7 +66,7 @@
 						<p class="fujinyz-word2">简介：成立于1949年，走过长征路</p>
 					</div>
 				</li>
-				<li class="fujinyz-one-t clearfix">
+				<li class="fujinyz-one-t clearfix one">
 					<div class="fujinyz-list1 l">
 						<img src="img/logo-01.jpg" />
 					</div>
@@ -77,7 +77,7 @@
 						<p class="fujinyz-word2">项目经历：致力打假三十年，从未得手</p>
 					</div>
 				</li>
-				<li class="fujinyz-one-t clearfix">
+				<li class="fujinyz-one-t clearfix two">
 					<div class="fujinyz-list1 l">
 						<img src="img/logo-01.jpg" />
 					</div>
@@ -88,7 +88,7 @@
 						<p class="fujinyz-word2">简介：成立于1949年，走过长征路</p>
 					</div>
 				</li>
-				<li class="fujinyz-one-t clearfix">
+				<li class="fujinyz-one-t clearfix one">
 					<div class="fujinyz-list1 l">
 						<img src="img/logo-01.jpg" />
 					</div>
@@ -151,6 +151,25 @@
 				}
 			});
 		});
+		
+//检修工程师跳转进入详情页面
+		var companyList1=document.getElementsByClassName("one");
+		for(var i=0;i<companyList1.length;i++){
+			companyList1[i].addEventListener('tap', function() {
+				mui.openWindow({
+				    url:"a-fujin-yezhu1.html",
+				});
+			});
+		}
+//捡球企业跳转进入详情页面
+		var companyList2=document.getElementsByClassName("two");
+		for(var i=0;i<companyList2.length;i++){
+			companyList2[i].addEventListener('tap', function() {
+				mui.openWindow({
+				    url:"a-fujin-yezhu2.html",
+				});
+			});
+		}
 	</script>
 
 </html>

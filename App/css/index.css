@@ -416,7 +416,7 @@
 
 .fy-serch {
 	width: 4rem;
-	height: 0.5rem;
+	/*height: 0.5rem;*/
 	/*line-height: 0.4rem;*/
 	border: 1px solid #e4e4e4;
 	border-radius: 0.25rem;
@@ -519,6 +519,10 @@
 	color: #666;
 	margin-bottom: 0.1rem;
 }
+.fujinyz-list2 p:first-child {
+	font-size: 0.3rem;
+	font-weight: bold;
+}
 
 .fujinyz-list2 p:last-child {
 	margin-bottom: 0;
@@ -565,10 +569,14 @@
 	height: 0.3rem;
 	margin-bottom: 0.15rem;
 }
-
-.fujinyz1-list2 span {
-	color: #ff7d0d;
+.fujinyz1-list2 p:first-child {
+	font-size: 0.3rem;
+	font-weight: bold;
 }
+
+/*.fujinyz1-list2 span {
+	color: #ff7d0d;
+}*/
 
 .fujinyz1-list2 p:last-child {
 	margin-bottom: 0;
@@ -660,6 +668,11 @@
 	height: 0.3rem;
 	margin-bottom: 0.15rem;
 }
+.fujinyz2-list2 p:first-child {
+	font-size: 0.3rem;
+	font-weight: bold;
+}
+
 
 .fujinyz2-list2 span {
 	/*color: #ff7d0d;*/

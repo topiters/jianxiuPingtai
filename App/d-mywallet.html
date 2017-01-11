@@ -27,19 +27,19 @@
 				<p>0.00</p>
 			</div>
 			<div class="dw-main-m">
-				<div class="dw-main-mlist1">
+				<div class="dw-main-mlist1" id="myCharge">
 					<i class="icon iconfont icon-charge"></i>
 					<span>充值</span>
 					<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 				</div>
-				<div class="dw-main-mlist2">
+				<div class="dw-main-mlist2" id="myBank">
 					<i class="icon iconfont icon-tixian"></i>
 					<span>提现</span>
 					<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 				</div>
 			</div>
 			<div class="dw-main-d">
-				<div class="dw-main-dlist1">
+				<div class="dw-main-dlist1" id="myCard">
 					<i class="icon iconfont icon-yinxingqialine"></i>
 					<span>我的银行卡</span>
 					<i class="icon iconfont icon-jiantouyoujiantou r"></i>
@@ -54,3 +54,23 @@
 		</div>
 	</body>
 </html>
+<script type="text/javascript">
+//充值跳转进入详情页面
+	document.getElementById('myCharge').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-mycharge1.html",
+		});
+	});
+//体现跳转进入详情页面
+	document.getElementById('myBank').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-my-bank1.html",
+		});
+	});
+//我的银行卡跳转进入详情页面
+	document.getElementById('myCard').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-mybank.html",
+		});
+	});
+</script>

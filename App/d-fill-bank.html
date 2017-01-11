@@ -33,7 +33,7 @@
 					<input type="text" name="" id="" placeholder="银行预留手机号码" class="fb-input"/>
 				</dt>
 			</dl>
-			<button class="fb-btn">下一步</button>
+			<button class="fb-btn" id="next1">下一步</button>
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -46,6 +46,12 @@
 					$('.fb-btn').css('background','#ccc')
 				},
 			})
-		})
+		});
+//下一步
+document.getElementById('next1').addEventListener('tap', function() {
+	mui.openWindow({
+    	url:"d-fill1-bank.html",
+	});
+});
 	</script>
 </html>

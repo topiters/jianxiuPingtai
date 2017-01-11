@@ -24,7 +24,7 @@
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>-->
 		</header>
 		<div class="dm1-main">
-			<div class="dm1-main-t clearfix">
+			<div class="dm1-main-t clearfix" id="myCharge2">
 				<div class="dm1-main-t1 l">
 					<img src="img/jianhang-1.png" />
 				</div>
@@ -55,6 +55,12 @@
 				},
 			})
 		})
+//充值跳转进入详情页面
+	document.getElementById('myCharge2').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-mycharge2.html",
+		});
+	});
 	</script>
 
 </html>

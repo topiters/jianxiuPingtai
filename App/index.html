@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<div class="index-tol">
-			<div class="index-tol-list">
+			<div class="index-tol-list" id="buyingTask">
 				<img src="img/caigou-01.png" />
 				<span>采购任务</span>
 			</div>
@@ -94,7 +94,7 @@
 				<img src="img/gaojia-01.png" />
 				<span>高价悬赏</span>
 			</div>
-			<div class="index-tol-list">
+			<div class="index-tol-list" id="nearby">
 				<img src="img/fujin-01.png" />
 				<span>附近GO</span>
 			</div>
@@ -214,7 +214,7 @@
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a class="mui-tab-item" href="###">
+			<a class="mui-tab-item" href="###" id="message">
 				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
 				<span class="mui-tab-label">消息</span>
 			</a>
@@ -263,6 +263,26 @@
 				$(".jx-alert1").hide();
 			});
 		});
+		
+//采购任务跳转进入详情页面
+		document.getElementById('buyingTask').addEventListener('tap', function() {
+			mui.openWindow({
+			    url:"a-purchase-yezhu-1.1.html",
+			});
+		});
+//检修任务跳转进入详情页面
+//		document.getElementById('recondition').addEventListener('tap', function() {
+//			mui.openWindow({
+//			    url:"a-purchase-yezhu-1.1.html",
+//			});
+//		});
+//附近GO跳转进入详情页面
+		document.getElementById('nearby').addEventListener('tap', function() {
+			mui.openWindow({
+			    url:"a-fujin-yezhu.html",
+			});
+		});
+		
 	</script>
 	<!--倒计时-->
 	<!--<script type="text/javascript">

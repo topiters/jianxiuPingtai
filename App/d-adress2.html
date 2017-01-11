@@ -62,8 +62,16 @@
 				</li>
 			</ul>
 			<div class="adr2-foot">
-				<button>添加收货地址</button>
+				<button id="addAddress">添加收货地址</button>
 			</div>
 		</div>
 	</body>
 </html>
+<script type="text/javascript">
+	//地址管理跳转进入详情页面
+		document.getElementById('addAddress').addEventListener('tap', function() {
+			mui.openWindow({
+			    url:"d-adress1.html",
+			});
+		});
+</script>

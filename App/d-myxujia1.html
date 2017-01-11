@@ -59,4 +59,15 @@
 			</ul>
 		</div>
 	</body>
+<script type="text/javascript">
+//页面跳转
+	var myXunjiaList=document.getElementsByClassName("dmx1-tol1");
+	for(var i=0;i<myXunjiaList.length;i++){
+		myXunjiaList[i].addEventListener('tap', function() {
+			mui.openWindow({
+			    url:"d-myxunjia-detail.html",
+			});
+		});
+	}
+</script>
 </html>

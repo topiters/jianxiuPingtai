@@ -40,7 +40,7 @@
 					<input type="radio" name="bank1" id="" value="" class="r" />
 				</li>
 			</ul>
-			<div class="dm2-main-add clearfix">
+			<div class="dm2-main-add clearfix" id="addCard1">
 				<div class="dm2-listl l">
 					<img src="img/bank-change.png" />
 				</div>
@@ -48,5 +48,12 @@
 			</div>
 		</div>
 	</body>
-
+<script type="text/javascript">
+	//添加银行卡
+document.getElementById('addCard1').addEventListener('tap', function() {
+	mui.openWindow({
+	    url:"d-fill-bank.html",
+	});
+});
+</script>
 </html>

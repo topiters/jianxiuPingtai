@@ -23,7 +23,7 @@
 			<h1 class="mui-title">提现</h1>
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>-->
 		</header>
-		<div class="mb1-main-t clearfix">
+		<div class="mb1-main-t clearfix" id="moreCard">
 			<div class="mb1-main-t1 l">
 				<img src="img/jianhang-1.png" />
 			</div>
@@ -50,3 +50,11 @@
 	</body>
 
 </html>
+<script type="text/javascript">
+//选择银行卡
+document.getElementById('moreCard').addEventListener('tap', function() {
+	mui.openWindow({
+    	url:"d-mycharge2.html",
+	});
+});
+</script>

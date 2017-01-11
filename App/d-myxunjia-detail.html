@@ -108,7 +108,7 @@
 							<p>报价金额: <span>￥1500</span></p>
 							<p>报价时间: <span>2016-12-12 12:12</span></p>
 						</div>
-						<button class="dmd-five2-btn r">购买</button>
+						<button class="dmd-five2-btn r" id="buy">购买</button>
 					</dt>
 					<dt>
 						<div class="dmd-five2-l l">
@@ -130,6 +130,12 @@
 	<script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.previewImage();
+//购买跳转进入详情页面
+		document.getElementById('buy').addEventListener('tap', function() {
+			mui.openWindow({
+			    url:"d-myxunjia.html",
+			});
+		});
 	</script>
 
 </html>

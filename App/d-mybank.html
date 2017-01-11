@@ -21,7 +21,7 @@
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">我的银行卡</h1>
-			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="addCard"><i class="icon iconfont icon-jiahao"></i></button>
 		</header>
 		<div class="bank-main">
 			<dl>
@@ -76,5 +76,12 @@
 			</dl>
 		</div>
 	</body>
-
+<script type="text/javascript">
+//添加银行卡
+document.getElementById('addCard').addEventListener('tap', function() {
+	mui.openWindow({
+	    url:"d-fill-bank.html",
+	});
+});
+</script>
 </html>
