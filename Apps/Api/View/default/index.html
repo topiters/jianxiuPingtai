@@ -121,7 +121,7 @@
 		return false;
 	} */
 	
-	$.post("{:U('Api/Users/checkLogin')}",{loginName:userName,userPhone:userPhone,loginPwd:loginPwd,smscode:smscode,userType:userType},function(data,textStatus){
+	$.post("{:U('Api/Users/editPass')}",{loginName:userName,userPhone:userPhone,loginPwd:loginPwd,newPass:smscode,oldPass:userType},function(data,textStatus){
 		
 		
 	});

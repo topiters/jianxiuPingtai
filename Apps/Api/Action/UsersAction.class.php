@@ -249,11 +249,26 @@ class UsersAction extends BaseAction {
 		$USER = session('WST_USER');
 		$m = D('Api/Users');
    		$rs = $m->editPass($USER['userId']);
+   		if($rs['status']==3){
+   		$data["msg"]="两次输入的密码不一致...";
+   		$data = array('status'=>self::API_NOTSAME_ERROR ,'msg'=>$data);
+   		$this->stringify($data);
+   		exit();
+   		}
+   		if($rs['status']==-2){
+   			$data["msg"]="输入的密码错误...";
+   			$data = array('status'=>self::API_INPUT_ERROR ,'msg'=>$data);
+   			$this->stringify($data);
+   			exit();
+   		}
+   		if($rs['status']==1){
+   			$data["msg"]="数据加载成功...";
+   			$data = array('status'=>self::API_REQUEST_SUCCESS ,'msg'=>$data);
+   			$this->stringify($data);
+   			
+   		}
    		
-   		
-   		
-   		
-    	$this->ajaxReturn($rs);
+   
 	}
 	/**
 	 * 跳去修改买家资料

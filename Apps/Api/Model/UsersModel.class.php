@@ -224,8 +224,7 @@ class UsersModel extends BaseModel {
     public function regist(){
     	$rd = array('status'=>-1);	   
     	$udata = array();
-    	$userPhone = 
-    	$udata['loginName'] =WSTAddslashes(I("userPhone"));
+    	$udata['loginName'] =WSTAddslashes(I(" "));
     	$udata['loginPwd'] = I("loginPwd");
     	//$data['reUserPwd'] = I("reUserPwd");
     	//$data['protocol'] = (int)I("protocol");
@@ -271,7 +270,31 @@ class UsersModel extends BaseModel {
 	    	$data = array();
 	    	$data['lastTime'] = date('Y-m-d H:i:s');
 	    	$data['lastIP'] = get_client_ip();
-	    	$this->where(" userId=".$rd['userId'])->data($data)->save();	 		
+	    	$this->where(" userId=".$rd['userId'])->data($data)->save();
+	    	//业主
+	    	if($udata['userType']==1){
+	    		$shopinfo['userId']=$rs;
+	    		M("shops")->add($shopinfo);	
+	    	}
+	    	
+	    	//供应商
+	    	if($udata['userType']==2){
+	    		$shopinfo['userId']=$rs;
+	    		M("supperlier")->add($shopinfo);
+	    	}
+	    	
+	    //	3=>检修企业,4=>检修工程师
+	    	
+	    	if($udata['userType']==3){
+	    		$manufacturerinfo['userId']=$rs;
+	    		M("manufacturer")->add($manufacturerinfo);
+	    	}
+	    	
+	    	if($udata['userType']==4){
+	    		$engineerinfo['userId']=$rs;
+	    		M("engineer")->add($engineerinfo);
+	    	}
+	    	
 	    	//记录登录日志
 		 	$data = array();
 			$data["userId"] = $rd['userId'];
@@ -324,10 +347,10 @@ class UsersModel extends BaseModel {
 		$rd = array('status'=>-1);
 		$data = array();
 		$data["loginPwd"]= I("newPass");//新密码
-		$data["rePwd"] = I("rePass");//确认密码
+		$rePwd = I("rePass");//确认密码
 		  $oldPass     = I("oldPass");//旧密码
 		  
-		 if($data["rePwd"]!=$data["loginPwd"]){ 
+		 if($rePwd!=$data["loginPwd"]){ 
 		 	  $rd['status']= 3;
 		 } 
 		  
@@ -338,10 +361,10 @@ class UsersModel extends BaseModel {
 				$data["loginPwd"] = md5(I("newPass").$rs['loginSecret']);
 				$rs = $this->where("userId=".$id)->save($data);
 				if(false !== $rs){
-					$rd['status']= 1;
+					$rd['status']= 1;//
 				}
 			}else{
-				$rd['status']= -2;
+				$rd['status']= -2;//密码不正确
 			}
 		}
 		return $rd;

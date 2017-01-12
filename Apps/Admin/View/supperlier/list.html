@@ -75,8 +75,8 @@
              <select id='areaId2' name='areaId2'>
                <option value=''>请选择</option>
              </select>    
-       供应商名称：<input type='text' id='jxgysName' name='jxgysName' class='form-control wst-ipt-10' value='{$jxgysName}'/> 
-       供应商编号：<input type='text' id='jxgysSn' name='jxgysSn' class='form-control wst-ipt-10' value='{$jxgysSn}'/> 
+       供应商名称：<input type='text' id='supperlierName' name='supperlierName' class='form-control wst-ipt-10' value='{$supperlierName}'/> 
+       供应商编号：<input type='text' id='supperlierSn' name='supperlierSn' class='form-control wst-ipt-10' value='{$supperlierSn}'/> 
   <button type="submit" class="btn btn-primary glyphicon glyphicon-search">查询</button> 
   <php>if(in_array('jxgyslb_01',$WST_STAFF['grant'])){</php>
   <a class="btn btn-success glyphicon glyphicon-plus" href="{:U('Admin/Supperlier/toEdit')}" style='float:right'>新增</a>
@@ -100,20 +100,20 @@
             <volist name="Page['root']" id="vo" key='i'>
              <tr>
                <td>{$i}</td>
-               <td><a href="{:U('Home/Supperlier/toShopHome',array('jxgysId'=>$vo['jxgysId']))}" target='_blank'>{$vo['jxgysName']}</a></td>
-               <td>{$vo['jxgysSn']}&nbsp;</td>
+               <td><a href="{:U('Home/Supperlier/toShopHome',array('supperlierId'=>$vo['supperlierId']))}" target='_blank'>{$vo['supperlierName']}</a></td>
+               <td>{$vo['supperlierSn']}&nbsp;</td>
                <td>{$vo['userName']}&nbsp;</td>
                <td>{$vo['catName']}&nbsp;</td>
                <td>
-               <if condition="$vo['jxgysAtive'] == 1 "><span class='label label-success'>营业中</span></if>
-               <if condition="$vo['jxgysAtive'] == 0 "><span class='label label-warning'>休息中</span></if>&nbsp;
+               <if condition="$vo['supperlierAtive'] == 1 "><span class='label label-success'>营业中</span></if>
+               <if condition="$vo['supperlierAtive'] == 0 "><span class='label label-warning'>休息中</span></if>&nbsp;
                </td>
                <td>
                <php>if(in_array('jxgyslb_02',$WST_STAFF['grant'])){</php>
-               <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Supperlier/toEdit',array('id'=>$vo['jxgysId'],'src'=>'index'))}">修改</a>&nbsp;
+               <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Supperlier/toEdit',array('id'=>$vo['supperlierId'],'src'=>'index'))}">修改</a>&nbsp;
                <php>}</php>
                <php>if(in_array('jxgyslb_03',$WST_STAFF['grant'])){</php>
-               <button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="javascript:del({$vo['jxgysId']})">刪除</buttona>
+               <button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="javascript:del({$vo['supperlierId']})">刪除</buttona>
                <php>}</php>
                </td>
              </tr>

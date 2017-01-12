@@ -1,5 +1,5 @@
 <?php
-namespace Home\Widget;
+namespace Api\Widget;
 use Think\Controller;
 /**
  * ============================================================================

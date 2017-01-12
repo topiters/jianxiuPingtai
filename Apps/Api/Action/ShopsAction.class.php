@@ -1,14 +1,269 @@
 <?php
-namespace Home\Action;
+namespace Api\Action;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 店铺控制器
- */
+*  业主控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年1月9日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class ShopsAction extends BaseAction {
+	
+public function __construct(){
+		parent::__construct();
+		$USER = session('WST_USER');
+		if($USER['userId']!=1){
+			$data["msg"] = '你还不是业主,没有权限操作!';
+			$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
+			$this->stringify($data);
+			
+			
+		}
+		
+		
+	}
+	//完善公司信息
+public  function addByUser(){
+	$USER = session('WST_USER');
+	$userId=$USER['userId'];
+	$shopsOne=M('shops')->where(array('userId'=>$userId))->find();
+	if(!$shopsOne){
+		$data["msg"] = '你还不是业主,没有权限操作!';
+		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
+		$this->stringify($data);
+		
+	}
+	
+	
+	
+	$shops=D('shops');
+	$data=array();
+	//$shopImg=I('shopImg');//公司logo
+	if($_FILES['shopImg']){
+		$info=$this->uploadPic();
+		if($info['status']==1){
+		$shopImg=$info['savename'].$info['savethumbname'];
+		}		
+	}
+	
+	
+	$shopCompany=I('shopCompany');//公司名称
+	$goodsCatId1=I('goodsCatId1');//行业分类
+	$shoptotal=I('shoptotal');//注册金额
+	$shopInfo=I('shopInfo');//简介
+	$shopArea=I('shopArea');//公司所在城市
+	$shopAddr=I('shopAddr');//公司地址
+	$latitude=I('latitude');  //经度
+	$longitude=I('longitude'); //纬度
+	$shopIdentimg=I('shopIdentimg');//公司证明
+	$data['shopImg']=$shopImg;
+    $data['shopCompany']=$shopCompany;
+    $data['goodsCatId1']=$goodsCatId1;
+    $data['shoptotal']=$shoptotal;
+    $data['shopInfo']=$shopInfo;
+    $data['shopArea']=$shopArea;
+    $data['shopAddr']=$shopAddr;
+    $data['latitude']=$latitude;
+    $data['longitude']=$longitude;
+    $shopIdentimg=array();
+    //附件
+    if($_FILES){
+    
+    	$shopIdentimgInfo=$this->uploads();
+    	
+    	if($shopIdentimgInfo){
+    		foreach ($shopIdentimgInfo  as $k=>$v){
+    			$imgs[]=$v['savepath'].$v['savethumbname'];
+    		}
+    		
+    	}
+    }
+    $data['shopIdentimg']=serialize($shopIdentimg);
+    $data['createTime']=time();
+	
+ $result=D('shops')->where(array('shopId'=>$shopsOne['shopId']))->save($data);
+    if($result){
+    	$data["msg"] = '数据保存成功!';
+    	$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
+    	$this->stringify($data);
+    	
+    }
+    
+    
+    
+    
+    
+	
+}	
+	
+	
+	
+	
+	
+	
+	//任务发布页面
+	public function addgoods(){
+		$USER = session('WST_USER');
+	$shopinfo=D("shops")->where(array('userId'=>$USER['userId']))->find();	
+	if(!$shopinfo){//业主不存在
+		
+		$data["msg"] = '你还不是业主,没有权限操作!';
+		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
+		$this->stringify($data);
+		
+		
+	}	
+		$data=array();
+		$shopId=$USER['userId']; //用户id
+		$type=I('goodsCatId3');//发布类型1.采购2.为检修
+		$data['shopId']=$shopinfo['shopId'];//业主id
+		$data['goodsCatId3']= $type;
+		$goodName=I('goodName');//产品名称
+		$data['createTime']=time();
+		$imgs=array();
+		if($_FILES){	
+			$info=$this->uploads();
+				if($info){
+					foreach ($info  as $k=>$v){
+						$imgs[]=$v['savepath'].$v['savename'];
+					}	
+				}		
+		}
+		$data['goodsthumb']=$imgs?serialize($imgs):'';
+		if($type==1){  //采购任务
+		$goodsStock=I('goodsStock');//数量	
+		$attrCatId=I('attrCatId');//产品规格型号
+		$beginTime=I("beginTime");	//开始时间
+		$endTime=I("endTime");//结束时间
+		$linkMan=I("linkMan");//联系人
+		$linkPhone=I("linkPhone");//手机号
+		$linkAddr=I("linkAddr");//地址
+		$goodsDesc=I("goodsDesc");//要求特殊
+		//$goodsImg=I("goodsImg");//产品图
+		//$goodsthumb=I("goodsthumb");//多张图
+		
+		
+		$data['goodName']=$goodName;
+		$data['goodsStock']=goodsStock;
+		$data['goodsCatId3']=$goodsCatId3;
+		$data['attrCatId']=$attrCatId;
+		$data['beginTime']=$beginTime;
+		$data['endTime']=$endTime ;
+		$data['linkMan']=$linkMan  ;
+		$data['linkPhone']=$linkPhone   ;
+		$data['linkAddr']=$linkAddr   ;
+		$data['goodsDesc']=$goodsDesc;
+		//$data['goodsImg']=$goodsImg  ;
+	
+		$res=D('goods')->add($data);
+		if($res){
+			
+			$data["msg"] = '数据添加成功!';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
+			$this->stringify($data);
+			
+		}
+		
+		
+		
+		}elseif($type==2){
+			
+		$goodName=I("goodName");// 检修名称	
+		$brandId=I("brandId");//	风机品牌厂家
+		$attrCatId=I("attrCatId");//	设备型号
+		$goodType=I("goodType");//竞价1.0 2.枪弹
+		$repairId=I("repairId");//检修性质	
+		$goodDesc=I("goodDesc");//故障描述	
+		$beginTime=I("beginTime");// 开始时间
+		$repairhistory=	I("repairhistory");//检修历史
+		$shopPrice=I("shopPrice");// 检修报价
+		$data['goodName']=$goodName ;
+		$data['brandId']=$brandId ;
+		$data['attrCatId']=$attrCatId ;
+		$data['goodType']=$goodType ;
+		$data['repairId']=$repairId ;
+		$data['goodDesc']=$goodDesc ;
+		$data['beginTime']=$beginTime ;
+		$data['repairhistory']=$repairhistory ;
+		$data['shopId']=$shopId ;
+		$data['shopPrice']=$shopPrice;
+		$data['createTime']=time();
+		$res=D('goods')->add($data);
+		if($res){
+				
+			$data["msg"] = '数据添加成功!';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
+			$this->stringify($data);
+				
+		}
+		
+		
+		
+		
+			
+		}
+		
+		
+		
+	}
+	
+	//发布检修或采购列表
+	
+	public  function  getshopgoodslist(){
+		
+		$shopsModel=D('Api/shops');
+		$result=$shopsModel->getshopgoodslist();
+		if($result['root']){
+			
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
+			$this->stringify($data);
+			
+		}else{
+			$data['msg']="暂时没有符合的数据...";
+			$data = array('status'=>self::API_DATA_NOT_EXISTS,'msg'=>$data);
+			$this->stringify($data);
+		}
+		
+		
+		
+		
+	}
+	
+	
+	//采购或检修详情页面  
+	public function shopgoodsdetails(){
+		  
+		$result=D('Api/shops')->shopgoodsdetails();
+		
+		 if($result){
+		 		
+		 	$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
+		 	$this->stringify($data);
+		 		
+		 }else{
+		 	$data['msg']="暂时没有符合的数据...";
+		 	$data = array('status'=>self::API_DATA_NOT_EXISTS,'msg'=>$data);
+		 	$this->stringify($data);
+		 		
+		 		
+		 }
+		
+		
+		
+		
+	}
+	
+	//
+	
+	
+	
+	
+	
+	
 	/**
      * 跳到商家首页面
      */
@@ -174,12 +429,17 @@ class ShopsAction extends BaseAction {
 	 * 编辑商家资料
 	 */
 	public function toEdit(){
-		$m = D('Home/Shops');
-		$USER = session('WST_USER');
-		$shop = $m->get((int)$USER['shopId']);
-		if($shop["shopStatus"]!=-1){
-			$this->isShopLogin();
+		
+		if($_FILES){
+			
+			$info=$this->uploads();
+			
+			var_dump($info);
+			
 		}
+		$m = D('Home/Shops');
+		 
+		
 		//获取银行列表
 		$m = D('Admin/Banks');
 		$this->assign('bankList',$m->queryByList(0));

@@ -86,7 +86,8 @@ class BaseAction extends Controller {
 	//用户名不存在
 	const API_USER_NOT_EXISTS = 329;
 	const API_USER_NO_ACCESS  = 330;
-	
+	//请求的数据不存在。。。
+	const API_DATA_NOT_EXISTS  = 331;
 	
 	public function __construct(){
 		parent::__construct();
@@ -227,15 +228,54 @@ class BaseAction extends Controller {
 			    $images->thumb(I('width',700), I('height',700))->save('./Upload/'.$rs[$Filedata]['savepath'].$mnewsavename);
 			    $images->thumb(I('width',250), I('height',250))->save('./Upload/'.$rs[$Filedata]['savepath'].$mnewsavename_thmb);
 			}
-			$rs[$Filedata]['savepath'] = "Upload/".$rs[$Filedata]['savepath'];
-			$rs[$Filedata]['savethumbname'] = $newsavename;
+			//$rs[$Filedata]['savepath'] = "Upload/".$rs[$Filedata]['savepath'];
+			//$rs[$Filedata]['savethumbname'] = $newsavename;
+			$rs['savepath'] = "Upload/".$rs[$Filedata]['savepath'];
+			$rs['savethumbname'] = $mnewsavename_thmb;
 			$rs['status'] = 1;
 			
-			echo json_encode($rs);
+			//echo json_encode($rs);
+			return $rs;
 
 		}	
     }
 	
+    
+    /*
+     * 多文件上传
+     * 
+     */
+    public  function uploads(){
+    	
+    	
+    	$config = array(
+    			'maxSize'       =>  0, //上传的文件大小限制 (0-不做限制)
+    			'exts'          =>  array('jpg','png','gif','jpeg'), //允许上传的文件后缀
+    			'rootPath'      =>  './Upload/', //保存根路径
+    			'driver'        =>  'LOCAL', // 文件上传驱动
+    			'subName'       =>  array('date', 'Y-m'),
+    			'savePath'      =>  I('dir','uploads')."/"
+    	);
+    	$dirs = explode(",",C("WST_UPLOAD_DIR"));
+    	if(!in_array(I('dir','uploads'), $dirs)){
+    		echo '非法文件目录！';
+    		return false;
+    	}
+    	
+    	$upload = new \Think\Upload($config);
+    	$info =$upload->upload($files='');
+    	if(!$info) {// 上传错误提示错误信息  
+    		$this->error($upload->getError());
+    	   }else{// 上传成功 获取上传文件信息    
+    			/* foreach($info as $file){   
+    				echo $file['savepath'].$file['savename']; 
+    			} */ 
+    			
+    			return  $info;
+    			
+    		}
+    	
+    }
 	/**
 	 * 产生验证码图片
 	 * 

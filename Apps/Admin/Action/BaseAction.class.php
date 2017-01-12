@@ -57,11 +57,15 @@ class BaseAction extends Controller {
 			    $images->thumb(I('width',700), I('height',700))->save('./Upload/'.$rs[$Filedata]['savepath'].$mnewsavename);
 			    $images->thumb(I('width',250), I('height',250))->save('./Upload/'.$rs[$Filedata]['savepath'].$mnewsavename_thmb);
 			}
-			$rs[$Filedata]['savepath'] = "Upload/".$rs[$Filedata]['savepath'];
-			$rs[$Filedata]['savethumbname'] = $newsavename;
+			//$rs[$Filedata]['savepath'] = "Upload/".$rs[$Filedata]['savepath'];
+			$rs['savepath'] = "Upload/".$rs[$Filedata]['savepath'];
+			//$rs[$Filedata]['savethumbname'] = $newsavename;
+			$rs['savethumbname'] = $newsavename;
 			$rs['status'] = 1;
 			
-			echo json_encode($rs);
+			//echo json_encode($rs);
+			
+			return  $rs;
 		}	
     }
     /**
