@@ -15,8 +15,57 @@ class GoodsAction extends BaseAction {
 	
 	
 	/**
-	 * 商品列表
+	 * 推荐任务
+	 * 
+	 * 
 	 */
+	public function getGoodsIndex(){
+		 $result=D('Api/goods')->getGoodsIndex();
+		 if($result){
+		 	//$data["msg"] = '数据载入成功!';
+		 	$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
+		 	$this->stringify($data);
+		 	
+		 	
+		 }else{
+		 	
+		 	$data["msg"] = '数据暂时没有请求的数据!';
+		 	$data = array('status'=>self::API_DATA_NOT_EXISTS,'msg'=>$data);
+		 	$this->stringify($data);
+		 	
+		 }
+		
+	}
+	
+	//推荐任务详情
+	
+	
+	public function getGoodsDetails(){
+		$result=D('Api/goods')->getGoodsDetails();
+		if($result){
+			//$data["msg"] = '数据载入成功!';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
+			$this->stringify($data);
+	
+	
+		}else{
+	
+			$data["msg"] = '数据暂时没有请求的数据!';
+			$data = array('status'=>self::API_DATA_NOT_EXISTS,'msg'=>$data);
+			$this->stringify($data);
+	
+		}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
     public function getGoodsList(){
    		$mgoods = D('Api/Goods');
    		$mareas = D('Api/Areas');

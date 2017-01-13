@@ -14,6 +14,47 @@ namespace Api\Model;
 class GoodsModel extends BaseModel {
 	
 	
+	
+	//首页推荐任务
+	public function getGoodsIndex(){
+		 
+		$isAdminRecom=1;//推荐,正在进行的任务
+		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId   where  g.isAdminRecom =$isAdminRecom AND g.goodStatus=1 ";
+		$result=D('goods')->pageQuery($sql,I("p"),30);
+		//var_dump(D('goods')->getLastSql());
+		//exit;
+		return $result;
+		
+		
+		
+		
+	}
+	
+	//首页推荐任务详情
+	public function getGoodsDetails(){
+		
+		$goodsId=I("goodsId");
+		
+		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId   where g.isAdminRecom =$isAdminRecom AND g.goodStatus=1 ";
+		$result=D('goods')->query($sql);
+		//var_dump(D('goods')->getLastSql());
+		//exit;
+		return $result;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 商品列表
 	 */

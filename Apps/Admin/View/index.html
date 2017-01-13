@@ -163,24 +163,24 @@
                         <php>if(in_array('spgl_00',$WST_STAFF['grant'])){</php>
                         <li class="treeview">
                             <a href="#">
-                                <span>商品管理</span>
+                                <span>任务管理</span>
                                 <small id='goodsTips' style='display:none' class="badge pull-right bg-green">0</small>
                             </a>
                             <ul class="treeview-menu">
                                 <php>if(in_array('spfl_00',$WST_STAFF['grant'])){</php>
-                                <li><a href="{:U('Admin/GoodsCats/index')}" target='pageContent'>商品分类</a></li>
+                                <li><a href="{:U('Admin/GoodsCats/index')}" target='pageContent'>任务分类</a></li>
                                 <php>}</php>
                                 <php>if(in_array('ppgl_00',$WST_STAFF['grant'])){</php>
 					            <li><a href="{:U('Admin/Brands/index')}" target='pageContent'>品牌管理</a></li>
 					            <php>}</php>
                                 <php>if(in_array('splb_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Goods/index')}" target='pageContent'>商品列表</a></li>
+					            <li><a href="{:U('Admin/Goods/index')}" target='pageContent'>任务列表</a></li>
 					            <php>}</php>
                                 <php>if(in_array('spsh_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Goods/queryPenddingByPage')}" target='pageContent'>商品审核</a></li>
+					            <li><a href="{:U('Admin/Goods/queryPenddingByPage')}" target='pageContent'>任务审核</a></li>
 					            <php>}</php>
                                 <php>if(in_array('sppl_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/GoodsAppraises/index')}" target='pageContent'>商品评价</a></li>
+					            <li><a href="{:U('Admin/GoodsAppraises/index')}" target='pageContent'>任务评价</a></li>
 					            <php>}</php>
                             </ul>
                         </li>

@@ -53,6 +53,12 @@ class IndexAction extends BaseAction {
    		//	$this->display("default/index");
    		} */
     }
+  
+    
+    
+    
+    
+    
     /**
      * 广告记数
      */
