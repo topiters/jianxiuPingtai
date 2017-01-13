@@ -300,18 +300,18 @@
 }
 
 /*我的 业主*/
-.jx-alert1 {
+.jx-alert122 {
 	position: absolute;
 	left: 0;
 	top: 0;
 	background: rgba(0, 0, 0, 0.7);
 	width: 6.4rem;
-	/*height: 100%;*/
+	height: 100%;
 	z-index: 20;
 	display: none;
 }
 
-.jx-alert1-t {
+.jx-alert1-t22 {
 	position: fixed;
 	left: 50%;
 	top: 50%;
@@ -324,25 +324,25 @@
 	padding: 0.5rem;
 }
 
-.jx-alert1-t .cha {
+.jx-alert1-t22 .cha {
 	position: absolute;
 	right: 0.1rem;
 	top: 0.1rem;
 	color: #8a8a8a;
 }
 
-.jx-alert1-t1 {
+.jx-alert1-t122 {
 	width: 1.4rem;
 	height: 1.4rem;
 	margin: -1rem auto 0;
 }
 
-.jx-alert1-t1 img {
+.jx-alert1-t122 img {
 	width: 100%;
 }
 
-.jx-alert1-t2,
-.jx-alert1-t3 {
+.jx-alert1-t222,
+.jx-alert1-t322 {
 	padding: 0.3rem 0;
 	text-align: center;
 	border-top: 1px solid #e4e4e4;
@@ -350,8 +350,8 @@
 	margin-top: 0.15rem;
 }
 
-.jx-alert1-t2 p,
-.jx-alert1-t3 p {
+.jx-alert1-t222 p,
+.jx-alert1-t322 p {
 	font-size: 0.32rem;
 }
 

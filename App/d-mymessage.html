@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>供应商信息</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个人信息</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>
+		</header>
+		<div class="mq-main">
+			<div class="mq-head clearfix">
+				<span class="l">头像</span>
+				<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+				<div class="mq-headimg r">
+					<img src="img/touxiang.jpg" />
+				</div>
+			</div>
+			<div class="mq-name">
+				<ul>
+					<li class="mq-name-val">
+						<span>昵称</span>
+						<input type="text" name="" id="" value="李四" />
+					</li>
+					<li class="mq-name-val">
+						<span>手机号</span>
+						<input type="text" name="" id="" value="13256362569" />
+					</li>
+					<li>
+						<span>修改密码</span>
+						<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+					</li>
+					<li>
+						<span>设置支付密码</span>
+						<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+					</li>
+				</ul>
+			</div>
+			<button class="mb1-btn" style="margin-top: 30px;">退出登录</button>
+		</div>
+	</body>
+	<!--<script src="js/feedback.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript">
+		/*字数限制*/
+		$("#area").on("input propertychange", function() {
+			var $this = $(this),
+				_val = $this.val(),
+				count = "";
+			if(_val.length > 200) {
+				$this.val(_val.substring(0, 200));
+			}
+			count = 200 - $this.val().length;
+			$("#text-count").text(count);
+		});
+	</script>
+	<script type="text/javascript">
+		(function() {
+			var index = 1;
+			var size = null;
+			var imageIndexIdNum = 0;
+			var starIndex = 0;
+			var feedback = {
+				imageList: document.getElementById('image-list')
+			};
+			var url = 'https://service.dcloud.net.cn/feedback';
+			feedback.files = [];
+			feedback.uploader = null;
+			feedback.deviceInfo = null;
+			mui.plusReady(function() {
+				//设备信息，无需修改
+				feedback.deviceInfo = {
+					appid: plus.runtime.appid,
+					imei: plus.device.imei, //设备标识
+					images: feedback.files, //图片文件
+					p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
+					md: plus.device.model, //设备型号
+					app_version: plus.runtime.version,
+					plus_version: plus.runtime.innerVersion, //基座版本号
+					os: mui.os.version,
+					net: '' + plus.networkinfo.getCurrentType()
+				}
+			});
+			/**
+			 *提交成功之后，恢复表单项 
+			 */
+			feedback.clearForm = function() {
+				feedback.question.value = '';
+				feedback.contact.value = '';
+				feedback.imageList.innerHTML = '';
+				feedback.newPlaceholder();
+				feedback.files = [];
+				index = 0;
+				size = 0;
+				imageIndexIdNum = 0;
+				starIndex = 0;
+				//清除所有星标
+				mui('.icons i').each(function(index, element) {
+					if(element.classList.contains('mui-icon-star-filled')) {
+						element.classList.add('mui-icon-star')
+						element.classList.remove('mui-icon-star-filled')
+					}
+				})
+			};
+			feedback.getFileInputArray = function() {
+				return [].slice.call(feedback.imageList.querySelectorAll('.file'));
+			};
+			feedback.addFile = function(path) {
+				feedback.files.push({
+					name: "images" + index,
+					path: path
+				});
+				index++;
+			};
+			/**
+			 * 初始化图片域占位
+			 */
+			feedback.newPlaceholder = function() {
+				var fileInputArray = feedback.getFileInputArray();
+				if(fileInputArray &&
+					fileInputArray.length > 0 &&
+					fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
+					return;
+				};
+				imageIndexIdNum++;
+				var placeholder = document.createElement('div');
+				placeholder.setAttribute('class', 'image-item space');
+				var up = document.createElement("div");
+				up.setAttribute('class', 'image-up')
+					//删除图片
+				var closeButton = document.createElement('div');
+				closeButton.setAttribute('class', 'image-close');
+				closeButton.innerHTML = 'X';
+				//小X的点击事件
+				closeButton.addEventListener('tap', function(event) {
+					setTimeout(function() {
+						feedback.imageList.removeChild(placeholder);
+					}, 0);
+					return false;
+				}, false);
+
+				//
+				var fileInput = document.createElement('div');
+				fileInput.setAttribute('class', 'file');
+				fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
+				fileInput.addEventListener('tap', function(event) {
+					var self = this;
+					var index = (this.id).substr(-1);
+
+					plus.gallery.pick(function(e) {
+						//				console.log("event:"+e);
+						var name = e.substr(e.lastIndexOf('/') + 1);
+						console.log("name:" + name);
+
+						plus.zip.compressImage({
+							src: e,
+							dst: '_doc/' + name,
+							overwrite: true,
+							quality: 50
+						}, function(zip) {
+							size += zip.size
+							console.log("filesize:" + zip.size + ",totalsize:" + size);
+							if(size > (10 * 1024 * 1024)) {
+								return mui.toast('文件超大,请重新选择~');
+							}
+							if(!self.parentNode.classList.contains('space')) { //已有图片
+								feedback.files.splice(index - 1, 1, {
+									name: "images" + index,
+									path: e
+								});
+							} else { //加号
+								placeholder.classList.remove('space');
+								feedback.addFile(zip.target);
+								feedback.newPlaceholder();
+							}
+							up.classList.remove('image-up');
+							placeholder.style.backgroundImage = 'url(' + zip.target + ')';
+						}, function(zipe) {
+							mui.toast('压缩失败！')
+						});
+
+					}, function(e) {
+						mui.toast(e.message);
+					}, {});
+				}, false);
+				placeholder.appendChild(closeButton);
+				placeholder.appendChild(up);
+				placeholder.appendChild(fileInput);
+				feedback.imageList.appendChild(placeholder);
+			};
+			feedback.newPlaceholder();
+		})();
+	</script>
+
+</html>

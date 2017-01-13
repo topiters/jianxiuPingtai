@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页</title>
+		<!--公共css  ss-->
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<!--公共css  ee-->
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/message.css"/>
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<!--公共js  ss-->
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共js  ee-->
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+	<body>
+<!--底部导航-->
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="#home">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="#message">
+				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="#setting">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+	<!--内容部分-->
+		<div class="mui-content">
+			
+			<!--首页HOME-->
+			<div id="home" class="mui-control-content mui-active">
+				<header id="header" class="mui-bar mui-bar-transparent">
+					<span>郑州</span>
+					<a><span class="mui-icon mui-icon-arrowdown"></span></a>
+					<div class="index-serch">
+						<input type="search" placeholder="请输入关键词">
+					</div>
+					<span class="put r" style="margin: 0.2rem 0.1rem 0 0;">发布</span>
+				</header>
+				<div class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop">
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#"><img src="img/d9d90c5024e40a4502860d3bf7184cde.jpg" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="img/lunbo.png" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="img/1eca34d5534a658febcec7ca2a723f94.jpg" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="img/c6538c150f3d4f043a1e382a3a3ef9a0.jpg" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="img/d9d90c5024e40a4502860d3bf7184cde.jpg" /></a>
+						</div>
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#"><img src="img/lunbo.png" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="index-new clearfix">
+					<div class="new-l l">
+						<img src="img/zuixin-01.png" />
+					</div>
+					<i class="icon iconfont icon-shengyin l"></i>
+					<div class="news l">
+						<ul class="list">
+							<li>
+								<a target="_blank" href="###">永远有多远1？你小子走多远</a>
+							</li>
+							<li>
+								<a target="_blank" href="###">月亮依旧停旷野上,你的身影被越拉越长</a>
+							</li>
+							<li>
+								<a target="_blank" href="###">直到远去的马蹄声响,呼唤你的歌声传四方</a>
+							</li>
+							<li>
+								<a target="_blank" href="###">举头望天只见雁两行,低头泪水为我卸了妆</a>
+							</li>
+							<li>
+								<a target="_blank" href="###">伤心凭栏相思涂满墙,彻夜无眠爱的路太长</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="index-tol">
+					<div class="index-tol-list" id="buyingTask">
+						<img src="img/caigou-01.png" />
+						<span>采购任务</span>
+					</div>
+					<div class="index-tol-list">
+						<img src="img/jianxiu-01.png" />
+						<span>检修任务</span>
+					</div>
+					<div class="index-tol-list">
+						<img src="img/gaojia-01.png" />
+						<span>高价悬赏</span>
+					</div>
+					<div class="index-tol-list" id="nearby">
+						<img src="img/fujin-01.png" />
+						<span>附近GO</span>
+					</div>
+				</div>
+				<div class="index-task">
+					<div class="index-taskt clearfix">
+						<span class="l">任务推荐</span>
+						<span class="r">更多></span>
+					</div>
+					<div class="index-taskd">
+						<ul class="task-tol">
+							<li class="task-tol1">
+								<div class="task-list1 l">
+									<img src="img/logo-01.jpg" />
+								</div>
+								<div class="task-list2 l">
+									<p class="mingcheng">检修名称检修名称检修名称</p>
+									<p>李三 | 15236252635</p>
+									<p>已有<span>2</span>人投标</p>
+									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+								</div>
+								<div class="task-list3 r">
+									<p>消缺</p>
+									<p></p>
+									<p id="1" class="settime" endTime="2017-02-05 10:00:00"></p>
+									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+								</div>
+								<div class="task-list4">
+									<img src="img/bid-01.png" />
+								</div>
+							</li>
+							<li class="task-tol2">
+								<div class="task-list1 l">
+									<img src="img/logo-01.jpg" />
+								</div>
+								<div class="task-list2 l">
+									<p class="mingcheng">检修名称</p>
+									<p>已有<span>3</span>人抢单</p>
+									<p>发布时间：<span>12-12 12:12</span></p>
+									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+								</div>
+								<div class="task-list3 r">
+									<p>￥400.00</p>
+									<p>5人</p>
+									<p></p>
+									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+								</div>
+								<div class="task-list4">
+									<img src="img/qiangdan-01.png" />
+								</div>
+							</li>
+							<li class="task-tol1">
+								<div class="task-list1 l">
+									<img src="img/logo-01.jpg" />
+								</div>
+								<div class="task-list2 l">
+									<p class="mingcheng">检修名称</p>
+									<p>李三 | 15236252635</p>
+									<p>已有<span>2</span>人投标</p>
+									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+								</div>
+								<div class="task-list3 r">
+									<p>消缺</p>
+									<p></p>
+									<p id="2" class="settime" endTime="2017-02-05 15:45:00"></p>
+									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+								</div>
+								<div class="task-list4">
+									<img src="img/bid-01.png" />
+								</div>
+							</li>
+							<li class="task-tol2">
+								<div class="task-list1 l">
+									<img src="img/logo-01.jpg" />
+								</div>
+								<div class="task-list2 l">
+									<p class="mingcheng">检修名称</p>
+									<p>已有<span>3</span>人抢单</p>
+									<p>发布时间：<span>12-12 12:12</span></p>
+									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+								</div>
+								<div class="task-list3 r">
+									<p>￥400.00</p>
+									<p>5人</p>
+									<p></p>
+									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+								</div>
+								<div class="task-list4">
+									<img src="img/qiangdan-01.png" />
+								</div>
+							</li>
+							<li></li>
+						</ul>
+					</div>
+				</div>
+				<!--发布弹框-->
+				<div class="jx-alert1"></div>
+				<div class="jx-alert1-t">
+					<div class="jx-alert1-t1">
+						<img src="img/shouye-01.png" />
+					</div>
+					<div class="jx-alert1-t2">
+						<a href="###">
+							<p><i class="icon iconfont icon-caigou"></i><span>发布采购任务</span></p>
+						</a>
+					</div>
+					<div class="jx-alert1-t3">
+						<a href="###">
+							<p><i class="icon iconfont icon-weixiuyuanyin"></i><span>发布检修任务</span></p>
+						</a>
+					</div>
+					<!--<span class="cha"><i class="icon iconfont icon-cha"></i></span>-->
+				</div>
+			</div>
+		<!--第2个子页面   消息界面-->
+			<div id="message" class="mui-control-content">
+				<header id="header" class="mui-bar mui-bar-nav">
+					<h1 class="mui-title">消息</h1>
+				</header>
+				<div class="cyx1">
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="myInquiry">
+							<p>我的询价</p>
+							<p class="clearfix"><span class="l">某某企业向我报价</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-invitation" style="color: #FF7583;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="myInvitation">
+							<p>我的邀请</p>
+							<p class="clearfix"><span class="l">我邀请某某投标</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="orderMessage">
+							<p>抢单消息</p>
+							<p class="clearfix"><span class="l">某某抢了某某的</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>投标消息</p>
+							<p class="clearfix"><span class="l">某某企业投了某某</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!--第三个子页面  个人信息界面-->
+			<div id="setting" class="mui-control-content">
+				<header id="header" class="mui-bar mui-bar-nav">
+					<h1 class="mui-title">我的</h1>
+				</header>
+				<div class="my1-main">
+					<div class="my1-maintop clearfix" id="myMessage">
+						<div class="my1-img l">
+							<img src="img/touxiang.jpg" />
+						</div>
+						<span class="l">用户名</span>
+						<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
+					</div>
+					<div class="my1-mainbottom">
+						<ul>
+							<li id="myXunjia">
+								<i class="icon iconfont icon-xiaoxi2"></i>
+								<span>我的询价</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myFabu">
+								<i class="icon iconfont icon-fabu"></i>
+								<span>我发布的</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myWallet">
+								<i class="icon iconfont icon-qianbao"></i>
+								<span>我的钱包</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myAddress">
+								<i class="icon iconfont icon-address"></i>
+								<span>地址管理</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li>
+								<i class="icon iconfont icon-3"></i>
+								<span>绑定QQ</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+								<span class="r">已绑定</span>
+							</li>
+							<li>
+								<i class="icon iconfont icon-weixin"></i>
+								<span>绑定微信</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+								<span class="r">未绑定</span>
+							</li>
+							<li id="mySetting">
+								<i class="icon iconfont icon-shezhi"></i>
+								<span>我的设置</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--发布弹框-->
+				<div class="jx-alert122">
+					<div class="jx-alert1-t22">
+						<div class="jx-alert1-t122">
+							<img src="img/shouye-01.png" />
+						</div>
+						<div class="jx-alert1-t222">
+							<a href="d-myqiangdan.html">
+								<p><i class="icon iconfont icon-qiangdan" style="color: #FF9A00;font-size: 0.4rem;margin-right: 0.1rem;"></i><span>抢单</span></p>
+							</a>
+						</div>
+						<div class="jx-alert1-t322">
+							<a href="d-mybid-list.html">
+								<p><i class="icon iconfont icon-icon-rank" style="color: #4EB145;font-size: 0.4rem;margin-right: 0.1rem;"></i><span>竞标</span></p>
+							</a>
+						</div>
+						<span class="cha"><i class="icon iconfont icon-cha"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+</html>
+<script>
+/**
+ * 首页js
+ */
+	var gallery = mui('.mui-slider');
+	gallery.slider({
+		interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+	});
+	$(function() {
+		//限制字符个数
+		$(".cut_str , .mingcheng").each(function() {
+			var maxwidth = 10;
+			if($(this).text().length > maxwidth) {
+				$(this).text($(this).text().substring(0, maxwidth));
+				$(this).html($(this).html() + '…');
+			}
+		});
+		function preventDefaultFn(event) {
+			event.preventDefault();
+		}
+		$(".put").click(function() {
+			//			$(".jx-alert1").show();
+			$('.jx-alert1').fadeIn(500);
+			$('.jx-alert1-t').fadeIn(500);
+			$('body').css('overflow', 'hidden');
+			$('body').on('touchmove', preventDefaultFn);
+		});
+		$('.jx-alert1').click(function() {
+			$(this).fadeOut(500);
+			$('body').off('touchmove', preventDefaultFn);
+			$('.jx-alert1-t').fadeOut(500);
+			$('body').removeAttr('style');
+		})
+		$(".cha").click(function() {
+			$(".jx-alert1").hide();
+		});
+	});
+		
+//采购任务跳转进入详情页面
+	document.getElementById('buyingTask').addEventListener('tap',function() {
+		mui.openWindow({
+		    url:"a-purchase-yezhu-1.1.html",
+		});
+	});
+//附近GO跳转进入详情页面
+	document.getElementById('nearby').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"a-fujin-yezhu.html",
+		});
+	});
+		
+</script>
+<script type="text/javascript">
+	$(function() {
+		var t;
+		t = setInterval(function() {
+			var ul = $(".list");
+			var liHeight = ul.find("li:last").height();
+			ul.animate({
+				marginTop: 0
+					//						liHeight + "px"
+			}, 1000, function() {
+				ul.find("li:last").prependTo(ul);
+				ul.find("li:first").hide();
+				ul.css({
+					marginTop: 0
+				});
+				ul.find("li:first").fadeIn(800);
+			});
+		}, 3000);
+	});
+		
+/**
+ * 消息js
+ */
+//我的询价跳转进入详情页面
+	document.getElementById('myInquiry').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"c-yezhu-xunjia.html",
+		});
+	});
+//我的邀请跳转进入详情页面
+	document.getElementById('myInvitation').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"c-yezhu-yaoqing.html",
+		});
+	});
+//抢单消息跳转进入详情页面
+	document.getElementById('orderMessage').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"c-yezhu-qiangdan.html",
+		});
+	});
+
+	
+/**
+ * 我的个人信息js
+ */
+	$("#myFabu").click(function() {
+		$(".jx-alert122").fadeIn(500);
+		var hh=$(window).height();
+		$(".jx-alert122").css("height",hh+"px") 
+	});
+	$(".cha").click(function() {
+		$(".jx-alert122").fadeOut(500);
+	});
+		
+//各页面跳转
+//我的询价跳转进入详情页面
+	document.getElementById('myXunjia').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-myxujia1.html",
+		});
+	});
+//我的钱包跳转进入详情页面
+	document.getElementById('myWallet').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-mywallet.html",
+		});
+	});
+//地址管理跳转进入详情页面
+	document.getElementById('myAddress').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-adress2.html",
+		});
+	});
+//地址管理跳转进入详情页面
+	document.getElementById('mySetting').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-set.html",
+		});
+	});
+//地址管理跳转进入详情页面
+	document.getElementById('myMessage').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-mymessage.html",
+		});
+	});
+
+</script>
