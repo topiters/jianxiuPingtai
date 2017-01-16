@@ -72,6 +72,40 @@
 	</body>
 	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+//		(function($, doc) {
+//			$.init();
+//			$.ready(function() {
+//				//普通示例
+//				var userPicker = new $.PopPicker();
+//				userPicker.setData([{
+//					value: "1",
+//					text: "业主"
+//				}, {
+//					value: '2',
+//					text: '供应商'
+//				}, {
+//					value: '3',
+//					text: '检修企业'
+//				}, {
+//					value: '4',
+//					text: '检修工程师'
+//				}]);
+//				var showUserPickerButton = doc.getElementById('showUserPicker');
+//				//					var userResult = doc.getElementById('userResult');
+//				showUserPickerButton.addEventListener('tap', function(event) {
+//					userPicker.show(function(items) {
+//						var str = items[0]['text'].replace("/\"/gi", '');
+//						showUserPickerButton.innerText = str;
+//						alert(showUserPickerButton);
+//						//返回 false 可以阻止选择框的关闭
+//						//return false;
+//					});
+//				}, false);
+//				//-----------------------------------------
+//			});
+//		})(mui, document);
+	</script>
+	<script>
 		(function($, doc) {
 			$.init({
 				beforeback: function() {
