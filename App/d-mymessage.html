@@ -61,7 +61,7 @@
 		$("#area").on("input propertychange", function() {
 			var $this = $(this),
 				_val = $this.val(),
-				count = "";
+				count ="";
 			if(_val.length > 200) {
 				$this.val(_val.substring(0, 200));
 			}
@@ -69,7 +69,7 @@
 			$("#text-count").text(count);
 		});
 	</script>
-	<script type="text/javascript">
+	<!--<script type="text/javascript">
 		(function() {
 			var index = 1;
 			var size = null;
@@ -205,6 +205,6 @@
 			};
 			feedback.newPlaceholder();
 		})();
-	</script>
+	</script>-->
 
 </html>

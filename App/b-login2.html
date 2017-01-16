@@ -20,62 +20,55 @@
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">登录</h1>
-			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right reg-btn">注册</button>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="reg_btn">注册</button>
 		</header>
-		<form action="" method="post">
-			<div class="l-main">
-				<div class="l-main1">
-					<i class="icon iconfont icon-shouji1"></i>
-					<input type="text" name="" id="phone" placeholder="请输入手机号" />
+
+		<div class="l-main">
+			<div class="l-main1">
+				<i class="icon iconfont icon-shouji1"></i>
+				<input type="text" name="" id="phone" placeholder="请输入手机号" />
+			</div>
+			<div class="l-main2">
+				<i class="icon iconfont icon-suo"></i>
+				<input type="password" name="" id="paslogin" placeholder="请输入密码" />
+			</div>
+			<div class="l-main3 clearfix">
+				<span class="forget l" id="forgetpwd">忘记密码</span>
+				<span class="r" id="p_login">手机登录</span>
+			</div>
+			<button class="l-btn" id="l_btn">立即登录</button>
+			<div class="l-main4">
+				<div class="l-main4-t">
+					<span></span>
+					<span>第三方登录</span>
+					<span></span>
 				</div>
-				<div class="l-main2">
-					<i class="icon iconfont icon-suo"></i>
-					<input type="password" name="" id="paslogin" placeholder="请输入密码" />
+				<div class="l-main4-d"></div>
+			</div>
+			<div class="l-main5">
+				<div class="l-main5-list" id="qqlogin">
+					<img src="img/qq.png" />
 				</div>
-				<div class="l-main3 clearfix">
-					<a href="###">
-						<span class="forget l">忘记密码</span>
-					</a>
-					<a href="b-login3.html">
-						<span class="r">手机登录</span>
-					</a>
-				</div>
-				<button class="l-btn" id="l-btn">立即登陆</button>
-				<div class="l-main4">
-					<div class="l-main4-t">
-						<span></span>
-						<span>第三方登录</span>
-						<span></span>
-					</div>
-					<div class="l-main4-d"></div>
-				</div>
-				<div class="l-main5">
-					<div class="l-main5-list">
-						<a href="b-login1.html">
-							<img src="img/qq.png" />
-						</a>
-					</div>
-					<div class="l-main5-list">
-						<a href="b-login4.html">
-							<img src="img/wechat.png" />
-						</a>
-					</div>
+				<div class="l-main5-list" id="weixinlogin">
+					<img src="img/wechat.png" />
 				</div>
 			</div>
-		</form>
+		</div>
 		<a href="###">
-			<a href="index.html">
-				<span class="l-suibian r">随便逛逛</span>
-			</a>
+			<span class="l-suibian r" id="l_suibian">随便逛逛</span>
 		</a>
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script>
 		(function($, doc) {
 			$.plusReady(function() {
-				var loginbtn = document.getElementById('l-btn'); //点击登录按钮
-				var forgetpasswd = document.getElementById('forget'); //点击忘记密码
-				var register = document.getElementById('reg-btn'); //注册
+				var loginbtn = document.getElementById('l_btn'); //点击登录按钮
+				var forgetpasswd = document.getElementById('forgetpwd'); //点击忘记密码
+				var register = document.getElementById('reg_btn'); //注册
+				var p_login = document.getElementById('p_login'); //手机登录
+				var weixinlogin = document.getElementById('weixinlogin'); //微信登录
+				var qqlogin = document.getElementById('qqlogin'); //QQ登录
+				var suibian = document.getElementById('l_suibian'); //随便逛逛
 				var regphone = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 				//点击登录
 				loginbtn.addEventListener('tap', function() {
@@ -97,39 +90,24 @@
 							type: 'post', //HTTP请求类型 
 							timeout: 10000, //超时时间设置为10秒；                
 							success: function(data) {
-								alert(JSON.stringify(data));
 								if(data.status == 200) {
-									var userId = data.responseList.userId; //会员id
-									var loginName = data.responseList.loginName; //登录账号
-									var loginPwd = data.responseList.loginPwd; //登录密码
-									var userinfo = {
-										userId: userId,
-										userPhoto: userPhoto,
-										signCount: signCount,
-										userScore: userScore,
-										userShare: userShare,
-										userUsable: userUsable,
-										userBalance: userBalance,
-										userName: userName
-									};
-									var json_str = JSON.stringify(userinfo);
-									localStorage.setItem("userinfo", json_str);
-									//alert(JSON.stringify(data.msg));
-									if(userId != "" && userId != null) {
-										$.openWindow({
-											url: 'index.html',
-											id: 'index',
-											show: {
-												aniShow: 'pop-in'
-											},
-											styles: {
-												popGesture: 'hide'
-											},
-											waiting: {
-												autoShow: false
-											}
-										});
-									}
+									//									alert(JSON.stringify(data.msg));
+									mui.toast('登录成功');
+									mui.openWindow({
+										url: 'index-home.html',
+										id: 'index-home',
+										show: {
+											aniShow: 'pop-in'
+										},
+										styles: {
+											popGesture: 'hide'
+										},
+										waiting: {
+											autoShow: false
+										}
+									});
+									sessionStorage.setItem("mphone",mphone);
+									sessionStorage.setItem("loginPwd",loginPwd);
 								} else {
 									mui.toast(data.msg.msg);
 								}
@@ -139,10 +117,21 @@
 
 				});
 				//点击忘记密码
-				forgetpasswd.addEventListener('tap', function() {
-					$.openWindow({
-						url: 'forgetpasswd.html',
-						id: 'forgetpasswd',
+				//				forgetpasswd.addEventListener('tap', function() {
+				//					$.openWindow({
+				//						url: 'forgetpasswd.html',
+				//						id: 'forgetpasswd',
+				//						preload: true,
+				//						show: {
+				//							aniShow: 'pop-in'
+				//						}
+				//					});
+				//				});
+				//手机登录
+				p_login.addEventListener('tap', function() {
+					mui.openWindow({
+						url: 'b-login3.html',
+						id: 'b-login3',
 						preload: true,
 						show: {
 							aniShow: 'pop-in'
@@ -151,9 +140,42 @@
 				});
 				//点击注册
 				register.addEventListener('tap', function() {
-					$.openWindow({
-						url: 'register.html',
-						id: 'register',
+					mui.openWindow({
+						url: 'b-login5.html',
+						id: 'b-login5',
+						preload: true,
+						show: {
+							aniShow: 'pop-in'
+						}
+					});
+				});
+				//QQ登录
+				qqlogin.addEventListener('tap', function() {
+					mui.openWindow({
+						url: 'b-login1.html',
+						id: 'b-login1',
+						preload: true,
+						show: {
+							aniShow: 'pop-in'
+						}
+					});
+				});
+				//微信登录
+				weixinlogin.addEventListener('tap', function() {
+					mui.openWindow({
+						url: 'b-login4.html',
+						id: 'b-login4',
+						preload: true,
+						show: {
+							aniShow: 'pop-in'
+						}
+					});
+				});
+				//随便逛逛
+				suibian.addEventListener('tap', function() {
+					mui.openWindow({
+						url: 'index-home.html',
+						id: 'index-home',
 						preload: true,
 						show: {
 							aniShow: 'pop-in'
