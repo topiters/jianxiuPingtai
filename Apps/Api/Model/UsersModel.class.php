@@ -224,7 +224,7 @@ class UsersModel extends BaseModel {
     public function regist(){
     	$rd = array('status'=>-1);	   
     	$udata = array();
-    	$udata['loginName'] =WSTAddslashes(I(" "));
+    	$udata['loginName'] =WSTAddslashes(I("userName"));
     	$udata['loginPwd'] = I("loginPwd");
     	//$data['reUserPwd'] = I("reUserPwd");
     	//$data['protocol'] = (int)I("protocol");
