@@ -436,15 +436,15 @@
 	width: 0.8rem;
 	height: 0.8rem;
 }
-/*.mq-headimg {
-	width: 0.9rem;
-	height: 0.9rem;
+.mq-headimg {
+	width: 0.8rem;
+	height: 0.8rem;
 	margin-right: 0.2rem;
-}*/
+}
 
 .mq-headimg img {
 	width: 100%;
-	border-radius: 0.45rem;
+	border-radius: 0.4rem;
 }
 
 .mq-name {
