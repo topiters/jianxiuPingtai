@@ -24,7 +24,7 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
 //				  	pullRefresh : {
-//				    container:refreshContainer,//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+//				    container:'#pullrefresh',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
 //				    up : {
 //				      height:50,//可选.默认50.触发上拉加载拖动距离
 //				      auto:true,//可选,默认false.自动上拉加载一次
@@ -230,12 +230,12 @@
 						<img src="img/shouye-01.png" />
 					</div>
 					<div class="jx-alert1-t2">
-						<a href="###">
+						<a href="a-fabu-caigou.html">
 							<p><i class="icon iconfont icon-caigou"></i><span>发布采购任务</span></p>
 						</a>
 					</div>
 					<div class="jx-alert1-t3">
-						<a href="###">
+						<a href="a-fabu-jianxiu.html">
 							<p><i class="icon iconfont icon-weixiuyuanyin"></i><span>发布检修任务</span></p>
 						</a>
 					</div>
@@ -461,35 +461,36 @@
   * 上拉加载，配合init代码
   */
  	function pullFresh() {
-	     //业务逻辑代码，比如通过ajax从服务器获取新数据；
-	    mui.ajax('http://test.cnceshi.com/index.php',{
-			data:{
-				m:'Api',
-				c:'goods',
-				a:'getGoodsDetails'
-			},
-			dataType:'json',//服务器返回json格式数据
-			type:'post',//HTTP请求类型
-			timeout:10000,//超时时间设置为10秒；
-			headers:{'Content-Type':'application/json'},	              
-			success:function(data){
-				//服务器返回响应，根据响应结果，分析是否获取数据成功；
-				var aaa="http://test.cnceshi.com/";
-				if( data.status == 200 ){
+ 		setTimeout(function() {
+		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
+		    mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=goods&a=getGoodsDetails',{
+				data:{
 					
-				}else{
-					alert("数据请求失败，请刷新页面")
-				} 
-			},
-			error:function(xhr,type,errorThrown){
-				//异常处理；
-				console.log(type);
-			}
-		});
-//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
-	     this.endPullupToRefresh(true);
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				headers:{'Content-Type':'application/json'},	              
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					var aaa="http://test.cnceshi.com/";
+					if( data.status == 200 ){
+						
+					}else{
+						alert("数据请求失败，请刷新页面")
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
+	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
+		     this.endPullupToRefresh(true);
+	    }
 	}
-	
+ 	
+
 //采购任务跳转进入详情页面
 	document.getElementById('buyingTask').addEventListener('tap',function() {
 		mui.openWindow({

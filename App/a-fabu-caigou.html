@@ -32,11 +32,11 @@
 				<ul class="fabu1-one-mes">
 					<li>
 						<span>物质名称：</span>
-						<input type="text" name="" id="" placeholder="请输入要采购的物质名称" />
+						<input type="text" name="" id="productName" placeholder="请输入要采购的物质名称" />
 					</li>
 					<li>
 						<span>采购数量：</span>
-						<input type="text" name="" id="" placeholder="请输入采购数量" />
+						<input type="text" name="" id="purchaseAmount" placeholder="请输入采购数量" />
 					</li>
 					<li>
 						<span>规格型号：</span>
@@ -61,11 +61,11 @@
 				<ul class="fabu1-one-mes">
 					<li>
 						<span>开始时间：</span>
-						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择开始时间" />
+						<input type="text" data-options='{}' class="result" id="beginTime" placeholder="请选择开始时间" />
 					</li>
 					<li>
 						<span>结束时间：</span>
-						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择结束时间" />
+						<input type="text" data-options='{}' class="result" id="endTime" placeholder="请选择结束时间" />
 					</li>
 					<li>
 						<span>风场位置：</span>
@@ -77,8 +77,8 @@
 				<span class="fabu1-onebasic">收货地址</span>
 				<div class="fabu1-one-receive clearfix">
 					<div class="fabu1-one-address l">
-						<p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</span><span style="margin-left: 0.5rem;">李四 &nbsp;&nbsp;15236956585</span></p>
-						<p>郑州市索克时代大厦</p>
+						<p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</span><span style="margin-left: 0.5rem;" id="linkMan">李四 &nbsp;&nbsp;<span id="linkPhone">15236956585</span></span></p>
+						<p id="linkAddr">郑州市索克时代大厦</p>
 					</div>
 					<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
 				</div>
@@ -87,7 +87,7 @@
 				<span class="fabu1-onebasic">特殊要求</span>
 				<div class="fabu1-special clearfix">
 					<span>特殊要求</span>
-					<textarea name="" rows="" cols="" placeholder="请输入你对服务商的要求"></textarea>
+					<textarea name="" id="goodsDesc" rows="" cols="" placeholder="请输入你对服务商的要求"></textarea>
 					<span class="r">选填</span>
 				</div>
 			</div>
@@ -156,3 +156,48 @@
 	</script>
 
 </html>
+<script type="text/javascript">
+/**
+ * 发布采购任务
+ */
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods',{
+		var productName = document.getElementById("productName").value;
+		var purchaseAmount = document.getElementById("purchaseAmount").value;
+		var productSize = document.getElementById("fabu1-one-sel").value; 
+		var beginTime = document.getElementById("beginTime").value; 
+		var endTime = document.getElementById("endTime").value; 
+		var linkMan = document.getElementById("linkMan").innerHTML; 
+		var linkPhone = document.getElementById("linkPhone").innerHTML; 
+		var linkAddr = document.getElementById("linkAddr").innerHTML; 
+		var goodsDesc = document.getElementById("goodsDesc").value; 
+		data:{
+			goodName:productName,
+			goodsCatId3:1,
+			goodsthumb:,
+			goodsStock:purchaseAmount,
+			attrCatId:productSize,
+			beginTime:beginTime,
+			endTime:endTime,
+			linkMan:linkMan,
+			linkPhone:linkPhone,
+			linkAddr:linkAddr,
+			goodsDesc:goodsDesc
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		headers:{'Content-Type':'application/json'},	              
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				mui.toast(data.msg.msg);
+			}else{
+				alert("数据请求失败，请刷新页面")
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});
+</script>

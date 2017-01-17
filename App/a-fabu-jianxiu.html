@@ -32,11 +32,11 @@
 				<ul class="fabu1-one-mes">
 					<li>
 						<span>检修名称：</span>
-						<input type="text" name="" id="" placeholder="请输入要采购的物质名称" />
+						<input type="text" name="" id="goodName" placeholder="请输入要采购的物质名称" />
 					</li>
 					<li>
 						<span>风机厂家：</span>
-						<select id="fabu1-one-sel" data-placeholder="请选择风机厂家" tabindex="-1">
+						<select id="fabu1-one-sel" class="brandId" data-placeholder="请选择风机厂家" tabindex="-1">
 							<option value=""></option>
 							<option value="item-1">item-1</option>
 							<option value="item-2">item-2</option>
@@ -46,7 +46,7 @@
 					</li>
 					<li>
 						<span>设备型号：</span>
-						<select id="fabu1-one-sel" data-placeholder="请选择设备型号" tabindex="-1">
+						<select id="fabu1-one-sel" class="attrCatId" data-placeholder="请选择设备型号" tabindex="-1">
 							<option value=""></option>
 							<option value="item-1">item-1</option>
 							<option value="item-2">item-2</option>
@@ -65,7 +65,17 @@
 					</li>
 					<li>
 						<span>检修性质：</span>
-						<select id="fabu1-one-sel" data-placeholder="请选择检修性质" tabindex="-1">
+						<select id="fabu1-one-sel" class="repairId" data-placeholder="请选择检修性质" tabindex="-1">
+							<option value=""></option>
+							<option value="item-1">消缺</option>
+							<option value="item-2">定检</option>
+							<option value="item-3">大修</option>
+							<option value="item-4">小修</option>
+						</select>
+					</li>
+					<li>
+						<span>检修类型：</span>
+						<select id="fabu1-one-sel" class="" data-placeholder="请选择检修类型" tabindex="-1">
 							<option value=""></option>
 							<option value="item-1">消缺</option>
 							<option value="item-2">定检</option>
@@ -75,15 +85,15 @@
 					</li>
 					<li>
 						<span>发生时间：</span>
-						<input type="text" data-options='{}' class="result" id="result" placeholder="请输入故障发生时间" />
+						<input type="text" data-options='{}' class="result" id="result0" placeholder="请输入故障发生时间" />
 					</li>
 					<li class="fabu1-special clearfix">
 						<span>故障描述:</span>
-						<textarea name="" rows="" cols="" placeholder="故障描述，请尽可能的描述你的故障情况"></textarea>
+						<textarea name="" id="goodDesc" rows="" cols="" placeholder="故障描述，请尽可能的描述你的故障情况"></textarea>
 					</li>
 					<li class="fabu1-special clearfix">
 						<span>检修历史:</span>
-						<textarea name="" rows="" cols="" placeholder="请输入你的检修历史"></textarea>
+						<textarea name="" id="repairhistory" rows="" cols="" placeholder="请输入你的检修历史"></textarea>
 						<span class="r">选填</span>
 					</li>
 				</ul>
@@ -93,15 +103,15 @@
 				<ul class="fabu1-one-mes">
 					<li>
 						<span>开始时间：</span>
-						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择开始时间" />
+						<input type="text" data-options='{}' class="result" id="result1" placeholder="请选择开始时间" />
 					</li>
 					<li>
 						<span>结束时间：</span>
-						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择结束时间" />
+						<input type="text" data-options='{}' class="result" id="result2" placeholder="请选择结束时间" />
 					</li>
 					<li class="fabu1-one-mes-n" style="display: none;">
 						<span>检修费用：</span>
-						<input type="text" placeholder="请输入检修检修金额" />元
+						<input type="text" id="shopPrice" placeholder="请输入检修检修金额" />元
 					</li>
 					<li>
 						<span>风场位置：</span>
@@ -190,3 +200,53 @@
 		}
 	</script>
 </html>
+<script type="text/javascript">
+/**
+ * 发布检修任务
+ */
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods',{
+		var goodName = document.getElementById("goodName").value;
+		var goodsCatId3 = document.getElementById("purchaseAmount").value;
+		var brandId = document.getElementsByClassName("brandId")[0].value; 
+		var attrCatId = document.getElementsByClassName("attrCatId")[0].value; 
+		var goodType = $("input[name='name1']:checked").val();
+		var repairId = document.getElementsByClassName("repairId")[0].value; 
+		var goodDesc = document.getElementById("goodDesc").value; 
+		var startTime = document.getElementById("result0").value; 
+		var beginTime = document.getElementById("result1").value; 
+		var endTime = document.getElementById("result2").value; 
+		var repairhistory = document.getElementById("repairhistory").value;
+		var shopPrice = document.getElementById("shopPrice").value; 
+		data:{
+			goodName:goodName,
+			goodsCatId3:2,
+			goodsthumb:,
+			brandId:brandId,
+			attrCatId:attrCatId,
+			goodType:goodType,
+			repairId:repairId,
+			goodDesc:goodDesc,
+			startTime:startTime,
+			beginTime:beginTime,
+			endTime:endTime,
+			repairhistory:repairhistory,
+			shopPrice:shopPrice
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		headers:{'Content-Type':'application/json'},	              
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				mui.toast(data.msg.msg);
+			}else{
+				alert("数据请求失败，请刷新页面")
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});
+</script>

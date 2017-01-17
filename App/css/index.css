@@ -811,6 +811,9 @@
 .fabu1-one-address p {
 	line-height: 0.4rem;
 }
+.fabu1-one-address #linkAddr {
+	color: #666;
+} 
 
 .fabu1-one-receive span:nth-child(2) {
 	padding: 0.4rem 0.2rem 0 0;
