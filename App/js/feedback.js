@@ -3,7 +3,6 @@
  * FeedBack Template For MUI (http://dev.dcloud.net.cn/mui)
  * =======================================================
  * @version:1.0.0
- * @author:cuihongbao@dcloud.io
  */
 (function() {
 	var index = 1;
@@ -13,8 +12,8 @@
 	var feedback = {
 		question: document.getElementById('question'), 
 		contact: document.getElementById('contact'), 
-		imageList: document.getElementById('image-list'),
-		submitBtn: document.getElementById('submit')
+		imageList: document.getElementById('image-list')
+//		submitBtn: document.getElementById('submit')
 	};
 	var url = 'https://service.dcloud.net.cn/feedback';
 	feedback.files = [];
