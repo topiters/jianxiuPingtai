@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="feedback">
 
 	<head>
 		<meta charset="UTF-8">
 		<title>发布-采购任务</title>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/feedback.css"/>
+		<link rel="stylesheet" type="text/css" href="css/feedback.css" />
 		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/select2.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -77,7 +77,8 @@
 				<span class="fabu1-onebasic">收货地址</span>
 				<div class="fabu1-one-receive clearfix">
 					<div class="fabu1-one-address l">
-						<p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</span><span style="margin-left: 0.5rem;" id="linkMan">李四 &nbsp;&nbsp;<span id="linkPhone">15236956585</span></span></p>
+						<p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</span><span style="margin-left: 0.5rem;" id="linkMan">李四 &nbsp;&nbsp;<span id="linkPhone">15236956585</span></span>
+						</p>
 						<p id="linkAddr">郑州市索克时代大厦</p>
 					</div>
 					<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
@@ -106,7 +107,7 @@
 	</body>
 	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/select2.min.js" type="text/javascript" charset="utf-8"></script>
-	<!--<script src="js/feedback.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="js/feedback.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$("select").select2({
 			placeholder: "select a option",
@@ -157,45 +158,47 @@
 
 </html>
 <script type="text/javascript">
-/**
- * 发布采购任务
- */
-	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods',{
-		var productName = document.getElementById("productName").value;
-		var purchaseAmount = document.getElementById("purchaseAmount").value;
-		var productSize = document.getElementById("fabu1-one-sel").value; 
-		var beginTime = document.getElementById("beginTime").value; 
-		var endTime = document.getElementById("endTime").value; 
-		var linkMan = document.getElementById("linkMan").innerHTML; 
-		var linkPhone = document.getElementById("linkPhone").innerHTML; 
-		var linkAddr = document.getElementById("linkAddr").innerHTML; 
-		var goodsDesc = document.getElementById("goodsDesc").value; 
-		data:{
-			goodName:productName,
-			goodsCatId3:1,
-			goodsthumb:,
-			goodsStock:purchaseAmount,
-			attrCatId:productSize,
-			beginTime:beginTime,
-			endTime:endTime,
-			linkMan:linkMan,
-			linkPhone:linkPhone,
-			linkAddr:linkAddr,
-			goodsDesc:goodsDesc
+	/**
+	 * 发布采购任务
+	 */
+	var productName = document.getElementById("productName").value;
+	var purchaseAmount = document.getElementById("purchaseAmount").value;
+	var productSize = document.getElementById("fabu1-one-sel").value;
+	var beginTime = document.getElementById("beginTime").value;
+	var endTime = document.getElementById("endTime").value;
+	var linkMan = document.getElementById("linkMan").innerHTML;
+	var linkPhone = document.getElementById("linkPhone").innerHTML;
+	var linkAddr = document.getElementById("linkAddr").innerHTML;
+	var goodsDesc = document.getElementById("goodsDesc").value;
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
+		data: {
+			goodName: productName,
+			goodsCatId3: 1,
+			//			goodsthumb:,
+			goodsStock: purchaseAmount,
+			attrCatId: productSize,
+			beginTime: beginTime,
+			endTime: endTime,
+			linkMan: linkMan,
+			linkPhone: linkPhone,
+			linkAddr: linkAddr,
+			goodsDesc: goodsDesc
 		},
-		dataType:'json',//服务器返回json格式数据
-		type:'post',//HTTP请求类型
-		timeout:10000,//超时时间设置为10秒；
-		headers:{'Content-Type':'application/json'},	              
-		success:function(data){
+		dataType: 'json', //服务器返回json格式数据
+		type: 'post', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		success: function(data) {
 			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-			if( data.status == 200 ){
+			if(data.status == 200) {
 				mui.toast(data.msg.msg);
-			}else{
-				alert("数据请求失败，请刷新页面")
-			} 
+			} else {
+				mui.toast("数据请求失败，请刷新页面");
+			}
 		},
-		error:function(xhr,type,errorThrown){
+		error: function(xhr, type, errorThrown) {
 			//异常处理；
 			console.log(type);
 		}

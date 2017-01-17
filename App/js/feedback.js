@@ -138,26 +138,26 @@
 		feedback.imageList.appendChild(placeholder);
 	};
 	feedback.newPlaceholder();
-	feedback.submitBtn.addEventListener('tap', function(event) {
-		if (feedback.question.value == '' ||
-			(feedback.contact.value != '' &&
-				feedback.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
-			return mui.toast('信息填写不符合规范');
-		}
-		if (feedback.question.value.length > 200 || feedback.contact.value.length > 200) {
-			return mui.toast('信息超长,请重新填写~')
-		}
-		//判断网络连接
-		if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
-			return mui.toast("连接网络失败，请稍后再试");
-		}
-		feedback.send(mui.extend({}, feedback.deviceInfo, {
-			content: feedback.question.value,
-			contact: feedback.contact.value,
-			images: feedback.files,
-			score:''+starIndex
-		})) 
-	}, false)
+//	feedback.submitBtn.addEventListener('tap', function(event) {
+//		if (feedback.question.value == '' ||
+//			(feedback.contact.value != '' &&
+//				feedback.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
+//			return mui.toast('信息填写不符合规范');
+//		}
+//		if (feedback.question.value.length > 200 || feedback.contact.value.length > 200) {
+//			return mui.toast('信息超长,请重新填写~')
+//		}
+//		//判断网络连接
+//		if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+//			return mui.toast("连接网络失败，请稍后再试");
+//		}
+//		feedback.send(mui.extend({}, feedback.deviceInfo, {
+//			content: feedback.question.value,
+//			contact: feedback.contact.value,
+//			images: feedback.files,
+//			score:''+starIndex
+//		})) 
+//	}, false)
 	feedback.send = function(content) {
 		feedback.uploader = plus.uploader.createUpload(url, {
 			method: 'POST'

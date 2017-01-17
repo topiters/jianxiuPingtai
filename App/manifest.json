@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "d-message-qiye.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "a-fabu-jianxiu.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -241,6 +241,47 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"a-fabu-caigou.html": {
+				"resources": [
+					"css/feedback.css",
+					"js/mui.picker.min.js",
+					"fonts/mui.ttf",
+					"fonts/iconfont.woff",
+					"css/select2.min.css",
+					"css/index.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"css/mui.min.css",
+					"js/select2.min.js",
+					"css/mui.picker.min.css",
+					"js/feedback.js",
+					"css/reset.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"a-fabu-jianxiu.html": {
+				"resources": [
+					"css/index.css",
+					"fonts/iconfont.css",
+					"css/feedback.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/select2.min.js",
+					"css/mui.picker.min.css",
+					"css/reset.css",
+					"css/select2.min.css",
+					"js/feedback.js"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -260,7 +301,6 @@
 				"js/mui.poppicker.js",
 				"c-jx-xiaoxi.html",
 				"js/mui.previewimage.js",
-				"js/select2.min.js",
 				"fonts/iconfont.ttf",
 				"a-fujin-yezhu.html",
 				"img/logo-01.jpg",
@@ -300,7 +340,6 @@
 				"d-myfabu-tol.html",
 				"a-fujin-jianxiuqiye-1.4.2.1.html",
 				"d-my-yezhuqiangdan-step.html",
-				"a-fabu-caigou.html",
 				"img/tubiao-04.png",
 				"d-price1.html",
 				"c-jx-yaoqing2.html",
@@ -325,7 +364,6 @@
 				"img/bid-01.png",
 				"a-purchase-detail1.html",
 				"d-myorder.html",
-				"a-fabu-jianxiu.html",
 				"fonts/demo_fontclass.html",
 				"js/mui.zoom.js",
 				"d-mybid-list.html",
@@ -358,10 +396,8 @@
 				"a-fujin-yezhu3.html",
 				"c-jx-yaoqing.html",
 				"img/b3f2b23cb17f3023f8a30d4305e1962f.jpg",
-				"css/select2.min.css",
 				"img/bid-02.png",
 				"a-jx-qiangdan.html",
-				"css/index.css",
 				"c-gys-xunjia.html",
 				"d-mywallet.html",
 				"d-order.html",

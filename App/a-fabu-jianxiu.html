@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="feedback">
 
 	<head>
 		<meta charset="UTF-8">
@@ -189,7 +189,7 @@
 		})(mui);
 	</script>
 	<script type="text/javascript">
-//	选择竞标 抢单
+		//	选择竞标 抢单
 		function ab() {
 			var a = $("input[name='name1']:checked").val();
 			if(a == 2) {
@@ -199,52 +199,58 @@
 			}
 		}
 	</script>
+
 </html>
+<script src="js/feedback.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-/**
- * 发布检修任务
- */
-	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods',{
-		var goodName = document.getElementById("goodName").value;
-		var goodsCatId3 = document.getElementById("purchaseAmount").value;
-		var brandId = document.getElementsByClassName("brandId")[0].value; 
-		var attrCatId = document.getElementsByClassName("attrCatId")[0].value; 
-		var goodType = $("input[name='name1']:checked").val();
-		var repairId = document.getElementsByClassName("repairId")[0].value; 
-		var goodDesc = document.getElementById("goodDesc").value; 
-		var startTime = document.getElementById("result0").value; 
-		var beginTime = document.getElementById("result1").value; 
-		var endTime = document.getElementById("result2").value; 
-		var repairhistory = document.getElementById("repairhistory").value;
-		var shopPrice = document.getElementById("shopPrice").value; 
-		data:{
-			goodName:goodName,
-			goodsCatId3:2,
-			goodsthumb:,
-			brandId:brandId,
-			attrCatId:attrCatId,
-			goodType:goodType,
-			repairId:repairId,
-			goodDesc:goodDesc,
-			startTime:startTime,
-			beginTime:beginTime,
-			endTime:endTime,
-			repairhistory:repairhistory,
-			shopPrice:shopPrice
+	/**
+	 * 发布检修任务
+	 */
+	var goodName = document.getElementById("goodName").value;
+//	var goodsCatId3 = document.getElementById("purchaseAmount").value;
+	var brandId = document.getElementsByClassName("brandId")[0].value;
+	var attrCatId = document.getElementsByClassName("attrCatId")[0].value;
+	var goodType = $("input[name='name1']:checked").val();
+	var repairId = document.getElementsByClassName("repairId")[0].value;
+	var goodDesc = document.getElementById("goodDesc").value;
+	var startTime = document.getElementById("result0").value;
+	var beginTime = document.getElementById("result1").value;
+	var endTime = document.getElementById("result2").value;
+	var repairhistory = document.getElementById("repairhistory").value;
+	var shopPrice = document.getElementById("shopPrice").value;
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
+
+		data: {
+			goodName: goodName,
+			goodsCatId3: 2,
+//			goodsthumb: ,
+			brandId: brandId,
+			attrCatId: attrCatId,
+			goodType: goodType,
+			repairId: repairId,
+			goodDesc: goodDesc,
+			startTime: startTime,
+			beginTime: beginTime,
+			endTime: endTime,
+			repairhistory: repairhistory,
+			shopPrice: shopPrice
 		},
-		dataType:'json',//服务器返回json格式数据
-		type:'post',//HTTP请求类型
-		timeout:10000,//超时时间设置为10秒；
-		headers:{'Content-Type':'application/json'},	              
-		success:function(data){
+		dataType: 'json', //服务器返回json格式数据
+		type: 'post', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		success: function(data) {
 			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-			if( data.status == 200 ){
+			if(data.status == 200) {
 				mui.toast(data.msg.msg);
-			}else{
-				alert("数据请求失败，请刷新页面")
-			} 
+			} else {
+				mui.toast(data.msg.msg);
+//				mui.toast("数据请求失败，请刷新页面");
+			}
 		},
-		error:function(xhr,type,errorThrown){
+		error: function(xhr, type, errorThrown) {
 			//异常处理；
 			console.log(type);
 		}
