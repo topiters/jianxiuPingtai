@@ -429,15 +429,18 @@
 .mq-head {
 	margin-top: 0.9rem;
 	background-color: #fff;
-	padding: 0.3rem 0.2rem;
-	line-height: 0.9rem;
+	padding: 0.2rem 0.2rem;
+	line-height: 0.8rem;
 }
-
-.mq-headimg {
+.mq-head .head{
+	width: 0.8rem;
+	height: 0.8rem;
+}
+/*.mq-headimg {
 	width: 0.9rem;
 	height: 0.9rem;
 	margin-right: 0.2rem;
-}
+}*/
 
 .mq-headimg img {
 	width: 100%;
@@ -487,7 +490,8 @@
 }
 
 .mq-paper p {
-	padding: 0.3rem 0.2rem;
+	padding: 0.3rem 0.2rem 0 0.2rem;
+	font-size: 0.3rem;
 }
 
 .mq-adress {
@@ -498,24 +502,27 @@
 
 .mq-adress p {
 	margin: 0.2rem 0 0 0;
+	padding: 0;
+	font-size: 0.3rem;
 }
 
 .mq-adress-r dd {
 	border-bottom: 1px solid #e4e4e4;
 	height: 0.86rem;
-	line-height: 0.86rem;
+	line-height: 0.8rem;
 }
 
 .mq-adress-r dd input {
 	border: 0;
 }
 
-.mq-brief {
-	background-color: #fff;
+.mq-brief p{
+	font-size: 0.3rem;
 }
 
 .mq-brief {
 	padding: 0.2rem 0.2rem;
+	background-color: #fff;
 }
 
 

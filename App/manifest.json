@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "b-login5.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "d-message-qiye.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -220,6 +220,27 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"d-message-qiye.html": {
+				"resources": [
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"img/touxiang.jpg",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff",
+					"css/feedback.css",
+					"js/feedback.js",
+					"img/gaojia-01.png",
+					"img/fujin-01.png"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -235,7 +256,6 @@
 				"d-mybid.html",
 				"d-my-yezhuqiangdan-tol.html",
 				"d-my-qiye.html",
-				"img/touxiang.jpg",
 				"img/shouye-01.png",
 				"js/mui.poppicker.js",
 				"c-jx-xiaoxi.html",
@@ -251,7 +271,6 @@
 				"img/qiangdan-01.png",
 				"d-my-no-login.html",
 				"d-myxujia1.html",
-				"img/gaojia-01.png",
 				"d-mybid-histroy.html",
 				"d-my-yezhu.html",
 				"d-order1.html",
@@ -263,7 +282,6 @@
 				"img/fujin-03.jpg",
 				"c-yezhu-qiangdan.html",
 				"a-fujin-jianxiuqiye.html",
-				"js/feedback.js",
 				"d-adress1.html",
 				"js/index.js",
 				"d-myqiangdan.html",
@@ -301,7 +319,6 @@
 				"a-purchase-list-1.1.html",
 				"c-gys-baojia.html",
 				"d-mybank.html",
-				"css/feedback.css",
 				"d-mycharge1.html",
 				"d-my-yezhu-jingbiao2.html",
 				"d-judge1.html",
@@ -326,10 +343,8 @@
 				"img/caigou-01.png",
 				"css/mui.css",
 				"c-gys-xiaoxi.html",
-				"img/fujin-01.png",
 				"d-my-gongyingshang.html",
 				"d-myxunjia.html",
-				"css/my.css",
 				"c-jx-qiang2.html",
 				"b-login1.html",
 				"js/zepto.min.js",
@@ -338,7 +353,6 @@
 				"a-fujin-yezhu4.html",
 				"c-gys-t.html",
 				"d-my-yezhujingbiao-zhong-list.html",
-				"d-message-qiye.html",
 				"a-purchase-yezhu-1.1.html",
 				"d-my-yezhu-jingbiao1.html",
 				"a-fujin-yezhu3.html",
