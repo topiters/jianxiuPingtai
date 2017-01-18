@@ -413,7 +413,7 @@
 			$('body').css('overflow', 'hidden');
 			$('body').on('touchmove', preventDefaultFn);
 		}else{
-			alert("未登录，没有权限。请登录...");
+			mui.toast("未登录，没有权限。请登录...");
 			mui.openWindow({
 			    url:"b-login2.html",
 			});
