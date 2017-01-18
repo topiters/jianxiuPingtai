@@ -34,12 +34,8 @@ public  function addByUser(){
 	if(!$shopsOne){
 		$data["msg"] = '你还不是业主,没有权限操作!';
 		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
-		$this->stringify($data);
-		
+		$this->stringify($data);	
 	}
-	
-	
-	
 	$shops=D('shops');
 	$data=array();
 	//$shopImg=I('shopImg');//公司logo
@@ -49,8 +45,6 @@ public  function addByUser(){
 		$shopImg=$info['savename'].$info['savethumbname'];
 		}		
 	}
-	
-	
 	$shopCompany=I('shopCompany');//公司名称
 	$goodsCatId1=I('goodsCatId1');//行业分类
 	$shoptotal=I('shoptotal');//注册金额
@@ -59,12 +53,15 @@ public  function addByUser(){
 	$shopAddr=I('shopAddr');//公司地址
 	$latitude=I('latitude');  //经度
 	$longitude=I('longitude'); //纬度
+	$shopHost=I('shopHost');//企业法人
+	$shopUrl=I('shopUrl');//网址
 	$shopIdentimg=I('shopIdentimg');//公司证明
 	$data['shopImg']=$shopImg;
     $data['shopCompany']=$shopCompany;
     $data['goodsCatId1']=$goodsCatId1;
     $data['shoptotal']=$shoptotal;
     $data['shopInfo']=$shopInfo;
+    $data['shopHost']=$shopHost;
     $data['shopArea']=$shopArea;
     $data['shopAddr']=$shopAddr;
     $data['latitude']=$latitude;
@@ -72,7 +69,6 @@ public  function addByUser(){
     $shopIdentimg=array();
     //附件
     if($_FILES){
-    
     	$shopIdentimgInfo=$this->uploads();
     	
     	if($shopIdentimgInfo){
@@ -87,9 +83,16 @@ public  function addByUser(){
 	
  $result=D('shops')->where(array('shopId'=>$shopsOne['shopId']))->save($data);
     if($result){
-    	$data["msg"] = '数据保存成功!';
+    	$data["msg"] = '数据写入成功!';
     	$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
     	$this->stringify($data);
+    	
+    }else{
+    	$data["msg"] = '数据输入失败，请检查...!';
+    	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
+    	$this->stringify($data);
+    	
+    	
     	
     }
     
@@ -99,11 +102,6 @@ public  function addByUser(){
     
 	
 }	
-	
-	
-	
-	
-	
 	
 	//任务发布页面
 	public function addgoods(){
@@ -119,8 +117,10 @@ public  function addByUser(){
 	}	
 		$data=array();
 		$shopId=$USER['userId']; //用户id
+		$goodsCatId1=I('goodsCatId3');
 		$type=I('goodsCatId3');//发布类型1.采购2.为检修
 		$data['shopId']=$shopinfo['shopId'];//业主id
+		$data['goodsCatId1']= goodsCatId1;// 产品分类
 		$data['goodsCatId3']= $type;
 		$goodName=I('goodName');//产品名称
 		$data['createTime']=time();
@@ -166,12 +166,15 @@ public  function addByUser(){
 			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
 			$this->stringify($data);
 			
-		}
+		}else{
+    	$data["msg"] = '数据输入失败，请检查...!';
+    	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
+    	$this->stringify($data);	
+    }
 		
 		
 		
 		}elseif($type==2){
-			
 		$goodName=I("goodName");// 检修名称	
 		$brandId=I("brandId");//	风机品牌厂家
 		$attrCatId=I("attrCatId");//	设备型号
@@ -179,6 +182,8 @@ public  function addByUser(){
 		$repairId=I("repairId");//检修性质	
 		$goodDesc=I("goodDesc");//故障描述	
 		$beginTime=I("beginTime");// 开始时间
+		$beginTime=I("endTime");// 结束时间
+		$startTime=I("startTime");//故障发生时间
 		$repairhistory=	I("repairhistory");//检修历史
 		$shopPrice=I("shopPrice");// 检修报价
 		$data['goodName']=$goodName ;
@@ -188,6 +193,8 @@ public  function addByUser(){
 		$data['repairId']=$repairId ;
 		$data['goodDesc']=$goodDesc ;
 		$data['beginTime']=$beginTime ;
+		$data['endTime']=$endTime ;
+		$data['startTime']=$startTime;
 		$data['repairhistory']=$repairhistory ;
 		$data['shopId']=$shopId ;
 		$data['shopPrice']=$shopPrice;
@@ -199,7 +206,14 @@ public  function addByUser(){
 			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
 			$this->stringify($data);
 				
-		}
+		}else{
+    	$data["msg"] = '数据输入失败，请检查...!';
+    	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
+    	$this->stringify($data);
+    	
+    	
+    	
+    } 
 		
 		
 		
@@ -258,12 +272,7 @@ public  function addByUser(){
 	}
 	
 	//
-	
-	
-	
-	
-	
-	
+
 	/**
      * 跳到商家首页面
      */

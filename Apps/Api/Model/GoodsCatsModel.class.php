@@ -1,14 +1,33 @@
 <?php
-namespace Home\Model;
-/**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 商品分类服务类
- */
+namespace Api\Model;
+
 class GoodsCatsModel extends BaseModel {
+	
+	//获取产品分类
+public function cate(){
+	
+	
+	$cata  = D('goods_cats')->select();
+	$_cata = array();
+	foreach($cata as $catas){
+		$_cata[$catas['catId']] = $catas['catName'];
+	}
+	return $_cata;
+	}
+	
+   //获取型号
+	public function getType(){
+	
+	
+		$goosdType  = D('goods_type')->select();	
+		return $goosdType;
+	}
+	
+	
+	
+	
+	
+	
    /**
 	* 获取列表
 	*/

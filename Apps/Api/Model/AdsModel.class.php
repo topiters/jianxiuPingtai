@@ -45,8 +45,8 @@ class AdsModel extends BaseModel {
 			$sql = "select adId,adName,adURL,adFile,adPositionId from __PREFIX__ads WHERE (areaId2 = $areaId2 or areaId1 = 0 or areaId1=".$areaId1.")
 					AND adStartDate<='$today' AND adEndDate >='$today' and adPositionId='-4' order by adSort asc";
 			$rs = $this->query($sql);
-			//var_dump($sql);
-			//var_dump();exit;
+			var_dump($sql);
+		//exit;
 			$data = array();
 			foreach ($rs as $v){
 				$data[$v['adPositionId']][] = $v;

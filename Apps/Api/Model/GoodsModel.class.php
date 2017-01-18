@@ -31,7 +31,7 @@ class GoodsModel extends BaseModel {
 	}
 	
 	//首页推荐任务详情
-	public function getGoodsDetails(){
+	public function getGoodsIndexDetails(){
 		
 		$goodsId=I("goodsId");
 		
@@ -45,33 +45,12 @@ class GoodsModel extends BaseModel {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
-	 * 商品列表
+	 * 产品列表
 	 */
 	public function getGoodsList($obj){
-		$areaId2 = $obj["areaId2"];
-		$areaId3 = $obj["areaId3"];
-		$communityId = (int)I("communityId");
-		$c1Id = (int)I("c1Id");
-		$c2Id = (int)I("c2Id");
-		$c3Id = (int)I("c3Id");
-		$pcurr = (int)I("pcurr");
-		$mark = (int)I("mark",1);
-		$msort = (int)I("msort",0);
-		$prices = I("prices");
-		if($prices != ""){
-			$pricelist = explode("_",$prices);
-		}
+		
+		$pcurr = (int)I("pcurr")?(int)I("pcurr"):1;//当前页
 		$brandId = (int)I("brandId");
 		$keyWords = WSTAddslashes(urldecode(I("keyWords")));
 		$words = array();
@@ -81,44 +60,16 @@ class GoodsModel extends BaseModel {
 		
 		$sqla = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,p.shopId,marketPrice,shopPrice,ga.id goodsAttrId,saleTime,totalScore,totalUsers ";
 		$sqlb = "SELECT max(shopPrice) maxShopPrice  ";
-		$sqlc = " FROM __PREFIX__goods g 
-				left join __PREFIX__goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1
-				left join __PREFIX__goods_scores gs on gs.goodsId= g.goodsId
-				, __PREFIX__shops p ";
-		
+		$sqlc = " FROM __PREFIX__goods g left join __PREFIX__shops  ";
 		if($brandId>0){
 			$sqlc .=" , __PREFIX__brands bd ";
 		}
-		$sqld = "";
-		if($areaId3>0 || $communityId>0){
-			$sqld .=" , __PREFIX__shops_communitys sc ";
-		}
+		
 		
 		$where = " WHERE g.shopId = p.shopId AND  g.goodsStatus=1 AND g.goodsFlag = 1 and g.isSale=1 ";
-		$where2 = " AND p.areaId2 = $areaId2 AND p.isDistributAll=0 ";
-		$where3 = " AND p.isDistributAll=1 ";
-		if($areaId3>0 || $communityId>0){
-			$where2 .= " AND sc.shopId=p.shopId ";
-			if($areaId3>0){
-				$where2 .= " AND sc.areaId3 = $areaId3 ";
-			}
-			if($communityId>0){
-				$where2 .= " AND sc.communityId = $communityId ";
-			}
-		}
 		if($brandId>0){
 			$where .=" AND bd.brandId=g.brandId AND g.brandId = $brandId ";
 		}
-		if($c1Id>0){
-			$where .= " AND g.goodsCatId1 = $c1Id";
-		}
-		if($c2Id>0){
-			$where .= " AND g.goodsCatId2 = $c2Id";
-		}
-		if($c3Id>0){
-			$where .= " AND g.goodsCatId3 = $c3Id";
-		}
-		
 		if(!empty($words)){
 			$sarr = array();
 			foreach ($words as $key => $word) {
@@ -128,52 +79,11 @@ class GoodsModel extends BaseModel {
 			}
 			$where .= " AND (".implode(" or ", $sarr).")";
 		}
-		
-		$sqlb = "select max(maxShopPrice) maxShopPrice from (".
-				$sqlb . $sqlc . $sqld . $where. $where2. 
-				" union all ".
-				$sqlb . $sqlc . $where. $where3. 
-				") goods";
-		
-		$maxrow = $this->queryRow( $sqlb );
-		$maxPrice = $maxrow["maxShopPrice"];
-	
-	    if($prices != "" && $pricelist[0]>=0 && $pricelist[1]>=0){
-			$where .= " AND (g.shopPrice BETWEEN  ".(int)$pricelist[0]." AND ".(int)$pricelist[1].") ";
-		}
-	   	$groupBy .= " group by goodsId  ";
-	   	//排序-暂时没有按好评度排
-	   	$orderFile = array('1'=>'saleCount','6'=>'saleCount','7'=>'saleCount','8'=>'shopPrice','9'=>'(totalScore/totalUsers)','10'=>'saleTime',''=>'saleTime','12'=>'saleCount');
-	   	$orderSort = array('0'=>'ASC','1'=>'DESC');
-		$orderBy .= " ORDER BY ".$orderFile[$mark]." ".$orderSort[$msort].",goodsId ";
-
-		$sqla = "select * from (".
-				$sqla . $sqlc . $sqld . $where. $where2 .
-				" union all ".
-				$sqla . $sqlc . $where. $where3 .
-				") goods". $groupBy .$orderBy ;
-		
+		$sqla=$sqla.$sqlc.$where;
 		$pages = $this->pageQuery($sqla, $pcurr, 30);
-		
-		$rs["maxPrice"] = $maxPrice;
-		$brands = array();
-		$sql = "SELECT b.brandId, b.brandName FROM __PREFIX__brands b, __PREFIX__goods_cat_brands cb WHERE b.brandId = cb.brandId AND b.brandFlag=1 ";
-		if($c1Id>0){
-			$sql .= " AND cb.catId = $c1Id";
-		}
-		$sql .= " GROUP BY b.brandId";
-		$blist = $this->query($sql);
-		for($i=0;$i<count($blist);$i++){
-			$brand = $blist[$i];
-			$brands[$brand["brandId"]] = array('brandId'=>$brand["brandId"],'brandName'=>$brand["brandName"]);
-		}
-		$rs["brands"] = $brands;
-		$rs["pages"] = $pages;
-		$gcats["goodsCatId1"] = $c1Id;
-		$gcats["goodsCatId2"] = $c2Id;
-		$gcats["goodsCatId3"] = $c3Id;
-		$rs["goodsNav"] = self::getGoodsNav($gcats);
-		return $rs;
+		//var_dump($pages);
+	
+		return $pages;
 	}
 
 

@@ -40,7 +40,7 @@ class GoodsAction extends BaseAction {
 	//推荐任务详情
 	
 	
-	public function getGoodsDetails(){
+	public function getGoodsIndexDetails(){
 		$result=D('Api/goods')->getGoodsDetails();
 		if($result){
 			//$data["msg"] = '数据载入成功!';
@@ -58,88 +58,27 @@ class GoodsAction extends BaseAction {
 	
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
     public function getGoodsList(){
    		$mgoods = D('Api/Goods');
-   		$mareas = D('Api/Areas');
-   		$mcommunitys = D('Api/Communitys');
-   		//获取默认城市及县区
-   		$areaId2 = $this->getDefaultCity();
-   		$districts = $mareas->getDistricts($areaId2);
-   		//获取社区
-   		$areaId3 = (int)I("areaId3");
-   		$communitys = array();
-   		if($areaId3>0){
-   		    $communitys = $mcommunitys->getByDistrict($areaId3);
-   		}
-        $this->assign('communitys',$communitys);
    		
-   		//获取商品列表
-   		$obj["areaId2"] = $areaId2;
-        $obj["areaId3"] = $areaId3;
-   		$rslist = $mgoods->getGoodsList($obj);
-		$brands = $rslist["brands"];
-		$pages = $rslist["pages"];
-		$goodsNav = $rslist["goodsNav"];
-		$this->assign('goodsList',$rslist);
-		//动态划分价格区间
-		$maxPrice = $rslist["maxPrice"];
-		$minPrice = 0;
-		$pavg5 = ($maxPrice/5);
-		$prices = array();
-    	$price_grade = 0.0001;
-        for($i=-2; $i<= log10($maxPrice); $i++){
-            $price_grade *= 10;
-        }
-    	//区间跨度
-        $span = ceil(($maxPrice - $minPrice) / 8 / $price_grade) * $price_grade;
-        if($span == 0){
-            $span = $price_grade;
-        }
-		for($i=1;$i<=8;$i++){
-			$prices[($i-1)*$span."_".($span * $i)] = ($i-1)*$span."-".($span * $i);
-			if(($span * $i)>$maxPrice) break;
+   		$result=$mgoods->getGoodsList();
+    if($result['total']){
+			//$data["msg"] = '数据载入成功!';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
+			$this->stringify($data);
+	
+	
+		}else{
+	
+			$data["msg"] = '数据暂时没有请求的数据!';
+			$data = array('status'=>self::API_DATA_NOT_EXISTS,'msg'=>$data);
+			$this->stringify($data);
+	
 		}
-		if(count($prices)<5){
-			$prices = array();
-			$prices["0_100"] = "0-100";
-			$prices["100_200"] = "100-200";
-			$prices["200_300"] = "200-300";
-			$prices["300_400"] = "300-400";
-			$prices["400_500"] = "400-500";
-		}
-   		$this->assign('c1Id',(int)I("c1Id"));
-   		$this->assign('c2Id',(int)I("c2Id"));
-   		$this->assign('c3Id',(int)I("c3Id"));
-   		$this->assign('msort',(int)I("msort",0));
-   		$this->assign('mark',(int)I("mark",0));
-		$this->assign('stime',I("stime"));//上架开始时间
-		$this->assign('etime',I("etime"));//上架结束时间
    		
-   		$this->assign('areaId3',(int)I("areaId3",0));
-   		$this->assign('communityId',(int)I("communityId",0));
-   		
-   		$pricelist = explode("_",I("prices"));
-   		$this->assign('sprice',(int)$pricelist[0]);
-   		$this->assign('eprice',(int)$pricelist[1]);
-   		
-   		$this->assign('brandId',(int)I("brandId",0));
-   		$this->assign('keyWords',urldecode(I("keyWords")));
-		$this->assign('brands',$brands);
-		$this->assign('goodsNav',$goodsNav);
-		$this->assign('pages',$pages);
-		$this->assign('prices',$prices);
-		$priceId = $prices[I("prices")];
-		$this->assign('priceId',(strlen($priceId)>1)?I("prices"):'');
-   		$this->assign('districts',$districts);
-   		$this->display('default/goods_list');
+   	
     }
     
   
@@ -150,74 +89,33 @@ class GoodsAction extends BaseAction {
 	public function getGoodsDetails(){
 
 		$goods = D('Api/Goods');
-		$kcode = I("kcode");
-		$scrictCode = md5(base64_encode("wstmall".date("Y-m-d")));
-		
+
 		//查询商品详情		
 		$goodsId = (int)I("goodsId");
-		$this->assign('goodsId',$goodsId);
 		$obj["goodsId"] = $goodsId;	
-		
-		$packages = $goods->getGoodsPackages($goodsId,1);
-		$this->assign('packages',$packages);
+	
 		
 		$goodsDetails = $goods->getGoodsDetails($obj);
-		if($kcode==$scrictCode || ($goodsDetails["isSale"]==1 && $goodsDetails["goodsStatus"]==1)){
-			if($kcode==$scrictCode){//来自后台管理员
-				$this->assign('comefrom',1);
-			}
+		
 			
-			$shopServiceStatus = 1;
-			if($goodsDetails["shopAtive"]==0){
-				$shopServiceStatus = 0;
-			}
-			$goodsDetails["serviceEndTime"] = str_replace('.5',':30',$goodsDetails["serviceEndTime"]);
-			$goodsDetails["serviceEndTime"] = str_replace('.0',':00',$goodsDetails["serviceEndTime"]);
-			$goodsDetails["serviceStartTime"] = str_replace('.5',':30',$goodsDetails["serviceStartTime"]);
-			$goodsDetails["serviceStartTime"] = str_replace('.0',':00',$goodsDetails["serviceStartTime"]);
-			$goodsDetails["shopServiceStatus"] = $shopServiceStatus;
-			$goodsDetails['goodsDesc'] = htmlspecialchars_decode($goodsDetails['goodsDesc']);
-			
-			
-			$areas = D('Api/Areas');
-			$shopId = intval($goodsDetails["shopId"]);
-			$obj["shopId"] = $shopId;
-			$obj["areaId2"] = $this->getDefaultCity();
-			$obj["attrCatId"] = $goodsDetails['attrCatId'];
-			$shops = D('Api/Shops');
-			$shopScores = $shops->getShopScores($obj);
-			$this->assign("shopScores",$shopScores);
-			
-			$shopCity = $areas->getDistrictsByShop($obj);
-			$this->assign("shopCity",$shopCity[0]);
-			
-			$shopCommunitys = $areas->getShopCommunitys($obj);
-			$this->assign("shopCommunitys",json_encode($shopCommunitys));
-			
-			$this->assign("goodsImgs",$goods->getGoodsImgs());
-			$this->assign("relatedGoods",$goods->getRelatedGoods($goodsId));
-			$this->assign("goodsNav",$goods->getGoodsNav());
-			$this->assign("goodsAttrs",$goods->getAttrs($obj));
-			$this->assign("goodsDetails",$goodsDetails);
-			
-			$viewGoods = cookie("viewGoods");
-			if(!in_array($goodsId,$viewGoods)){
-				$viewGoods[] = $goodsId;
-			}
-			if(!empty($viewGoods)){
-				cookie("viewGoods",$viewGoods,25920000);
-			}
-			//获取关注信息
-			$m = D('Api/Favorites');
-			$this->assign("favoriteGoodsId",$m->checkFavorite($goodsId,0));
-			$m = D('Api/Favorites');
-			$this->assign("favoriteShopId",$m->checkFavorite($shopId,1));
-			//客户端二维码
-			$this->assign("qrcode",base64_encode("{type:'goods',content:'".$goodsId."',key:'wstmall'}"));
-			$this->display('default/goods_details');
+	   $goodsDetails['goodsDesc'] = htmlspecialchars_decode($goodsDetails['goodsDesc']);
+		 if($goodsDetails){
+			//$data["msg"] = '数据载入成功!';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$goodsDetails);
+			$this->stringify($data);
+	
+	
 		}else{
-			$this->display('default/goods_notexist');
-		}
+	
+			$data["msg"] = '数据暂时没有请求的数据!';
+			$data = array('status'=>self::API_DATA_NOT_EXISTS,'msg'=>$goodsDetails);
+			$this->stringify($data);
+	
+		}	
+			
+			
+		
+			
 
 	}
 	
