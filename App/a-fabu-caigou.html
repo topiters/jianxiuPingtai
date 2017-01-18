@@ -62,11 +62,11 @@
 				<ul class="fabu1-one-mes">
 					<li>
 						<span>开始时间：</span>
-						<input type="text" data-options='{}' class="result" id="beginTime" placeholder="请选择开始时间" />
+						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择开始时间" />
 					</li>
 					<li>
 						<span>结束时间：</span>
-						<input type="text" data-options='{}' class="result" id="endTime" placeholder="请选择结束时间" />
+						<input type="text" data-options='{}' class="result" id="result" placeholder="请选择结束时间" />
 					</li>
 					<li>
 						<span>风场位置：</span>
@@ -193,6 +193,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
+					
 					//服务器返回响应，根据响应结果，分析是否获取数据成功；
 					if(data.status == 200) {
 						mui.toast(data.msg.msg);

@@ -1,64 +1,77 @@
 {
-	"d-message-qiye.html": {
-		"resources": [
-			"css/my.css",
-			"fonts/iconfont.css",
-			"js/jquery-3.1.1.min.js",
-			"img/touxiang.jpg",
-			"js/mui.min.js",
-			"js/rem-w.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"css/icons-extra.css",
-			"css/reset.css",
-			"fonts/iconfont.woff",
-			"css/feedback.css",
-			"js/feedback.js",
-			"img/gaojia-01.png",
-			"img/fujin-01.png"
-		],
-		"refer": []
-	},
-	"a-fabu-caigou.html": {
-		"resources": [
-			"css/feedback.css",
-			"js/mui.picker.min.js",
-			"fonts/mui.ttf",
-			"fonts/iconfont.woff",
-			"css/select2.min.css",
-			"css/index.css",
-			"fonts/iconfont.css",
-			"js/jquery-3.1.1.min.js",
-			"js/mui.min.js",
-			"js/rem-w.min.js",
-			"css/mui.min.css",
-			"js/select2.min.js",
-			"css/mui.picker.min.css",
-			"js/feedback.js",
-			"css/reset.css",
-			"a-fabu-caigou.html"
-		],
-		"refer": [
-			"a-fabu-caigou.html"
-		]
-	},
-	"a-fabu-jianxiu.html": {
-		"resources": [
-			"css/index.css",
-			"fonts/iconfont.css",
-			"css/feedback.css",
-			"js/jquery-3.1.1.min.js",
-			"js/mui.picker.min.js",
-			"js/mui.min.js",
-			"js/rem-w.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/select2.min.js",
-			"css/mui.picker.min.css",
-			"css/reset.css",
-			"css/select2.min.css",
-			"js/feedback.js"
-		],
-		"refer": []
-	}
+  "d-message-qiye.html": {
+    "resources": [
+      "css/my.css",
+      "fonts/iconfont.css",
+      "js/jquery-3.1.1.min.js",
+      "img/touxiang.jpg",
+      "js/mui.min.js",
+      "js/rem-w.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/icons-extra.css",
+      "css/reset.css",
+      "fonts/iconfont.woff",
+      "css/feedback.css",
+      "js/feedback.js",
+      "img/gaojia-01.png",
+      "img/fujin-01.png"
+    ],
+    "refer": []
+  },
+  "a-fabu-caigou.html": {
+    "resources": [
+      "css/feedback.css",
+      "js/mui.picker.min.js",
+      "fonts/mui.ttf",
+      "fonts/iconfont.woff",
+      "css/select2.min.css",
+      "css/index.css",
+      "fonts/iconfont.css",
+      "js/jquery-3.1.1.min.js",
+      "js/mui.min.js",
+      "js/rem-w.min.js",
+      "css/mui.min.css",
+      "js/select2.min.js",
+      "css/mui.picker.min.css",
+      "js/feedback.js",
+      "css/reset.css",
+      "a-fabu-caigou.html"
+    ],
+    "refer": [
+      "a-fabu-caigou.html"
+    ]
+  },
+  "a-fabu-jianxiu.html": {
+    "resources": [
+      "css/index.css",
+      "fonts/iconfont.css",
+      "css/feedback.css",
+      "js/jquery-3.1.1.min.js",
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "js/rem-w.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/select2.min.js",
+      "css/mui.picker.min.css",
+      "css/reset.css",
+      "css/select2.min.css",
+      "js/feedback.js"
+    ],
+    "refer": []
+  },
+  "d-modifypassword.html": {
+    "resources": [
+      "css/b-login.css",
+      "fonts/iconfont.css",
+      "js/jquery-3.1.1.min.js",
+      "js/mui.min.js",
+      "js/rem-w.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/reset.css",
+      "fonts/iconfont.woff"
+    ]
+  }
 }
