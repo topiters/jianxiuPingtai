@@ -16,7 +16,7 @@ class ShopsAction extends BaseAction {
 public function __construct(){
 		parent::__construct();
 		$USER = session('WST_USER');
-		if($USER['userId']!=1){
+		if($USER['userType']!=1){
 			$data["msg"] = '你还不是业主,没有权限操作!';
 			$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
 			$this->stringify($data);
