@@ -26,7 +26,8 @@
 			<h1 class="mui-title">发布采购任务</h1>
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
 		</header>
-		<form action="" method="post" class="fabu1-tol">
+		<!--action="" method="post" -->
+		<form class="fabu1-tol">
 			<div class="fabu1-one">
 				<span class="fabu1-onebasic">基本信息</span>
 				<ul class="fabu1-one-mes">
@@ -101,7 +102,7 @@
 				</div>
 			</div>
 			<div class="fabu1-foot">
-				<button>发布询价</button>
+				<button id="enquiry">发布询价</button>
 			</div>
 		</form>
 	</body>
@@ -161,46 +162,57 @@
 	/**
 	 * 发布采购任务
 	 */
-	var productName = document.getElementById("productName").value;
-	var purchaseAmount = document.getElementById("purchaseAmount").value;
-	var productSize = document.getElementById("fabu1-one-sel").value;
-	var beginTime = document.getElementById("beginTime").value;
-	var endTime = document.getElementById("endTime").value;
-	var linkMan = document.getElementById("linkMan").innerHTML;
-	var linkPhone = document.getElementById("linkPhone").innerHTML;
-	var linkAddr = document.getElementById("linkAddr").innerHTML;
-	var goodsDesc = document.getElementById("goodsDesc").value;
-	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
-		data: {
-			goodName: productName,
-			goodsCatId3: 1,
-			//			goodsthumb:,
-			goodsStock: purchaseAmount,
-			attrCatId: productSize,
-			beginTime: beginTime,
-			endTime: endTime,
-			linkMan: linkMan,
-			linkPhone: linkPhone,
-			linkAddr: linkAddr,
-			goodsDesc: goodsDesc
-		},
-		dataType: 'json', //服务器返回json格式数据
-		type: 'post', //HTTP请求类型
-		timeout: 10000, //超时时间设置为10秒；
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		success: function(data) {
-			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-			if(data.status == 200) {
-				mui.toast(data.msg.msg);
-			} else {
-				mui.toast("数据请求失败，请刷新页面");
-			}
-		},
-		error: function(xhr, type, errorThrown) {
-			//异常处理；
-			console.log(type);
-		}
-	});
+	mui("#enquiry").on("tap",function(){
+		var productName = document.getElementById("productName").value;
+			var purchaseAmount = document.getElementById("purchaseAmount").value;
+			var productSize = document.getElementById("fabu1-one-sel").value;
+			var beginTime = document.getElementById("beginTime").value;
+			var endTime = document.getElementById("endTime").value;
+			var linkMan = document.getElementById("linkMan").innerHTML;
+			var linkPhone = document.getElementById("linkPhone").innerHTML;
+			var linkAddr = document.getElementById("linkAddr").innerHTML;
+			var goodsDesc = document.getElementById("goodsDesc").value;
+			mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
+				data: {
+					goodName: productName,
+					goodsCatId3: 1,
+					//			goodsthumb:,
+					goodsStock: purchaseAmount,
+					attrCatId: productSize,
+					beginTime: beginTime,
+					endTime: endTime,
+					linkMan: linkMan,
+					linkPhone: linkPhone,
+					linkAddr: linkAddr,
+					goodsDesc: goodsDesc
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if(data.status == 200) {
+						mui.toast(data.msg.msg);
+						mui.openWindow({
+						    url:"a-purchase-yezhu-1.1.html"
+						});
+					} else {
+						mui.toast("数据请求失败，请刷新页面");
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});	
+	})
+//	$(function(){
+//		$("#enquiry").click(function(){
+//				
+//		})
+//	})
+	
 </script>
