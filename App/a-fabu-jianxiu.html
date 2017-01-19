@@ -26,10 +26,21 @@
 			<h1 class="mui-title">发布检修任务</h1>
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
 		</header>
-		<form action="" method="post" class="fabu1-tol">
+		<div class="fabu1-tol">
 			<div class="fabu1-one">
 				<span class="fabu1-onebasic">基本信息</span>
 				<ul class="fabu1-one-mes">
+					<li>
+						<span>产品类型：</span>
+						<select id="fabu1-one-sel1" class="productType" data-placeholder="请输入要采购的物质名称" tabindex="-1">
+							<option value=""></option>
+							<option value="1">item-1</option>
+							<option value="2">item-2</option>
+							<option value="3">item-3</option>
+							<option value="4">item-4</option>
+							<option value="5">item-5</option>
+						</select>
+					</li>
 					<li>
 						<span>检修名称：</span>
 						<input type="text" name="" id="goodName" placeholder="请输入要采购的物质名称" />
@@ -48,10 +59,6 @@
 						<span>设备型号：</span>
 						<select id="fabu1-one-sel" class="attrCatId" data-placeholder="请选择设备型号" tabindex="-1">
 							<option value=""></option>
-							<option value="item-1">item-1</option>
-							<option value="item-2">item-2</option>
-							<option value="item-3">item-3</option>
-							<option value="item-4">item-4</option>
 						</select>
 					</li>
 				</ul>
@@ -137,7 +144,7 @@
 			<div class="fabu1-foot">
 				<button id="confirmAnnouncement">确认发布</button>
 			</div>
-		</form>
+		</div>
 	</body>
 	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/select2.min.js" type="text/javascript" charset="utf-8"></script>
@@ -207,8 +214,8 @@
 	 * 发布检修任务
 	 */
 	document.getElementById('confirmAnnouncement').addEventListener("tap",function(){
+		var goodsCatId1 = document.getElementsByClassName("productType")[0].value;
 		var goodName = document.getElementById("goodName").value;
-	//	var goodsCatId3 = document.getElementById("purchaseAmount").value;
 		var brandId = document.getElementsByClassName("brandId")[0].value;
 		var attrCatId = document.getElementsByClassName("attrCatId")[0].value;
 		var goodType = $("input[name='name1']:checked").val();
@@ -220,8 +227,8 @@
 		var repairhistory = document.getElementById("repairhistory").value;
 		var shopPrice = document.getElementById("shopPrice").value;
 		mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
-	
 			data: {
+				goodsCatId1: goodsCatId1,
 				goodName: goodName,
 				goodsCatId3: 2,
 				goodsthumb: "",
@@ -246,6 +253,16 @@
 				//服务器返回响应，根据响应结果，分析是否获取数据成功；
 				if(data.status == 200) {
 					mui.toast(data.msg.msg);
+					if(goodType==1){
+						mui.openWindow({
+							url: "d-my-yezhu-jingbiao1.html"
+						});	
+					}else{
+						mui.openWindow({
+							url: "d-my-yezhuqiangdan-tol.html"
+						});	
+					}
+					
 				} else {
 					mui.toast(data.msg.msg);
 	//				mui.toast("数据请求失败，请刷新页面");
@@ -257,4 +274,60 @@
 			}
 		});
 	});
+	
+	/**
+	 * 规格型号
+	 */
+	
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getType', {
+		dataType: 'json', //服务器返回json格式数据
+		type: 'post', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		success: function(data) {
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if(data.status == 200) {
+				var spe = document.getElementsByClassName("attrCatId")[0];
+				for(var i=0; i<data.msg.length; i++){
+					var opt = document.createElement ("option");
+				    opt.value = data.msg[i].typeId;
+				    opt.innerText = data.msg[i].typeSn;
+				    spe.appendChild (opt);
+				}
+			} else {
+				mui.toast(data.msg.msg);
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+		//异常处理；
+			console.log(type);
+		}
+	});
+	
+	/**
+	 * 产品类型
+	 */
+	
+//	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getCat', {
+//		dataType: 'json', //服务器返回json格式数据
+//		type: 'post', //HTTP请求类型
+//		timeout: 10000, //超时时间设置为10秒；
+//		success: function(data) {
+//			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+//			if(data.status == 200) {
+//				var spe = document.getElementById("fabu1-one-sel");
+//				for(var i=0; i<data.msg.length; i++){
+//					var opt = document.createElement ("option");
+//				    opt.value = data.msg[i].typeId;
+//				    opt.innerText = data.msg[i].typeSn;
+//				    spe.appendChild (opt);
+//				}
+//			} else {
+//				mui.toast(data.msg.msg);
+//			}
+//		},
+//		error: function(xhr, type, errorThrown) {
+//		//异常处理；
+//			console.log(type);
+//		}
+//	});
 </script>

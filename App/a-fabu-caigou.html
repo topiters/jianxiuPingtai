@@ -54,16 +54,6 @@
 						<span>规格型号：</span>
 						<select id="fabu1-one-sel" data-placeholder="请输入要采购的物质名称" tabindex="-1">
 							<option value=""></option>
-							<option value="1">item-1</option>
-							<option value="2">item-2</option>
-							<option value="3">item-3</option>
-							<option value="4">item-4</option>
-							<option value="5">item-5</option>
-							<!--<option value="item-1">item-1</option>
-							<option value="item-2">item-2</option>
-							<option value="item-3">item-3</option>
-							<option value="item-4">item-4</option>
-							<option value="item-5">item-5</option>-->
 						</select>
 
 					</li>
@@ -233,7 +223,7 @@
 				goodsCatId1: goodsCatId1,
 				goodName: productName,
 				goodsCatId3: 1,
-				goodsthumb: "",
+				goodsthumb: myimg,
 				goodsStock: purchaseAmount,
 				attrCatId: productSize,
 				beginTime: beginTime,
@@ -258,11 +248,68 @@
 					mui.toast("错啦");
 					mui.toast(data.msg.msg);
 				}
-			});
-//			error: function(xhr, type, errorThrown) {
-//			//异常处理；
-//				console.log(type);
-//			}
+			},
+			error: function(xhr, type, errorThrown) {
+			//异常处理；
+				console.log(type);
+			}
 		});
 	});
+	
+	/**
+	 * 规格型号
+	 */
+	
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getType', {
+		dataType: 'json', //服务器返回json格式数据
+		type: 'post', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		success: function(data) {
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if(data.status == 200) {
+				var spe = document.getElementById("fabu1-one-sel");
+				for(var i=0; i<data.msg.length; i++){
+					var opt = document.createElement ("option");
+				    opt.value = data.msg[i].typeId;
+				    opt.innerText = data.msg[i].typeSn;
+				    spe.appendChild (opt);
+				}
+			} else {
+				mui.toast(data.msg.msg);
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+		//异常处理；
+			console.log(type);
+		}
+	});
+	
+	/**
+	 * 产品类型
+	 */
+	
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getCat', {
+		dataType: 'json', //服务器返回json格式数据
+		type: 'post', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		success: function(data) {
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if(data.status == 200) {
+//				var spe = document.getElementById("fabu1-one-sel");
+//				for(var i=0; i<data.msg.length; i++){
+//					var opt = document.createElement ("option");
+//				    opt.value = data.msg[i].typeId;
+//				    opt.innerText = data.msg[i].typeSn;
+//				    spe.appendChild (opt);
+//				}
+			} else {
+				mui.toast(data.msg.msg);
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+		//异常处理；
+			console.log(type);
+		}
+	});
+		
 </script>

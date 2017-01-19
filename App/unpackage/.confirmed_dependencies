@@ -1,1 +1,152 @@
-null
+{
+	"b-login2.html": {
+		"resources": [
+			"css/b-login.css",
+			"fonts/iconfont.css",
+			"js/jquery-3.1.1.min.js",
+			"img/qq.png",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"css/reset.css",
+			"fonts/iconfont.woff",
+			"img/wechat.png"
+		],
+		"refer": [
+			"index-home.html"
+		]
+	},
+	"index-home.html": {
+		"resources": [
+			"css/feedback.css",
+			"img/qiangdan-01.png",
+			"img/bid-01.png",
+			"img/gaojia-01.png",
+			"img/caigou-01.png",
+			"css/select2.min.css",
+			"img/fujin-01.png",
+			"css/index.css",
+			"css/my.css",
+			"img/touxiang.jpg",
+			"img/shouye-01.png",
+			"css/message.css",
+			"img/jianxiu-01.png",
+			"img/logo-01.jpg",
+			"js/index.js",
+			"img/zuixin-01.png",
+			"a-fabu-caigou.html",
+			"css/icons-extra.css",
+			"fonts/iconfont.woff",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"fonts/mui.ttf",
+			"fonts/iconfont.css",
+			"css/mui.min.css",
+			"css/reset.css",
+			"a-fabu-jianxiu.html"
+		],
+		"refer": [
+			"a-fabu-caigou.html",
+			"a-fabu-jianxiu.html",
+			"d-message-qiye.html"
+		]
+	},
+	"a-fabu-caigou.html": {
+		"resources": [
+			"css/index.css",
+			"js/mui.picker.min.js",
+			"js/select2.min.js",
+			"css/mui.picker.min.css",
+			"js/feedback.js",
+			"css/select2.min.css",
+			"index-home.html",
+			"css/feedback.css",
+			"fonts/mui.ttf",
+			"fonts/iconfont.woff",
+			"fonts/iconfont.css",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"css/mui.min.css",
+			"css/reset.css"
+		],
+		"refer": [
+			"a-purchase-yezhu-1.1.html",
+			"index-home.html"
+		]
+	},
+	"a-purchase-yezhu-1.1.html": {
+		"resources": [
+			"css/index.css",
+			"js/mui.zoom.js",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"css/mui.min.css",
+			"js/mui.previewimage.js",
+			"img/logo-01.jpg",
+			"js/index.js"
+		],
+		"refer": [
+			"a-purchase-detail1-1.1.html"
+		]
+	},
+	"a-purchase-detail1-1.1.html": {
+		"resources": [
+			"css/index.css",
+			"js/mui.zoom.js",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"css/mui.min.css",
+			"js/mui.previewimage.js",
+			"img/fujin-03.jpg",
+			"img/fujin-01.jpg",
+			"img/fujin-04.jpg",
+			"img/fujin-02.jpg",
+			"js/index.js"
+		]
+	},
+	"a-fabu-jianxiu.html": {
+		"resources": [
+			"js/mui.picker.min.js",
+			"js/select2.min.js",
+			"css/mui.picker.min.css",
+			"js/feedback.js",
+			"css/index.css",
+			"fonts/iconfont.css",
+			"css/feedback.css",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/reset.css",
+			"css/select2.min.css",
+			"index-home.html"
+		],
+		"refer": [
+			"index-home.html"
+		]
+	},
+	"d-message-qiye.html": {
+		"resources": [
+			"css/my.css",
+			"css/feedback.css",
+			"fonts/iconfont.css",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"css/mui.min.css",
+			"js/feedback.js",
+			"css/icons-extra.css",
+			"css/reset.css",
+			"fonts/mui.ttf",
+			"fonts/iconfont.woff",
+			"img/fujin-01.png"
+		]
+	}
+}

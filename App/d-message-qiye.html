@@ -33,7 +33,7 @@
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">供应商信息</h1>
-			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="saveMsg">保存</button>
 		</header>
 		<div class="mq-main">
 			<!--<div class="mq-head clearfix">
@@ -309,6 +309,7 @@
 /**
  * 完善信息
  */
+document.getElementById('saveMsg').addEventListener("tap", function() {
 	var shopImg = document.getElementById("head-img1").getAttribute("src");
 	var shopCompany = document.getElementById("shopCompany").value;
 	var goodsCatId1 = document.getElementById("goodsCatId1").value;
@@ -331,8 +332,8 @@
 			shopArea: shopArea,
 			shopAddr: shopAddr,
 			shopUrl: shopUrl,
-//			latitude:,
-//			longitude:,
+			latitude: "",
+			longitude: "",
 			shopHost: shopHost,
 			shopIdentimg: shopIdentimg
 		},
@@ -353,4 +354,5 @@
 			console.log(type);
 		}
 	});
+});
 </script>
