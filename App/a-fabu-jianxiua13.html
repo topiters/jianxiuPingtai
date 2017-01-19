@@ -253,6 +253,7 @@
 				//服务器返回响应，根据响应结果，分析是否获取数据成功；
 				if(data.status == 200) {
 					mui.toast(data.msg.msg);
+					mui.toast(goodType);
 					if(goodType==1){
 						mui.openWindow({
 							url: "d-my-yezhu-jingbiao1.html"
