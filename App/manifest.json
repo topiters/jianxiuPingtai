@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "d-modifypassword.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "b-login2.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -106,7 +106,7 @@
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true
+			"waiting": true,"delay":"0"
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
@@ -181,262 +181,13 @@
 					}
 				},
 				"android": {
-					"mdpi": "C:/Users/Administrator/Desktop/备份/检修/img/240282.png", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "C:/Users/Administrator/Desktop/备份/检修/img/320442.png", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/Administrator/Desktop/备份/检修/img/480762.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/Administrator/Desktop/备份/检修/img/7201242.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/Administrator/Desktop/备份/检修/img/10801882.png"
+					"mdpi": "C:/Users/Administrator/Desktop/img/10801882.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "C:/Users/Administrator/Desktop/img/7201242.png", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "C:/Users/Administrator/Desktop/img/480762.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/Administrator/Desktop/img/320442.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/Administrator/Desktop/img/240282.png"
 				}
 			}
-		}
-	},
-	"dependencies": {
-		"pages": {
-			"b-login5.html": {
-				"resources": [
-					"css/b-login.css",
-					"fonts/iconfont.css",
-					"js/jquery-3.1.1.min.js",
-					"js/mui.picker.min.js",
-					"js/mui.min.js",
-					"css/app.css",
-					"js/rem-w.min.js",
-					"css/mui.min.css",
-					"css/mui.picker.min.css",
-					"css/icons-extra.css",
-					"css/reset.css",
-					"fonts/iconfont.woff"
-				],
-				"refer": [
-					"b-login2.html"
-				],
-				"priority": 0
-			},
-			"b-login2.html": {
-				"resources": [
-					"img/qq.png",
-					"fonts/mui.ttf",
-					"img/wechat.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"d-message-qiye.html": {
-				"resources": [
-					"css/my.css",
-					"fonts/iconfont.css",
-					"js/jquery-3.1.1.min.js",
-					"img/touxiang.jpg",
-					"js/mui.min.js",
-					"js/rem-w.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"css/icons-extra.css",
-					"css/reset.css",
-					"fonts/iconfont.woff",
-					"css/feedback.css",
-					"js/feedback.js",
-					"img/gaojia-01.png",
-					"img/fujin-01.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"a-fabu-caigou.html": {
-				"resources": [
-					"css/feedback.css",
-					"js/mui.picker.min.js",
-					"fonts/mui.ttf",
-					"fonts/iconfont.woff",
-					"css/select2.min.css",
-					"css/index.css",
-					"fonts/iconfont.css",
-					"js/jquery-3.1.1.min.js",
-					"js/mui.min.js",
-					"js/rem-w.min.js",
-					"css/mui.min.css",
-					"js/select2.min.js",
-					"css/mui.picker.min.css",
-					"js/feedback.js",
-					"css/reset.css",
-					"a-fabu-caigou.html"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"a-fabu-jianxiu.html": {
-				"resources": [
-					"css/index.css",
-					"fonts/iconfont.css",
-					"css/feedback.css",
-					"js/jquery-3.1.1.min.js",
-					"js/mui.picker.min.js",
-					"js/mui.min.js",
-					"js/rem-w.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"js/select2.min.js",
-					"css/mui.picker.min.css",
-					"css/reset.css",
-					"css/select2.min.css",
-					"js/feedback.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"d-modifypassword.html": {
-				"resources": [
-					"css/b-login.css",
-					"fonts/iconfont.css",
-					"js/jquery-3.1.1.min.js",
-					"js/mui.min.js",
-					"js/rem-w.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"css/reset.css",
-					"fonts/iconfont.woff"
-				],
-				"refer": [],
-				"priority": 0
-			}
-		},
-		"idle": {
-			"resources": [
-				"img/zhonguo-1.png",
-				"fonts/demo_unicode.html",
-				"d-mybid-achieve.html",
-				"d-mymessage.html",
-				"c-yezhu-yaoqing.html",
-				"c-jx-qiang1.html",
-				"img/fujin-04.jpg",
-				"d-bind-bank-ok.html",
-				"d-mybid.html",
-				"d-my-yezhuqiangdan-tol.html",
-				"d-my-qiye.html",
-				"img/shouye-01.png",
-				"js/mui.poppicker.js",
-				"c-jx-xiaoxi.html",
-				"js/mui.previewimage.js",
-				"fonts/iconfont.ttf",
-				"a-fujin-yezhu.html",
-				"img/logo-01.jpg",
-				"js/mui.js",
-				"img/1eca34d5534a658febcec7ca2a723f94.jpg",
-				"img/d9d90c5024e40a4502860d3bf7184cde.jpg",
-				"d-comment2.html",
-				"img/qiangdan-01.png",
-				"d-my-no-login.html",
-				"d-myxujia1.html",
-				"d-mybid-histroy.html",
-				"d-my-yezhu.html",
-				"d-order1.html",
-				"index.html",
-				"a-jx-qiangdan-dingdan1.html",
-				"b-login3.html",
-				"img/bank-change.png",
-				"d-mytask-list.html",
-				"img/fujin-03.jpg",
-				"c-yezhu-qiangdan.html",
-				"a-fujin-jianxiuqiye.html",
-				"d-adress1.html",
-				"js/index.js",
-				"d-myqiangdan.html",
-				"fonts/iconfont.js",
-				"d-mycharge2.html",
-				"d-set.html",
-				"index-home.html",
-				"d-mytask.html",
-				"b-login4.html",
-				"d-my-bank1.html",
-				"c-yezhu-xunjia.html",
-				"css/message.css",
-				"img/jianxiu-01.png",
-				"img/0500bed5f05d2ef66742caec9e2ce5ab.jpg",
-				"c-gys-order.html",
-				"d-myfabu-tol.html",
-				"a-fujin-jianxiuqiye-1.4.2.1.html",
-				"d-my-yezhuqiangdan-step.html",
-				"img/tubiao-04.png",
-				"d-price1.html",
-				"c-jx-yaoqing2.html",
-				"a-fujin-yezhu2.html",
-				"d-adress2.html",
-				"a-fujin-yezhu1.html",
-				"d-comment1.html",
-				"img/jianhang-1.png",
-				"c.html",
-				"img/tubiao-02.png",
-				"a-search.html",
-				"a-purchase-detail1-1.1.html",
-				"fonts/demo.css",
-				"c-jx-tixian.html",
-				"img/tubiao-03.png",
-				"a-purchase-list-1.1.html",
-				"c-gys-baojia.html",
-				"d-mybank.html",
-				"d-mycharge1.html",
-				"d-my-yezhu-jingbiao2.html",
-				"d-judge1.html",
-				"img/bid-01.png",
-				"a-purchase-detail1.html",
-				"d-myorder.html",
-				"fonts/demo_fontclass.html",
-				"js/mui.zoom.js",
-				"d-mybid-list.html",
-				"img/true-01.png",
-				"a-jx-qiangdan-dingdan2.html",
-				"img/fujin-01.jpg",
-				"d-my-yezhujingbiao-0.html",
-				"b.html",
-				"img/bg.png",
-				"a-jx-jingjia1.html",
-				"img/zuixin-01.png",
-				"js/mui.picker.js",
-				"d-set-opinion.html",
-				"fonts/demo_symbol.html",
-				"img/caigou-01.png",
-				"css/mui.css",
-				"c-gys-xiaoxi.html",
-				"d-my-gongyingshang.html",
-				"d-myxunjia.html",
-				"c-jx-qiang2.html",
-				"b-login1.html",
-				"js/zepto.min.js",
-				"img/money-01.png",
-				"d-fill1-bank.html",
-				"a-fujin-yezhu4.html",
-				"c-gys-t.html",
-				"d-my-yezhujingbiao-zhong-list.html",
-				"a-purchase-yezhu-1.1.html",
-				"d-my-yezhu-jingbiao1.html",
-				"a-fujin-yezhu3.html",
-				"c-jx-yaoqing.html",
-				"img/b3f2b23cb17f3023f8a30d4305e1962f.jpg",
-				"img/bid-02.png",
-				"a-jx-qiangdan.html",
-				"c-gys-xunjia.html",
-				"d-mywallet.html",
-				"d-order.html",
-				"c-jx-jingbiao1.html",
-				"fonts/iconfont.svg",
-				"css/mui.poppicker.css",
-				"img/c6538c150f3d4f043a1e382a3a3ef9a0.jpg",
-				"d-fill-bank.html",
-				"a-fujin-gongyingshang.html",
-				"d-my-yezhujingbiao-zhong.html",
-				"c-yezhu-xiaoxi.html",
-				"img/lunbo.png",
-				"d-comment.html",
-				"a-fujin-gongyingshang-1.4.1.1.html",
-				"img/91519ebdfb4a13385bfae49403a0cd6d.jpg",
-				"css/mui.picker.css",
-				"d-myxunjia-detail.html",
-				"fonts/iconfont.eot",
-				"img/nonghang-1.png",
-				"d-bind-bank.html",
-				"c-jx-jingbiao2.html",
-				"img/fujin-02.jpg"
-			]
 		}
 	}
 }
