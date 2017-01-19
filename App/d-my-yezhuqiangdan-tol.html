@@ -27,10 +27,10 @@
 		<div class="order1-top">
 			<ul>
 				<li class="order1-top-list active4">全部</li>
-				<li class="order1-top-list">待抢单</li>
-				<li class="order1-top-list">抢单中</li>
-				<li class="order1-top-list">已抢单</li>
-				<li class="order1-top-list">已完成</li>
+				<li class="order1-top-list" id="1">待抢单</li>
+				<li class="order1-top-list" id="2">抢单中</li>
+				<li class="order1-top-list" id="3">已抢单</li>
+				<li class="order1-top-list" id="4">已完成</li>
 			</ul>
 		</div>
 		<div class="dmyj-list-m">
@@ -97,6 +97,41 @@
 				$(".mes").hide();
 			});
 		});
+		
 	</script>
 
 </html>
+<script type="text/javascript">
+/**
+ * 业主发布的检修列表---抢单
+ */
+
+	var lis = document.getElementsByClassName("order1-top")[0].getElementsByTagName("li");
+	for(var i=0;i<lis;i++){
+		if(lis[i].className=="active4"){
+			var goodStatus = lis[i].getAttribute("id");
+		}
+	}
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=getshopgoodslist',{
+		data:{
+			goodsCatId3: 2,
+			goodStatus: goodStatus
+		}
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		headers:{'Content-Type':'application/json'},	              
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				
+			}else{
+				mui.toast(data.msg.msg);
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});
+</script>
