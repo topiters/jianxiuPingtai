@@ -1,7 +1,8 @@
 <?php
 return array(
-	
-		
+	'DB_DEBUG'=>  true, // 开启调试模式 记录SQL日志
+	'show_page_error'=>true,
+  
 	//'配置项'=>'配置值'
 	define('WEB_HOST', WSTDomain()),
 	/*微信支付配置*/

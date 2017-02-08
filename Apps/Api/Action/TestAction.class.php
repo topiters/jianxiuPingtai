@@ -16,6 +16,22 @@ class TestAction extends BaseAction {
 	 * 获取首页信息
 	 * 
 	 */
+	
+	//测试等
+	public  function test(){
+		
+		
+		
+		
+		$this->display("default/addgoods");
+		
+	}	
+	
+	
+	
+	
+	
+	
     public function index(){
     	$ads = D('Api/Ads');
     	$areas= D('Api/Areas');
@@ -36,7 +52,7 @@ class TestAction extends BaseAction {
     	$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
     	//$this->stringify($data);
     	
-    	$this->display("default/index");
+    	$this->display("default/login");
    		
    		//
    		//获取分类

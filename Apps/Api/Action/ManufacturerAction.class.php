@@ -30,6 +30,82 @@ class ManufacturerAction extends BaseAction{
 	
 	
 	
+	//完善公司信息
+	public  function addByUser(){
+		$USER = session('WST_USER');
+		$userId=$USER['userId'];
+		$manufacturersOne=M('manufacturer')->where(array('userId'=>$userId))->find();
+		if(!$manufacturersOne){
+			$data["msg"] = '你还不是业主,没有权限操作!';
+			$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
+		}
+		$manufacturers=M('manufacturer');
+		$datas=array();
+		//$manufacturerImg=I('manufacturerImg');//公司logo
+		if($_FILES['manufacturerImg']){
+			$info=$this->uploadPic();
+			if($info['status']==1){
+				$manufacturerImg=$info['savename'].$info['savethumbname'];
+			}
+		}
+		$manufacturerCompany=$_POST['manufacturerCompany'];//公司名称
+		$goodsCatId1=$_POST['goodsCatId1'];//行业分类
+		$manufacturerTotal=$_POST['manufacturerTotal'];//注册金额
+		$manufacturerInfo=$_POST['manufacturerInfo'];//简介
+		$manufacturerArea=$_POST['manufacturerArea'];//公司所在城市
+		$manufacturerAddr=$_POST['manufacturerAddr'];//公司地址
+		$latitude=$_POST['latitude'];  //经度
+		$longitude=$_POST['longitude']; //纬度
+		$manufacturerHost=$_POST['manufacturerHost'];//企业法人
+		$manufacturerUrl=$_POST['manufacturerUrl'];//网址
+		$manufacturerIdentimg=$_POST['manufacturerIdentimg'];//公司证明
+		$datas['manufacturerImg']=$manufacturerImg;
+		$datas['manufacturerCompany']=$manufacturerCompany;
+		$datas['goodsCatId1']=$goodsCatId1;
+		$datas['manufacturerTotal']=$manufacturerTotal;
+		$datas['manufacturerInfo']=$manufacturerInfo;
+		$datas['manufacturerHost']=$manufacturerHost;
+		$datas['manufacturerArea']=$manufacturerArea;
+		$datas['manufacturerAddr']=$manufacturerAddr;
+		$datas['latitude']=$latitude;
+		$datas['longitude']=$longitude;
+		$manufacturerIdentimg=array();
+		//附件
+		if($_FILES){
+			$manufacturerIdentimgInfo=$this->uploads();
+			 
+			if($manufacturerIdentimgInfo){
+				foreach ($manufacturerIdentimgInfo  as $k=>$v){
+					$imgs[]=$v['savepath'].$v['savethumbname'];
+				}
+			}
+		}
+		$datas['manufacturerIdentimg']=serialize($manufacturerIdentimg);
+		$datas['createTime']=time();
+	
+		$manufacturerId=(int)$manufacturersOne['manufacturerId'];//当前业主的id
+		$result=M('manufacturer')->where(array('manufacturerId'=>$manufacturerId))->save($datas);
+		if($result!==false){
+			$data["msg"] ='数据保存成功';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
+			$this->stringify($data);
+			 
+		}else{
+			$data["msg"] = '数据没有更新，请更新后保存...!';
+			$data = array('status'=>self::API_UPDATE_FALSE,'msg'=>$data);
+			$this->stringify($data);
+		}
+	
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -1,7 +1,7 @@
 <?php
 namespace Api\Action;
 /**
-*  xx控制器
+*  基类控制器
 * ==============================================
 * 版权所有 2010-2016 http://www.chunni168.com
 * ----------------------------------------------
@@ -85,28 +85,22 @@ class BaseAction extends Controller {
 	const API_SCODE_NOTSAME   = 328;
 	//用户名不存在
 	const API_USER_NOT_EXISTS = 329;
+	//用户没有访问权限 
 	const API_USER_NO_ACCESS  = 330;
 	//请求的数据不存在。。。
 	const API_DATA_NOT_EXISTS  = 331;
+	//数据更新失败
+	const  API_UPDATE_FALSE  =332;
 	
 	public function __construct(){
 		parent::__construct();
 		//初始化系统信息
 		$m = D('Api/System');
 		$GLOBALS['CONFIG'] = $m->loadConfigs();
-		//var_dump($GLOBALS['CONFIG']);
-		//WSTAutoByCookie();
-		//$this->assign("WST_USER",session('WST_USER'));
-	//	$this->assign("WST_IS_LOGIN",(session('WST_USER.userId')>0)?1:0);
 		   $areas= D('Api/Areas');
 	   $areaId2 = $this->getDefaultCity();
 	   $currArea = $areas->getArea($areaId2);
-	//var_dump($currArea);
-		//$this->assign('currArea',$currArea);
-   		//$this->assign('searchType',(int)I("searchType",1));
-   		//$this->assign('CONF',$GLOBALS['CONFIG']);
-   		//$this->assign('WST_REFERE',$_SERVER['HTTP_REFERER']);
-		//$this->footer(); //加入底部
+
 	}
 	
 	/**

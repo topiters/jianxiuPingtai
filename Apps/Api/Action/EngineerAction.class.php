@@ -16,7 +16,7 @@ class EngineerAction extends BaseAction{
 	public function __construct(){
 		parent::__construct();
 		$USER = session('WST_USER');
-		if($USER['userId']!=4){
+		if($USER['userType']!=4){
 			$data["msg"] = '你还不是检修工程师,没有权限操作!';
 			$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
 			$this->stringify($data);

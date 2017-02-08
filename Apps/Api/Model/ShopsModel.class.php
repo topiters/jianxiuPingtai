@@ -15,13 +15,13 @@ class ShopsModel extends BaseModel {
 	
 	public function getshopgoodslist(){
 		
-	$type=I('goodsCatId3');//类型
+	$type=I('goodsTaskId');//类型
 	$user=session("WST_USER");
-	$shopId=$user['userId'];
-	$goodStatus=I("goodStatus");//投标状态1.未开始2.投标中，3.已中标  4 已完成
-	$sql = "SELECT * FROM __PREFIX__goods where goodsCatId3=$type  AND shopId=$shopId ";
+	$shopId=$user['shopId'];
+	$goodStatus=I("goodStatus");//投标状态1.未开始2.投标中，3.已中标  4 已完成,0后台审核
+	$sql = "SELECT * FROM __PREFIX__goods where goodsTaskId=$type  AND shopId=$shopId ";
 	if($goodStatus){
-		$sql.="AND goodStatus=1";	
+		$sql.="AND goodStatus=$goodStatus";	
 	}
 	$result=D('goods')->pageQuery($sql,I("p"),30);
 	  
@@ -32,13 +32,10 @@ class ShopsModel extends BaseModel {
 	}
 	//检修或采购详情
 public function shopgoodsdetails(){
-	
 		$goodsId=I("goodsId");
 		$sql = "SELECT * FROM __PREFIX__goods where goodsId=$goodsId ";
 		$result=$this->query($sql);
-		
 		return $result;
-		
 	}
 	
 	public function addByUser($userId){

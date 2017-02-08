@@ -15,13 +15,13 @@ class ShopsAction extends BaseAction {
 	
 public function __construct(){
 		parent::__construct();
-		$USER = session('WST_USER');
+		  //$USER=D('users')->where(array('userId'=>49))->find();//测试写法
+	$USER = session('WST_USER');
+		//var_dump($USER);
 		if($USER['userType']!=1){
 			$data["msg"] = '你还不是业主,没有权限操作!';
 			$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
 			$this->stringify($data);
-			
-			
 		}
 		
 		
@@ -33,11 +33,10 @@ public  function addByUser(){
 	$shopsOne=M('shops')->where(array('userId'=>$userId))->find();
 	if(!$shopsOne){
 		$data["msg"] = '你还不是业主,没有权限操作!';
-		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
-		$this->stringify($data);	
+		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);	
 	}
-	$shops=D('shops');
-	$data=array();
+	$shops=M('shops');
+	$datas=array();
 	//$shopImg=I('shopImg');//公司logo
 	if($_FILES['shopImg']){
 		$info=$this->uploadPic();
@@ -45,27 +44,27 @@ public  function addByUser(){
 		$shopImg=$info['savename'].$info['savethumbname'];
 		}		
 	}
-	$shopCompany=I('shopCompany');//公司名称
-	$goodsCatId1=I('goodsCatId1');//行业分类
-	$shoptotal=I('shoptotal');//注册金额
-	$shopInfo=I('shopInfo');//简介
-	$shopArea=I('shopArea');//公司所在城市
-	$shopAddr=I('shopAddr');//公司地址
-	$latitude=I('latitude');  //经度
-	$longitude=I('longitude'); //纬度
-	$shopHost=I('shopHost');//企业法人
-	$shopUrl=I('shopUrl');//网址
-	$shopIdentimg=I('shopIdentimg');//公司证明
-	$data['shopImg']=$shopImg;
-    $data['shopCompany']=$shopCompany;
-    $data['goodsCatId1']=$goodsCatId1;
-    $data['shoptotal']=$shoptotal;
-    $data['shopInfo']=$shopInfo;
-    $data['shopHost']=$shopHost;
-    $data['shopArea']=$shopArea;
-    $data['shopAddr']=$shopAddr;
-    $data['latitude']=$latitude;
-    $data['longitude']=$longitude;
+	$shopCompany=$_POST['shopCompany'];//公司名称
+	$goodsCatId1=$_POST['goodsCatId1'];//行业分类
+	$shopTotal=$_POST['shopTotal'];//注册金额
+	$shopInfo=$_POST['shopInfo'];//简介
+	$shopArea=$_POST['shopArea'];//公司所在城市
+	$shopAddr=$_POST['shopAddr'];//公司地址
+	$latitude=$_POST['latitude'];  //经度
+	$longitude=$_POST['longitude']; //纬度
+	$shopHost=$_POST['shopHost'];//企业法人
+	$shopUrl=$_POST['shopUrl'];//网址
+	$shopIdentimg=$_POST['shopIdentimg'];//公司证明
+	$datas['shopImg']=$shopImg;
+    $datas['shopCompany']=$shopCompany;
+    $datas['goodsCatId1']=$goodsCatId1;
+    $datas['shopTotal']=$shopTotal;
+    $datas['shopInfo']=$shopInfo;
+    $datas['shopHost']=$shopHost;
+    $datas['shopArea']=$shopArea;
+    $datas['shopAddr']=$shopAddr;
+    $datas['latitude']=$latitude;
+    $datas['longitude']=$longitude;
     $shopIdentimg=array();
     //附件
     if($_FILES){
@@ -78,51 +77,59 @@ public  function addByUser(){
     		
     	}
     }
-    $data['shopIdentimg']=serialize($shopIdentimg);
-    $data['createTime']=time();
+    $datas['shopIdentimg']=serialize($shopIdentimg);
+    $datas['createTime']=time();
 	
- $result=D('shops')->where(array('shopId'=>$shopsOne['shopId']))->save($data);
-    if($result){
-    	$data["msg"] = '数据写入成功!';
+  $shopId=(int)$shopsOne['shopId'];//当前业主的id
+ $result=M('shops')->where(array('shopId'=>$shopId))->save($datas);
+    if($result!==false){
+    	$data["msg"] ='数据保存成功';
     	$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
     	$this->stringify($data);
     	
     }else{
-    	$data["msg"] = '数据输入失败，请检查...!';
-    	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
-    	$this->stringify($data);
-    	
-    	
-    	
+    	$data["msg"] = '数据没有更新，请更新后保存...!';
+    	$data = array('status'=>self::API_UPDATE_FALSE,'msg'=>$data);
+    	$this->stringify($data);	
     }
-    
-    
-    
-    
-    
 	
 }	
 	
 	//任务发布页面
 	public function addgoods(){
+
+		$datas=array();
 		$USER = session('WST_USER');
 	$shopinfo=D("shops")->where(array('userId'=>$USER['userId']))->find();	
 	if(!$shopinfo){//业主不存在
-		
 		$data["msg"] = '你还不是业主,没有权限操作!';
 		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
 		$this->stringify($data);
+		exit;
+	    }	
+		$goodsTaskId=I("post.goodsTaskId");//发布类型1.采购2.为检修
+		 if(empty($goodsTaskId)){//发布类型不存在
+			$data["msg"] = '发布类型未选择!';
+			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
+			$this->stringify($data);
+		}
+		$datas['goodsTaskId']=$goodsTaskId;
+		$goodsCatId1=$_POST['goodsCatId1'];
+		if(!$goodsCatId1){//产品分类
+			$data["msg"] = '产品分类未选择!';
+			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
+			$this->stringify($data);
+		}
+		$datas['shopId']=$shopinfo['shopId'];//业主id
+		$datas['goodsCatId1']=$goodsCatId1;// 产品分类
+		$datas['createTime']=time();
+		$goodName=$_POST['goodName'];//产品名称
+	 	if(empty($goodName)){//业主不存在
 		
-		
-	}	
-		$data=array();
-		$shopId=$USER['userId']; //用户id
-		$goodsCatId1=I('goodsCatId3');
-		$type=I('goodsCatId3');//发布类型1.采购2.为检修
-		$data['shopId']=$shopinfo['shopId'];//业主id
-		$data['goodsCatId1']= goodsCatId1;// 产品分类
-		$data['goodsCatId3']= $type;
-		$goodName=I('goodName');//产品名称
+			$data["msg"] = '发布产品名称未填写!';
+			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
+			$this->stringify($data);
+		} 
 		$data['createTime']=time();
 		$imgs=array();
 		if($_FILES){	
@@ -133,10 +140,21 @@ public  function addByUser(){
 					}	
 				}		
 		}
-		$data['goodsthumb']=$imgs?serialize($imgs):'';
-		if($type==1){  //采购任务
-		$goodsStock=I('goodsStock');//数量	
-		$attrCatId=I('attrCatId');//产品规格型号
+		$datas['goodsThums']=$imgs?serialize($imgs):'';
+
+		if($goodsTaskId==1){  //采购任务
+		$goodsStock=$_POST['goodsStock'];//数量	
+		if(empty($goodsStock)){//业主不存在
+			$data["msg"] = '发布产品数量未填写!';
+			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
+			$this->stringify($data);
+		}
+	    $attrCatId=$_POST['attrCatId'];//产品规格型号
+	    if(empty($attrCatId)){//业主不存在
+	    	$data["msg"] = '发布规格型号未选择!';
+	    	$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
+	    	$this->stringify($data);
+	    } 
 		$beginTime=I("beginTime");	//开始时间
 		$endTime=I("endTime");//结束时间
 		$linkMan=I("linkMan");//联系人
@@ -145,21 +163,17 @@ public  function addByUser(){
 		$goodsDesc=I("goodsDesc");//要求特殊
 		//$goodsImg=I("goodsImg");//产品图
 		//$goodsthumb=I("goodsthumb");//多张图
-		
-		
-		$data['goodName']=$goodName;
-		$data['goodsStock']=goodsStock;
-		$data['goodsCatId3']=$goodsCatId3;
-		$data['attrCatId']=$attrCatId;
-		$data['beginTime']=$beginTime;
-		$data['endTime']=$endTime ;
-		$data['linkMan']=$linkMan  ;
-		$data['linkPhone']=$linkPhone   ;
-		$data['linkAddr']=$linkAddr   ;
-		$data['goodsDesc']=$goodsDesc;
-		//$data['goodsImg']=$goodsImg  ;
-	
-		$res=D('goods')->add($data);
+		$datas['goodsName']=$goodName;
+		$datas['goodsStock']=goodsStock;
+		$datas['attrCatId']=$attrCatId;
+		$datas['beginTime']=$beginTime;
+		$datas['endTime']=$endTime;
+		$datas['linkMan']=$linkMan;
+		$datas['linkPhone']=$linkPhone;
+		$datas['linkAddr']=$linkAddr;
+		$datas['goodsDesc']=$goodsDesc;
+		//$data['goodsImg']=$goodsImg;
+		$res=D('goods')->add($datas);
 		if($res){
 			
 			$data["msg"] = '数据添加成功!';
@@ -171,14 +185,11 @@ public  function addByUser(){
     	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
     	$this->stringify($data);	
     }
-		
-		
-		
-		}elseif($type==2){
+		 }elseif($goodsTaskId==2){
 		$goodName=I("goodName");// 检修名称	
 		$brandId=I("brandId");//	风机品牌厂家
 		$attrCatId=I("attrCatId");//	设备型号
-		$goodType=I("goodType");//竞价1.0 2.枪弹
+		$goodType=I("goodsType");//竞价1.0 2.枪弹
 		$repairId=I("repairId");//检修性质	
 		$goodDesc=I("goodDesc");//故障描述	
 		$beginTime=I("beginTime");// 开始时间
@@ -186,20 +197,18 @@ public  function addByUser(){
 		$startTime=I("startTime");//故障发生时间
 		$repairhistory=	I("repairhistory");//检修历史
 		$shopPrice=I("shopPrice");// 检修报价
-		$data['goodName']=$goodName ;
-		$data['brandId']=$brandId ;
-		$data['attrCatId']=$attrCatId ;
-		$data['goodType']=$goodType ;
-		$data['repairId']=$repairId ;
-		$data['goodDesc']=$goodDesc ;
-		$data['beginTime']=$beginTime ;
-		$data['endTime']=$endTime ;
-		$data['startTime']=$startTime;
-		$data['repairhistory']=$repairhistory ;
-		$data['shopId']=$shopId ;
-		$data['shopPrice']=$shopPrice;
-		$data['createTime']=time();
-		$res=D('goods')->add($data);
+		$datas['goodsName']=$goodName ;
+		$datas['brandId']=$brandId ;
+		$datas['attrCatId']=$attrCatId ;
+		$datas['goodsType']=$goodType ;
+		$datas['repairId']=$repairId ;
+		$datas['goodDesc']=$goodDesc ;
+		$datas['beginTime']=$beginTime ;
+		$datas['endTime']=$endTime ;
+		$datas['startTime']=$startTime;
+		$datas['repairhistory']=$repairhistory ;
+		$datas['shopPrice']=$shopPrice;
+		$res=D('goods')->add($datas);
 		if($res){
 				
 			$data["msg"] = '数据添加成功!';
@@ -214,11 +223,7 @@ public  function addByUser(){
     	
     	
     } 
-		
-		
-		
-		
-			
+	
 		}
 		
 		
