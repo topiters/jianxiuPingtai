@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>检修任务</title>
+		<title>检修任务抢单</title>
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
@@ -26,11 +26,10 @@
 		</header>
 		<div class="order1-top">
 			<ul>
-				<li class="order1-top-list active4">全部</li>
+				<li class="order1-top-list active4" id="0">全部</li>
 				<li class="order1-top-list" id="1">待抢单</li>
-				<li class="order1-top-list" id="2">抢单中</li>
-				<li class="order1-top-list" id="3">已抢单</li>
-				<li class="order1-top-list" id="4">已完成</li>
+				<li class="order1-top-list" id="2">已抢单</li>
+				<li class="order1-top-list" id="3">已完成</li>
 			</ul>
 		</div>
 		<div class="dmyj-list-m">
@@ -40,7 +39,7 @@
 						<img src="img/logo-01.jpg" />
 					</div>
 					<div class="dmyj-list-list2 l">
-						<p><span class="l">检修名称</span><span class="r" style="color: #FF7D0D;">￥400</span></p>
+						<p><span class="l" id="goodName">检修名称</span><span class="r" style="color: #FF7D0D;" id="shopPrice">￥400</span></p>
 						<p>已有<span style="color: #FF7D0D;">24</span>人抢单</p>
 						<p>地址:<span>索科时代大厦1810</span></p>
 						<p>发布时间：<span>2016-12-12 12:12:12</span></p>
@@ -74,6 +73,17 @@
 					</div>
 					<div class="dmyj-list-list2 l">
 						<p><span class="l">检修名称</span><span class="r" style="color: #FF7D0D;">￥400</span></p>
+						<p>已抢光</p>
+						<p>地址:<span>索科时代大厦1810</span></p>
+						<p>发布时间：<span>2016-12-12 12:12:12</span></p>
+					</div>
+				</li>
+				<li class="dmyj-list-tol1">
+					<div class="dmyj-list-list1 l">
+						<img src="img/logo-01.jpg" />
+					</div>
+					<div class="dmyj-list-list2 l">
+						<p><span class="l">检修名称</span><span class="r" style="color: #FF7D0D;">￥400</span></p>
 						<p>已完成</p>
 						<p>地址:<span>索科时代大厦1810</span></p>
 						<p>发布时间：<span>2016-12-12 12:12:12</span></p>
@@ -82,56 +92,57 @@
 			</ul>
 		</div>
 	</body>
-	<script type="text/javascript">
-		$(function() {
-			$(".order1-top ul").on("click", "li", function() {
-				$(".order1-top ul").children("li").removeClass('active4');
-				$(this).addClass("active4");
-			});
-			$(".order1-top ul").find("li").eq(0).click(function() {
-				$(".mes").show();
-				$(".notice").hide();
-			});
-			$(".order1-top ul").find("li").eq(1).click(function() {
-				$(".notice").show();
-				$(".mes").hide();
-			});
-		});
-		
-	</script>
 
 </html>
 <script type="text/javascript">
 /**
  * 业主发布的检修列表---抢单
  */
-
-	var lis = document.getElementsByClassName("order1-top")[0].getElementsByTagName("li");
-	for(var i=0;i<lis;i++){
-		if(lis[i].className=="active4"){
-			var goodStatus = lis[i].getAttribute("id");
-		}
-	}
-	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=getshopgoodslist',{
-		data:{
-			goodsCatId3: 2,
-			goodStatus: goodStatus
-		}
-		dataType:'json',//服务器返回json格式数据
-		type:'post',//HTTP请求类型
-		timeout:10000,//超时时间设置为10秒；
-		headers:{'Content-Type':'application/json'},	              
-		success:function(data){
-			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-			if( data.status == 200 ){
-				
-			}else{
-				mui.toast(data.msg.msg);
-			} 
-		},
-		error:function(xhr,type,errorThrown){
-			//异常处理；
-			console.log(type);
-		}
+	$(function() {
+		$(".order1-top ul").on("click", "li", function() {
+			$(".order1-top ul").children("li").removeClass('active4');
+			$(this).addClass("active4");
+			var goodStatus = $(this).attr("id");
+			alert(goodStatus); 
+			mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=getshopgoodslist',{
+				data:{
+					goodsCatId3: 2,
+					goodStatus: goodStatus,
+					p:""
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				headers:{'Content-Type':'application/json'},	              
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						for(var i in data.msg){
+							var opt1 = document.createElement ("option");
+						    opt1.value = i;
+						    opt1.innerText = data.msg[i];
+						    spe1.appendChild (opt1);
+						}
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
+		});
+		$(".order1-top ul").find("li").eq(0).click(function() {
+			$(".mes").show();
+			$(".notice").hide();
+		});
+		$(".order1-top ul").find("li").eq(1).click(function() {
+			$(".notice").show();
+			$(".mes").hide();
+		});
 	});
+
+
+
 </script>

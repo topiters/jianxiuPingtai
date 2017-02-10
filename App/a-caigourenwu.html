@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>供应商看到的详情</title>
+		<!--公共css  ss-->
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<!--公共css  ee-->
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<!--公共js  ss-->
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共js  ee-->
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">采购列表</h1>
+		</header>
+		<div class="pd1-one" id="pullRef" dataGao="rootcon">
+			<div class="pd1-one-t clearfix" dataGao="rootchild">
+				<div class="pd1-list1 l">
+					<img src="img/logo-01.jpg" dataGao=""/>
+				</div>
+				<div class="pd1-list2 r">
+					<p class="mingcheng"  dataGao="goodsName">采购名称采购名称采购名称</p>
+					<p>型&nbsp;&nbsp;号<span dataGao="attrCatId">kg-2563</span></p>
+					<p><span dataGao="linkMan">李三</span> | <span dataGao="linkPhone">15236252635</span></p>
+					<p>数&nbsp;&nbsp;量：<span dataGao="goodsStock">1000</span>件<span class="time1" style="margin-left: 1.4rem;"  dataGao="">12:12:12</span></p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!--<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		mui.previewImage();
+
+/**
+ * 业主发布的采购列表
+ * 上拉加载，配合init代码
+ */
+	 mui.init({
+		pullRefresh : {
+		    container:'#pullRef',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    up : {
+//		      	height:50,//可选.默认50.触发上拉加载拖动距离
+//		      	auto:true,//可选,默认false.自动上拉加载一次
+		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+//		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+	  	}
+	});
+	var rootnode = $('[dataGao = "rootcon"]');
+	var childnode = $('[dataGao = "rootchild"]').clone();
+	$('[dataGao = "rootchild"]').remove();
+ 	function mypullFresh() {
+ 		setTimeout(function() {
+		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
+			mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Goods&a=gooodsPurchase',{
+				data:{
+					pcurr:3
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:60000,//超时时间设置为10秒；
+				headers:{'Content-Type':'application/json'},	              
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+//						alert(data.msg.root.length);
+						$commonObj.loadListData({
+							sourceDataList : data.msg.root,
+							dataListRootNode : rootnode,
+							dataListChildNode : childnode,
+							dataAttrName : "dataGao",
+							dataHandleFn : function(){}
+						})
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});	    
+			
+	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
+			var count = 0;
+		    mui('#pullRef').pullRefresh().endPullupToRefresh((++count > 2));
+	    },1000)
+	}
+//	if (mui.os.plus) {
+//		mui.plusReady(function() {
+//			setTimeout(function() {
+//				mui('#pullrefresh').pullRefresh().pullupLoading();
+//			}, 1000);
+//
+//		});
+//	} else {
+//		mui.ready(function() {
+//			mui('#pullrefresh').pullRefresh().pullupLoading();
+//		});
+//	}		
+		
+	</script>
+
+</html>

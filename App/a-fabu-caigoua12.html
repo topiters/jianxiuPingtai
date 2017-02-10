@@ -14,6 +14,7 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 			mui('.mui-scroll-wrapper').scroll();
@@ -35,11 +36,6 @@
 						<span>产品类型：</span>
 						<select id="fabu1-one-sel1" data-placeholder="请输入要采购的物质名称" tabindex="-1">
 							<option value=""></option>
-							<option value="1">item-1</option>
-							<option value="2">item-2</option>
-							<option value="3">item-3</option>
-							<option value="4">item-4</option>
-							<option value="5">item-5</option>
 						</select>
 					</li>
 					<li>
@@ -55,8 +51,12 @@
 						<select id="fabu1-one-sel" data-placeholder="请输入要采购的物质名称" tabindex="-1">
 							<option value=""></option>
 						</select>
-
 					</li>
+					<!--<li>
+						<span>是否开票：</span>
+						<input type="radio" name="name2" />是
+						<input type="radio" name="name2" />否
+					</li>-->
 				</ul>
 			</div>
 			<div class="fabu1-one">
@@ -116,7 +116,7 @@
 	<script type="text/javascript">
 		$("select").select2({
 			placeholder: "select a option",
-			allowClear: true
+			allowClear: true   
 		});
 		(function($) {
 			$.init();
@@ -216,14 +216,16 @@
 		var linkMan = document.getElementById("linkMan").innerHTML;
 		var linkPhone = document.getElementById("linkPhone").innerHTML;
 		var linkAddr = document.getElementById("linkAddr").innerHTML;
-		var myimg = document.getElementById("image-list").innerHTML;
+		var myimg = document.getElementById("image-list").getAttribute("title");
+		alert(myimg);
+//		return false;
 		var goodsDesc = document.getElementById("goodsDesc").value;
 		mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
 			data: {
 				goodsCatId1: goodsCatId1,
 				goodName: productName,
-				goodsCatId3: 1,
-				goodsthumb: myimg,
+				goodsTaskId: 1,   
+				goodsthumbs: myimg,
 				goodsStock: purchaseAmount,
 				attrCatId: productSize,
 				beginTime: beginTime,
@@ -241,7 +243,7 @@
 				if(data.status == 200) {
 					mui.toast(data.msg.msg);
 					mui.openWindow({
-						url: "a-purchase-yezhu-1.1.html"
+						url: "a-caigourenwu.html"
 					});
 				} else {
 					mui.toast("错啦");
@@ -286,7 +288,6 @@
 	/**
 	 * 产品类型
 	 */
-	
 	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getCat', {
 		dataType: 'json', //服务器返回json格式数据
 		type: 'post', //HTTP请求类型
@@ -294,13 +295,13 @@
 		success: function(data) {
 			//服务器返回响应，根据响应结果，分析是否获取数据成功；
 			if(data.status == 200) {
-//				var spe = document.getElementById("fabu1-one-sel");
-//				for(var i=0; i<data.msg.length; i++){
-//					var opt = document.createElement ("option");
-//				    opt.value = data.msg[i].typeId;
-//				    opt.innerText = data.msg[i].typeSn;
-//				    spe.appendChild (opt);
-//				}
+				var spe1 = document.getElementById("fabu1-one-sel1");
+				for(var i in data.msg){
+					var opt1 = document.createElement ("option");
+				    opt1.value = i;
+				    opt1.innerText = data.msg[i];
+				    spe1.appendChild (opt1);
+				}
 			} else {
 				mui.toast(data.msg.msg);
 			}

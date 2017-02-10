@@ -31,19 +31,14 @@
 				<span class="fabu1-onebasic">基本信息</span>
 				<ul class="fabu1-one-mes">
 					<li>
-						<span>产品类型：</span>
+						<span>产品分类：</span>
 						<select id="fabu1-one-sel1" class="productType" data-placeholder="请输入要采购的物质名称" tabindex="-1">
 							<option value=""></option>
-							<option value="1">item-1</option>
-							<option value="2">item-2</option>
-							<option value="3">item-3</option>
-							<option value="4">item-4</option>
-							<option value="5">item-5</option>
 						</select>
 					</li>
 					<li>
 						<span>检修名称：</span>
-						<input type="text" name="" id="goodName" placeholder="请输入要采购的物质名称" />
+						<input type="text" name="" id="goodName" placeholder="请输入检修名称，16字以内" />
 					</li>
 					<li>
 						<span>风机厂家：</span>
@@ -71,6 +66,15 @@
 						<input type="radio" name="name1" value="2" onclick="ab()" />抢单
 					</li>
 					<li>
+						<span>是否开票：</span>
+						<input type="radio" name="name2" value="1"/>是
+						<input type="radio" name="name2" value="0"/>否
+					</li>
+					<li class="needPeople" style="display: none;">
+						<span>需要人数：</span>
+						<input type="text" id="needp" placeholder="请输入需要人数"/>
+					</li>
+					<li>
 						<span>检修性质：</span>
 						<select id="fabu1-one-sel" class="repairId" data-placeholder="请选择检修性质" tabindex="-1">
 							<option value=""></option>
@@ -80,7 +84,7 @@
 							<option value="item-4">小修</option>
 						</select>
 					</li>
-					<li>
+					<!--<li>
 						<span>检修类型：</span>
 						<select id="fabu1-one-sel" class="" data-placeholder="请选择检修类型" tabindex="-1">
 							<option value=""></option>
@@ -89,17 +93,17 @@
 							<option value="item-3">大修</option>
 							<option value="item-4">小修</option>
 						</select>
-					</li>
+					</li>-->
 					<li>
 						<span>发生时间：</span>
 						<input type="text" data-options='{}' class="result" id="result0" placeholder="请输入故障发生时间" />
 					</li>
 					<li class="fabu1-special clearfix">
-						<span>故障描述:</span>
-						<textarea name="" id="goodDesc" rows="" cols="" placeholder="故障描述，请尽可能的描述你的故障情况"></textarea>
+						<span>故障描述：</span>
+						<textarea name="" id="goodDesc" rows="" cols="" placeholder="故障描述：1000字以内，请尽可能的描述你的故障情况"></textarea>
 					</li>
 					<li class="fabu1-special clearfix">
-						<span>检修历史:</span>
+						<span>检修历史：</span>
 						<textarea name="" id="repairhistory" rows="" cols="" placeholder="请输入你的检修历史"></textarea>
 						<span class="r">选填</span>
 					</li>
@@ -123,6 +127,7 @@
 					<li>
 						<span>风场位置：</span>
 						<input type="text" value="郑州市索克时代" />
+						<i class="icon iconfont icon-weizhi" style="font-size: 0.4rem;"></i>
 					</li>
 				</ul>
 			</div>
@@ -130,9 +135,10 @@
 				<span class="fabu1-onebasic">特殊要求</span>
 				<div class="fabu1-special clearfix">
 					<span>特殊要求</span>
-					<textarea name="" rows="" cols="" placeholder="请输入你对服务商的要求"></textarea>
+					<textarea name="" rows="" cols="" placeholder="特殊要求：1000字以内，请说出您对服务商的要求"></textarea>
 				</div>
 			</div>
+			<!--<input type="file" name="aaaaa" id="aaaaa" value="" />-->
 			<div class="fabu1-attach">
 				<span class="fabu1-onebasic">上传附件</span>
 				<div class="mui-content">
@@ -141,6 +147,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="fabu1-foot">
 				<button id="confirmAnnouncement">确认发布</button>
 			</div>
@@ -201,8 +208,10 @@
 			var a = $("input[name='name1']:checked").val();
 			if(a == 2) {
 				$('.fabu1-one-mes-n').show();
+				$('.needPeople').show();
 			} else {
 				$('.fabu1-one-mes-n').hide();
+				$('.needPeople').hide();
 			}
 		}
 	</script>
@@ -219,6 +228,7 @@
 		var brandId = document.getElementsByClassName("brandId")[0].value;
 		var attrCatId = document.getElementsByClassName("attrCatId")[0].value;
 		var goodType = $("input[name='name1']:checked").val();
+		var isVoice = $("input[name='name2']:checked").val();
 		var repairId = document.getElementsByClassName("repairId")[0].value;
 		var goodDesc = document.getElementById("goodDesc").value;
 		var startTime = document.getElementById("result0").value;
@@ -226,12 +236,15 @@
 		var endTime = document.getElementById("result2").value;
 		var repairhistory = document.getElementById("repairhistory").value;
 		var shopPrice = document.getElementById("shopPrice").value;
+		var goodsworks = document.getElementById("needp").value;
+		var goodsthumb = document.getElementById("image-list").getAttribute("title");
+		mui.toast(goodsthumb);
 		mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
-			data: {
+			data:{
 				goodsCatId1: goodsCatId1,
 				goodName: goodName,
-				goodsCatId3: 2,
-				goodsthumb: "",
+				goodsTaskId: 2,
+				goodsthumb: "lalalala",
 				brandId: brandId,
 				attrCatId: attrCatId,
 				goodType: goodType,
@@ -241,14 +254,13 @@
 				beginTime: beginTime,
 				endTime: endTime,
 				repairhistory: repairhistory,
-				shopPrice: shopPrice
+				shopPrice: shopPrice,
+				goodsworks: goodsworks,
+				isVoice: isVoice
 			},
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
-			timeout: 10000, //超时时间设置为10秒；
-			headers: {
-				'Content-Type': 'application/json'
-			},
+			timeout: 60000, //超时时间设置为10秒；
 			success: function(data) {
 				//服务器返回响应，根据响应结果，分析是否获取数据成功；
 				if(data.status == 200) {
@@ -263,10 +275,8 @@
 							url: "d-my-yezhuqiangdan-tol.html"
 						});	
 					}
-					
 				} else {
-					mui.toast(data.msg.msg);
-	//				mui.toast("数据请求失败，请刷新页面");
+					mui.toast(data.msg.msg);  
 				}
 			},
 			error: function(xhr, type, errorThrown) {
@@ -283,7 +293,7 @@
 	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getType', {
 		dataType: 'json', //服务器返回json格式数据
 		type: 'post', //HTTP请求类型
-		timeout: 10000, //超时时间设置为10秒；
+		timeout: 60000, //超时时间设置为10秒；
 		success: function(data) {
 			//服务器返回响应，根据响应结果，分析是否获取数据成功；
 			if(data.status == 200) {
@@ -307,28 +317,27 @@
 	/**
 	 * 产品类型
 	 */
-	
-//	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getCat', {
-//		dataType: 'json', //服务器返回json格式数据
-//		type: 'post', //HTTP请求类型
-//		timeout: 10000, //超时时间设置为10秒；
-//		success: function(data) {
-//			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-//			if(data.status == 200) {
-//				var spe = document.getElementById("fabu1-one-sel");
-//				for(var i=0; i<data.msg.length; i++){
-//					var opt = document.createElement ("option");
-//				    opt.value = data.msg[i].typeId;
-//				    opt.innerText = data.msg[i].typeSn;
-//				    spe.appendChild (opt);
-//				}
-//			} else {
-//				mui.toast(data.msg.msg);
-//			}
-//		},
-//		error: function(xhr, type, errorThrown) {
-//		//异常处理；
-//			console.log(type);
-//		}
-//	});
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=GoodsCats&a=getCat', {
+		dataType: 'json', //服务器返回json格式数据
+		type: 'post', //HTTP请求类型
+		timeout: 60000, //超时时间设置为10秒；
+		success: function(data) {
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if(data.status == 200) {
+				var spe1 = document.getElementById("fabu1-one-sel1");
+				for(var i in data.msg){
+					var opt1 = document.createElement ("option");
+				    opt1.value = i;
+				    opt1.innerText = data.msg[i];
+				    spe1.appendChild (opt1);
+				}
+			} else {
+				mui.toast(data.msg.msg);
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+		//异常处理；
+			console.log(type);
+		}
+	});
 </script>

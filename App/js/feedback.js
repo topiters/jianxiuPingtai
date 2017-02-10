@@ -10,12 +10,12 @@
 	var imageIndexIdNum = 0;
 	var starIndex = 0;
 	var feedback = {
-		question: document.getElementById('question'), 
-		contact: document.getElementById('contact'), 
-		imageList: document.getElementById('image-list')
-//		submitBtn: document.getElementById('submit')
+		//question: document.getElementById('question'), 
+		//contact: document.getElementById('contact'), 
+		imageList: document.getElementById('image-list'),
+		submitBtn: document.getElementById('enquiry')
 	};
-	var url = 'https://service.dcloud.net.cn/feedback';
+//	var url = 'http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods';
 	feedback.files = [];
 	feedback.uploader = null;  
 	feedback.deviceInfo = null; 
@@ -121,15 +121,18 @@
 					}
 					up.classList.remove('image-up');
 					placeholder.style.backgroundImage = 'url(' + zip.target + ')';
+					console.log(zip.target);
 				}, function(zipe) {
 					mui.toast('压缩失败！')
 				});
 				
-
 				
 			}, function(e) {
 				mui.toast(e.message);
 			},{});
+			
+		
+			
 		}, false);
 		placeholder.appendChild(closeButton);
 		placeholder.appendChild(up);
@@ -137,7 +140,7 @@
 		feedback.imageList.appendChild(placeholder);
 	};
 	feedback.newPlaceholder();
-//	feedback.submitBtn.addEventListener('tap', function(event) {
+	feedback.submitBtn.addEventListener('tap', function(event) {
 //		if (feedback.question.value == '' ||
 //			(feedback.contact.value != '' &&
 //				feedback.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
@@ -147,25 +150,38 @@
 //			return mui.toast('信息超长,请重新填写~')
 //		}
 //		//判断网络连接
-//		if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
-//			return mui.toast("连接网络失败，请稍后再试");
-//		}
-//		feedback.send(mui.extend({}, feedback.deviceInfo, {
-//			content: feedback.question.value,
+		if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+			return mui.toast("连接网络失败，请稍后再试");
+		}
+		console.log(feedback.files)
+		feedback.send(mui.extend({}, feedback.deviceInfo, {
+//			content: feedback.question.value,      
 //			contact: feedback.contact.value,
-//			images: feedback.files,
-//			score:''+starIndex
-//		})) 
-//	}, false)
+			images: feedback.files,
+			score:''+starIndex
+		})) 
+	}, false)
+
+	
+	var url = 'http://test.cnceshi.com/index.php?m=Api&c=shops&a=uploadPic';
 	feedback.send = function(content) {
 		feedback.uploader = plus.uploader.createUpload(url, {
 			method: 'POST'
 		}, function(upload, status) {
 //			plus.nativeUI.closeWaiting()
-			console.log("upload cb:"+upload.responseText);
+			console.log("upload cb:"+upload );
 			if(status==200){
 				var data = JSON.parse(upload.responseText);
 				//上传成功，重置表单
+				console.log("####################################################");
+				console.log(upload.responseText);
+				var shopIdentimg = document.getElementById("image-list");
+				for(var i in upload.responseText){
+					var _data = upload.responseText[i].savename+upload.responseText[i].savepath;
+					shopIdentimg.setAttribute("title",_data);
+					console.log(_data);
+				}
+				
 				if (data.ret === 0 && data.desc === 'Success') {
 //					mui.toast('反馈成功~')
 					console.log("upload success");

@@ -16,6 +16,7 @@
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
 		<!--公共js  ee-->
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
@@ -26,26 +27,15 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">采购任务</h1>
 		</header>
-		<div class="pd1-one">
-			<div class="pd1-one-t clearfix" id="buy-list">
+		<div class="pd1-one" dataGao="rootcon">
+			<div class="pd1-one-t clearfix" id="buy-list" dataGao="rootchild">
 				<div class="pd1-list1 l">
 					<img src="img/logo-01.jpg" />
 				</div>
 				<div class="pd1-list2 l">
-					<p class="clearfix"><span class="mingcheng l">供应商名称供应商名称</span><span class="r" style="color: #FF7D0D;">￥400.00</span></p>
-					<p>李三 | 15236252635</p>
-					<p>采购名称: <span class="mingcheng">采购名称采购名称采购名称</span></p>
-					<p>报价时间：<span>2012-12-12 12:12</span></p>
-				</div>
-			</div>
-			<div class="pd1-one-t clearfix" id="buy-list">
-				<div class="pd1-list1 l">
-					<img src="img/logo-01.jpg" />
-				</div>
-				<div class="pd1-list2 l">
-					<p class="clearfix"><span class="mingcheng l">供应商名称供应商名称</span><span class="r" style="color: #FF7D0D;">￥400.00</span></p>
-					<p>李三 | 15236252635</p>
-					<p>采购名称: <span class="mingcheng">采购名称采购名称采购名称</span></p>
+					<p class="clearfix"><span class="mingcheng l" dataGao="">供应商名称供应商名称</span><span class="r" style="color: #FF7D0D;" dataGao="">￥400.00</span></p>
+					<p><span dataGao="linkMan">李三</span> | <span dataGao="linkPhone">15236252635</span></p>
+					<p>采购名称: <span class="mingcheng" dataGao="goodName">采购名称采购名称采购名称</span></p>
 					<p>报价时间：<span>2012-12-12 12:12</span></p>
 				</div>
 			</div>
@@ -73,7 +63,7 @@
 /**
  * 业主发布的采购列表
  */
-	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=getshopgoodslist',{
+	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Goods&a=gooodsPurchase',{
 		data:{
 			goodsCatId3:1,
 			goodStatus:""
@@ -85,7 +75,16 @@
 		success:function(data){
 			//服务器返回响应，根据响应结果，分析是否获取数据成功；
 			if( data.status == 200 ){
-				
+//				var rootnode = $('[dataGao = "rootcon"]');
+//				var childnode = $('[dataGao = "rootchild"]').clone();
+//				$('[dataGao = "rootchild"]').remove();
+//				$commonObj.loadListData({
+//					sourceDataList : data.msg,
+//					dataListRootNode : rootnode,
+//					dataListChildNode : childnode,
+//					dataAttrName : "dataGao",
+//					dataHandleFn : function(){}
+//				})
 			}else{
 				mui.toast(data.msg.msg);
 			} 

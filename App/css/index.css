@@ -298,9 +298,9 @@
 .pd1-list2 p:nth-child(1){
 	font-size: 0.3rem;
 }
-.pd1-list2 p:nth-child(4) span {
+/*.pd1-list2 p:nth-child(4) span {
 	color: #ff7d0d;
-}
+}*/
 
 .pd1-list2 p:last-child {
 	margin-bottom: 0;
@@ -415,21 +415,25 @@
 }
 
 .fy-serch {
-	width: 4rem;
+	width: 4.3rem;
 	/*height: 0.5rem;*/
 	/*line-height: 0.4rem;*/
 	border: 1px solid #e4e4e4;
 	border-radius: 0.25rem;
 	vertical-align: middle;
 	display: inline-block;
-	margin-right: 0.3rem;
+	margin: 0 0.3rem 0 0.3rem;
 	padding: 0.05rem 0;
 }
 
 .fy-serch input {
-	width: 3rem;
+	width: 3.8rem;
 	margin-left: 0.2rem;
 	border: 0;
+	background-image: url(../img/search.png);
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: 0.28rem;
 }
 
 .fy-serch a span {
@@ -644,7 +648,7 @@
 .fujinyz1-footer {
 	width: 4rem;
 	height: 0.65rem;
-	border-radius: 0.3rem;
+	border-radius: 0.15rem;
 	margin: 0 auto;
 	text-align: center;
 	line-height: 0.65rem;
@@ -659,7 +663,7 @@
 /*附近-业主-检修工程师*/
 
 .fujinyz2-list2 {
-	margin-left: 0.4rem;
+	/*margin-left: 0.4rem;*/
 }
 
 .fujinyz2-list2 p {
@@ -671,11 +675,17 @@
 .fujinyz2-list2 p:first-child {
 	font-size: 0.3rem;
 	font-weight: bold;
+	width: 4.2rem;
+	display: inline-block;
 }
 
 
 .fujinyz2-list2 span {
 	/*color: #ff7d0d;*/
+	margin-right: 0.2rem;
+}
+.fujinyz2-list2 span i{
+	margin-right: 0.1rem;
 }
 
 .fujinyz2-list2 p:last-child {
@@ -832,7 +842,7 @@
 	width: 4rem;
 	border: 0;
 	padding: 0;
-	margin-left: 0.4rem;
+	margin-left: 0.1rem;
 }
 
 .fabu1-attach {

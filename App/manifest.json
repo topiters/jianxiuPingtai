@@ -208,7 +208,11 @@
 					"img/wechat.png"
 				],
 				"refer": [
-					"index-home.html"
+					"index-home.html",
+					"b-login5.html",
+					"b-login1.html",
+					"b-login4.html",
+					"b-login3.html"
 				],
 				"priority": 0
 			},
@@ -240,10 +244,19 @@
 					"fonts/iconfont.css",
 					"css/mui.min.css",
 					"css/reset.css",
-					"a-fabu-jianxiu.html"
+					"a-fabu-jianxiu.html",
+					"a-fabu-jianxiua13.html",
+					"a-fabu-caigoua12.html",
+					"d-myqiangdan.html",
+					"d-mybid-list.html"
 				],
 				"refer": [
-					"d-message-qiye.html"
+					"d-message-qiye.html",
+					"d-myxujia1.html",
+					"c-yezhu-xunjia.html",
+					"a-caigourenwu.html",
+					"c-yezhu-yaoqing.html",
+					"a-fujin-yezhu01.html"
 				],
 				"priority": 0
 			},
@@ -345,6 +358,237 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"a-fabu-caigoua12.html": {
+				"resources": [
+					"js/mui.picker.min.js",
+					"index-home.html",
+					"js/select2.min.js",
+					"css/mui.picker.min.css",
+					"js/feedback.js",
+					"css/feedback.css",
+					"fonts/mui.ttf",
+					"fonts/iconfont.woff",
+					"css/select2.min.css",
+					"css/index.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"css/mui.min.css",
+					"css/reset.css"
+				],
+				"refer": [
+					"a-purchase-yezhua6.html",
+					"a-caigourenwu.html"
+				],
+				"priority": 0
+			},
+			"a-fabu-jianxiua13.html": {
+				"resources": [
+					"index-home.html",
+					"js/mui.picker.min.js",
+					"js/select2.min.js",
+					"css/mui.picker.min.css",
+					"js/feedback.js",
+					"css/index.css",
+					"fonts/iconfont.css",
+					"css/feedback.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/reset.css",
+					"css/select2.min.css",
+					"fonts/iconfont.woff"
+				],
+				"refer": [
+					"d-my-yezhuqiangdan-tol.html",
+					"d-my-yezhu-jingbiao1.html"
+				],
+				"priority": 0
+			},
+			"a-purchase-yezhua6.html": {
+				"resources": [
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"img/logo-01.jpg",
+					"js/index.js",
+					"css/index.css",
+					"fonts/iconfont.css",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/reset.css",
+					"js/jquery-3.1.1.min.js",
+					"js/myCommon.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"b-login5.html": {
+				"resources": [
+					"js/mui.picker.min.js",
+					"css/app.css",
+					"css/mui.picker.min.css",
+					"css/b-login.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-myxujia1.html": {
+				"resources": [
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"css/reset.css",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-my-yezhuqiangdan-tol.html": {
+				"resources": [
+					"css/my.css",
+					"js/rem-w.min.js",
+					"img/logo-01.jpg",
+					"css/icons-extra.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/reset.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"c-yezhu-xunjia.html": {
+				"resources": [
+					"fonts/iconfont.css",
+					"css/feedback.css",
+					"js/jquery-3.1.1.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/message.css",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"css/mui.picker.min.css",
+					"js/index.js",
+					"css/reset.css",
+					"css/select2.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-myqiangdan.html": {
+				"resources": [
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"index-home.html",
+					"img/logo-01.jpg",
+					"css/reset.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-mybid-list.html": {
+				"resources": [
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"index-home.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-my-yezhu-jingbiao1.html": {
+				"resources": [
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"css/icons-extra.css",
+					"css/reset.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"a-caigourenwu.html": {
+				"resources": [
+					"js/mui.zoom.js",
+					"js/myCommon.js",
+					"js/mui.previewimage.js",
+					"css/index.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"js/index.js",
+					"css/reset.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"c-yezhu-yaoqing.html": {
+				"resources": [
+					"css/feedback.css",
+					"fonts/mui.ttf",
+					"css/select2.min.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"css/message.css",
+					"css/mui.min.css",
+					"css/mui.picker.min.css",
+					"img/logo-01.jpg",
+					"css/reset.css",
+					"js/index.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"a-fujin-yezhu01.html": {
+				"resources": [
+					"img/search.png"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -353,11 +597,9 @@
 				"fonts/demo_unicode.html",
 				"d-mybid-achieve.html",
 				"d-mymessage.html",
-				"c-yezhu-yaoqing.html",
 				"c-jx-qiang1.html",
 				"d-bind-bank-ok.html",
 				"d-mybid.html",
-				"d-my-yezhuqiangdan-tol.html",
 				"d-my-qiye.html",
 				"js/mui.poppicker.js",
 				"c-jx-xiaoxi.html",
@@ -368,27 +610,22 @@
 				"img/d9d90c5024e40a4502860d3bf7184cde.jpg",
 				"d-comment2.html",
 				"d-my-no-login.html",
-				"d-myxujia1.html",
 				"d-mybid-histroy.html",
 				"d-my-yezhu.html",
 				"d-order1.html",
 				"index.html",
 				"a-jx-qiangdan-dingdan1.html",
-				"b-login3.html",
 				"img/bank-change.png",
 				"d-mytask-list.html",
 				"c-yezhu-qiangdan.html",
 				"a-fujin-jianxiuqiye.html",
 				"d-adress1.html",
-				"d-myqiangdan.html",
 				"fonts/iconfont.js",
 				"d-mycharge2.html",
 				"d-set.html",
 				"d-mytask.html",
-				"b-login4.html",
 				"d-my-bank1.html",
 				"d-modifypassword.html",
-				"c-yezhu-xunjia.html",
 				"img/0500bed5f05d2ef66742caec9e2ce5ab.jpg",
 				"c-gys-order.html",
 				"d-myfabu-tol.html",
@@ -418,14 +655,12 @@
 				"d-myorder.html",
 				"img/head.png",
 				"fonts/demo_fontclass.html",
-				"d-mybid-list.html",
 				"img/true-01.png",
 				"a-jx-qiangdan-dingdan2.html",
 				"d-my-yezhujingbiao-0.html",
 				"b.html",
 				"img/bg.png",
 				"a-jx-jingjia1.html",
-				"b-login5.html",
 				"js/mui.picker.js",
 				"d-set-opinion.html",
 				"fonts/demo_symbol.html",
@@ -434,14 +669,12 @@
 				"d-my-gongyingshang.html",
 				"d-myxunjia.html",
 				"c-jx-qiang2.html",
-				"b-login1.html",
 				"js/zepto.min.js",
 				"img/money-01.png",
 				"d-fill1-bank.html",
 				"a-fujin-yezhu4.html",
 				"c-gys-t.html",
 				"d-my-yezhujingbiao-zhong-list.html",
-				"d-my-yezhu-jingbiao1.html",
 				"a-fujin-yezhu3.html",
 				"c-jx-yaoqing.html",
 				"img/b3f2b23cb17f3023f8a30d4305e1962f.jpg",
@@ -464,7 +697,6 @@
 				"img/91519ebdfb4a13385bfae49403a0cd6d.jpg",
 				"css/mui.picker.css",
 				"d-myxunjia-detail.html",
-				"css/app.css",
 				"fonts/iconfont.eot",
 				"img/nonghang-1.png",
 				"d-bind-bank.html",

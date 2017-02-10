@@ -89,19 +89,27 @@
 
 
 /*订单中心*/
-
+.order1-top {
+	position: fixed;
+	top: 0.8rem;
+	left: 0;
+	z-index: 999;
+}
 .order1-top ul {
-	margin-top: 0.8rem;
+	/*margin-top: 0.8rem;*/
 	display: flex;
 	height: 1rem;
 	line-height: 1rem;
 	background-color: #f7f7f7;
 	border-bottom: 1px solid #e4e4e4;
+	width: 100%;
 }
 
 .order1-top-list {
 	flex: 1;
 	text-align: center;
+	width: 1.6rem;
+	display: inline-block;
 }
 
 .order1-top li.active4 {
@@ -736,7 +744,9 @@
 
 
 /*我的竞标*/
-
+.dm-list-tol {
+	margin-top: 1.8rem;
+}
 .dm-list-tol li {
 	border-bottom: 1px solid #e4e4e4;
 	background-color: #fff;
@@ -1040,7 +1050,7 @@
 }
 /*我的任务列表*/
 .dml1-one {
-	margin-top: 0.1rem;
+	margin-top: 1.8rem;
 	background-color: #fff;
 }
 
@@ -1753,6 +1763,7 @@
 	border: 1px solid #FF7D0D;
 }
 /*业主我的发布 全部*/
+.dmyj-list-tol {margin-top: 1.8rem;}
 .dmyj-list-tol li {
 	border-bottom: 1px solid #e4e4e4;
 	background-color: #fff;

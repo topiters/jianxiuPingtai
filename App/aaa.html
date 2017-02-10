@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title></title>
+        <link href="css/mui.min.css" rel="stylesheet" />
+        <style type="text/css">
+            body {
+                background-color: #efeff4;
+            }
+            .mui-content {} .mui-content a {
+                color: #8F8F94;
+            }
+            .mui-content a.active {
+                color: #007aff;
+            }
+            .mui-title {
+                font-family: simhei;
+            }
+            .btn_1 {
+                position: absolute;
+                bottom: 100px;
+                left: 10px;
+                right: 10px;
+            }
+            .btn_2 {
+                position: absolute;
+                bottom: 20px;
+                left: 10px;
+                right: 10px;
+            }
+            .mui-btn-block {
+                width: 90%;
+                margin: 0 auto;
+            }
+            body {
+                overflow: hidden;
+            }
+            .showimg {
+                margin: 20px 10px auto 10px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">上传身份证照片</h1>
+            <a class="mui-pull-right mui-icon mui-icon-upload" onclick="imgupgrade()"></a>
+        </header>
+        <!--
+    作者：1020450921@qq.com
+    时间：2015-04-24
+    描述：参考 http://ask.dcloud.net.cn/question/2089
+-->
+        <div class="mui-content">
+            <div class="showimg">
+
+            </div>
+            <button type="button" class="mui-btn mui-btn-primary mui-btn-block  btn_1" onclick="galleryImgs()">从相册中选择图片</button>
+            <br>
+            <button type="button" class="mui-btn mui-btn-success mui-btn-block btn_2" onclick="cameraimages()">拍照</button>
+        </div>
+    </body>
+    <script src="js/mui.min.js"></script>
+    <!--<script src="../../../js/binaryajax.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/exif.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/canvasResize.js" type="text/javascript" charset="utf-8"></script>-->
+
+    <script type="text/javascript">
+        mui.init();
+        mui.plusReady(function() {})
+
+               //上传单张图片
+        function galleryImg() {
+            //每次拍摄或选择图片前清空数组对象
+            f1.splice(0, f1.length);
+            document.getElementsByClassName("showimg")[0].innerHTML = null;
+            // 从相册中选择图片
+            mui.toast("从相册中选择一张图片");
+            plus.gallery.pick(function(path) {
+                showImg(path);
+            }, function(e) {
+                mui.toast("取消选择图片");
+            }, {
+                filter: "image",
+                multiple: false
+            });
+        }
+
+        function galleryImgs() {
+                //每次拍摄或选择图片前清空数组对象
+                f1.splice(0, f1.length);
+                document.getElementsByClassName("showimg")[0].innerHTML = null;
+                // 从相册中选择图片
+                mui.toast("从相册中选择不超过两张图片");
+                plus.gallery.pick(function(e) {
+                    if (e.files.length != 2) {
+                        mui.toast('请选择身份证正面和背面照片共两张');
+                        return false;
+                    }
+                    for (var i in e.files) {
+                        showImg(e.files[i]);
+                    }
+                }, function(e) {
+                    mui.toast("取消选择图片");
+                }, {
+                    filter: "image",
+                    multiple: true
+                });
+            }
+            // 拍照添加文件
+
+        function cameraimages() {
+                //每次拍摄或选择图片前清空数组对象
+                f1.splice(0, f1.length);
+                document.getElementsByClassName("showimg")[0].innerHTML = null;
+                var cmr = plus.camera.getCamera();
+                cmr.captureImage(function(p) {
+                    plus.io.resolveLocalFileSystemURL(p, function(entry) {
+                        var localurl = entry.toLocalURL(); //把拍照的目录路径，变成本地url路径，例如file:///........之类的。
+                        showImg(localurl);
+                    });
+                }, function(e) {
+                    mui.toast("很抱歉，获取失败 "   e);
+                });
+            }
+            // 全局数组对象，添加文件,用于压缩上传使用
+        var f1 = new Array();
+
+
+function showImg(url) {
+    // 兼容以“file:”开头的情况
+    if (0 != url.toString().indexOf("file://")) {
+        url = "file://" + url;
+    }
+    var _div_ = document.getElementsByClassName("showimg")[0];
+    var _img_ = new Image();
+    _img_.src = url; // 传过来的图片路径在这里用。
+        _img_.onclick = function() {
+                plus.runtime.openFile(url);
+            };
+    _img_.onload = function() {
+        var tmph = _img_.height;
+        var tmpw = _img_.width;
+        var isHengTu = tmpw > tmph;
+        var max = Math.max(tmpw, tmph);
+        var min = Math.min(tmpw, tmph);
+        var bili = min / max;
+        if (max > 1200) {
+            max = 1200;
+            min = Math.floor(bili * max);
+        }
+        tmph = isHengTu ? min : max;
+        tmpw = isHengTu ? max : min;
+        _img_.style.border = "1px solid rgb(200,199,204)";
+        _img_.style.margin = "10px";
+        _img_.style.width = "150px";
+        _img_.style.height = "150px";
+        _img_.onload = null;
+        plus.io.resolveLocalFileSystemURL(url, function(entry) {
+                entry.file(function(file) {
+                    console.log(file.size + '--' + file.name);
+                    canvasResize(file, {
+                        width: tmpw,
+                        height: tmph,
+                        crop: false,
+                        quality: 50, //压缩质量
+                        rotate: 0,
+                        callback: function(data, width, height) {
+                            f1.push(data);
+                            _img_.src = data;
+                            _div_.appendChild(_img_);
+                            plus.nativeUI.closeWaiting();
+                        }
+                    });
+                });
+            },
+            function(e) {
+                plus.nativeUI.closeWaiting();
+                console.log(e.message);
+            });
+    };
+};
+
+        function imgupgrade() {
+                mui.toast('后台联调时启用上传功能');
+                return;
+                var wt = plus.nativeUI.showWaiting();
+                var url = '后台地址';
+                var dataType = 'json';
+                //发送数据  
+                var data = {
+                    files1: f1 //base64数据        
+                };
+                mui.post(url, data, success, dataType);
+            }
+            //成功响应的回调函数
+        var success = function(response) {
+            plus.nativeUI.closeWaiting();
+            if (response != null) {
+                alert("上传成功");
+            }
+        }
+    </script>
+
+</html>

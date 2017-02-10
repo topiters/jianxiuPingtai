@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>供应商信息</title>
+		<title>业主信息</title>
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
@@ -32,7 +32,7 @@
 	<body>
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">供应商信息</h1>
+			<h1 class="mui-title">业主信息</h1>
 			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="saveMsg">保存</button>
 		</header>
 		<div class="mq-main">
@@ -108,7 +108,7 @@
 					<dl class="mq-adress-r r">
 						<dd>
 							<input type="text" name="" id="shopArea" value="索克时代大厦" />
-							<i class="icon iconfont icon-weizhi r"></i>
+							<i class="icon iconfont icon-weizhi" style="font-size: 0.4rem;"></i>
 						</dd>
 						<dd>
 							<input type="text" name="" id="shopAddr" value="18层向东50米" />
@@ -298,7 +298,6 @@
 				var _slider = mui(slider).slider();
 			}
 		}
-		
 		if(mui.os.stream){
 			document.getElementById("check_update").display = "none";
 		}
@@ -309,7 +308,7 @@
 /**
  * 完善信息
  */
-document.getElementById('saveMsg').addEventListener("tap", function() {
+document.getElementById("saveMsg").addEventListener('tap', function() {
 	var shopImg = document.getElementById("head-img1").getAttribute("src");
 	var shopCompany = document.getElementById("shopCompany").value;
 	var goodsCatId1 = document.getElementById("goodsCatId1").value;
@@ -319,40 +318,49 @@ document.getElementById('saveMsg').addEventListener("tap", function() {
 	var shopAddr = document.getElementById("shopAddr").value;
 	var shopUrl = document.getElementById("shopUrl").value;
 	var shopHost = document.getElementById("shopHost").value;
-//	var latitude = document.getElementById("goodName").value;
-//	var longitude = document.getElementById("goodName").value;
-	var shopIdentimg = document.getElementById("image-list").innerHTML;
-	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addByUser',{
-		data:{
-			shopImg: shopImg,
-			shopCompany: shopCompany,
-			goodsCatId1: goodsCatId1,
-			shoptotal: shoptotal,
-			shopInfo: shopInfo,
-			shopArea: shopArea,
-			shopAddr: shopAddr,
-			shopUrl: shopUrl,
-			latitude: "",
-			longitude: "",
-			shopHost: shopHost,
-			shopIdentimg: shopIdentimg
-		},
-		dataType:'json',//服务器返回json格式数据
-		type:'post',//HTTP请求类型
-		timeout:10000,//超时时间设置为10秒；
-		headers:{'Content-Type':'application/json'},	              
-		success:function(data){
-			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-			if( data.status == 200 ){
-				mui.toast(data.msg.msg);
-			}else{
-				mui.toast("数据请求失败，请刷新页面")
-			} 
-		},
-		error:function(xhr,type,errorThrown){
-			//异常处理；
-			console.log(type);
+//	var latitude = document.getElementById("").value;
+//	var longitude = document.getElementById("").value;
+	var shopIdentimg = document.getElementById("image-list").getAttribute("title");
+//	mui.toast(shopIdentimg);
+	var btnArray = ['否', '是'];
+	mui.confirm('确认保存？', '提示', btnArray, function(e) {
+		if (e.index == 1) {
+//			mui.toast(shopCompany);
+			mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addByUser',{
+				data:{
+					shopImg: shopImg,
+					shopCompany: shopCompany,
+					goodsCatId1: goodsCatId1,
+					shopTotal: shoptotal,
+					shopInfo: shopInfo,
+					shopArea: shopArea,
+					shopAddr: shopAddr,
+					shopUrl: shopUrl,
+					latitude: "",
+					longitude: "",
+					shopHost: shopHost,
+					shopIdentimg: shopIdentimg
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						mui.toast(data.msg.msg);
+					}else{
+						mui.toast(data.msg.msg);
+//						mui.toast("数据请求失败，请刷新页面")
+					}   
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});			
+		} else {
+			     
 		}
-	});
+	})
 });
 </script>

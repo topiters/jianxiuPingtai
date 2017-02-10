@@ -119,12 +119,12 @@
 						<img src="img/caigou-01.png" />
 						<span>采购任务</span>
 					</div>
-					<div class="index-tol-list">
+					<div class="index-tol-list" id="maintenanceTask">
 						<img src="img/jianxiu-01.png" />
 						<span>检修任务</span>
 					</div>
 					<div class="index-tol-list">
-						<img src="img/gaojia-01.png" />
+						<img src="img/gaojia-01.png" id="highPrice"/>
 						<span>高价悬赏</span>
 					</div>
 					<div class="index-tol-list" id="nearby">
@@ -230,12 +230,12 @@
 						<img src="img/shouye-01.png" />
 					</div>
 					<div class="jx-alert1-t2">
-						<a href="a-fabu-caigou.html">
+						<a href="a-fabu-caigoua12.html">
 							<p><i class="icon iconfont icon-caigou"></i><span>发布采购任务</span></p>
 						</a>
 					</div>
 					<div class="jx-alert1-t3">
-						<a href="a-fabu-jianxiu.html">
+						<a href="a-fabu-jianxiua13.html">
 							<p><i class="icon iconfont icon-weixiuyuanyin"></i><span>发布检修任务</span></p>
 						</a>
 					</div>
@@ -252,36 +252,36 @@
 						<div class="cyx1-list1 l">
 							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
 						</div>
-						<div class="cyx1-list2 l" id="myInquiry">
-							<p>我的询价</p>
-							<p class="clearfix"><span class="l">某某企业向我报价</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
-					</div>
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-invitation" style="color: #FF7583;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="myInvitation">
-							<p>我的邀请</p>
-							<p class="clearfix"><span class="l">我邀请某某投标</span><span class="r">2016-12-12 12:12</span></p>
+						<div class="cyx1-list2 l" id="baojiaMsg">
+							<p>报价消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
 						</div>
 					</div>
 					<div class="cyx1-one-t clearfix">
 						<div class="cyx1-list1 l">
 							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
 						</div>
-						<div class="cyx1-list2 l" id="orderMessage">
+						<div class="cyx1-list2 l" id="qiangMsg">
 							<p>抢单消息</p>
-							<p class="clearfix"><span class="l">某某抢了某某的</span><span class="r">2016-12-12 12:12</span></p>
+							<p class="clearfix"><span class="l">未有抢单消息</span><span class="r">2016-12-12 12:12</span></p>
 						</div>
 					</div>
 					<div class="cyx1-one-t clearfix">
 						<div class="cyx1-list1 l">
 							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
 						</div>
+						<div class="cyx1-list2 l" id="jingMsg">
+							<p>竞标消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
+						</div>
 						<div class="cyx1-list2 l">
-							<p>投标消息</p>
-							<p class="clearfix"><span class="l">某某企业投了某某</span><span class="r">2016-12-12 12:12</span></p>
+							<p>提现进度</p>
+							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
 						</div>
 					</div>
 				</div>
@@ -434,7 +434,7 @@
 	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Index&a=index',{
 		dataType:'json',//服务器返回json格式数据
 		type:'post',//HTTP请求类型
-		timeout:10000,//超时时间设置为10秒；
+		timeout:60000,//超时时间设置为10秒；
 		headers:{'Content-Type':'application/json'},	              
 		success:function(data){
 			//服务器返回响应，根据响应结果，分析是否获取数据成功；
@@ -469,7 +469,7 @@
 				},
 				dataType:'json',//服务器返回json格式数据
 				type:'post',//HTTP请求类型
-				timeout:10000,//超时时间设置为10秒；
+				timeout:60000,//超时时间设置为10秒；
 				headers:{'Content-Type':'application/json'},	              
 				success:function(data){
 					//服务器返回响应，根据响应结果，分析是否获取数据成功；
@@ -494,13 +494,25 @@
 //采购任务跳转进入详情页面
 	document.getElementById('buyingTask').addEventListener('tap',function() {
 		mui.openWindow({
-		    url:"a-purchase-yezhu-1.1.html",
+		    url:"a-caigourenwu.html",
+		});
+	});
+//检修任务跳转进入详情页面
+	document.getElementById('maintenanceTask').addEventListener('tap',function() {
+		mui.openWindow({
+		    url:"a-jianxiurenwu.html",
+		});
+	});
+//高价悬赏跳转进入详情页面
+	document.getElementById('highPrice').addEventListener('tap',function() {
+		mui.openWindow({
+		    url:"a-gaojiaxuanshang.html",
 		});
 	});
 //附近GO跳转进入详情页面
 	document.getElementById('nearby').addEventListener('tap', function() {
 		mui.openWindow({
-		    url:"a-fujin-yezhu.html",
+		    url:"a-fujin-yezhu01.html",
 		});
 	});
 		
@@ -528,22 +540,22 @@
 /**
  * 消息js
  */
-//我的询价跳转进入详情页面
-	document.getElementById('myInquiry').addEventListener('tap', function() {
+//报价消息跳转进入详情页面
+	document.getElementById('baojiaMsg').addEventListener('tap', function() {
 		mui.openWindow({
 		    url:"c-yezhu-xunjia.html",
 		});
 	});
-//我的邀请跳转进入详情页面
-	document.getElementById('myInvitation').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"c-yezhu-yaoqing.html",
-		});
-	});
 //抢单消息跳转进入详情页面
-	document.getElementById('orderMessage').addEventListener('tap', function() {
+	document.getElementById('qiangMsg').addEventListener('tap', function() {
 		mui.openWindow({
 		    url:"c-yezhu-qiangdan.html",
+		});
+	});
+//竞标消息跳转进入详情页面
+	document.getElementById('jingMsg').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"c-yezhu-toubiao.html",
 		});
 	});
 
@@ -560,7 +572,9 @@
 		$(".jx-alert122").fadeOut(500);
 	});
 		
-//各页面跳转
+/**
+ * 各页面跳转
+ */
 //我的询价跳转进入详情页面
 	document.getElementById('myXunjia').addEventListener('tap', function() {
 		mui.openWindow({
