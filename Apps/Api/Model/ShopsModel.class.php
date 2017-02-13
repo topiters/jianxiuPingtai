@@ -12,16 +12,16 @@ namespace Api\Model;
 * @version:1.0
 */
 class ShopsModel extends BaseModel {
-	
+	//获取抢单
 	public function getshopgoodslist(){
 		
 	$type=I('goodsTaskId');//类型
 	$user=session("WST_USER");
 	$shopId=$user['shopId'];
-	$goodStatus=I("goodStatus");//投标状态1.未开始2.投标中，3.已中标  4 已完成,0后台审核
-	$sql = "SELECT * FROM __PREFIX__goods where goodsTaskId=$type  AND shopId=$shopId ";
+	$goodStatus=I("goodStatus");//1 待抢单 1  已抢单  2 已完成
+	$sql = "SELECT g.*,s.shopAddr,s.shopImg,s.shopArea,s.shopId FROM __PREFIX__goods  g left join __PREFIX__shops s  on s.shopId=g.shopId where g.goodsTaskId=$type  AND g.shopId=$shopId ";
 	if($goodStatus){
-		$sql.="AND goodStatus=$goodStatus";	
+		$sql.="AND g.goodStatus=$goodStatus";	
 	}
 	$result=D('goods')->pageQuery($sql,I("p"),30);
 	  
@@ -30,10 +30,10 @@ class ShopsModel extends BaseModel {
 	return $result;
 	
 	}
-	//检修或采购详情
+	//检修抢单详情
 public function shopgoodsdetails(){
 		$goodsId=I("goodsId");
-		$sql = "SELECT * FROM __PREFIX__goods where goodsId=$goodsId ";
+		$sql = "SELECT g.*,s.* FROM __PREFIX__goods g  left join  __PREFIX__shops s on g.shopId=s.shopId where g.goodsId=$goodsId ";
 		$result=$this->query($sql);
 		return $result;
 	}

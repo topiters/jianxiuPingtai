@@ -19,7 +19,7 @@ class GoodsModel extends BaseModel {
 	public function getGoodsIndex(){
 		 
 		$isAdminRecom=1;//推荐,正在进行的任务
-		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId   where  g.isAdminRecom =$isAdminRecom AND g.goodStatus=1 ";
+		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId  where  g.isAdminRecom =$isAdminRecom AND g.goodStatus=1 ";
 		$result=D('goods')->pageQuery($sql,I("p"),30);
 		//var_dump(D('goods')->getLastSql());
 		//exit;
@@ -43,6 +43,32 @@ class GoodsModel extends BaseModel {
 		
 		
 	}
+	//采购任务
+	
+public function gooodsPurchase(){
+	$pcurr = (int)I("pcurr")?(int)I("pcurr"):1;//当前页
+		//采购进行中的
+	$sql = "SELECT g.*,s.*,t.typeSn FROM __PREFIX__goods g left join __PREFIX__shops s ON g.shopId=s.shopId left join __PREFIX__goods_type t ON t.typeId=g.attrCatId   where  g.goodsStatus=0  AND  g.goodsTaskId=1";
+	$pages = $this->pageQuery($sql, $pcurr, 5);
+	//var_dump($pages);
+	
+	return $pages;
+	
+		
+	}
+	
+	
+//采购详情	
+	
+	public function gooodsPurchaseDetails(){
+		//采购进行中的
+		$goodsId=I('goodsId');
+		$sql = "SELECT * FROM __PREFIX__goods  where  goodsId=$goodsId";
+		$result=D('goods')->query($sql);
+		return $result;
+	
+	}
+	
 	
 	
 	/**

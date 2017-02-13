@@ -138,9 +138,11 @@ public  function addByUser(){
 					foreach ($info  as $k=>$v){
 						$imgs[]=$v['savepath'].$v['savename'];
 					}	
-				}		
-		}
+				}
 		$datas['goodsThums']=$imgs?serialize($imgs):'';
+				
+		}
+		
 
 		if($goodsTaskId==1){  //采购任务
 		$goodsStock=$_POST['goodsStock'];//数量	
@@ -162,9 +164,9 @@ public  function addByUser(){
 		$linkAddr=I("linkAddr");//地址
 		$goodsDesc=I("goodsDesc");//要求特殊
 		//$goodsImg=I("goodsImg");//产品图
-		//$goodsthumb=I("goodsthumb");//多张图
+		$goodsthumb=I("goodsthumb");//多张图
 		$datas['goodsName']=$goodName;
-		$datas['goodsStock']=goodsStock;
+		$datas['goodsStock']=$goodsStock;
 		$datas['attrCatId']=$attrCatId;
 		$datas['beginTime']=$beginTime;
 		$datas['endTime']=$endTime;
@@ -172,6 +174,7 @@ public  function addByUser(){
 		$datas['linkPhone']=$linkPhone;
 		$datas['linkAddr']=$linkAddr;
 		$datas['goodsDesc']=$goodsDesc;
+		$datas['goodsthumb']=$goodsthumb;
 		//$data['goodsImg']=$goodsImg;
 		$res=D('goods')->add($datas);
 		if($res){
@@ -190,24 +193,33 @@ public  function addByUser(){
 		$brandId=I("brandId");//	风机品牌厂家
 		$attrCatId=I("attrCatId");//	设备型号
 		$goodType=I("goodsType");//竞价1.0 2.枪弹
+		
+		if($goodType==2){
+		$goodsworks=I("goodsworks");//工作人数	
+		$shopPrice=I("shopPrice");// 检修报价
+		$datas['shopPrice']=$shopPrice;
+		}
+		if($goodType==1){
+		$goodDesc=I("goodDesc");//故障描述
+		$datas['goodDesc']=$goodDesc;
+		}
 		$repairId=I("repairId");//检修性质	
-		$goodDesc=I("goodDesc");//故障描述	
+		$isVoice=I("isVoice");//是否发票1 是,0否
 		$beginTime=I("beginTime");// 开始时间
 		$beginTime=I("endTime");// 结束时间
 		$startTime=I("startTime");//故障发生时间
 		$repairhistory=	I("repairhistory");//检修历史
-		$shopPrice=I("shopPrice");// 检修报价
+		
 		$datas['goodsName']=$goodName ;
 		$datas['brandId']=$brandId ;
 		$datas['attrCatId']=$attrCatId ;
 		$datas['goodsType']=$goodType ;
 		$datas['repairId']=$repairId ;
-		$datas['goodDesc']=$goodDesc ;
 		$datas['beginTime']=$beginTime ;
 		$datas['endTime']=$endTime ;
 		$datas['startTime']=$startTime;
-		$datas['repairhistory']=$repairhistory ;
-		$datas['shopPrice']=$shopPrice;
+		$datas['repairhistory']=$repairhistory;
+		$datas['createTime']=date("Y-m-d H:i:s");
 		$res=D('goods')->add($datas);
 		if($res){
 				
@@ -218,10 +230,7 @@ public  function addByUser(){
 		}else{
     	$data["msg"] = '数据输入失败，请检查...!';
     	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
-    	$this->stringify($data);
-    	
-    	
-    	
+    	$this->stringify($data);	
     } 
 	
 		}
@@ -459,7 +468,7 @@ public  function addByUser(){
 		$this->assign('bankList',$m->queryByList(0));
 		//获取商品信息
 		
-		$this->assign('object',$shop);
+		//$this->assign('object',$shop);
 		$this->assign("umark","toEdit");
 		$this->display("default/shops/edit_shop");
 	}
