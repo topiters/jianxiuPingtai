@@ -548,3 +548,16 @@ function WSTIPAddress(){
     }
     return array();
 }
+
+function getDistance($lat1 , $lng1 , $lat2 , $lng2) {
+    $s = getDistanceNone($lat1 , $lng1 , $lat2 , $lng2);
+    $s = $s / 10000;
+    if ($s < 1) {
+        $s = round($s * 1000);
+        $s .= 'm';
+    } else {
+        $s = round($s , 2);
+        $s .= 'km';
+    }
+    return $s;
+}
