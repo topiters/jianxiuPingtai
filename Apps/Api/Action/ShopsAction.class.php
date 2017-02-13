@@ -131,19 +131,29 @@ public  function addByUser(){
 			$this->stringify($data);
 		} 
 		$data['createTime']=time();
-		$imgs=array();
-		if($_FILES){	
-			$info=$this->uploads();
-				if($info){
-					foreach ($info  as $k=>$v){
-						$imgs[]=$v['savepath'].$v['savename'];
-					}	
-				}
-		$datas['goodsThums']=$imgs?serialize($imgs):'';
-				
+		//$goodsImg=I("goodsImg");//产品图
+		//if($goodsImg){
+			
+		//}
+		
+		$goodsthumb=I("goodsThumbs");//多张图
+		if($goodsthumb){
+			$a=0;
+	foreach($goodsthumb as $k=>$v){
+		  $a++;
+		if($a==1){
+			$datas['goodsImg']=$v;//获取第一张
 		}
 		
-
+		
+	}
+			
+			
+		$datas['goodsThums']=serialize($goodsthumb);
+	
+		
+		
+		}
 		if($goodsTaskId==1){  //采购任务
 		$goodsStock=$_POST['goodsStock'];//数量	
 		if(empty($goodsStock)){//业主不存在
@@ -163,8 +173,7 @@ public  function addByUser(){
 		$linkPhone=I("linkPhone");//手机号
 		$linkAddr=I("linkAddr");//地址
 		$goodsDesc=I("goodsDesc");//要求特殊
-		//$goodsImg=I("goodsImg");//产品图
-		$goodsthumb=I("goodsthumb");//多张图
+		
 		$datas['goodsName']=$goodName;
 		$datas['goodsStock']=$goodsStock;
 		$datas['attrCatId']=$attrCatId;
@@ -174,7 +183,7 @@ public  function addByUser(){
 		$datas['linkPhone']=$linkPhone;
 		$datas['linkAddr']=$linkAddr;
 		$datas['goodsDesc']=$goodsDesc;
-		$datas['goodsthumb']=$goodsthumb;
+		
 		//$data['goodsImg']=$goodsImg;
 		$res=D('goods')->add($datas);
 		if($res){
@@ -288,7 +297,7 @@ public  function addByUser(){
 	//
 
 	/**
-     * 跳到商家首页面
+     * 跳到业主首页面
      */
 	public function toShopHome(){
 		$mshops = D('Home/Shops');
@@ -397,7 +406,7 @@ public  function addByUser(){
 	}
 	
     /**
-     * 跳到商家登录页面
+     * 跳到业主登录页面
      */
 	public function login(){
 		$USER = session('WST_USER');
@@ -409,7 +418,7 @@ public  function addByUser(){
 	}
 	
 	/**
-	 * 商家登录验证
+	 * 业主登录验证
 	 */
 	public function checkLogin(){
 		$rs = array('status'=>-2);
@@ -434,7 +443,7 @@ public  function addByUser(){
 		echo "1";
 	}
 	/**
-	 * 跳到商家中心页面
+	 * 跳到业主中心页面
 	 */
 	public function index(){
 		$this->isShopLogin();
@@ -449,7 +458,7 @@ public  function addByUser(){
 		$this->display("default/shops/index");
 	}
 	/**
-	 * 编辑商家资料
+	 * 编辑业主资料
 	 */
 	public function toEdit(){
 		
@@ -474,7 +483,7 @@ public  function addByUser(){
 	}
 	
 	/**
-	 * 设置商家资料
+	 * 设置业主资料
 	 */
 	public function toShopCfg(){
 		$this->isShopLogin();

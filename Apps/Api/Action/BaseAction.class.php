@@ -260,12 +260,13 @@ class BaseAction extends Controller {
     	$info =$upload->upload($files='');
     	if(!$info) {// 上传错误提示错误信息  
     		$this->error($upload->getError());
-    	   }else{// 上传成功 获取上传文件信息    
-    			/* foreach($info as $file){   
-    				echo $file['savepath'].$file['savename']; 
-    			} */ 
+    	   }else{// 上传成功 获取上传文件信息   
+    	   	$pic=array();
+    		 foreach($info as $file){   
+    					$pic[]=$file['savepath'].$file['savename']; 
+    			}  
     			
-    			return  $info;
+    			echo  json_encode($info);
     			
     		}
     	
