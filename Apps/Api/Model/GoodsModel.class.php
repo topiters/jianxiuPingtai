@@ -35,7 +35,7 @@ class GoodsModel extends BaseModel {
 		
 		$goodsId=I("goodsId");
 		
-		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId   where g.isAdminRecom =$isAdminRecom AND g.goodStatus=1 ";
+		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId   where g.isAdminRecom =1 AND g.goodStatus=1 ";
 		$result=D('goods')->query($sql);
 		//var_dump(D('goods')->getLastSql());
 		//exit;
@@ -63,7 +63,7 @@ public function gooodsPurchase(){
 	public function gooodsPurchaseDetails(){
 		//采购进行中的
 		$goodsId=I('goodsId');
-		$sql = "SELECT * FROM __PREFIX__goods  where  goodsId=$goodsId";
+		$sql = "SELECT g.*,s.*,t.typeSn FROM __PREFIX__goods g left join __PREFIX__shops s ON g.shopId=s.shopId left join __PREFIX__goods_type t ON t.typeId=g.attrCatId   where  g.goodsStatus=0  AND  g.goodsTaskId=1 AND  g.goodsId=$goodsId";
 		$result=D('goods')->query($sql);
 		return $result;
 	

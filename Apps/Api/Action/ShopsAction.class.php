@@ -122,7 +122,8 @@ public  function addByUser(){
 		}
 		$datas['shopId']=$shopinfo['shopId'];//业主id
 		$datas['goodsCatId1']=$goodsCatId1;// 产品分类
-		$datas['createTime']=time();
+		//$datas['createTime']=date("Y-m-d H:i:s");
+		$datas['createTimes']=date("Y-m-d");
 		$goodName=$_POST['goodName'];//产品名称
 	 	if(empty($goodName)){//业主不存在
 		
@@ -130,7 +131,7 @@ public  function addByUser(){
 			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
 			$this->stringify($data);
 		} 
-		$data['createTime']=time();
+		//$data['createTime']=time();
 		//$goodsImg=I("goodsImg");//产品图
 		//if($goodsImg){
 			
@@ -228,7 +229,7 @@ public  function addByUser(){
 		$datas['endTime']=$endTime ;
 		$datas['startTime']=$startTime;
 		$datas['repairhistory']=$repairhistory;
-		$datas['createTime']=date("Y-m-d H:i:s");
+		//
 		$res=D('goods')->add($datas);
 		if($res){
 				
@@ -256,6 +257,7 @@ public  function addByUser(){
 		$result=$shopsModel->getshopgoodslist();
 		if($result['root']){
 			
+			//exit;
 			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
 			$this->stringify($data);
 			
