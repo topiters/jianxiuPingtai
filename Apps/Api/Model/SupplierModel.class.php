@@ -12,7 +12,6 @@ namespace Api\Model;
 class SupplierModel extends BaseModel{
 
     public function getList() {
-        $user = session('WST_USER');
         $sql = "SELECT * FROM __PREFIX__supperlier  where  supplierFlag=1 ";
         if (I('keyword')) {
             $keyword = I('keyword');
