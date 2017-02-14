@@ -101,6 +101,12 @@ class SupplierAction extends BaseAction {
     public function offer() {
         $USER = session('WST_USER');
         $goodsId = I('goodsId');
+        $result = D('offer')->where("goodsId = $goodsId and userId = {$USER['userId']}")->count();
+        if ($result > 0) {
+            $data["msg"] = '您已对该采购报价,不能再次报价!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
         $goodsModel = D('Api/goods');
         $result = $goodsModel->gooodsPurchaseDetails();
         $time = date('Y-m-d H:i:s' , time());
