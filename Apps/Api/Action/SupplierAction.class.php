@@ -12,11 +12,12 @@ namespace Api\Action;
  * @author : top_iter 2504585798@qq.com
  * @version:1.0
  */
-class SupperlierAction extends BaseAction {
+class SupplierAction extends BaseAction {
 
     public function __construct() {
         parent::__construct();
         $USER = session('WST_USER');
+//        dump($USER);die;
         if ($USER['userType'] != 2) {
             $data["msg"] = '你还不是供应商,没有权限操作!';
             $data = array('status' => self::API_PERMISSION_NO_OPERATION , 'msg' => $data);
@@ -24,6 +25,10 @@ class SupperlierAction extends BaseAction {
         }
     }
 
+    public function index() {
+        $data = array('status' => self::API_REQUEST_SUCCESS);
+        $this->stringify($data);
+    }
     /**
      *
      */
@@ -92,7 +97,65 @@ class SupperlierAction extends BaseAction {
         }
 
     }
+
+    public function offer() {
+        $USER = session('WST_USER');
+        $goodsId = I('goodsId');
+        $goodsModel = D('Api/goods');
+        $result = $goodsModel->gooodsPurchaseDetails();
+        $time = date('Y-m-d H:i:s' , time());
+        $t = $result[0]['endTime'];
+        if ($time > $t) {
+            $data["msg"] = '该采购已结束!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
+        $money = I('money');
+        $data = array();
+        $data['goodsId'] = $goodsId;
+        $data['userId'] = $USER['userId'];
+        $data['money'] = $money;
+        $data['offerTime'] = date('Y-m-d H:i:s' , time());
+        $result = D('offer')->add($data);
+        if ($result != false) {
+            $data["msg"] = '报价成功!';
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $data);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '添加失败!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
+
+    public function myOffer() {
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
+        $Model = D('Api/supplier');
+        $result = $Model->getOfferList();
+//        dump($result);die;
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '暂时没有请求的数据!';
+            $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
+
+    public function nearby() {
+        $Model = D('Api/supplier');
+        $result = $Model->getList();
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '暂时没有请求的数据!';
+            $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
+
 }
-
-
 ?>
