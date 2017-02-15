@@ -135,11 +135,8 @@ class SupplierAction extends BaseAction {
     }
 
     public function myOffer() {
-        $USER = session('WST_USER');
-        $userId = $USER['userId'];
         $Model = D('Api/supplier');
         $result = $Model->getOfferList();
-//        dump($result);die;
         if ($result) {
             $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
             $this->stringify($data);
@@ -163,5 +160,87 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    public function detail() {
+        $id = I('supplierId');
+        $result = D('supperlier')->where("supplierId = $id")->find();
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '暂时没有请求的数据!';
+            $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
+
+    public function message() {
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
+        $id = I('supplierId');
+        $datas=array();
+        $datas['userId'] = $userId;
+        $datas['supplierId'] = $id;
+        $datas['content'] = I('content');
+        $datas['createTime'] = date('Y-m-d H:i:s' , time());
+        $result = D('supplier_message')->add($datas);
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '暂时没有请求的数据!';
+            $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
+
+    public function myMessage() {
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
+        $sId = D('supperlier')->field('userId,supplierId')->where("userID = $userId")->find();
+        $result = D('supplier_message')->where("supplierId = {$sId['supplierId']}")->select();
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '暂时没有请求的数据!';
+            $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
+
+    public function successOffer() {
+        $Model = D('Api/supplier');
+        $result = $Model->getSuccessOfferList();
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '暂时没有请求的数据!';
+            $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
+
+    public function messageCount() {
+        //新留言
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
+        $sId = D('supperlier')->field('userId,supplierId')->where("userID = $userId")->find();
+        $message = D('supplier_message')->where("supplierId = {$sId['supplierId']} and isCheck = 1")->count();
+        $result = array();
+        $result['message'] = $message;
+        //成功报价
+        $Model = D('Api/supplier');
+        $offer = $Model->getSuccessOfferList();
+        $result['offer'] = count($offer);
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '暂时没有请求的数据!';
+            $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
 }
 ?>
