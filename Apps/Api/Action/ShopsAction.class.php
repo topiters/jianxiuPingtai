@@ -731,6 +731,27 @@ public  function addByUser(){
 		$rs = $m->getKeyList($areaId2);
 		$this->ajaxReturn($rs);
 	}
-	
-	
+
+    /**
+     * 对供应商留言
+     */
+    public function message() {
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
+        $id = I('supplierId');
+        $datas = array();
+        $datas['userId'] = $userId;
+        $datas['supplierId'] = $id;
+        $datas['content'] = I('content');
+        $datas['createTime'] = date('Y-m-d H:i:s' , time());
+        $result = D('supplier_message')->add($datas);
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '添加失败!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
 }
