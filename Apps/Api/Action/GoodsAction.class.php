@@ -128,15 +128,7 @@ class GoodsAction extends BaseAction {
 	public function getGoodsDetails(){
 
 		$goods = D('Api/Goods');
-
-		//查询商品详情		
-		$goodsId = (int)I("goodsId");
-		$obj["goodsId"] = $goodsId;	
-	
-		
-		$goodsDetails = $goods->getGoodsDetails($obj);
-		
-			
+		$goodsDetails = $goods->getGoodsDetails();
 	   $goodsDetails['goodsDesc'] = htmlspecialchars_decode($goodsDetails['goodsDesc']);
 		 if($goodsDetails){
 			//$data["msg"] = '数据载入成功!';

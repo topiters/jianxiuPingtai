@@ -16,7 +16,7 @@ class ShopsAction extends BaseAction {
 public function __construct(){
 		parent::__construct();
 		  //$USER=D('users')->where(array('userId'=>49))->find();//测试写法
-	$USER = session('WST_USER');
+	     $USER = session('WST_USER');
 		//var_dump($USER);
 		if($USER['userType']!=1){
 			$data["msg"] = '你还不是业主,没有权限操作!';
@@ -149,8 +149,14 @@ public  function addByUser(){
 		
 	}
 			
-			
-		$datas['goodsThums']=serialize($goodsthumb);
+	
+	  $linkMan=I("linkMan");//联系人
+	  $linkPhone=I("linkPhone");//手机号
+	  $linkAddr=I("linkAddr");//地址
+	   $datas['linkMan']=$linkMan;
+	   $datas['linkPhone']=$linkPhone;
+	   $datas['linkAddr']=$linkAddr;
+	   $datas['goodsThums']=serialize($goodsthumb);
 	
 		
 		
@@ -170,9 +176,6 @@ public  function addByUser(){
 	    } 
 		$beginTime=I("beginTime");	//开始时间
 		$endTime=I("endTime");//结束时间
-		$linkMan=I("linkMan");//联系人
-		$linkPhone=I("linkPhone");//手机号
-		$linkAddr=I("linkAddr");//地址
 		$goodsDesc=I("goodsDesc");//要求特殊
 		
 		$datas['goodsName']=$goodName;
@@ -180,9 +183,7 @@ public  function addByUser(){
 		$datas['attrCatId']=$attrCatId;
 		$datas['beginTime']=$beginTime;
 		$datas['endTime']=$endTime;
-		$datas['linkMan']=$linkMan;
-		$datas['linkPhone']=$linkPhone;
-		$datas['linkAddr']=$linkAddr;
+		
 		$datas['goodsDesc']=$goodsDesc;
 		
 		//$data['goodsImg']=$goodsImg;
@@ -256,7 +257,19 @@ public  function addByUser(){
 		$shopsModel=D('Api/shops');
 		$result=$shopsModel->getshopgoodslist();
 		if($result['root']){
-			
+			foreach ($result['root']  as $k=>$v){
+				if($result['root']['goodDesc']){
+				$result['root']['goodDesc']=WSTMSubstr($v['goodDesc'],0,10);
+				}
+				
+				if($result['root']['createTime']){
+					
+					
+					$result['root']['createTime']=WSTMSubstr($v['createTime'],0,8);
+				}
+				
+				
+			}
 			//exit;
 			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
 			$this->stringify($data);

@@ -12,31 +12,73 @@ namespace Api\Model;
 * @version:1.0
 */
 class ShopsModel extends BaseModel {
-	//获取抢单
+	//获取抢单,竞价
 	public function getshopgoodslist(){
 		
-	$type=I('goodsTaskId');//类型
+	$type=I('goodsTaskId');//任务类型2.检修
+	$goodsType=I("goodsType");//活动类型
 	$user=session("WST_USER");
 	$shopId=$user['shopId'];
-	$goodStatus=I("goodStatus");//1 待抢单 1  已抢单  2 已完成
-	$sql = "SELECT g.*,s.shopAddr,s.shopImg,s.shopArea,s.shopId FROM __PREFIX__goods  g left join __PREFIX__shops s  on s.shopId=g.shopId where g.goodsTaskId=$type  AND g.shopId=$shopId ";
-	if($goodStatus){
-		$sql.="AND g.goodStatus=$goodStatus";	
+	$goodsStatus=I("goodsStatus");//0 待抢单 1  已抢单  2 已完成     //0待投标 1  已投标  2.已中标
+	$sql = "SELECT g.*,s.shopAddr,s.shopImg,s.shopArea,s.shopId ,gt.* FROM __PREFIX__goods  g left join __PREFIX__shops s  on s.shopId=g.shopId   left join __PREFIX__goods_type gt  on gt.typeId=g.attrCatId     where g.goodsTaskId=$type  AND g.shopId=$shopId AND g.goodsType=$goodsType";
+	if($goodsStatus){
+		$sql.="AND g.goodsStatus=$goodsStatus";	
 	}
-	$result=D('goods')->pageQuery($sql,I("p"),30);
+	$result=D('goods')->pageQuery($sql,I("p"),15);
 	  
 	//var_dump(D('goods')->getLastSql());
 	//exit;
 	return $result;
 	
 	}
-	//检修抢单详情
+	//检修抢单,竞价
 public function shopgoodsdetails(){
 		$goodsId=I("goodsId");
-		$sql = "SELECT g.*,s.* FROM __PREFIX__goods g  left join  __PREFIX__shops s on g.shopId=s.shopId where g.goodsId=$goodsId ";
+		$sql = "SELECT g.*,s.* ,gt.* FROM __PREFIX__goods g  left join  __PREFIX__shops s on g.shopId=s.shopId   left join __PREFIX__goods_type gt  on gt.typeId=g.attrCatId  where g.goodsId=$goodsId ";
 		$result=$this->query($sql);
 		return $result;
 	}
+	
+	
+	
+	//获取采购
+	public function getgoodsofferlist(){
+		//$type=I('goodsTaskId');//任务类型1.采购
+		$user=session("WST_USER");
+		$shopId=$user['shopId'];
+		$goodStatus=I("goodStatus");//0 待抢单 1  已抢单  2 已完成     //0待投标 1  已投标  2.已中标
+		$sql = "SELECT g.*,s.shopAddr,s.shopImg,s.shopArea,s.shopId ,gt.* FROM __PREFIX__goods  g left join __PREFIX__shops s  on s.shopId=g.shopId   left join __PREFIX__goods_type gt  on gt.typeId=g.attrCatId     where g.goodsStatus=0  AND g.shopId=$shopId  AND  g.goodsTaskId=1 ";
+		if($goodStatus){
+			$sql.="AND g.goodStatus=$goodStatus";
+		}
+		$result=D('goods')->pageQuery($sql,I("p"),15);
+		 
+		//var_dump(D('goods')->getLastSql());
+		//exit;
+		return $result;
+	
+	}
+	
+	
+	public function getgoodsofferdetails(){
+		$goodsId=I("goodsId");
+		$sql = "SELECT g.*,s.* ,gt.* FROM __PREFIX__goods g  left join  __PREFIX__shops s on g.shopId=s.shopId   left join __PREFIX__goods_type gt  on gt.typeId=g.attrCatId  where g.goodsId=$goodsId ";
+		$result=$this->query($sql);
+		return $result;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public function addByUser($userId){
 		$rd = array('status'=>-1);

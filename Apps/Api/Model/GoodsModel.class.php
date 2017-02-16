@@ -78,21 +78,22 @@ public function gooodsPurchase(){
 		
 		$pcurr = (int)I("pcurr")?(int)I("pcurr"):1;//当前页
 		$brandId = (int)I("brandId");
+		$goodstaskId=2;
 		$keyWords = WSTAddslashes(urldecode(I("keyWords")));
 		$words = array();
 		if($keyWords!=""){
 			$words = explode(" ",$keyWords);
 		}
 		
-		$sqla = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,p.shopId,marketPrice,shopPrice,ga.id goodsAttrId,saleTime,totalScore,totalUsers ";
+		$sqla = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,p.shopId,marketPrice,shopPrice,ga.id goodsAttrId,saleTime,totalScore,totalUsers,gt.* ";
 		$sqlb = "SELECT max(shopPrice) maxShopPrice  ";
-		$sqlc = " FROM __PREFIX__goods g left join __PREFIX__shops  ";
+		$sqlc = " FROM __PREFIX__goods g left join __PREFIX__shops   left join __PREFIX__goods_type  gt  on gt.typeId=g.attrCatId  ";
 		if($brandId>0){
 			$sqlc .=" , __PREFIX__brands bd ";
 		}
 		
 		
-		$where = " WHERE g.shopId = p.shopId AND  g.goodsStatus=1 AND g.goodsFlag = 1 and g.isSale=1 ";
+		$where = " WHERE g.shopId = p.shopId AND  g.goodsStatus=0 AND g.goodsFlag = 1 and g.isSale=1 and g.goodsTaskId=$goodstaskId ";
 		if($brandId>0){
 			$where .=" AND bd.brandId=g.brandId AND g.brandId = $brandId ";
 		}
@@ -106,7 +107,7 @@ public function gooodsPurchase(){
 			$where .= " AND (".implode(" or ", $sarr).")";
 		}
 		$sqla=$sqla.$sqlc.$where;
-		$pages = $this->pageQuery($sqla, $pcurr, 30);
+		$pages = $this->pageQuery($sqla, $pcurr, 15);
 		//var_dump($pages);
 	
 		return $pages;
@@ -116,20 +117,17 @@ public function gooodsPurchase(){
 	/**
 	 * 查询商品信息
 	 */
-	public function getGoodsDetails($obj){		
-		$goodsId = $obj["goodsId"];
-		$sql = "SELECT sc.catName,sc2.catName as pCatName, g.*,shop.shopName,shop.deliveryType,ga.id goodsAttrId,ga.attrPrice,ga.attrStock,
+	public function getGoodsDetails(){		
+		$goodsId = I("goodsId");
+		$sql = "SELECT  g.*,
 				shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.qqNo,shop.isDistributAll,
-				shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime FROM __PREFIX__goods g left join __PREFIX__goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1, __PREFIX__shops shop, __PREFIX__shops_cats sc 
-				LEFT JOIN __PREFIX__shops_cats sc2 ON sc.parentId = sc2.catId
-				WHERE g.goodsId = $goodsId AND shop.shopId=sc.shopId AND sc.catId=g.shopCatId1 AND g.shopId = shop.shopId AND g.goodsFlag = 1 ";		
+				shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime FROM __PREFIX__goods g LEFT JOIN __PREFIX__shops shop  ON  g.shopId = shop.shopId
+				
+				WHERE g.goodsId = $goodsId  AND g.goodsFlag = 1 ";		
 		$rs = $this->query($sql);
 		
-		if(!empty($rs) && $rs[0]['goodsAttrId']>0){
-			$rs[0]['shopPrice'] = $rs[0]['attrPrice'];
-			$rs[0]['goodsStock'] = $rs[0]['attrStock'];
-		}
-		return $rs[0];
+		
+		return $rs;
 	}
 	
 	/**
