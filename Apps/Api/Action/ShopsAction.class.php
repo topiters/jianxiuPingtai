@@ -123,7 +123,7 @@ public  function addByUser(){
 		$datas['shopId']=$shopinfo['shopId'];//业主id
 		$datas['goodsCatId1']=$goodsCatId1;// 产品分类
 		//$datas['createTime']=date("Y-m-d H:i:s");
-		$datas['createTimes']=date("Y-m-d");
+		$datas['createTimes']=date("Y-m-d");//发布时间
 		$goodName=$_POST['goodName'];//产品名称
 	 	if(empty($goodName)){//业主不存在
 		
@@ -145,22 +145,19 @@ public  function addByUser(){
 		if($a==1){
 			$datas['goodsImg']=$v;//获取第一张
 		}
-		
-		
 	}
-			
-	
-	  $linkMan=I("linkMan");//联系人
+	   $datas['goodsThums']=serialize($goodsthumb);
+		}
+		
+		
+      $linkMan=I("linkMan");//联系人
 	  $linkPhone=I("linkPhone");//手机号
 	  $linkAddr=I("linkAddr");//地址
 	   $datas['linkMan']=$linkMan;
 	   $datas['linkPhone']=$linkPhone;
 	   $datas['linkAddr']=$linkAddr;
-	   $datas['goodsThums']=serialize($goodsthumb);
-	
 		
 		
-		}
 		if($goodsTaskId==1){  //采购任务
 		$goodsStock=$_POST['goodsStock'];//数量	
 		if(empty($goodsStock)){//业主不存在
@@ -210,14 +207,14 @@ public  function addByUser(){
 		$shopPrice=I("shopPrice");// 检修报价
 		$datas['shopPrice']=$shopPrice;
 		}
-		if($goodType==1){
+	
 		$goodDesc=I("goodDesc");//故障描述
 		$datas['goodDesc']=$goodDesc;
-		}
+	
 		$repairId=I("repairId");//检修性质	
 		$isVoice=I("isVoice");//是否发票1 是,0否
 		$beginTime=I("beginTime");// 开始时间
-		$beginTime=I("endTime");// 结束时间
+		$endTime=I("endTime");// 结束时间
 		$startTime=I("startTime");//故障发生时间
 		$repairhistory=	I("repairhistory");//检修历史
 		
@@ -257,19 +254,19 @@ public  function addByUser(){
 		$shopsModel=D('Api/shops');
 		$result=$shopsModel->getshopgoodslist();
 		if($result['root']){
-			foreach ($result['root']  as $k=>$v){
-				if($result['root']['goodDesc']){
-				$result['root']['goodDesc']=WSTMSubstr($v['goodDesc'],0,10);
-				}
-				
+			//foreach ($result['root']  as $k=>$v){
+				//if($result['root']['goodDesc']){
+				//$result['root']['goodDesc']=WSTMSubstr($v['goodDesc'],0,10);
+				//}
+				/* 
 				if($result['root']['createTime']){
 					
-					
-					$result['root']['createTime']=WSTMSubstr($v['createTime'],0,8);
+					$time=$result['root']['createTime'];
+					$result['root']['createTime']=date("Y-m-d",strtotime($time));
 				}
+				 */
 				
-				
-			}
+			//}
 			//exit;
 			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$result);
 			$this->stringify($data);

@@ -25,7 +25,16 @@ class ShopsModel extends BaseModel {
 		$sql.="AND g.goodsStatus=$goodsStatus";	
 	}
 	$result=D('goods')->pageQuery($sql,I("p"),15);
-	  
+	  if($result){
+		  foreach($result['root']  as $k=>$v){
+			  if($v['goodsDesc']){
+				  $v['goodsDesc']=WSTMSubstr($v['goodsDesc'],0,10);
+			  }
+			  
+		  }
+		  
+		  
+	  }
 	//var_dump(D('goods')->getLastSql());
 	//exit;
 	return $result;
