@@ -47,4 +47,25 @@ class SupplierModel extends BaseModel{
         return $result;
     }
 
+    public function orderList() {
+        $pcurr = (int)I("pcurr") ? (int)I("pcurr") : 1;
+        $user = session('WST_USER');
+        //TODO sql语句待修改
+        $sql = "SELECT * FROM __PREFIX__orders as oo JOIN __PREFIX__goods as gg ON gg.goodsId = oo.goodsId where  userId = {$user['userId']} AND isCheck = 1";
+        //供应商没发货的
+        if (I('unSend')) {
+            $sql .= " and isPay = 1";
+        }
+        //供应商已发货但业主还未确认的
+        if (I('sent')) {
+            $sql .= " and isPay = 2";
+        }
+        //业主已确认待评价的
+        if (I('unComment')) {
+            $sql .= " and isPay = 3";
+        }
+        $result = $this->pageQuery($sql , $pcurr , 5);
+        return $result;
+    }
+
 }
