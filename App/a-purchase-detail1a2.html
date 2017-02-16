@@ -24,7 +24,7 @@
 		<div class="pd1-one">
 			<div class="pd1-one-t clearfix">
 				<div class="pd1-list1 l">
-					<img src="" />
+					<img src="img/logo-01.jpg" />
 				</div>
 				<div class="pd1-list2 l">
 					<p id="goodsName1"></p>
@@ -35,6 +35,15 @@
 			</div>
 			<div class="pd1-one-d">
 				<p class="clearfix"><span class="l">地址：</span><span class="l" id="linkAddr1"></span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+			</div>
+		</div>
+		<div class="pd1-two">
+			<div class="pd1-two1">
+				报价记录
+			</div>
+			<div class="pd1-two2">
+				<p>报价金额：<span class="money">￥400,00.00</span><span class="times">2016-01-12 11:48</span></p>
+				<p>报价金额：<span class="money">￥400,00.00</span><span class="times">2016-01-12 11:48</span></p>
 			</div>
 		</div>
 		<div class="pd1-two">
@@ -56,7 +65,7 @@
 					特殊要求：
 				</div>
 				<div class="pd1-three2-list2 l" id="teshu">
-					
+					小和尚下山去化斋老和尚有交待山下的女人是老虎遇见了千万要躲开走过了一村又一寨小和尚暗思揣为什么老虎不吃人模样还挺可爱
 				</div>
 			</div>
 		</div>
@@ -92,9 +101,11 @@
 	<script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.previewImage();
-		var myUrl = "http://test.cnceshi.com/";
+		var myUrl="http://test.cnceshi.com/";
 		var path = window.location.href;
 		var id = path.substring(path.indexOf("=")+1); 
+//		alert(id);
+		var myUrl = "http://test.cnceshi.com/";
 		
 		mui.ajax(myUrl+'index.php?m=Api&c=Goods&a=gooodsPurchaseDetails',{
 			data:{
@@ -119,11 +130,12 @@
 						$("#eTime").html(datas[i].endTime);
 						$("#addr").html(datas[i].linkAddr);
 						$("#teshu").html(datas[i].goodsDesc);
-						$(".pd1-list1 img").attr("src",myUrl+datas[i].goodsImg);
+						$(".pd1-list1 img").attr("src",datas[i].goodsImg);
 						var dataImg = datas[i].goodsThums;
-						$(".mui-content-padded p").each(function(i,val){
-							var imgurl=$(this).find('img').attr('src',myUrl+dataImg);
-						})
+//						$.each(dataImg,function(n,value) {  
+//				            //do something here  
+//				            alert(n+' '+value);  
+//				        });
 					}
 				}else{
 					alert("数据请求失败，请刷新页面")
@@ -135,28 +147,11 @@
 			}
 		});
 	/**
-	 * 我要报价，供应商身份选择
+	 * 
 	 */
-	
 		document.getElementById('quote').addEventListener('tap',function() {
-			mui.ajax(myUrl+'index.php?m=Api&c=Supplier&a=index',{
-				dataType:'json',//服务器返回json格式数据
-				type:'post',//HTTP请求类型
-				timeout:60000,//超时时间设置为10秒；
-				success:function(data){
-					//服务器返回响应，根据响应结果，分析是否获取数据成功；
-					if( data.status == 200 ){
-						mui.openWindow({
-						    url:"a-quedingbaojia.html?goodsId="+id,
-						});
-					}else{
-						alert(data.msg.msg);
-					} 
-				},
-				error:function(xhr,type,errorThrown){
-					//异常处理；
-					console.log(type);
-				}
+			mui.openWindow({
+			    url:"a-shangchuanfujian.html",
 			});
 		});
 	</script>

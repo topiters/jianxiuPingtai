@@ -273,6 +273,7 @@
 	border-bottom: 1px solid #ddd;
 	border-top: 1px solid #ddd;
 	padding: 0.25rem 0.15rem;
+	position: relative;
 }
 
 .pd1-list1 {
@@ -284,10 +285,17 @@
 
 .pd1-list1 img {
 	width: 100%;
+	height: 100%;
+	border-radius: 0.2rem;
 }
 
 .pd1-list2 {
 	margin-left: 0.4rem;
+}
+.pd1-list2 .time1{
+	position: absolute;
+	right: 0.2rem;
+	bottom: 0.2rem;
 }
 
 .pd1-list2 p {
@@ -324,10 +332,19 @@
 	width: 6.4rem;
 	padding: 0.25rem 0.15rem;
 	background-color: #fff;
+	font-size: 0.25rem;
 }
 
 .pd1-two2 p {
 	margin-bottom: 0.2rem;
+}
+
+.money{
+	color: #ff3d10;
+}
+.pd1-two2 p .times{
+	color: #ccc;
+	float: right;
 }
 
 .pd1-two2 p:last-child {
@@ -335,15 +352,18 @@
 }
 
 .pd1-three2-list1 {
-	width: 1.6rem;
+	width: 1.3rem;
 }
-
+.jj1-three2-list2{
+	font-size: 0.25rem;
+}
 .pd1-three2-list2 {
-	width: 4.3rem;
+	width: 4.6rem;
+	
 }
 
 .pd1-four {
-	margin-bottom: 1rem;
+	/*margin-bottom: 1rem;*/
 }
 
 .mui-content-padded {
@@ -382,6 +402,7 @@
 	text-align: center;
 	line-height: 0.66rem;
 }
+
 
 .pd1-foot-btn span,
 .pd1-foot-btn2 span {
@@ -950,10 +971,12 @@
 
 .jj-list1 img {
 	width: 100%;
+	height: 100%;
+	border-radius: 0.2rem;
 }
 
 .jj-list3 p:nth-child(1) {
-	color: #4eb145;
+	color: #ff3d10;
 }
 
 .jj-list2 {
@@ -963,8 +986,8 @@
 .jj-list2 p {
 	font-size: 0.26rem;
 	color: #666;
-	height: 0.3rem;
 	margin-bottom: 0.15rem;
+	width: 3.3rem;
 }
 
 .jj-list2 span {
@@ -974,6 +997,7 @@
 .jj-list2 p:nth-child(1) {
 	font-size: 0.3rem;
 	color: #333;
+	font-weight: bold;
 }
 
 .jj-list2 p:nth-child(4) span {
@@ -1523,4 +1547,27 @@
 p img {
 	max-width: 100%;
 	height: auto;
+}
+
+
+/*上传附件*/
+.myBox{
+	margin-top: 1.8rem;
+}
+.myInput input{
+	width: 5.8rem;
+	height: 0.9rem;
+	margin: 0 0 0.2rem 0.35rem;
+	text-indent: 0.2rem;
+	border-radius:0.06rem ;
+}
+.myBtn .pd-btn {
+	width: 5.8rem;
+	height: 0.9rem;
+	background-color: #4EB145;
+	margin-left:0.35rem;
+	border-radius: 0.06rem;
+	text-align: center;
+	/*line-height: 0.7rem;*/
+	color: #fff;
 }

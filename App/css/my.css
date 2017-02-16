@@ -1,3 +1,11 @@
+
+.dmyj-list-m .dmyj-list-tol{
+	display: none;
+}
+.dmyj-list-m .now{
+	display: block;
+}
+
 .adr-main {
 	margin-top: 0.9rem;
 }
@@ -356,6 +364,25 @@
 	border-top: 1px solid #e4e4e4;
 	border-bottom: 1px solid #e4e4e4;
 	margin-top: 0.15rem;
+}
+.srje,
+.qdzj {
+	padding: 0.15rem 0;
+	text-align: center;
+	margin-top: 0.15rem;
+}
+.srje input{
+	border: none;
+	text-align: center;
+	outline: none;
+	border-bottom: 1px solid #e4e4e4;
+}
+.qdzj button{
+	height: 0.6rem;
+	width: 3.8rem;
+	/*line-height: 0.5rem;*/
+	background: #4EB145;
+	color: #fff;
 }
 
 .jx-alert1-t222 p,
@@ -1687,6 +1714,15 @@
 
 .dmx1-list2 {
 	margin-left: 0.3rem;
+	/*position: relative;*/
+}
+.money{
+	color: #ff3d10;
+}
+.times{
+	position: absolute;
+	bottom: 0.36rem;
+	right: 0.2rem;
 }
 
 .dmx1-list2 p {
@@ -1785,6 +1821,8 @@
 
 .dmyj-list-list1 img {
 	width: 100%;
+	height: 1.8rem;
+	border-radius: 0.2rem;
 }
 
 .dmyj-list-list2 {
@@ -1856,6 +1894,7 @@
 .dmyj2-list2 p:nth-child(1) {
 	font-size: 0.3rem;
 	color: #333;
+	font-weight: bold;
 }
 
 .dmyj2-list2 p:nth-child(4) span {
@@ -1937,7 +1976,6 @@
 	clear: both;
 	overflow: hidden;
 	padding: 0.15rem 0;
-	border-bottom: 1px solid #e4e4e4;
 }
 .dmyj2-five2-l{
 	width: 0.88rem;
@@ -1951,7 +1989,7 @@
 .dmyj2-five2{
 	padding: 0 0.2rem;
 	background-color: #fff;
-	margin-bottom: 1rem;
+	margin-bottom: 0.2rem;
 }
 .dmyj2-five2-r{
 	margin-left: 0.3rem;
@@ -1961,17 +1999,14 @@
 	font-size: 0.32rem;
 	
 }
-.dmyj2-five2-r p:nth-child(2) span{
-	color: #FF3D10;
-}
 .dmyj2-five2-btn{
 	width: 1rem;
 	height: 0.4rem;
-	border-radius: 0.2rem;
+	border-radius: 0.1rem;
 	font-size: 0.22rem;
 	line-height: 0.2rem;
-	color: #4EB145;
-	border: 1px solid #4EB145;
+	color: #fff;
+	background: #4EB145;
 }
 .dmyj2-five2-btn2{
 	width: 1rem;
@@ -2049,6 +2084,11 @@
 	color: #ff7d0d;
 }
 
+.dmyz1-list2 p:first-child {
+	height: 0.6rem;
+	width: 4rem;
+	font-weight: bold;
+}
 .dmyz1-list2 p:last-child {
 	margin-bottom: 0;
 }
@@ -2059,6 +2099,9 @@
 	padding: 0.25rem 0.15rem;
 }
 
+.dmyz1-three{
+	margin-bottom: 1.2rem;
+}
 .dmyz1-two1,
 .dmyz1-three1 {
 	width: 6.4rem;
@@ -2082,6 +2125,12 @@
 
 .dmyz1-three2 p {
 	margin-bottom: 0.1rem;
+}
+.dmyz1-three2 p span{
+	margin-left: 0.2rem;
+}
+.dmyz1-three2 p:nth-child(2) span{
+	color: #4EB145;
 }
 
 .dmyz1-three2-a p {
@@ -2181,7 +2230,7 @@
 }
 
 .dmyz-foot .dmyz-foot-btn:nth-child(2) {
-	background-color: #999;
+	background-color: #4EB145;
 }
 
 .dmyz-foot-btn span {

@@ -20,7 +20,6 @@
 			mui('.mui-scroll-wrapper').scroll();
 		</script>
 	</head>
-
 	<body>
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -71,13 +70,13 @@
 						<span>结束时间：</span>
 						<input type="text" data-options='{}' class="result1" id="endTime" placeholder="请选择结束时间" />
 					</li>
-					<li>
+					<!--<li>
 						<span>风场位置：</span>
 						<input type="text" value="郑州市索克时代" />
-					</li>
+					</li>-->
 				</ul>
 			</div>
-			<div class="fabu1-one">
+			<!--<div class="fabu1-one">
 				<span class="fabu1-onebasic">收货地址</span>
 				<div class="fabu1-one-receive clearfix">
 					<div class="fabu1-one-address l">
@@ -87,6 +86,23 @@
 					</div>
 					<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
 				</div>
+			</div>-->
+			<div class="fabu1-one">
+				<span class="fabu1-onebasic">联系信息</span>
+				<ul class="fabu1-one-mes">
+					<li>
+						<span>联系人：</span>
+						<input type="text" name="" id="linkMan" placeholder="请输入联系人姓名" />
+					</li>
+					<li>
+						<span>电话：</span>
+						<input type="text" name="" id="linkPhone" placeholder="请输入联系人电话" />
+					</li>
+					<li>
+						<span>联系地址：</span>
+						<input type="text" name="" id="linkAddr" placeholder="请输入联系人地址" />
+					</li>
+				</ul>
 			</div>
 			<div class="fabu1-one">
 				<span class="fabu1-onebasic">特殊要求</span>
@@ -103,7 +119,6 @@
 						<div id='image-list' class="row image-list"></div>
 					</div>
 				</div>
-
 			</div>
 			<div class="fabu1-foot">
 				<button id="enquiry">发布询价</button>
@@ -112,7 +127,7 @@
 	</body>
 	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/select2.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/feedback.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script type="text/javascript">
 		$("select").select2({
 			placeholder: "select a option",
@@ -201,62 +216,11 @@
 	</script>
 
 </html>
+<!--<script type="text/javascript">
+	var imgArr=[];
+</script>-->
+<script src="js/feedback.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-	/**
-	 * 发布采购任务
-	 */
-
-	document.getElementById('enquiry').addEventListener("tap", function() {
-		var productName = document.getElementById("productName").value;
-		var purchaseAmount = document.getElementById("purchaseAmount").value;
-		var productSize = document.getElementById("fabu1-one-sel").value;
-		var goodsCatId1 = document.getElementById("fabu1-one-sel1").value;
-		var beginTime = document.getElementById("beginTime").value;
-		var endTime = document.getElementById("endTime").value;
-		var linkMan = document.getElementById("linkMan").innerHTML;
-		var linkPhone = document.getElementById("linkPhone").innerHTML;
-		var linkAddr = document.getElementById("linkAddr").innerHTML;
-		var myimg = document.getElementById("image-list").getAttribute("title");
-		alert(myimg);
-//		return false;
-		var goodsDesc = document.getElementById("goodsDesc").value;
-		mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
-			data: {
-				goodsCatId1: goodsCatId1,
-				goodName: productName,
-				goodsTaskId: 1,   
-				goodsthumbs: myimg,
-				goodsStock: purchaseAmount,
-				attrCatId: productSize,
-				beginTime: beginTime,
-				endTime: endTime,
-				linkMan: linkMan,
-				linkPhone: linkPhone,
-				linkAddr: linkAddr,
-				goodsDesc: goodsDesc
-			},
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			timeout: 10000, //超时时间设置为10秒；
-			success: function(data) {
-				//服务器返回响应，根据响应结果，分析是否获取数据成功；
-				if(data.status == 200) {
-					mui.toast(data.msg.msg);
-					mui.openWindow({
-						url: "a-caigourenwu.html"
-					});
-				} else {
-					mui.toast("错啦");
-					mui.toast(data.msg.msg);
-				}
-			},
-			error: function(xhr, type, errorThrown) {
-			//异常处理；
-				console.log(type);
-			}
-		});
-	});
-	
 	/**
 	 * 规格型号
 	 */

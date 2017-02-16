@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的竞标</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">检修竞价</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
+		</header>
+		<div class="order1-top">
+			<ul>
+				<li class="order1-top-list active4" id="">全部</li>
+				<li class="order1-top-list" id="0">未开始</li>
+				<li class="order1-top-list" id="1">已中标</li>
+				<li class="order1-top-list" id="2">已完成</li>
+			</ul>
+		</div>
+		<div class="dmyj-list-m">
+			<ul class="dmyj-list-tol now" dataGaoOne = "rootcon1">
+				<li class="dmyj-list-tol1" dataGaoOne = "rootchild1">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
+					<div class="dmyj-list-list1 l">
+						<p dataGaoOne = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs" />
+					</div>
+					<div class="dmyj-list-list2 l">
+						<p><span class="l" dataGaoOne="goodsName">检修111名称</span><span class="r" style="color: #4EB145;" dataGaoOne="">消缺</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoOne="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoOne="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoOne="shopAddr">索科时代大厦1810</span></p>
+					</div>
+				</li>
+			</ul>
+			<ul class="dmyj-list-tol" dataGaoTwo = "rootcon2">
+				<li class="dmyj-list-tol1" dataGaoTwo = "rootchild2">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
+					<div class="dmyj-list-list1 l">
+						<p dataGaoTwo = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs" />
+					</div>
+					<div class="dmyj-list-list2 l">
+						<p><span class="l" dataGaoTwo="goodsName">检修222名称</span><span class="r" style="color: #4EB145;">消缺</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoTwo="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoTwo="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoTwo="shopAddr">索科时代大厦1810</span></p>
+					</div>
+				</li>
+			</ul>
+			<ul class="dmyj-list-tol" dataGaoThree = "rootcon3">
+				<li class="dmyj-list-tol1" dataGaoThree = "rootchild3">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
+					<div class="dmyj-list-list1 l">
+						<p dataGaoThree = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs" />
+					</div>
+					<div class="dmyj-list-list2 l">
+						<p><span class="l" dataGaoThree="goodsName">检修333名称</span><span class="r" style="color: #4EB145;">消缺</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoThree="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoThree="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoThree="shopAddr">索科时代大厦1810</span></p>
+					</div>
+				</li>
+			</ul>
+			<ul class="dmyj-list-tol" dataGaoFour = "rootcon4">
+				<li class="dmyj-list-tol1" dataGaoFour = "rootchild4">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
+					<div class="dmyj-list-list1 l">
+						<p dataGaoFour = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs" />
+					</div>
+					<div class="dmyj-list-list2 l">
+						<p><span class="l" dataGaoFour="goodsName">检修444名称</span><span class="r" style="color: #4EB145;">消缺</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoFour="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoFour="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoFour="shopAddr">索科时代大厦1810</span></p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+/**
+ * 业主发布的检修列表---竞价
+ */
+	var myURL = "http://test.cnceshi.com/";
+	mui.init({
+		pullRefresh : {
+		    container:'.dmyj-list-tol',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    up : {
+//		      	height:50,//可选.默认50.触发上拉加载拖动距离
+		      	auto:true,//可选,默认false.自动上拉加载一次
+		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+	  	}
+	});
+		/**
+		 * 业主发布的采购列表
+		 * 上拉加载，配合init代码
+		 */
+	var rootnode1 = $('[dataGaoOne = "rootcon1"]');
+	var rootnode2 = $('[dataGaoTwo = "rootcon2"]');
+	var rootnode3 = $('[dataGaoThree = "rootcon3"]');
+	var rootnode4 = $('[dataGaoFour = "rootcon4"]');
+	var childnode1 = $('[dataGaoOne = "rootchild1"]').clone();
+	var childnode2 = $('[dataGaoTwo = "rootchild2"]').clone();
+	var childnode3 = $('[dataGaoThree = "rootchild3"]').clone();
+	var childnode4 = $('[dataGaoFour = "rootchild4"]').clone();
+	$('[dataGaoOne = "rootchild1"]').remove();	
+	$('[dataGaoTwo = "rootchild2"]').remove();	
+	$('[dataGaoThree = "rootchild3"]').remove();	
+	$('[dataGaoFour = "rootchild4"]').remove();	  
+	
+//	var mySrc1 = document.getElementsByClassName("mySrc");
+//	var mySrc = document.getElementsByClassName("myimgs");
+//	var mylist = document.getElementsByClassName("dmyj-list-tol1");
+//	mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+//				data:{
+//					goodsTaskId: 2,
+//					goodsType: 2,
+//					p:0,
+//					goodsStatus: ""
+//				},
+//				dataType:'json',//服务器返回json格式数据
+//				type:'post',//HTTP请求类型
+//				timeout:10000,//超时时间设置为10秒；
+//				success:function(data){
+//					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+//					if( data.status == 200 ){
+//						
+//						console.log(JSON.stringify(data.msg.root))
+//						$commonObj.loadListData({
+//							sourceDataList : data.msg.root,
+//							dataListRootNode : rootnode1,
+//							dataListChildNode : childnode1,
+//							dataAttrName : "dataGaoOne",
+//							dataHandleFn : function(){
+//								for(var i=0;i<mySrc1.length;i++){
+//									for (var j=0;j<mySrc.length;j++){
+//										var myStr = myURL+mySrc1[j].innerHTML; 
+//										mySrc[j].setAttribute("src",myStr);
+//									}	
+//								}
+//							//点击事件
+//								for(var j=0;j<mylist.length;j++){
+//									mylist[j].addEventListener('tap',function(){
+//										var id = $(this).children("p").html();
+//										mui.openWindow({
+//									    	url:"d-qiangdan-dai.html?id="+id
+//										})
+//									});	
+//								}
+//							}
+//						})	
+//						
+//					}else{
+//						mui.toast(data.msg.msg);
+//					} 
+//				},
+//				error:function(xhr,type,errorThrown){
+//					//异常处理；
+//					console.log(type);
+//				}
+//			});
+	
+	
+	$(function(){
+		$(".order1-top ul").on("click", "li", function() {
+			$(".order1-top ul").children("li").removeClass('active4');
+			$(this).addClass("active4");
+			var num=$(this).index();
+			$(".dmyj-list-m .dmyj-list-tol").eq(num).addClass("now").siblings().removeClass("now");
+			var goodStatus=$(this).attr("id");
+			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+				data:{
+					goodsTaskId: 2,
+					goodsType: 2,
+					p:1,
+					goodsStatus: goodStatus
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						
+						var mySrc1 = document.getElementsByClassName("mySrc");
+						var mySrc = document.getElementsByClassName("myimgs");
+						var mylist = document.getElementsByClassName("dmyj-list-tol1");
+						if(goodStatus==""){
+							console.log(JSON.stringify(data.msg.root))
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode1,
+								dataListChildNode : childnode1,
+								dataAttrName : "dataGaoOne",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+								//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-qiangdan-dai.html?id="+id
+											})
+										});	
+									}
+								}
+							})	
+						}else if(goodStatus==0){
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode2,
+								dataListChildNode : childnode2,
+								dataAttrName : "dataGaoTwo",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+									//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-qiangdan-dai.html?id="+id
+											})
+										});	
+									}
+								}
+							})	
+						}else if(goodStatus==1){
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode3,
+								dataListChildNode : childnode3,
+								dataAttrName : "dataGaoThree",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+									//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-qiangdan-zhifu.html?id="+id
+											})
+										});	
+									}
+								}
+							})	
+						}else{
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode4,
+								dataListChildNode : childnode4,
+								dataAttrName : "dataGaoFour",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+									//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-qiangdan-pingjia.html?id="+id
+											})
+										});	
+									}
+								}
+							})	
+						}
+						
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
+			
+			
+		});
+	})	
+	
+ 	var i = 2;
+ 	function mypullFresh() {
+ 		setTimeout(function() {
+ 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+				data:{
+					goodsTaskId: 2,
+					goodsType: "",
+					p:i,
+					goodsStatus: goodStatus
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						if(goodStatus==""){
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode1,
+								dataListChildNode : childnode1,
+								dataAttrName : "dataGaoOne",
+								dataHandleFn : function(){
+								}
+							})	
+						}else if(goodStatus==1){
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode2,
+								dataListChildNode : childnode2,
+								dataAttrName : "dataGaoTwo",
+								dataHandleFn : function(){
+								}
+							})	
+						}else if(goodStatus==2){
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode3,
+								dataListChildNode : childnode3,
+								dataAttrName : "dataGaoThree",
+								dataHandleFn : function(){
+								}
+							})	
+						}else{
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode4,
+								dataListChildNode : childnode4,
+								dataAttrName : "dataGaoFour",
+								dataHandleFn : function(){
+								}
+							})	
+						}
+						
+						i++;
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
+ 			
+ 		},1000)
+	}
+</script>

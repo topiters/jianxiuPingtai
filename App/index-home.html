@@ -348,12 +348,12 @@
 							<img src="img/shouye-01.png" />
 						</div>
 						<div class="jx-alert1-t222">
-							<a href="d-myqiangdan.html">
+							<a href="d-wodeqiangdan.html">
 								<p><i class="icon iconfont icon-qiangdan" style="color: #FF9A00;font-size: 0.4rem;margin-right: 0.1rem;"></i><span>抢单</span></p>
 							</a>
 						</div>
 						<div class="jx-alert1-t322">
-							<a href="d-mybid-list.html">
+							<a href="d-wodejingbiao.html">
 								<p><i class="icon iconfont icon-icon-rank" style="color: #4EB145;font-size: 0.4rem;margin-right: 0.1rem;"></i><span>竞标</span></p>
 							</a>
 						</div>
@@ -431,20 +431,19 @@
 /**
  * 轮播图数据请求
  */
-	mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Index&a=index',{
+	var myUrl="http://test.cnceshi.com/";
+	mui.ajax(myUrl+'index.php?m=Api&c=Index&a=index',{
 		dataType:'json',//服务器返回json格式数据
 		type:'post',//HTTP请求类型
 		timeout:60000,//超时时间设置为10秒；
-		headers:{'Content-Type':'application/json'},	              
 		success:function(data){
 			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-			var aaa="http://test.cnceshi.com/";
 			if( data.status == 200 ){
 				var sliderImgs=document.getElementsByClassName("sliderImgs");
 				for(var i=0; i<sliderImgs.length;i++){
 					var imgs=data.msg.adv;
 					for(var j=0 ;j<imgs.length;j++){
-						sliderImgs[j].setAttribute("src",aaa+imgs[j].adFile);
+						sliderImgs[j].setAttribute("src",myUrl+imgs[j].adFile);
 						sliderImgs[j].parentNode.href=imgs[j].adURL;
 					}
 				}

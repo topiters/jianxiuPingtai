@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="feedback">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>上传附件</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">采购任务</h1>
+		</header>
+		<div class="myBox">	
+			<div class="myInput">
+				<input type="text" id="jinE" placeholder="请输入报价金额"/>
+			</div>	
+			<div class="myBtn">
+				<button class="pd-btn">确定报价</button>
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/select2.min.js" type="text/javascript" charset="utf-8"></script>
+</html>
+<script type="text/javascript">
+	var path = window.location.href;
+	var id = path.substring(path.indexOf("=")+1); 
+	
+	var myUrl="http://test.cnceshi.com/";
+	document.getElementsByClassName('pd-btn')[0].addEventListener('tap',function() {
+		var jinE = $("#jinE").val();
+		mui.ajax(myUrl+'index.php?m=Api&c=Supplier&a=offer',{
+			data:{
+				goodsId:id,
+				money:jinE
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:60000,//超时时间设置为10秒；
+			success:function(data){
+				//服务器返回响应，根据响应结果，分析是否获取数据成功；
+				if( data.status == 200 ){
+					mui.toast(data.msg.msg);
+					mui.openWindow({
+					    url:"d-mybaojia.html"
+					});
+				}else{
+					mui.toast(data.msg.msg);
+				} 
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				console.log(type);
+			}
+		});
+	});
+</script>

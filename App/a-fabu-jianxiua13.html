@@ -124,10 +124,27 @@
 						<span>检修费用：</span>
 						<input type="text" id="shopPrice" placeholder="请输入检修检修金额" />元
 					</li>
-					<li>
+					<!--<li>
 						<span>风场位置：</span>
-						<input type="text" value="郑州市索克时代" />
-						<i class="icon iconfont icon-weizhi" style="font-size: 0.4rem;"></i>
+						<input type="text"  value="郑州市索克时代"/>
+						<i class="icon iconfont icon-weizhi"></i>
+					</li>-->
+				</ul>
+			</div>
+			<div class="fabu1-one">
+				<span class="fabu1-onebasic">联系信息</span>
+				<ul class="fabu1-one-mes">
+					<li>
+						<span>联系人：</span>
+						<input type="text" name="" id="linkMan" placeholder="请输入联系人姓名" />
+					</li>
+					<li>
+						<span>电话：</span>
+						<input type="text" name="" id="linkPhone" placeholder="请输入联系人电话" />
+					</li>
+					<li>
+						<span>联系地址：</span>
+						<input type="text" name="" id="linkAddr" placeholder="请输入联系人地址" />
 					</li>
 				</ul>
 			</div>
@@ -217,74 +234,8 @@
 	</script>
 
 </html>
-<script src="js/feedback.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/feedback-jianxiu.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-	/**
-	 * 发布检修任务
-	 */
-	document.getElementById('confirmAnnouncement').addEventListener("tap",function(){
-		var goodsCatId1 = document.getElementsByClassName("productType")[0].value;
-		var goodName = document.getElementById("goodName").value;
-		var brandId = document.getElementsByClassName("brandId")[0].value;
-		var attrCatId = document.getElementsByClassName("attrCatId")[0].value;
-		var goodType = $("input[name='name1']:checked").val();
-		var isVoice = $("input[name='name2']:checked").val();
-		var repairId = document.getElementsByClassName("repairId")[0].value;
-		var goodDesc = document.getElementById("goodDesc").value;
-		var startTime = document.getElementById("result0").value;
-		var beginTime = document.getElementById("result1").value;
-		var endTime = document.getElementById("result2").value;
-		var repairhistory = document.getElementById("repairhistory").value;
-		var shopPrice = document.getElementById("shopPrice").value;
-		var goodsworks = document.getElementById("needp").value;
-		var goodsthumb = document.getElementById("image-list").getAttribute("title");
-		mui.toast(goodsthumb);
-		mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
-			data:{
-				goodsCatId1: goodsCatId1,
-				goodName: goodName,
-				goodsTaskId: 2,
-				goodsthumb: "lalalala",
-				brandId: brandId,
-				attrCatId: attrCatId,
-				goodType: goodType,
-				repairId: repairId,
-				goodDesc: goodDesc,
-				startTime: startTime,
-				beginTime: beginTime,
-				endTime: endTime,
-				repairhistory: repairhistory,
-				shopPrice: shopPrice,
-				goodsworks: goodsworks,
-				isVoice: isVoice
-			},
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			timeout: 60000, //超时时间设置为10秒；
-			success: function(data) {
-				//服务器返回响应，根据响应结果，分析是否获取数据成功；
-				if(data.status == 200) {
-					mui.toast(data.msg.msg);
-					mui.toast(goodType);
-					if(goodType==1){
-						mui.openWindow({
-							url: "d-my-yezhu-jingbiao1.html"
-						});	
-					}else{
-						mui.openWindow({
-							url: "d-my-yezhuqiangdan-tol.html"
-						});	
-					}
-				} else {
-					mui.toast(data.msg.msg);  
-				}
-			},
-			error: function(xhr, type, errorThrown) {
-				//异常处理；
-				console.log(type);
-			}
-		});
-	});
 	
 	/**
 	 * 规格型号

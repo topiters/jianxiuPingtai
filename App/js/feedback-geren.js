@@ -15,7 +15,7 @@
 		//question: document.getElementById('question'), 
 		//contact: document.getElementById('contact'), 
 		imageList: document.getElementById('image-list'),
-		submitBtn: document.getElementById('enquiry')
+		submitBtn: document.getElementById('saveMsg')
 	};
 //	var url = 'http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods';
 	feedback.files = [];
@@ -176,54 +176,64 @@
 					console.log(_data);
 				}
 				/**  
-				 * 发布采购任务
+				 * 发布检修任务
 				 */
+				
 				console.log(imgArrs);
-				var productName = document.getElementById("productName").value;
-				var purchaseAmount = document.getElementById("purchaseAmount").value;
-				var productSize = document.getElementById("fabu1-one-sel").value;
-				var goodsCatId1 = document.getElementById("fabu1-one-sel1").value;
-				var beginTime = document.getElementById("beginTime").value;
-				var endTime = document.getElementById("endTime").value;
-				var linkMan = document.getElementById("linkMan").value;
-				var linkPhone = document.getElementById("linkPhone").value;
-				var linkAddr = document.getElementById("linkAddr").value;
-				var goodsDesc = document.getElementById("goodsDesc").value;
-				mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
-					data: {
-						goodsCatId1: goodsCatId1,
-						goodName: productName,
-						goodsTaskId: 1,   
-						goodsThumbs: imgArrs,
-						goodsStock: purchaseAmount,
-						attrCatId: productSize,
-						beginTime: beginTime,
-						endTime: endTime,
-						linkMan: linkMan,
-						linkPhone: linkPhone,
-						linkAddr: linkAddr,
-						goodsDesc: goodsDesc
-					},
-					dataType: 'json', //服务器返回json格式数据
-					type: 'post', //HTTP请求类型
-					timeout: 10000, //超时时间设置为10秒；
-					success: function(data) {
-						//服务器返回响应，根据响应结果，分析是否获取数据成功；
-						if(data.status == 200) {
-							mui.toast(data.msg.msg);
-							mui.openWindow({
-								url: "d-myxujia1.html"
-							});
-						} else {
-							mui.toast("错啦");
-							mui.toast(data.msg.msg);
-						}
-					},
-					error: function(xhr, type, errorThrown) {
-					//异常处理；
-						console.log(type);
+				
+				var shopImg = document.getElementById("head-img1").getAttribute("src");
+				var shopCompany = document.getElementById("shopCompany").value;
+				var goodsCatId1 = document.getElementById("goodsCatId1").value;
+				var shoptotal = document.getElementById("shoptotal").value;
+				var shopInfo = document.getElementById("area").value;
+				var shopArea = document.getElementById("shopArea").value;
+				var shopAddr = document.getElementById("shopAddr").value;
+				var shopUrl = document.getElementById("shopUrl").value;
+				var shopHost = document.getElementById("shopHost").value;
+				var shopIdentimg = document.getElementById("image-list").getAttribute("title");
+				var btnArray = ['否', '是'];
+				mui.confirm('确认保存？', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addByUser',{
+							data:{
+								shopImg: shopImg,
+								shopCompany: shopCompany,
+								goodsCatId1: goodsCatId1,
+								shopTotal: shoptotal,
+								shopInfo: shopInfo,
+								shopArea: shopArea,
+								shopAddr: shopAddr,
+								shopUrl: shopUrl,
+								latitude: "",
+								longitude: "",
+								shopHost: shopHost,
+								shopIdentimg: imgArrs
+							},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							success:function(data){
+								//服务器返回响应，根据响应结果，分析是否获取数据成功；
+								if( data.status == 200 ){
+									mui.toast(data.msg.msg);
+									mui.openWindow({
+										url: "index-home.html"
+									});	
+								}else{
+									mui.toast(data.msg.msg);
+			//						mui.toast("数据请求失败，请刷新页面")
+								}   
+							},
+							error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+						});			
+					} else {
+						     
 					}
-				});
+				})
+				
 				if (data.ret === 0 && data.desc === 'Success') {
 //					mui.toast('反馈成功~')
 					console.log("upload success");

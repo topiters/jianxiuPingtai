@@ -27,14 +27,16 @@
 		</header>
 		<div class="pd1-one" id="pullRef" dataGao="rootcon">
 			<div class="pd1-one-t clearfix" dataGao="rootchild">
+				<p dataGao = "goodsId" class="myid" style="display: none;"></p>
 				<div class="pd1-list1 l">
-					<img src="img/logo-01.jpg" dataGao=""/>
+					<p dataGao = "goodsImg" class="myimgs" style="display: none;"></p>
+					<img src="img/logo-01.jpg" class="myImg"/>
 				</div>
-				<div class="pd1-list2 r">
+				<div class="pd1-list2 l">
 					<p class="mingcheng"  dataGao="goodsName">采购名称采购名称采购名称</p>
-					<p>型&nbsp;&nbsp;号<span dataGao="attrCatId">kg-2563</span></p>
+					<p>型&nbsp;&nbsp;号:&nbsp;<span dataGao="typeSn">kg-2563</span></p>
 					<p><span dataGao="linkMan">李三</span> | <span dataGao="linkPhone">15236252635</span></p>
-					<p>数&nbsp;&nbsp;量：<span dataGao="goodsStock">1000</span>件<span class="time1" style="margin-left: 1.4rem;"  dataGao="">12:12:12</span></p>
+					<p>数&nbsp;&nbsp;量：<span dataGao="goodsStock" >1000</span>件<span class="time1" dataGao="createTimes">12:12:12</span></p>
 				</div>
 			</div>
 		</div>
@@ -54,9 +56,9 @@
 		    container:'#pullRef',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
 		    up : {
 //		      	height:50,//可选.默认50.触发上拉加载拖动距离
-//		      	auto:true,//可选,默认false.自动上拉加载一次
+		      	auto:true,//可选,默认false.自动上拉加载一次
 		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
-//		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
 		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 		    }
 	  	}
@@ -64,28 +66,54 @@
 	var rootnode = $('[dataGao = "rootcon"]');
 	var childnode = $('[dataGao = "rootchild"]').clone();
 	$('[dataGao = "rootchild"]').remove();
+ 	var i = 1;
+ 	var myUrl = "http://test.cnceshi.com/";
  	function mypullFresh() {
  		setTimeout(function() {
 		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
-			mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Goods&a=gooodsPurchase',{
+			mui.ajax(myUrl+'index.php?m=Api&c=Goods&a=gooodsPurchase',{
 				data:{
-					pcurr:3
+					pcurr: i
 				},
 				dataType:'json',//服务器返回json格式数据
 				type:'post',//HTTP请求类型
 				timeout:60000,//超时时间设置为10秒；
-				headers:{'Content-Type':'application/json'},	              
+//				headers:{'Content-Type':'application/json'},	              
 				success:function(data){
 					//服务器返回响应，根据响应结果，分析是否获取数据成功；
 					if( data.status == 200 ){
-//						alert(data.msg.root.length);
 						$commonObj.loadListData({
 							sourceDataList : data.msg.root,
 							dataListRootNode : rootnode,
 							dataListChildNode : childnode,
 							dataAttrName : "dataGao",
-							dataHandleFn : function(){}
+							dataHandleFn : function(){
+								var mySrc = document.getElementsByClassName("myImg");
+								var mySrc1 = document.getElementsByClassName("myimgs");
+								for(var i=0;i<mySrc1.length;i++){
+									for (var j=0;j<mySrc.length;j++){
+										var myStr = myUrl+mySrc1[j].innerHTML; 
+										mySrc[j].setAttribute("src",myStr);
+									}	
+								}
+								
+								//点击事件
+								var mylist = document.getElementsByClassName("pd1-one-t");
+								for(var j=0;j<mylist.length;j++){
+									mylist[j].addEventListener('tap',function(){
+										var id = $(this).children("p").html();
+//											alert(id);
+										mui.openWindow({
+									    	url:"a-purchase-detail1a1.html?id="+id
+										})
+									});	
+								}
+							}
 						})
+						
+						
+								
+						i++;
 					}else{
 						mui.toast(data.msg.msg);
 					} 
@@ -101,19 +129,11 @@
 		    mui('#pullRef').pullRefresh().endPullupToRefresh((++count > 2));
 	    },1000)
 	}
-//	if (mui.os.plus) {
-//		mui.plusReady(function() {
-//			setTimeout(function() {
-//				mui('#pullrefresh').pullRefresh().pullupLoading();
-//			}, 1000);
-//
-//		});
-//	} else {
-//		mui.ready(function() {
-//			mui('#pullrefresh').pullRefresh().pullupLoading();
-//		});
-//	}		
-		
+//	function toList(){
+//		
+//	}
+
+
 	</script>
 
 </html>

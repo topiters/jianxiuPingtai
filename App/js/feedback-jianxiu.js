@@ -15,7 +15,7 @@
 		//question: document.getElementById('question'), 
 		//contact: document.getElementById('contact'), 
 		imageList: document.getElementById('image-list'),
-		submitBtn: document.getElementById('enquiry')
+		submitBtn: document.getElementById('confirmAnnouncement')
 	};
 //	var url = 'http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods';
 	feedback.files = [];
@@ -176,51 +176,65 @@
 					console.log(_data);
 				}
 				/**  
-				 * 发布采购任务
+				 * 发布检修任务
 				 */
+				
 				console.log(imgArrs);
-				var productName = document.getElementById("productName").value;
-				var purchaseAmount = document.getElementById("purchaseAmount").value;
-				var productSize = document.getElementById("fabu1-one-sel").value;
-				var goodsCatId1 = document.getElementById("fabu1-one-sel1").value;
-				var beginTime = document.getElementById("beginTime").value;
-				var endTime = document.getElementById("endTime").value;
-				var linkMan = document.getElementById("linkMan").value;
-				var linkPhone = document.getElementById("linkPhone").value;
-				var linkAddr = document.getElementById("linkAddr").value;
-				var goodsDesc = document.getElementById("goodsDesc").value;
+				var goodsCatId1 = document.getElementsByClassName("productType")[0].value;
+				var goodName = document.getElementById("goodName").value;
+				var brandId = document.getElementsByClassName("brandId")[0].value;
+				var attrCatId = document.getElementsByClassName("attrCatId")[0].value;
+				var goodType = $("input[name='name1']:checked").val();
+				var isVoice = $("input[name='name2']:checked").val();
+				var repairId = document.getElementsByClassName("repairId")[0].value;
+				var goodDesc = document.getElementById("goodDesc").value;
+				var startTime = document.getElementById("result0").value;
+				var beginTime = document.getElementById("result1").value;
+				var endTime = document.getElementById("result2").value;
+				var repairhistory = document.getElementById("repairhistory").value;
+				var shopPrice = document.getElementById("shopPrice").value;
+				var goodsworks = document.getElementById("needp").value;
 				mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
-					data: {
+					data:{
 						goodsCatId1: goodsCatId1,
-						goodName: productName,
-						goodsTaskId: 1,   
+						goodName: goodName,
+						goodsTaskId: 2,
 						goodsThumbs: imgArrs,
-						goodsStock: purchaseAmount,
-						attrCatId: productSize,
+						brandId: brandId,
+						attrCatId: attrCatId,
+						goodsType: goodType,
+						repairId: repairId,
+						goodDesc: goodDesc,
+						startTime: startTime,
 						beginTime: beginTime,
 						endTime: endTime,
-						linkMan: linkMan,
-						linkPhone: linkPhone,
-						linkAddr: linkAddr,
-						goodsDesc: goodsDesc
+						repairhistory: repairhistory,
+						shopPrice: shopPrice,
+						goodsworks: goodsworks,
+						isVoice: isVoice
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
-					timeout: 10000, //超时时间设置为10秒；
+					timeout: 60000, //超时时间设置为10秒；
 					success: function(data) {
 						//服务器返回响应，根据响应结果，分析是否获取数据成功；
 						if(data.status == 200) {
 							mui.toast(data.msg.msg);
-							mui.openWindow({
-								url: "d-myxujia1.html"
-							});
+							if(goodType==1){
+								mui.openWindow({
+									url: "d-wodejingbiao.html"
+								});	
+							}else{
+								mui.openWindow({
+									url: "d-wodeqiangdan.html"
+								});	
+							}
 						} else {
-							mui.toast("错啦");
-							mui.toast(data.msg.msg);
+							mui.toast(data.msg.msg);  
 						}
 					},
 					error: function(xhr, type, errorThrown) {
-					//异常处理；
+						//异常处理；
 						console.log(type);
 					}
 				});
