@@ -259,7 +259,7 @@ class UsersModel extends BaseModel {
 	    $udata['userPhone'] = I('userPhone');
 	    //$data['userScore'] = I('userScore');
 		//$data['userEmail'] = I("userEmail");
-	    $udata['createTime'] = date('Y-m-d H:i:s');
+	    $udata['createTime'] = date('Y-m-d H:i:s',time());
 	    $udata['userFlag'] = 1;
 	    
 	   
