@@ -105,16 +105,16 @@
  */
 	var myURL = "http://test.cnceshi.com/";
 	mui.init({
-		pullRefresh : {
-		    container:'.dmyj-list-tol',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
-		    up : {
-//		      	height:50,//可选.默认50.触发上拉加载拖动距离
-		      	auto:true,//可选,默认false.自动上拉加载一次
-		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
-		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
-		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-		    }
-	  	}
+//		pullRefresh : {
+//		    container:'.dmyj-list-tol',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+//		    up : {
+////		      	height:50,//可选.默认50.触发上拉加载拖动距离
+//		      	auto:true,//可选,默认false.自动上拉加载一次
+//		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+//		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+//		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//		    }
+//	  	}
 	});
 		/**
 		 * 业主发布的采购列表
@@ -133,57 +133,57 @@
 	$('[dataGaoThree = "rootchild3"]').remove();	
 	$('[dataGaoFour = "rootchild4"]').remove();	  
 	
-//	var mySrc1 = document.getElementsByClassName("mySrc");
-//	var mySrc = document.getElementsByClassName("myimgs");
-//	var mylist = document.getElementsByClassName("dmyj-list-tol1");
-//	mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
-//				data:{
-//					goodsTaskId: 2,
-//					goodsType: 2,
-//					p:0,
-//					goodsStatus: ""
-//				},
-//				dataType:'json',//服务器返回json格式数据
-//				type:'post',//HTTP请求类型
-//				timeout:10000,//超时时间设置为10秒；
-//				success:function(data){
-//					//服务器返回响应，根据响应结果，分析是否获取数据成功；
-//					if( data.status == 200 ){
-//						
-//						console.log(JSON.stringify(data.msg.root))
-//						$commonObj.loadListData({
-//							sourceDataList : data.msg.root,
-//							dataListRootNode : rootnode1,
-//							dataListChildNode : childnode1,
-//							dataAttrName : "dataGaoOne",
-//							dataHandleFn : function(){
-//								for(var i=0;i<mySrc1.length;i++){
-//									for (var j=0;j<mySrc.length;j++){
-//										var myStr = myURL+mySrc1[j].innerHTML; 
-//										mySrc[j].setAttribute("src",myStr);
-//									}	
-//								}
-//							//点击事件
-//								for(var j=0;j<mylist.length;j++){
-//									mylist[j].addEventListener('tap',function(){
-//										var id = $(this).children("p").html();
-//										mui.openWindow({
-//									    	url:"d-qiangdan-dai.html?id="+id
-//										})
-//									});	
-//								}
-//							}
-//						})	
-//						
-//					}else{
-//						mui.toast(data.msg.msg);
-//					} 
-//				},
-//				error:function(xhr,type,errorThrown){
-//					//异常处理；
-//					console.log(type);
-//				}
-//			});
+	var mySrc1 = document.getElementsByClassName("mySrc");
+	var mySrc = document.getElementsByClassName("myimgs");
+	var mylist = document.getElementsByClassName("dmyj-list-tol1");
+	mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+		data:{
+			goodsTaskId: 2,
+			goodsType: 1,
+			p:1,
+			goodsStatus: ""
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				
+				console.log(JSON.stringify(data.msg.root))
+				$commonObj.loadListData({
+					sourceDataList : data.msg.root,
+					dataListRootNode : rootnode1,
+					dataListChildNode : childnode1,
+					dataAttrName : "dataGaoOne",
+					dataHandleFn : function(){
+						for(var i=0;i<mySrc1.length;i++){
+							for (var j=0;j<mySrc.length;j++){
+								var myStr = myURL+mySrc1[j].innerHTML; 
+								mySrc[j].setAttribute("src",myStr);
+							}	
+						}
+					//点击事件
+						for(var j=0;j<mylist.length;j++){
+							mylist[j].addEventListener('tap',function(){
+								var id = $(this).children("p").html();
+								mui.openWindow({
+							    	url:"d-jiangbiao-dai.html?id="+id
+								})
+							});	
+						}
+					}
+				})	
+				
+			}else{
+				mui.toast(data.msg.msg);
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});
 	
 	
 	$(function(){
@@ -196,7 +196,7 @@
 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
 				data:{
 					goodsTaskId: 2,
-					goodsType: 2,
+					goodsType: 1,
 					p:1,
 					goodsStatus: goodStatus
 				},
@@ -211,6 +211,7 @@
 						var mySrc = document.getElementsByClassName("myimgs");
 						var mylist = document.getElementsByClassName("dmyj-list-tol1");
 						if(goodStatus==""){
+							$(".dmyj-list-tol").empty();
 							console.log(JSON.stringify(data.msg.root))
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
@@ -229,13 +230,14 @@
 										mylist[j].addEventListener('tap',function(){
 											var id = $(this).children("p").html();
 											mui.openWindow({
-										    	url:"d-qiangdan-dai.html?id="+id
+										    	url:"d-jiangbiao-dai.html?id="+id
 											})
 										});	
 									}
 								}
 							})	
 						}else if(goodStatus==0){
+							$(".dmyj-list-tol").empty();
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
 								dataListRootNode : rootnode2,
@@ -253,13 +255,14 @@
 										mylist[j].addEventListener('tap',function(){
 											var id = $(this).children("p").html();
 											mui.openWindow({
-										    	url:"d-qiangdan-dai.html?id="+id
+										    	url:"d-jiangbiao-dai.html?id="+id
 											})
 										});	
 									}
 								}
 							})	
 						}else if(goodStatus==1){
+							$(".dmyj-list-tol").empty();
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
 								dataListRootNode : rootnode3,
@@ -277,13 +280,14 @@
 										mylist[j].addEventListener('tap',function(){
 											var id = $(this).children("p").html();
 											mui.openWindow({
-										    	url:"d-qiangdan-zhifu.html?id="+id
+										    	url:"d-jingbiao-xuanze.html?id="+id
 											})
 										});	
 									}
 								}
 							})	
 						}else{
+							$(".dmyj-list-tol").empty();
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
 								dataListRootNode : rootnode4,
@@ -301,7 +305,7 @@
 										mylist[j].addEventListener('tap',function(){
 											var id = $(this).children("p").html();
 											mui.openWindow({
-										    	url:"d-qiangdan-pingjia.html?id="+id
+										    	url:"d-jingbiao-pingjia.html?id="+id
 											})
 										});	
 									}
@@ -323,71 +327,71 @@
 		});
 	})	
 	
- 	var i = 2;
- 	function mypullFresh() {
- 		setTimeout(function() {
- 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
-				data:{
-					goodsTaskId: 2,
-					goodsType: "",
-					p:i,
-					goodsStatus: goodStatus
-				},
-				dataType:'json',//服务器返回json格式数据
-				type:'post',//HTTP请求类型
-				timeout:10000,//超时时间设置为10秒；
-				success:function(data){
-					//服务器返回响应，根据响应结果，分析是否获取数据成功；
-					if( data.status == 200 ){
-						if(goodStatus==""){
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode1,
-								dataListChildNode : childnode1,
-								dataAttrName : "dataGaoOne",
-								dataHandleFn : function(){
-								}
-							})	
-						}else if(goodStatus==1){
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode2,
-								dataListChildNode : childnode2,
-								dataAttrName : "dataGaoTwo",
-								dataHandleFn : function(){
-								}
-							})	
-						}else if(goodStatus==2){
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode3,
-								dataListChildNode : childnode3,
-								dataAttrName : "dataGaoThree",
-								dataHandleFn : function(){
-								}
-							})	
-						}else{
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode4,
-								dataListChildNode : childnode4,
-								dataAttrName : "dataGaoFour",
-								dataHandleFn : function(){
-								}
-							})	
-						}
-						
-						i++;
-					}else{
-						mui.toast(data.msg.msg);
-					} 
-				},
-				error:function(xhr,type,errorThrown){
-					//异常处理；
-					console.log(type);
-				}
-			});
- 			
- 		},1000)
-	}
+// 	var i = 2;
+// 	function mypullFresh() {
+// 		setTimeout(function() {
+// 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+//				data:{
+//					goodsTaskId: 2,
+//					goodsType: "",
+//					p:i,
+//					goodsStatus: goodStatus
+//				},
+//				dataType:'json',//服务器返回json格式数据
+//				type:'post',//HTTP请求类型
+//				timeout:10000,//超时时间设置为10秒；
+//				success:function(data){
+//					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+//					if( data.status == 200 ){
+//						if(goodStatus==""){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode1,
+//								dataListChildNode : childnode1,
+//								dataAttrName : "dataGaoOne",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else if(goodStatus==1){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode2,
+//								dataListChildNode : childnode2,
+//								dataAttrName : "dataGaoTwo",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else if(goodStatus==2){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode3,
+//								dataListChildNode : childnode3,
+//								dataAttrName : "dataGaoThree",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else{
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode4,
+//								dataListChildNode : childnode4,
+//								dataAttrName : "dataGaoFour",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}
+//						
+//						i++;
+//					}else{
+//						mui.toast(data.msg.msg);
+//					} 
+//				},
+//				error:function(xhr,type,errorThrown){
+//					//异常处理；
+//					console.log(type);
+//				}
+//			});
+// 			
+// 		},1000)
+//	}
 </script>

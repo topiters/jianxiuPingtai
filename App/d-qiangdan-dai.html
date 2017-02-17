@@ -87,7 +87,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="pd1-three">
+		<!--<div class="pd1-three">
 			<div class="pd1-three1">
 				特殊要求
 			</div>
@@ -99,7 +99,7 @@
 					小和尚下山去化斋老和尚有交待山下的女人是老虎遇见了千万要躲开走过了一村又一寨小和尚暗思揣为什么老虎不吃人模样还挺可爱
 				</div>
 			</div>
-		</div>
+		</div>-->
 		<div class="pd1-four" style="margin-bottom: 1.2rem;">
 			<div class="pd1-four1">
 				附件
@@ -138,9 +138,10 @@
 				<div class="srje">
 					<input type="text" id="fei" value="" placeholder="请输入增加的金额" />
 				</div>
-				<div class="qdzj">
-					<button>确定增加</button>
+				<div  class="qdzj">
+					<button class="mybtn">确定增加</button>
 				</div>
+				<span class="cha"><i class="icon iconfont icon-cha"></i></span>
 			</div>
 		</div>
 	</body>
@@ -149,18 +150,57 @@
 	<script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.previewImage();
+		var myUrl = "http://test.cnceshi.com/";
+		var path = window.location.href;
+		var id = path.substring(path.indexOf("=")+1); 
+		
+		/**
+		 * 点击发布
+		 */
 		$(".jj-foot-btn").click(function() {
-			$(".jx-alert122").show();
+			$(".jx-alert122").fadeIn();
 			var hh=$(document).height();
 			$(".jx-alert122").css("height",hh+"px");
 		});
+		$(".cha").click(function(){
+			$(".jx-alert122").fadeOut();
+		});
+		/**
+		 * 增加金额
+		 */
+		$(".mybtn").click(function(){
+			var shopPrice  = $("#fei").val();
+			alert(shopPrice);
+			mui.ajax(myUrl+'index.php?m=Api&c=shops&a=addMoney',{
+				data:{
+					goodsId:id,
+					shopPrice:shopPrice
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:60000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						mui.openWindow({
+							url: "d-wodeqiangdan.html"
+						});
+						mui.toast(data.msg.msg);
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
+		})
+		
 		
 		/**
 		 * 列表详情
 		 */
-		var myUrl = "http://test.cnceshi.com/";
-		var path = window.location.href;
-		var id = path.substring(path.indexOf("=")+1); 
 		
 		mui.ajax(myUrl+'index.php?m=Api&c=shops&a=shopgoodsdetails',{
 			data:{
@@ -177,6 +217,8 @@
 						$(".goodsName").html(datas[i].goodsName);
 						$(".goodsworks").html(datas[i].goodsworks);
 						$(".createTime").html(datas[i].createTime);
+						$(".beginTime").html(datas[i].beginTime);
+						$(".endTime").html(datas[i].endTime);
 						$(".shopPrice").html(datas[i].shopPrice);
 						$(".linkMan").html(datas[i].linkMan);
 						$(".linkPhone").html(datas[i].linkPhone);

@@ -92,6 +92,8 @@
 							success: function(data) {
 								if(data.status == 200) {
 									//									alert(JSON.stringify(data.msg));
+									localStorage.setItem("mphone",mphone);
+									localStorage.setItem("loginPwd",loginPwd);
 									mui.toast('登录成功');
 									mui.openWindow({
 										url: 'index-home.html',
@@ -106,8 +108,6 @@
 											autoShow: false
 										}
 									});
-									sessionStorage.setItem("mphone",mphone);
-									sessionStorage.setItem("loginPwd",loginPwd);
 								} else {
 									mui.toast(data.msg.msg);
 								}

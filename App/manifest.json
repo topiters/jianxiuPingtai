@@ -261,7 +261,8 @@
 					"a-fujin-yezhu01.html",
 					"a-jianxiurenwu.html",
 					"a-gaojiaxuanshang.html",
-					"d-mywallet.html"
+					"d-mywallet.html",
+					"b-login2.html"
 				],
 				"priority": 0
 			},
@@ -837,7 +838,8 @@
 					"index-home.html"
 				],
 				"refer": [
-					"d-qiangdan-dai.html"
+					"d-qiangdan-dai.html",
+					"d-jiangbiao-dai.html"
 				],
 				"priority": 0
 			},
@@ -853,9 +855,12 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"css/reset.css",
-					"index-home.html"
+					"index-home.html",
+					"js/mui.min.js"
 				],
-				"refer": [],
+				"refer": [
+					"d-qiangdan-dai.html"
+				],
 				"priority": 0
 			},
 			"d-mywallet.html": {
@@ -895,6 +900,32 @@
 					"img/logo-01.jpg",
 					"css/mui.picker.min.css",
 					"img/fujin-02.jpg",
+					"css/reset.css",
+					"js/index.js"
+				],
+				"refer": [
+					"d-wodeqiangdan.html"
+				],
+				"priority": 0
+			},
+			"d-jiangbiao-dai.html": {
+				"resources": [
+					"css/feedback.css",
+					"fonts/mui.ttf",
+					"fonts/iconfont.woff",
+					"css/select2.min.css",
+					"css/index.css",
+					"fonts/iconfont.css",
+					"css/my.css",
+					"js/mui.zoom.js",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"img/touxiang.jpg",
+					"js/rem-w.min.js",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"img/logo-01.jpg",
+					"css/mui.picker.min.css",
 					"css/reset.css",
 					"js/index.js"
 				],

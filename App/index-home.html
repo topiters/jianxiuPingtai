@@ -247,7 +247,7 @@
 				<header id="header" class="mui-bar mui-bar-nav">
 					<h1 class="mui-title">消息</h1>
 				</header>
-				<div class="cyx1">
+				<div class="cyx1" style="display: block;">
 					<div class="cyx1-one-t clearfix">
 						<div class="cyx1-list1 l">
 							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
@@ -272,6 +272,95 @@
 						</div>
 						<div class="cyx1-list2 l" id="jingMsg">
 							<p>竞标消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>提现进度</p>
+							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+				</div>
+				
+				<!--供应商-->
+				<div class="cyx1" style="display: none;">
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="baojiaMsg">
+							<p>我的留言</p>
+							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="qiangMsg">
+							<p>我的报价</p>
+							<p class="clearfix"><span class="l">未有抢单消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="jingMsg">
+							<p>订单消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>提现进度</p>
+							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+				</div>
+				
+				<!--检修企业检修工程师-->
+				<div class="cyx1" style="display: none;">
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="baojiaMsg">
+							<p>抢单成功</p>
+							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="qiangMsg">
+							<p>抢单失败</p>
+							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="jingMsg">
+							<p>竞标成功</p>
+							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
+						</div>
+						<div class="cyx1-list2 l" id="jingMsg">
+							<p>竞标失败</p>
 							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
 						</div>
 					</div> 
@@ -405,17 +494,19 @@
  * 发布按钮判断
  */
 	$("#issue").click(function(){
-		var mphones = sessionStorage.getItem("mphone");
-		var loginPwds = sessionStorage.getItem("loginPwd");
-		if( mphones != "" || loginPwds != ""){
+		var mphones = localStorage.getItem("mphone");
+		var loginPwds = localStorage.getItem("loginPwd");
+		console.log(mphones+loginPwds);
+		if( mphones == mphones || loginPwds == loginPwds){
 			$('.jx-alert1').fadeIn(500);
 			$('.jx-alert1-t').fadeIn(500);
 			$('body').css('overflow', 'hidden');
 			$('body').on('touchmove', preventDefaultFn);
 		}else{
-			mui.toast("未登录，没有权限。请登录...");
-			mui.openWindow({
-			    url:"b-login2.html",
+			mui.alert('未登录，您还没有权限。请登录...', '提示', function() {
+				mui.openWindow({
+				    url:"b-login2.html",
+				});
 			});
 		}
 	})

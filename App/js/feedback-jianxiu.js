@@ -186,11 +186,14 @@
 				var attrCatId = document.getElementsByClassName("attrCatId")[0].value;
 				var goodType = $("input[name='name1']:checked").val();
 				var isVoice = $("input[name='name2']:checked").val();
-				var repairId = document.getElementsByClassName("repairId")[0].value;
+				var repairId = $(".repairId option:selected").val();
 				var goodDesc = document.getElementById("goodDesc").value;
 				var startTime = document.getElementById("result0").value;
 				var beginTime = document.getElementById("result1").value;
 				var endTime = document.getElementById("result2").value;
+				var linkMan = document.getElementById("linkMan").value;
+				var linkPhone = document.getElementById("linkPhone").value;
+				var linkAddr = document.getElementById("linkAddr").value;
 				var repairhistory = document.getElementById("repairhistory").value;
 				var shopPrice = document.getElementById("shopPrice").value;
 				var goodsworks = document.getElementById("needp").value;
@@ -208,6 +211,9 @@
 						startTime: startTime,
 						beginTime: beginTime,
 						endTime: endTime,
+						linkMan: linkMan,
+						linkPhone: linkPhone,
+						linkAddr: linkAddr,
 						repairhistory: repairhistory,
 						shopPrice: shopPrice,
 						goodsworks: goodsworks,

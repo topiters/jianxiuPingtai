@@ -34,57 +34,61 @@
 		<div class="dmyj-list-m">
 			<ul class="dmyj-list-tol now" dataGaoOne = "rootcon1">
 				<li class="dmyj-list-tol1" dataGaoOne = "rootchild1">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
 					<div class="dmyj-list-list1 l">
 						<p dataGaoOne = "goodsImg" class="mySrc" style="display: none;"></p>
 						<img src="img/logo-01.jpg" class="myimgs" />
 					</div>
 					<div class="dmyj-list-list2 l">
 						<p><span class="l" dataGaoOne="goodsName">检修111名称</span><span class="r" style="color: #4EB145;" dataGaoOne="">消缺</span></p>
-						<p>已有<span style="color: #FF7D0D;" dataGaoOne="">24</span>人投标</p>
-						<p>故障描述：<span dataGaoOne="">故障描述故障描述</span></p>
-						<p>地址:<span dataGaoOne="">索科时代大厦1810</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoOne="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoOne="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoOne="shopAddr">索科时代大厦1810</span></p>
 					</div>
 				</li>
 			</ul>
 			<ul class="dmyj-list-tol" dataGaoTwo = "rootcon2">
 				<li class="dmyj-list-tol1" dataGaoTwo = "rootchild2">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
 					<div class="dmyj-list-list1 l">
 						<p dataGaoTwo = "goodsImg" class="mySrc" style="display: none;"></p>
 						<img src="img/logo-01.jpg" class="myimgs" />
 					</div>
 					<div class="dmyj-list-list2 l">
 						<p><span class="l" dataGaoTwo="goodsName">检修222名称</span><span class="r" style="color: #4EB145;">消缺</span></p>
-						<p>已有<span style="color: #FF7D0D;" dataGaoTwo="">24</span>人投标</p>
-						<p>故障描述：<span dataGaoTwo="">故障描述故障描述</span></p>
-						<p>地址:<span dataGaoTwo="">索科时代大厦1810</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoTwo="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoTwo="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoTwo="shopAddr">索科时代大厦1810</span></p>
 					</div>
 				</li>
 			</ul>
 			<ul class="dmyj-list-tol" dataGaoThree = "rootcon3">
 				<li class="dmyj-list-tol1" dataGaoThree = "rootchild3">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
 					<div class="dmyj-list-list1 l">
 						<p dataGaoThree = "goodsImg" class="mySrc" style="display: none;"></p>
 						<img src="img/logo-01.jpg" class="myimgs" />
 					</div>
 					<div class="dmyj-list-list2 l">
 						<p><span class="l" dataGaoThree="goodsName">检修333名称</span><span class="r" style="color: #4EB145;">消缺</span></p>
-						<p>已有<span style="color: #FF7D0D;" dataGaoThree="">24</span>人投标</p>
-						<p>故障描述：<span dataGaoThree="">故障描述故障描述</span></p>
-						<p>地址:<span dataGaoThree="">索科时代大厦1810</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoThree="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoThree="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoThree="shopAddr">索科时代大厦1810</span></p>
 					</div>
 				</li>
 			</ul>
 			<ul class="dmyj-list-tol" dataGaoFour = "rootcon4">
 				<li class="dmyj-list-tol1" dataGaoFour = "rootchild4">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
 					<div class="dmyj-list-list1 l">
 						<p dataGaoFour = "goodsImg" class="mySrc" style="display: none;"></p>
 						<img src="img/logo-01.jpg" class="myimgs" />
 					</div>
 					<div class="dmyj-list-list2 l">
 						<p><span class="l" dataGaoFour="goodsName">检修444名称</span><span class="r" style="color: #4EB145;">消缺</span></p>
-						<p>已有<span style="color: #FF7D0D;" dataGaoFour="">24</span>人投标</p>
-						<p>故障描述：<span dataGaoFour="">故障描述故障描述</span></p>
-						<p>地址:<span dataGaoFour="">索科时代大厦1810</span></p>
+						<p>已有<span style="color: #FF7D0D;" dataGaoFour="saleCount">24</span>人投标</p>
+						<p>故障描述：<span dataGaoFour="goodDesc">故障描述故障描述</span></p>
+						<p>地址:<span dataGaoFour="shopAddr">索科时代大厦1810</span></p>
 					</div>
 				</li>
 			</ul>
@@ -93,25 +97,25 @@
 </html>
 <script type="text/javascript">
 /**
- * 业主发布的检修列表---抢单
+ * 业主发布的检修列表---竞价
  */
 	var myURL = "http://test.cnceshi.com/";
 	mui.init({
-		pullRefresh : {
-		    container:'.dmyj-list-tol',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
-		    up : {
-//		      	height:50,//可选.默认50.触发上拉加载拖动距离
-		      	auto:true,//可选,默认false.自动上拉加载一次
-		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
-		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
-		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-		    }
-	  	}
+//		pullRefresh : {
+//		    container:'.dmyj-list-tol',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+//		    up : {
+////		      	height:50,//可选.默认50.触发上拉加载拖动距离
+//		      	auto:true,//可选,默认false.自动上拉加载一次
+//		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+//		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+//		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//		    }
+//	  	}
 	});
-/**
- * 抢单列表
- * 上拉加载，配合init代码
- */
+		/**
+		 * 业主发布的采购列表
+		 * 上拉加载，配合init代码
+		 */
 	var rootnode1 = $('[dataGaoOne = "rootcon1"]');
 	var rootnode2 = $('[dataGaoTwo = "rootcon2"]');
 	var rootnode3 = $('[dataGaoThree = "rootcon3"]');
@@ -123,7 +127,61 @@
 	$('[dataGaoOne = "rootchild1"]').remove();	
 	$('[dataGaoTwo = "rootchild2"]').remove();	
 	$('[dataGaoThree = "rootchild3"]').remove();	
-	$('[dataGaoFour = "rootchild4"]').remove();	
+	$('[dataGaoFour = "rootchild4"]').remove();	  
+	
+	var mySrc1 = document.getElementsByClassName("mySrc");
+	var mySrc = document.getElementsByClassName("myimgs");
+	var mylist = document.getElementsByClassName("dmyj-list-tol1");
+	mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+		data:{
+			goodsTaskId: 2,
+			goodsType: 2,
+			p:1,
+			goodsStatus: ""
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				
+				console.log(JSON.stringify(data.msg.root))
+				$commonObj.loadListData({
+					sourceDataList : data.msg.root,
+					dataListRootNode : rootnode1,
+					dataListChildNode : childnode1,
+					dataAttrName : "dataGaoOne",
+					dataHandleFn : function(){
+						for(var i=0;i<mySrc1.length;i++){
+							for (var j=0;j<mySrc.length;j++){
+								var myStr = myURL+mySrc1[j].innerHTML; 
+								mySrc[j].setAttribute("src",myStr);
+							}	
+						}
+					//点击事件
+						for(var j=0;j<mylist.length;j++){
+							mylist[j].addEventListener('tap',function(){
+								var id = $(this).children("p").html();
+								mui.openWindow({
+							    	url:"d-qiangdan-dai.html?id="+id
+								})
+							});	
+						}
+					}
+				})	
+				
+			}else{
+				mui.toast(data.msg.msg);
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});
+	
+	
 	$(function(){
 		$(".order1-top ul").on("click", "li", function() {
 			$(".order1-top ul").children("li").removeClass('active4');
@@ -131,11 +189,10 @@
 			var num=$(this).index();
 			$(".dmyj-list-m .dmyj-list-tol").eq(num).addClass("now").siblings().removeClass("now");
 			var goodStatus=$(this).attr("id");
-			
 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
 				data:{
 					goodsTaskId: 2,
-					goodsType: 1,
+					goodsType: 2,
 					p:1,
 					goodsStatus: goodStatus
 				},
@@ -145,10 +202,13 @@
 				success:function(data){
 					//服务器返回响应，根据响应结果，分析是否获取数据成功；
 					if( data.status == 200 ){
+						
 						var mySrc1 = document.getElementsByClassName("mySrc");
 						var mySrc = document.getElementsByClassName("myimgs");
 						var mylist = document.getElementsByClassName("dmyj-list-tol1");
 						if(goodStatus==""){
+							$(".dmyj-list-tol").empty();
+							console.log(JSON.stringify(data.msg.root))
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
 								dataListRootNode : rootnode1,
@@ -161,32 +221,19 @@
 											mySrc[j].setAttribute("src",myStr);
 										}	
 									}
-									//点击事件
+								//点击事件
 									for(var j=0;j<mylist.length;j++){
 										mylist[j].addEventListener('tap',function(){
 											var id = $(this).children("p").html();
 											mui.openWindow({
 										    	url:"d-qiangdan-dai.html?id="+id
 											})
-//											if(goodStatus==0){
-//												mui.openWindow({
-//											    	url:"d-qiangdan-dai.html?id="+id
-//												})
-//											}else if(goodStatus==1){
-//												mui.openWindow({
-//											    	url:"d-qiangdan-zhifu.html?id="+id
-//												})
-//											}else{
-//												mui.openWindow({
-//											    	url:"d-qiangdan-pingjia.html?id="+id
-//												})
-//											}
-											
 										});	
 									}
 								}
 							})	
 						}else if(goodStatus==0){
+							$(".dmyj-list-tol").empty();
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
 								dataListRootNode : rootnode2,
@@ -211,6 +258,7 @@
 								}
 							})	
 						}else if(goodStatus==1){
+							$(".dmyj-list-tol").empty();
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
 								dataListRootNode : rootnode3,
@@ -235,6 +283,7 @@
 								}
 							})	
 						}else{
+							$(".dmyj-list-tol").empty();
 							$commonObj.loadListData({
 								sourceDataList : data.msg.root,
 								dataListRootNode : rootnode4,
@@ -274,71 +323,71 @@
 		});
 	})	
 	
- 	var i = 2;
- 	function mypullFresh() {
- 		setTimeout(function() {
- 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
-				data:{
-					goodsTaskId: 2,
-					goodsType: "",
-					p:i,
-					goodsStatus: goodStatus
-				},
-				dataType:'json',//服务器返回json格式数据
-				type:'post',//HTTP请求类型
-				timeout:10000,//超时时间设置为10秒；
-				success:function(data){
-					//服务器返回响应，根据响应结果，分析是否获取数据成功；
-					if( data.status == 200 ){
-						if(goodStatus==""){
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode1,
-								dataListChildNode : childnode1,
-								dataAttrName : "dataGaoOne",
-								dataHandleFn : function(){
-								}
-							})	
-						}else if(goodStatus==1){
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode2,
-								dataListChildNode : childnode2,
-								dataAttrName : "dataGaoTwo",
-								dataHandleFn : function(){
-								}
-							})	
-						}else if(goodStatus==2){
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode3,
-								dataListChildNode : childnode3,
-								dataAttrName : "dataGaoThree",
-								dataHandleFn : function(){
-								}
-							})	
-						}else{
-							$commonObj.loadListData({
-								sourceDataList : data.msg.root,
-								dataListRootNode : rootnode4,
-								dataListChildNode : childnode4,
-								dataAttrName : "dataGaoFour",
-								dataHandleFn : function(){
-								}
-							})	
-						}
-						
-						i++;
-					}else{
-						mui.toast(data.msg.msg);
-					} 
-				},
-				error:function(xhr,type,errorThrown){
-					//异常处理；
-					console.log(type);
-				}
-			});
- 			
- 		},1000)
-	}
+// 	var i = 2;
+// 	function mypullFresh() {
+// 		setTimeout(function() {
+// 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+//				data:{
+//					goodsTaskId: 2,
+//					goodsType: "",
+//					p:i,
+//					goodsStatus: goodStatus
+//				},
+//				dataType:'json',//服务器返回json格式数据
+//				type:'post',//HTTP请求类型
+//				timeout:10000,//超时时间设置为10秒；
+//				success:function(data){
+//					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+//					if( data.status == 200 ){
+//						if(goodStatus==""){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode1,
+//								dataListChildNode : childnode1,
+//								dataAttrName : "dataGaoOne",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else if(goodStatus==1){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode2,
+//								dataListChildNode : childnode2,
+//								dataAttrName : "dataGaoTwo",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else if(goodStatus==2){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode3,
+//								dataListChildNode : childnode3,
+//								dataAttrName : "dataGaoThree",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else{
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode4,
+//								dataListChildNode : childnode4,
+//								dataAttrName : "dataGaoFour",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}
+//						
+//						i++;
+//					}else{
+//						mui.toast(data.msg.msg);
+//					} 
+//				},
+//				error:function(xhr,type,errorThrown){
+//					//异常处理；
+//					console.log(type);
+//				}
+//			});
+// 			
+// 		},1000)
+//	}
 </script>
