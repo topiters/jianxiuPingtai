@@ -27,226 +27,206 @@ public function __construct(){
 		
 	}
 	//完善公司信息
-public  function addByUser(){
-	$USER = session('WST_USER');
-	$userId=$USER['userId'];
-	$shopsOne=M('shops')->where(array('userId'=>$userId))->find();
-	if(!$shopsOne){
-		$data["msg"] = '你还不是业主,没有权限操作!';
-		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);	
-	}
-	$shops=M('shops');
-	$datas=array();
-	//$shopImg=I('shopImg');//公司logo
-	if($_FILES['shopImg']){
-		$info=$this->uploadPic();
-		if($info['status']==1){
-		$shopImg=$info['savename'].$info['savethumbname'];
-		}		
-	}
-	$shopCompany=$_POST['shopCompany'];//公司名称
-	$goodsCatId1=$_POST['goodsCatId1'];//行业分类
-	$shopTotal=$_POST['shopTotal'];//注册金额
-	$shopInfo=$_POST['shopInfo'];//简介
-	$shopArea=$_POST['shopArea'];//公司所在城市
-	$shopAddr=$_POST['shopAddr'];//公司地址
-	$latitude=$_POST['latitude'];  //经度
-	$longitude=$_POST['longitude']; //纬度
-	$shopHost=$_POST['shopHost'];//企业法人
-	$shopUrl=$_POST['shopUrl'];//网址
-	$shopIdentimg=$_POST['shopIdentimg'];//公司证明
-	$datas['shopImg']=$shopImg;
-    $datas['shopCompany']=$shopCompany;
-    $datas['goodsCatId1']=$goodsCatId1;
-    $datas['shopTotal']=$shopTotal;
-    $datas['shopInfo']=$shopInfo;
-    $datas['shopHost']=$shopHost;
-    $datas['shopArea']=$shopArea;
-    $datas['shopAddr']=$shopAddr;
-    $datas['latitude']=$latitude;
-    $datas['longitude']=$longitude;
-    $shopIdentimg=array();
-    //附件
-    if($_FILES){
-    	$shopIdentimgInfo=$this->uploads();
-    	
-    	if($shopIdentimgInfo){
-    		foreach ($shopIdentimgInfo  as $k=>$v){
-    			$imgs[]=$v['savepath'].$v['savethumbname'];
-    		}
-    		
-    	}
+    public function addByUser() {
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
+        $shopsOne = M('shops')->where(array('userId' => $userId))->find();
+        if (!$shopsOne) {
+            $data["msg"] = '你还不是业主,没有权限操作!';
+            $data = array('status' => self::API_PERMISSION_NO_OPERATION , 'msg' => $data);
+        }
+        $shops = M('shops');
+        $datas = array();
+        $shopImg=I('shopImg');//公司logo
+//        if ($_FILES['shopImg']) {
+//            $info = $this->uploadPic();
+//            if ($info['status'] == 1) {
+//                $shopImg = $info['savename'] . $info['savethumbname'];
+//            }
+//        }
+        $shopCompany = $_POST['shopCompany'];//公司名称
+        $goodsCatId1 = $_POST['goodsCatId1'];//行业分类
+        $shopTotal = $_POST['shopTotal'];//注册金额
+        $shopInfo = $_POST['shopInfo'];//简介
+        $shopArea = $_POST['shopArea'];//公司所在城市
+        $shopAddr = $_POST['shopAddr'];//公司地址
+        $latitude = $_POST['latitude'];  //经度
+        $longitude = $_POST['longitude']; //纬度
+        $shopHost = $_POST['shopHost'];//企业法人
+        $shopUrl = $_POST['shopUrl'];//网址
+        $datas['shopImg'] = $shopImg;
+        $datas['shopCompany'] = $shopCompany;
+        $datas['goodsCatId1'] = $goodsCatId1;
+        $datas['shopTotal'] = $shopTotal;
+        $datas['shopInfo'] = $shopInfo;
+        $datas['shopHost'] = $shopHost;
+        $datas['shopArea'] = $shopArea;
+        $datas['shopAddr'] = $shopAddr;
+        $datas['latitude'] = $latitude;
+        $datas['longitude'] = $longitude;
+        //附件
+        $shopIdentimg = I("shopIdentimg");//多张图
+        if ($shopIdentimg) {
+            $datas['shopIdentimg'] = serialize($shopIdentimg);
+        }
+        $datas['createTime'] = date('Y-m-d H:i:s' , time());
+
+        $shopId = (int)$shopsOne['shopId'];//当前业主的id
+        $result = M('shops')->where(array('shopId' => $shopId))->save($datas);
+        if ($result !== false) {
+            $data["msg"] = '数据保存成功';
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $data);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '数据没有更新，请更新后保存...!';
+            $data = array('status' => self::API_UPDATE_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
     }
-    $datas['shopIdentimg']=serialize($shopIdentimg);
-    $datas['createTime']=time();
-	
-  $shopId=(int)$shopsOne['shopId'];//当前业主的id
- $result=M('shops')->where(array('shopId'=>$shopId))->save($datas);
-    if($result!==false){
-    	$data["msg"] ='数据保存成功';
-    	$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
-    	$this->stringify($data);
-    	
-    }else{
-    	$data["msg"] = '数据没有更新，请更新后保存...!';
-    	$data = array('status'=>self::API_UPDATE_FALSE,'msg'=>$data);
-    	$this->stringify($data);	
-    }
-	
-}	
 	
 	//任务发布页面
-	public function addgoods(){
+    public function addgoods() {
+        $datas = array();
+        $USER = session('WST_USER');
+        $shopinfo = D("shops")->where(array('userId' => $USER['userId']))->find();
+        if (!$shopinfo) {//业主不存在
+            $data["msg"] = '你还不是业主,没有权限操作!';
+            $data = array('status' => self::API_PERMISSION_NO_OPERATION , 'msg' => $data);
+            $this->stringify($data);
+            exit;
+        }
+        $goodsTaskId = I("post.goodsTaskId");//发布类型1.采购2.为检修
+        if (empty($goodsTaskId)) {//发布类型不存在
+            $data["msg"] = '发布类型未选择!';
+            $data = array('status' => self::API_INPUT_ERROR , 'msg' => $data);
+            $this->stringify($data);
+        }
+        $datas['goodsTaskId'] = $goodsTaskId;
+        $goodsCatId1 = $_POST['goodsCatId1'];
+        if (!$goodsCatId1) {//产品分类
+            $data["msg"] = '产品分类未选择!';
+            $data = array('status' => self::API_INPUT_ERROR , 'msg' => $data);
+            $this->stringify($data);
+        }
+        $datas['shopId'] = $shopinfo['shopId'];//业主id
+        $datas['goodsCatId1'] = $goodsCatId1;// 产品分类
+        //$datas['createTime']=date("Y-m-d H:i:s");
+        $datas['createTimes'] = date("Y-m-d");//发布时间
+        $goodName = $_POST['goodName'];//产品名称
+        if (empty($goodName)) {//业主不存在
 
-		$datas=array();
-		$USER = session('WST_USER');
-	$shopinfo=D("shops")->where(array('userId'=>$USER['userId']))->find();	
-	if(!$shopinfo){//业主不存在
-		$data["msg"] = '你还不是业主,没有权限操作!';
-		$data = array('status'=>self::API_PERMISSION_NO_OPERATION,'msg'=>$data);
-		$this->stringify($data);
-		exit;
-	    }	
-		$goodsTaskId=I("post.goodsTaskId");//发布类型1.采购2.为检修
-		 if(empty($goodsTaskId)){//发布类型不存在
-			$data["msg"] = '发布类型未选择!';
-			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
-			$this->stringify($data);
-		}
-		$datas['goodsTaskId']=$goodsTaskId;
-		$goodsCatId1=$_POST['goodsCatId1'];
-		if(!$goodsCatId1){//产品分类
-			$data["msg"] = '产品分类未选择!';
-			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
-			$this->stringify($data);
-		}
-		$datas['shopId']=$shopinfo['shopId'];//业主id
-		$datas['goodsCatId1']=$goodsCatId1;// 产品分类
-		//$datas['createTime']=date("Y-m-d H:i:s");
-		$datas['createTimes']=date("Y-m-d");//发布时间
-		$goodName=$_POST['goodName'];//产品名称
-	 	if(empty($goodName)){//业主不存在
-		
-			$data["msg"] = '发布产品名称未填写!';
-			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
-			$this->stringify($data);
-		} 
-		//$data['createTime']=time();
-		//$goodsImg=I("goodsImg");//产品图
-		//if($goodsImg){
-			
-		//}
-		
-		$goodsthumb=I("goodsThumbs");//多张图
-		if($goodsthumb){
-			$a=0;
-	foreach($goodsthumb as $k=>$v){
-		  $a++;
-		if($a==1){
-			$datas['goodsImg']=$v;//获取第一张
-		}
-	}
+            $data["msg"] = '发布产品名称未填写!';
+            $data = array('status' => self::API_INPUT_ERROR , 'msg' => $data);
+            $this->stringify($data);
+        }
+        //$data['createTime']=time();
+        //$goodsImg=I("goodsImg");//产品图
+        //if($goodsImg){
 
-	 
-	   $datas['goodsThums']=serialize($goodsthumb);
-		}
-		
-		
-		
-	 $linkMan=I("linkMan");//联系人
-	  $linkPhone=I("linkPhone");//手机号
-	  $linkAddr=I("linkAddr");//地址
-	   $datas['linkMan']=$linkMan;
-	   $datas['linkPhone']=$linkPhone;
-	   $datas['linkAddr']=$linkAddr;
-		if($goodsTaskId==1){  //采购任务
-		$goodsStock=$_POST['goodsStock'];//数量	
-		if(empty($goodsStock)){//业主不存在
-			$data["msg"] = '发布产品数量未填写!';
-			$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
-			$this->stringify($data);
-		}
-	    $attrCatId=$_POST['attrCatId'];//产品规格型号
-	    if(empty($attrCatId)){//业主不存在
-	    	$data["msg"] = '发布规格型号未选择!';
-	    	$data = array('status'=>self::API_INPUT_ERROR,'msg'=>$data);
-	    	$this->stringify($data);
-	    } 
-		$beginTime=I("beginTime");	//开始时间
-		$endTime=I("endTime");//结束时间
-		$goodsDesc=I("goodsDesc");//要求特殊
-		
-		$datas['goodsName']=$goodName;
-		$datas['goodsStock']=$goodsStock;
-		$datas['attrCatId']=$attrCatId;
-		$datas['beginTime']=$beginTime;
-		$datas['endTime']=$endTime;
-		
-		$datas['goodsDesc']=$goodsDesc;
-		
-		//$data['goodsImg']=$goodsImg;
-		$res=D('goods')->add($datas);
-		if($res){
-			
-			$data["msg"] = '数据添加成功!';
-			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
-			$this->stringify($data);
-			
-		}else{
-    	$data["msg"] = '数据输入失败，请检查...!';
-    	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
-    	$this->stringify($data);	
+        //}
+        $goodsthumb = I("goodsThumbs");//多张图
+        if ($goodsthumb) {
+            $a = 0;
+            foreach ($goodsthumb as $k => $v) {
+                $a++;
+                if ($a == 1) {
+                    $datas['goodsImg'] = $v;//获取第一张
+                }
+            }
+            $datas['goodsThums'] = serialize($goodsthumb);
+        }
+
+        $linkMan = I("linkMan");//联系人
+        $linkPhone = I("linkPhone");//手机号
+        $linkAddr = I("linkAddr");//地址
+        $datas['linkMan'] = $linkMan;
+        $datas['linkPhone'] = $linkPhone;
+        $datas['linkAddr'] = $linkAddr;
+        if ($goodsTaskId == 1) {  //采购任务
+            $goodsStock = $_POST['goodsStock'];//数量
+            if (empty($goodsStock)) {//业主不存在
+                $data["msg"] = '发布产品数量未填写!';
+                $data = array('status' => self::API_INPUT_ERROR , 'msg' => $data);
+                $this->stringify($data);
+            }
+            $attrCatId = $_POST['attrCatId'];//产品规格型号
+            if (empty($attrCatId)) {//业主不存在
+                $data["msg"] = '发布规格型号未选择!';
+                $data = array('status' => self::API_INPUT_ERROR , 'msg' => $data);
+                $this->stringify($data);
+            }
+            $beginTime = I("beginTime");    //开始时间
+            $endTime = I("endTime");//结束时间
+            $goodsDesc = I("goodsDesc");//要求特殊
+
+            $datas['goodsName'] = $goodName;
+            $datas['goodsStock'] = $goodsStock;
+            $datas['attrCatId'] = $attrCatId;
+            $datas['beginTime'] = $beginTime;
+            $datas['endTime'] = $endTime;
+            $datas['goodsDesc'] = $goodsDesc;
+            //$data['goodsImg']=$goodsImg;
+            $res = D('goods')->add($datas);
+            if ($res) {
+
+                $data["msg"] = '数据添加成功!';
+                $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $data);
+                $this->stringify($data);
+
+            } else {
+                $data["msg"] = '数据输入失败，请检查...!';
+                $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+                $this->stringify($data);
+            }
+        } elseif ($goodsTaskId == 2) {
+            $goodName = I("goodName");// 检修名称
+            $brandId = I("brandId");//	风机品牌厂家
+            $attrCatId = I("attrCatId");//	设备型号
+            $goodType = I("goodsType");//竞价1.0 2.枪弹
+
+            if ($goodType == 2) {
+                $goodsworks = I("goodsworks");//工作人数
+                $shopPrice = I("shopPrice");// 检修报价
+                $datas['shopPrice'] = $shopPrice;
+            }
+
+            $goodDesc = I("goodDesc");//故障描述
+            $datas['goodDesc'] = $goodDesc;
+
+            $repairId = I("repairId");//检修性质
+            $isVoice = I("isVoice");//是否发票1 是,0否
+            $beginTime = I("beginTime");// 开始时间
+            $endTime = I("endTime");// 结束时间
+            $startTime = I("startTime");//故障发生时间
+            $repairhistory = I("repairhistory");//检修历史
+
+            $datas['goodsName'] = $goodName;
+            $datas['brandId'] = $brandId;
+            $datas['attrCatId'] = $attrCatId;
+            $datas['goodsType'] = $goodType;
+            $datas['repairId'] = $repairId;
+            $datas['beginTime'] = $beginTime;
+            $datas['endTime'] = $endTime;
+            $datas['startTime'] = $startTime;
+            $datas['repairhistory'] = $repairhistory;
+            //
+            $res = D('goods')->add($datas);
+            if ($res) {
+
+                $data["msg"] = '数据添加成功!';
+                $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $data);
+                $this->stringify($data);
+
+            } else {
+                $data["msg"] = '数据输入失败，请检查...!';
+                $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+                $this->stringify($data);
+            }
+
+        }
+
+
     }
-		 }elseif($goodsTaskId==2){
-		$goodName=I("goodName");// 检修名称	
-		$brandId=I("brandId");//	风机品牌厂家
-		$attrCatId=I("attrCatId");//	设备型号
-		$goodType=I("goodsType");//竞价1.0 2.枪弹
-		
-		if($goodType==2){
-		$goodsworks=I("goodsworks");//工作人数	
-		$shopPrice=I("shopPrice");// 检修报价
-		$datas['shopPrice']=$shopPrice;
-		}
-	
-		$goodDesc=I("goodDesc");//故障描述
-		$datas['goodDesc']=$goodDesc;
-	
-		$repairId=I("repairId");//检修性质	
-		$isVoice=I("isVoice");//是否发票1 是,0否
-		$beginTime=I("beginTime");// 开始时间
-		$endTime=I("endTime");// 结束时间
-		$startTime=I("startTime");//故障发生时间
-		$repairhistory=	I("repairhistory");//检修历史
-		
-		$datas['goodsName']=$goodName ;
-		$datas['brandId']=$brandId ;
-		$datas['attrCatId']=$attrCatId ;
-		$datas['goodsType']=$goodType ;
-		$datas['repairId']=$repairId ;
-		$datas['beginTime']=$beginTime ;
-		$datas['endTime']=$endTime ;
-		$datas['startTime']=$startTime;
-		$datas['repairhistory']=$repairhistory;
-		//
-		$res=D('goods')->add($datas);
-		if($res){
-				
-			$data["msg"] = '数据添加成功!';
-			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
-			$this->stringify($data);
-				
-		}else{
-    	$data["msg"] = '数据输入失败，请检查...!';
-    	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
-    	$this->stringify($data);	
-    } 
-	
-		}
-		
-		
-		
-	}
 	
 	//发布检修或采购列表
 	
