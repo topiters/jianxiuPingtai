@@ -25,12 +25,15 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 判断供应商身份
+     */
     public function index() {
         $data = array('status' => self::API_REQUEST_SUCCESS);
         $this->stringify($data);
     }
     /**
-     *
+     * 供应商信息完善
      */
     public function addByUser() {
         $USER = session('WST_USER');
@@ -98,6 +101,9 @@ class SupplierAction extends BaseAction {
 
     }
 
+    /**
+     * 供应商报价
+     */
     public function offer() {
         $USER = session('WST_USER');
         $goodsId = I('goodsId');
@@ -134,6 +140,9 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 我的报价
+     */
     public function myOffer() {
         $Model = D('Api/supplier');
         $result = $Model->getOfferList();
@@ -147,6 +156,9 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 附近的供应商
+     */
     public function nearby() {
         $Model = D('Api/supplier');
         $result = $Model->getList();
@@ -160,6 +172,9 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 供应商详情
+     */
     public function detail() {
         $id = I('supplierId');
         $result = D('supperlier')->where("supplierId = $id")->find();
@@ -173,6 +188,9 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 我的留言
+     */
     public function myMessage() {
         $USER = session('WST_USER');
         $userId = $USER['userId'];
@@ -190,6 +208,9 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 消息页报价成功的订单
+     */
     public function successOffer() {
         $Model = D('Api/supplier');
         $result = $Model->getSuccessOfferList();
@@ -203,6 +224,9 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 消息列表页计数
+     */
     public function messageCount() {
         //新留言
         $USER = session('WST_USER');
@@ -229,6 +253,9 @@ class SupplierAction extends BaseAction {
         }
     }
 
+    /**
+     * 订单列表
+     */
     public function order() {
         $Model = D('Api/supplier');
         $result = $Model->orderList();
@@ -240,6 +267,21 @@ class SupplierAction extends BaseAction {
             $data = array('status' => self::API_DATA_NOT_EXISTS , 'msg' => $data);
             $this->stringify($data);
         }
+    }
+
+    /**
+     * 确认发货
+     */
+    public function orderSure() {
+        $oId = I('orderId');
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
+        $sId = D('supperlier')->field('userId,supplierId')->where("userID = $userId")->find();
+        //更新订单状态
+        $datas = array();
+        $datas['orderStatus'] = 1;
+        // TODO 这里暂时将shopId定义为供应商ID 后续再讨论是否修改
+        D('orders')->where("shopId = {$sId['supplierId']} and orderId = $oId")->save($datas);
     }
 
 }
