@@ -39,22 +39,22 @@
 		<div class="jj1-one">
 			<div class="jj1-one-t clearfix">
 				<div class="jj-list1 l">
-					<img src="img/logo-01.jpg" />
+					<img src="" />
 				</div>
 				<div class="jj-list2 l">
-					<p>检修名称检修名称检修名称</p>
-					<p>已有<span>5</span>人投标</p>
+					<p class="goodsName"></p>
+					<p>已有<span class="saleCount"></span>人投标</p>
 					<p style="color: #4eb145;">投标中</p>
 				</div>
 				<div class="jj-list3 r">
 					<p style="color: #4eb145;">消缺</p>
 					<p></p>
 					<p></p>
-					<p id="timer">12:12:12</p>
+					<p id="timer" class="createTimes"></p>
 				</div>
 			</div>
 			<div class="pd1-one-d">
-				<p class="clearfix"><span class="l">地址：</span><span class="l">郑州市索克时代大厦</span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+				<p class="clearfix"><span class="l">地址：</span><span class="l linkAddr"></span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
 			</div>
 		</div>
 		<div class="pd1-two">
@@ -62,11 +62,11 @@
 				发布方信息
 			</div>
 			<div class="pd1-two2">
-				<p>联&nbsp;&nbsp;系&nbsp;&nbsp;人：<span>李四</span></p>
-				<p>联系电话：<span>15236525898</span></p>
-				<p>开&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：<span>可开发票</span></p>
-				<p>开始竞标：<span>2015-12-12 &nbsp;12:12</span></p>
-				<p>结束竞标：<span>2016-12-12 &nbsp;12:12</span></p>
+				<p>联&nbsp;&nbsp;系&nbsp;&nbsp;人：<span class="linkMan"></span></p>
+				<p>联系电话：<span class="linkPhone"></span></p>
+				<p>是否开票：<span class="isVoice"></span></p>
+				<p>开始竞标：<span class="beginTime"></span></p>
+				<p>结束竞标：<span class="endTime"></span></p>
 			</div>
 		</div>
 		<div class="pd1-two">
@@ -74,10 +74,10 @@
 				检修信息
 			</div>
 			<div class="pd1-two2">
-				<p>风机厂家：<span>东风风神</span></p>
-				<p>设备型号：<span>GTU-5263</span></p>
-				<p>工作时间：<span>2015-12-12 &nbsp;12:12</span></p>
-				<p>结束时间：<span>2016-12-12 &nbsp;12:12</span></p>
+				<p>风机厂家：<span class="brandId"></span></p>
+				<p>设备型号：<span class="typeSn"></span></p>
+				<p>工作时间：<span class="beginTime"></span></p>
+				<p>结束时间：<span class="endTime"></span></p>
 			</div>
 		</div>
 		<div class="jj1-three">
@@ -89,12 +89,12 @@
 					<div class="pd1-three2-list1 l">
 						故障描述：
 					</div>
-					<div class="pd1-three2-list2 l">
-						小和尚下山去化斋老和尚有交待山下的女人是老虎遇见了千万要躲开走过了一村又一寨小和尚暗思揣为什么老虎不吃人模样还挺可爱
+					<div class="pd1-three2-list2 l goodDesc">
+						
 					</div>
 				</div>
 				<div class="jj1-three2-list1">
-					<p>故障发生时间：<span>2016-12-12</span></p>
+					<p>故障发生时间：<span class="startTime"></span></p>
 				</div>
 			</div>
 		</div>
@@ -107,7 +107,7 @@
 					特殊要求：
 				</div>
 				<div class="pd1-three2-list2 l">
-					小和尚下山去化斋老和尚有交待山下的女人是老虎遇见了千万要躲开走过了一村又一寨小和尚暗思揣为什么老虎不吃人模样还挺可爱
+					
 				</div>
 			</div>
 		</div>
@@ -122,7 +122,7 @@
 							<img src="img/touxiang.jpg"/>
 						</div>
 						<div class="dmyj2-five2-r l">
-							<p>投标公司</p>
+							<p class="">投标公司</p>
 							<p>报价金额: <span>￥4,00.00</span></p>
 							<p>投标时间: <span>2016-12-12 12:12</span></p>
 						</div>
@@ -149,7 +149,7 @@
 				已有<span>2</span>人投标
 			</div>
 			<div class="jj-foot-btn">
-				<span class="jj-foot-now">距离结束12:12:12</span>
+				<span class="jj-foot-now">距离结束<span id="daojishi">00:00:00</span></span>
 			</div>
 		</div>
 	</body>
@@ -158,8 +158,98 @@
 	<script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.previewImage();
-		$(function(){
-			
-		})
+		var myUrl = "http://test.cnceshi.com/";
+		var path = window.location.href;
+		var id = path.substring(path.indexOf("=")+1); 
+		/**
+		 * 列表详情
+		 */
+		
+		mui.ajax(myUrl+'index.php?m=Api&c=shops&a=shopgoodsdetails',{
+			data:{
+				goodsId:id
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:60000,//超时时间设置为10秒；
+			success:function(data){
+				//服务器返回响应，根据响应结果，分析是否获取数据成功；
+				if( data.status == 200 ){
+					var datas = data.msg;
+					for(var i=0;i<datas.length;i++){
+						$(".goodsName").html(datas[i].goodsName);
+						$(".saleCount").html(datas[i].saleCount);
+						$(".createTimes").html(datas[i].createTimes);
+						$(".beginTime").html(datas[i].beginTime);
+						$(".endTime").html(datas[i].endTime);
+						$(".startTime").html(datas[i].startTime);
+						$(".shopPrice").html(datas[i].shopPrice);
+						$(".linkMan").html(datas[i].linkMan);
+						$(".linkPhone").html(datas[i].linkPhone);
+						$(".linkAddr").html(datas[i].linkAddr);
+						$(".brandId").html(datas[i].brandId);
+						$(".typeSn").html(datas[i].typeSn);
+						if(datas[i].isVoice==1){
+							$(".isVoice").html("是");
+						}else{
+							$(".isVoice").html("否");
+						}
+						
+						switch (datas[i].repairId){
+							case 1:
+								$(".isVoice").html("消缺");
+								break;
+							case 2:
+								$(".isVoice").html("定修");
+								break;
+							case 3:
+								$(".isVoice").html("小修");
+								break;
+							case 4:
+								$(".isVoice").html("大修");
+								break;
+							default:
+								console.log("没有数据");
+								break;
+						}
+						$(".jj-list1 img").attr("src",myUrl+datas[i].goodsImg);
+						
+						var interval = 1000; 
+						function ShowCountDown(year,month,day,divname){ 
+							var now = new Date(); 
+							var h = now.setHours(12);
+							var endDate = new Date(year, month-1, day); 
+							var leftTime=endDate.getTime()-now.getTime();
+							var leftsecond = parseInt(leftTime/1000); 
+							var day1=Math.floor(leftsecond/(60*60*24))
+							var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
+							var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+							var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+							var cc = document.getElementById(divname);
+							if(hour<10){
+								hour="0"+hour;
+							}
+							if(minute<10){
+								minute="0"+minute;
+							}
+							if(second<10){
+								second="0"+second;
+							}
+							cc.innerHTML=hour+":"+minute+":"+second;
+						} 
+						var tt = datas[i].startTime;
+						var q = tt.split('-');
+						var qq = q[2].slice(0,2);
+						window.setInterval(function(){ShowCountDown(q[0],q[1],qq,'daojishi');}, interval); 
+					}
+				}else{
+					mui.toast(data.msg.msg);
+				} 
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				console.log(type);
+			}
+		});
 	</script>
 </html>

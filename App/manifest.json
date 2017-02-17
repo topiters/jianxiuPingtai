@@ -181,11 +181,11 @@
 					}
 				},
 				"android": {
-					"mdpi": "C:/Users/Administrator/Desktop/img/10801882.png", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "C:/Users/Administrator/Desktop/img/7201242.png", /*大屏启动图片，分辨率：320x442*/
+					"mdpi": "C:/Users/Administrator/Desktop/img/240282.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "C:/Users/Administrator/Desktop/img/320442.png", /*大屏启动图片，分辨率：320x442*/
 					"hdpi": "C:/Users/Administrator/Desktop/img/480762.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/Administrator/Desktop/img/320442.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/Administrator/Desktop/img/240282.png"
+					"xhdpi": "C:/Users/Administrator/Desktop/img/7201242.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/Administrator/Desktop/img/10801882.png"
 				}
 			}
 		}
@@ -361,7 +361,10 @@
 					"fonts/mui.ttf",
 					"fonts/iconfont.woff",
 					"img/fujin-01.png",
-					"js/feedback-geren.js"
+					"js/feedback-geren.js",
+					"img/11.jpg",
+					"img/fujin-01.jpg",
+					"img/12.jpg"
 				],
 				"refer": [
 					"index-home.html"
@@ -655,9 +658,13 @@
 					"css/mui.min.css",
 					"img/logo-01.jpg",
 					"css/reset.css",
-					"js/index.js"
+					"js/index.js",
+					"js/myCommon.js"
 				],
-				"refer": [],
+				"refer": [
+					"d-jiangbiao-dai.html",
+					"d-qiangdan-dai.html"
+				],
 				"priority": 0
 			},
 			"a-gaojiaxuanshang.html": {
@@ -928,6 +935,45 @@
 					"css/mui.picker.min.css",
 					"css/reset.css",
 					"js/index.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"b-login3.html": {
+				"resources": [
+					"css/b-login.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"b-login1.html": {
+				"resources": [
+					"css/b-login.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"b-login4.html": {
+				"resources": [
+					"js/mui.min.js"
 				],
 				"refer": [],
 				"priority": 0

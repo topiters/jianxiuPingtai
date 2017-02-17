@@ -138,28 +138,28 @@
 						<span class="r">更多></span>
 					</div>
 					<div class="index-taskd">
-						<ul class="task-tol">
-							<li class="task-tol1">
+						<ul class="task-tol" dataGao="rootcon">
+							<li class="task-tol1" dataGao="rootchild">
 								<div class="task-list1 l">
 									<img src="img/logo-01.jpg" />
 								</div>
 								<div class="task-list2 l">
-									<p class="mingcheng">检修名称检修名称检修名称</p>
-									<p>李三 | 15236252635</p>
-									<p>已有<span>2</span>人投标</p>
-									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+									<p class="mingcheng" dataGao="goodsName">检修名称检修名称检修名称</p>
+									<p><span dataGao="linkMan"></span> | <span ></span></p>
+									<p>已有<span dataGao="saleCount">2</span>人投标</p>
+									<p class="cut_str">地址：<span dataGao="linkAddr">郑州市索克时代大厦1810</span></p>
 								</div>
 								<div class="task-list3 r">
-									<p>消缺</p>
+									<p dataGao="">消缺</p>
 									<p></p>
-									<p id="1" class="settime" endTime="2017-02-05 10:00:00"></p>
+									<p id="1" class="settime" endTime="2017-02-20 10:00:00"></p>
 									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
 								</div>
 								<div class="task-list4">
 									<img src="img/bid-01.png" />
 								</div>
 							</li>
-							<li class="task-tol2">
+							<!--<li class="task-tol2">
 								<div class="task-list1 l">
 									<img src="img/logo-01.jpg" />
 								</div>
@@ -178,48 +178,7 @@
 								<div class="task-list4">
 									<img src="img/qiangdan-01.png" />
 								</div>
-							</li>
-							<li class="task-tol1">
-								<div class="task-list1 l">
-									<img src="img/logo-01.jpg" />
-								</div>
-								<div class="task-list2 l">
-									<p class="mingcheng">检修名称</p>
-									<p>李三 | 15236252635</p>
-									<p>已有<span>2</span>人投标</p>
-									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
-								</div>
-								<div class="task-list3 r">
-									<p>消缺</p>
-									<p></p>
-									<p id="2" class="settime" endTime="2017-02-05 15:45:00"></p>
-									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
-								</div>
-								<div class="task-list4">
-									<img src="img/bid-01.png" />
-								</div>
-							</li>
-							<li class="task-tol2">
-								<div class="task-list1 l">
-									<img src="img/logo-01.jpg" />
-								</div>
-								<div class="task-list2 l">
-									<p class="mingcheng">检修名称</p>
-									<p>已有<span>3</span>人抢单</p>
-									<p>发布时间：<span>12-12 12:12</span></p>
-									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
-								</div>
-								<div class="task-list3 r">
-									<p>￥400.00</p>
-									<p>5人</p>
-									<p></p>
-									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
-								</div>
-								<div class="task-list4">
-									<img src="img/qiangdan-01.png" />
-								</div>
-							</li>
-							<li></li>
+							</li>-->
 						</ul>
 					</div>
 				</div>
@@ -548,24 +507,51 @@
 		}
 	});
 /**
-  * 上拉加载，配合init代码
-  */
+ * 上拉加载，配合init代码
+ * 首页推荐任务
+ */
+	var rootnode = $('[dataGaoFour = "rootcon"]');
+	var childnode = $('[dataGaoOne = "rootchild"]').clone();
+	$('[dataGao = "rootchild"]').remove();
+	var i = 1;
  	function pullFresh() {
  		setTimeout(function() {
 		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
-		    mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=goods&a=getGoodsDetails',{
+		    mui.ajax(myUrl+'index.php?m=Api&c=goods&a=getGoodsDetails',{
 				data:{
-					
+					p: i
 				},
 				dataType:'json',//服务器返回json格式数据
 				type:'post',//HTTP请求类型
 				timeout:60000,//超时时间设置为10秒；
-				headers:{'Content-Type':'application/json'},	              
 				success:function(data){
 					//服务器返回响应，根据响应结果，分析是否获取数据成功；
-					var aaa="http://test.cnceshi.com/";
 					if( data.status == 200 ){
-						
+						console.log(JSON.stringify(data.msg.root))
+						$commonObj.loadListData({
+							sourceDataList : data.msg.root,
+							dataListRootNode : rootnode,
+							dataListChildNode : childnode,
+							dataAttrName : "dataGao",
+							dataHandleFn : function(){
+//								for(var i=0;i<mySrc1.length;i++){
+//									for (var j=0;j<mySrc.length;j++){
+//										var myStr = myURL+mySrc1[j].innerHTML; 
+//										mySrc[j].setAttribute("src",myStr);
+//									}	
+//								}
+//							//点击事件
+//								for(var j=0;j<mylist.length;j++){
+//									mylist[j].addEventListener('tap',function(){
+//										var id = $(this).children("p").html();
+//										mui.openWindow({
+//									    	url:"d-jiangbiao-dai.html?id="+id
+//										})
+//									});	
+//								}
+							}
+						})
+						i++;
 					}else{
 						alert("数据请求失败，请刷新页面")
 					} 
@@ -576,7 +562,8 @@
 				}
 			});
 	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
-		     this.endPullupToRefresh(true);
+		    var count = 0;
+		    mui('#pullRef').pullRefresh().endPullupToRefresh((++count > 2));
 	    },1000)
 	}
  	
@@ -605,7 +592,7 @@
 		    url:"a-fujin-yezhu01.html",
 		});
 	});
-		
+	
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -695,5 +682,10 @@
 		    url:"d-message-qiye.html",
 		});
 	});
+
+
+
+
+
 
 </script>

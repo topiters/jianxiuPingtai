@@ -30,22 +30,22 @@
 		<div class="jj1-one">
 			<div class="jj1-one-t clearfix">
 				<div class="jj-list1 l">
-					<img src="img/logo-01.jpg" />
+					<img src="" />
 				</div>
 				<div class="jj-list2 l">
-					<p class="goodsName">检修名称检修名称检修名称</p>
+					<p class="goodsName">   </p>
 					<p>需要<span class="goodsworks">5</span>人</p>
-					<p>发布时间：<span class="createTimes">2016-11-07 12:30</span></p>
+					<p>发布时间：<span class="createTimes"></span></p>
 				</div>
 				<div class="jj-list3 r">
-					<p >￥<spanclass="shopPrice">1，000</span></p>
+					<p >￥<span class="shopPrice"></span></p>
 					<p></p>
 					<p class="repairId">消缺</p>
 					<!--<p id="timer">12:12:12</p>-->
 				</div>
 			</div>
 			<div class="pd1-one-d">
-				<p class="clearfix"><span class="l">地址：</span><span class="l linkAddr">郑州市索克时代大厦</span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+				<p class="clearfix"><span class="l">地址：</span><span class="l linkAddr"></span><span class="r"><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
 			</div>
 		</div>
 		<div class="pd1-two">
@@ -53,8 +53,8 @@
 				发布方信息
 			</div>
 			<div class="pd1-two2">
-				<p>联&nbsp;&nbsp;系&nbsp;&nbsp;人：<span class="linkMan">李四</span></p>
-				<p>联系电话：<span class="linkPhone">15236525898</span></p>
+				<p>联&nbsp;&nbsp;系&nbsp;&nbsp;人：<span class="linkMan"></span></p>
+				<p>联系电话：<span class="linkPhone"></span></p>
 			</div>
 		</div>
 		<div class="pd1-two">
@@ -62,11 +62,11 @@
 				检修信息
 			</div>
 			<div class="pd1-two2">
-				<p>风机厂家：<span class="brandId">东风风神</span></p>
-				<p>设备型号：<span class="attrCatId">GTU-5263</span></p>
-				<p>是否开票：<span class="isVoice">是</span></p>
-				<p>工作时间：<span class="beginTime">2015-12-12 &nbsp;12:12</span></p>
-				<p>结束时间：<span class="endTime">2016-12-12 &nbsp;12:12</span></p>
+				<p>风机厂家：<span class="brandId"></span></p>
+				<p>设备型号：<span class="attrCatId"></span></p>
+				<p>是否开票：<span class="isVoice"></span></p>
+				<p>工作时间：<span class="beginTime"></span></p>
+				<p>结束时间：<span class="endTime"></span></p>
 			</div>
 		</div>
 		<div class="jj1-three">
@@ -75,14 +75,14 @@
 			</div>
 			<div class="jj1-three2 clearfix">
 				<div class="jj1-three2-list1">
-					<p>故障发生时间：<span class="startTime">2016-12-12</span></p>
+					<p>故障发生时间：<span class="startTime"></span></p>
 				</div>
 				<div class="jj1-three2-list2">
 					<div class="pd1-three2-list1 l">
 					故障描述：
 				</div>
 				<div class="pd1-three2-list2 l goodDesc">
-					小和尚下山去化斋老和尚有交待山下的女人是老虎遇见了千万要躲开走过了一村又一寨小和尚暗思揣为什么老虎不吃人模样还挺可爱
+					
 				</div>
 				</div>
 			</div>
@@ -107,16 +107,16 @@
 			<!--<div class="mui-content">-->
 			<div class="mui-content-padded imgs">
 				<p>
-					<img src="img/fujin-01.jpg" data-preview-src="" data-preview-group="1" />
+					<img src="" data-preview-src="" data-preview-group="1" />
 				</p>
 				<p>
-					<img src="img/fujin-02.jpg" data-preview-src="" data-preview-group="1" />
+					<img src="" data-preview-src="" data-preview-group="1" />
 				</p>
 				<p>
-					<img src="img/fujin-03.jpg" data-preview-src="" data-preview-group="1" />
+					<img src="" data-preview-src="" data-preview-group="1" />
 				</p>
 				<p>
-					<img src="img/fujin-04.jpg" data-preview-src="" data-preview-group="1" />
+					<img src="" data-preview-src="" data-preview-group="1" />
 				</p>
 			</div>
 			<!--</div>-->
@@ -170,7 +170,6 @@
 		 */
 		$(".mybtn").click(function(){
 			var shopPrice  = $("#fei").val();
-			alert(shopPrice);
 			mui.ajax(myUrl+'index.php?m=Api&c=shops&a=addMoney',{
 				data:{
 					goodsId:id,
@@ -182,10 +181,8 @@
 				success:function(data){
 					//服务器返回响应，根据响应结果，分析是否获取数据成功；
 					if( data.status == 200 ){
-						mui.openWindow({
-							url: "d-wodeqiangdan.html"
-						});
 						mui.toast(data.msg.msg);
+						location.reload();
 					}else{
 						mui.toast(data.msg.msg);
 					} 

@@ -190,7 +190,7 @@
 				var shopAddr = document.getElementById("shopAddr").value;
 				var shopUrl = document.getElementById("shopUrl").value;
 				var shopHost = document.getElementById("shopHost").value;
-				var shopIdentimg = document.getElementById("image-list").getAttribute("title");
+				var manufacturerInfo = document.getElementById("area").value;
 				var btnArray = ['否', '是'];
 				mui.confirm('确认保存？', '提示', btnArray, function(e) {
 					if (e.index == 1) {
@@ -204,6 +204,7 @@
 								shopArea: shopArea,
 								shopAddr: shopAddr,
 								shopUrl: shopUrl,
+								manufacturerInfo: manufacturerInfo,
 								latitude: "",
 								longitude: "",
 								shopHost: shopHost,

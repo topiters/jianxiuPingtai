@@ -47,7 +47,7 @@
 				<a id="head" style="display: block;">LoGo
 					<!--<i class="icon iconfont icon-jiantouyoujiantou r"></i>-->
 					<div class="mui-pull-right head r">
-						<img class="head-img mui-action-preview" id="head-img1" src="img/fujin-01.png"/>
+						<img class="head-img mui-action-preview" id="head-img1" src=""/>
 					</div>
 				</a>
 			</div>
@@ -78,40 +78,41 @@
 				<ul>
 					<li>
 						<span>企业名称</span>
-						<input type="text" name="" id="shopCompany" value="春泥科技" />
+						<input type="text" name="" id="shopCompany" value="" />
 					</li>
 					<li>
 						<span>行业分类</span>
-						<input type="text" name="" id="goodsCatId1" value="互联网" />
+						<input type="text" name="" id="goodsCatId1" value="" />
 					</li>
 					<li>
 						<span>注册资金</span>
-						<input type="text" name="" id="shoptotal" value="500万" />
+						<input type="text" name="" id="shoptotal" value="" />
 					</li>
 					<li>
 						<span>企业法人</span>
-						<input type="text" name="" id="shopHost" value="科技大神" />
+						<input type="text" name="" id="shopHost" value="" />
 					</li>
 					<li>
 						<span>公司网址</span>
 						<a href="###">
-							<input type="text" name="" id="shopUrl" value="www.baidu.com" />
+							<input type="text" name="" id="shopUrl" value="" />
 						</a>
 					</li>
 				</ul>
 				<div class="mq-paper">
 					<p>证件证明</p>
-					<div id='image-list' class="row image-list"></div>
+					<div id='image-list' class="row image-list">
+					</div>
 				</div>
 				<div class="mq-adress clearfix">
 					<p class="l">企业地址</p>
 					<dl class="mq-adress-r r">
 						<dd>
-							<input type="text" name="" id="shopArea" value="索克时代大厦" />
+							<input type="text" name="" id="shopArea" value="" />
 							<i class="icon iconfont icon-weizhi" style="font-size: 0.4rem;"></i>
 						</dd>
 						<dd>
-							<input type="text" name="" id="shopAddr" value="18层向东50米" />
+							<input type="text" name="" id="shopAddr" value="" />
 						</dd>
 					</dl>
 				</div>
@@ -203,6 +204,7 @@
 								console.log("file remove success");
 								entry.copyTo(root, 'head.jpg', function(e) {
 										var e = e.fullPath + "?version=" + new Date().getTime();
+										console.log(e);
 //										document.getElementById("head-img").src = e;
 										document.getElementById("head-img1").src = e;
 										//变更大图预览的src
@@ -306,9 +308,47 @@
 </html>
 <script type="text/javascript">
 /**
- * 完善信息
+ * 信息展示
  */
-//document.getElementById("saveMsg").addEventListener('tap', function() {
-//	
-//});
+var myUrl = "http://test.cnceshi.com/";
+mui.ajax(myUrl+'index.php?m=Api&c=shops&a=index',{
+	dataType:'json',//服务器返回json格式数据
+	type:'post',//HTTP请求类型
+	timeout:60000,//超时时间设置为10秒；
+	success:function(data){
+		//服务器返回响应，根据响应结果，分析是否获取数据成功；
+		if( data.status == 200 ){
+			var datas = data.msg.shop;
+//			console.log(JSON.stringify(data.msg));
+//			for(var i=0;i<datas.length;i++){
+				$("#shopCompany").val(datas.shopCompany);
+				$("#head-img1").attr("src",myUrl+datas.shopImg);
+				$("#goodsCatId1").val(datas.goodsCatId1);
+				$("#shoptotal").val(datas.shoptotal);
+				$("#shopHost").val(datas.shopHost);
+				$("#shopUrl").val(datas.shopUrl);
+				$("#shopArea").val(datas.shopArea);
+				$("#shopAddr").val(datas.shopAddr);
+				$("#area").val(datas.shopInfo);
+				console.log(datas.shopIdentimg);
+				for(var i=0;i<datas.shopIdentimg.length;i++){
+					var img = document.createElement('img');
+					img.setAttribute('src', myUrl+datas.shopIdentimg[i]);
+					img.style.width="65px";	
+					img.style.height="65px";
+					img.style.float="left";
+					img.style.marginRight="0.2rem";
+					$(".image-list").append(img);
+				}
+				
+//			}
+		}else{
+			mui.toast(data.msg.msg);
+		} 
+	},
+	error:function(xhr,type,errorThrown){
+		//异常处理；
+		console.log(type);
+	}
+});
 </script>

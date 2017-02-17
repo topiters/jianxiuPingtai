@@ -17,6 +17,7 @@
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
 		<!--公共js  ee-->
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
@@ -29,68 +30,33 @@
 		</header>
 		<div class="fujin-jianxiu">
 			<div class="index-taskd">
-				<ul class="task-tol">
-					<li class="task-tol1">
+				<ul class="task-tol" id="jianxiuBox" dataGao="rootcon">
+					<li class="task-tol1" dataGao="rootchild">
+						<p dataGao="goodsId" style="display: none;"></p>
+						<!--<p dataGao="goodsType" class="goodsType1" style="display: none;"></p>-->
 						<div class="task-list1 l">
-							<img src="img/logo-01.jpg" />
+							<p dataGao="goodsImg" class="myimgs" style="display: none;"></p>
+							<img src="img/logo-01.jpg" class="myImg"/ >
 						</div>
 						<div class="task-list2 l">
-							<p class="mingcheng">检修名称检修名称检修名称</p>
-							<p>李三 | 15236252635</p>
-							<p>已有<span>2</span>人投标</p>
-							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
+							<p class="mingcheng" dataGao="goodsName">检修名称检修名称检修名称</p>
+							<p><span dataGao="linkMan">李三</span> | <span dataGao="linkPhone">15236252635</span></p>
+							<p>已有<span dataGao="saleCount">2</span>人投标</p>
+							<p class="cut_str">地址：<span dataGao="linkAddr">郑州市索克时代大厦</span></p>
 						</div>
 						<div class="task-list3 r">
-							<p>消缺</p>
+							<p dataGao="repairId" class="repairId" style="display: none;"></p>
+							<p class="rpId">消缺</p>
 							<p></p>
-							<p id="afj-1" style="color: #FF3D10;" class="settime" endTime="2017-02-05 10:00:00"></p>
+							<p id="afj-1" style="color: #FF3D10;" class="settime" endTime="2017-02-20 10:00:00"></p>
 							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
 						</div>
 						<div class="task-list4">
-							<img src="img/bid-01.png" />
+							<p dataGao="goodsType" class="goodsType" style="display: none;"></p>
+							<img src="img/bid-01.png" class="zhuang"/>
 						</div>
 					</li>
-					<li class="task-tol2">
-						<div class="task-list1 l">
-							<img src="img/logo-01.jpg" />
-						</div>
-						<div class="task-list2 l">
-							<p>检修名称</p>
-							<p>已有<span>3</span>人抢单</p>
-							<p>发布时间：<span>12-12 12:12</span></p>
-							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
-						</div>
-						<div class="task-list3 r">
-							<p>￥400.00</p>
-							<p>5人</p>
-							<p></p>
-							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
-						</div>
-						<div class="task-list4">
-							<img src="img/qiangdan-01.png" />
-						</div>
-					</li>
-					<li class="task-tol1">
-						<div class="task-list1 l">
-							<img src="img/logo-01.jpg" />
-						</div>
-						<div class="task-list2 l">
-							<p>检修名称</p>
-							<p>李三 | 15236252635</p>
-							<p>已有<span>2</span>人投标</p>
-							<p class="cut_str">地址：郑州市索克时代大厦1810</p>
-						</div>
-						<div class="task-list3 r">
-							<p>消缺</p>
-							<p></p>
-							<p id="timer"></p>
-							<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
-						</div>
-						<div class="task-list4">
-							<img src="img/bid-01.png" />
-						</div>
-					</li>
-					<li class="task-tol2">
+					<!--<li class="task-tol2">
 						<div class="task-list1 l">
 							<img src="img/logo-01.jpg" />
 						</div>
@@ -109,8 +75,7 @@
 						<div class="task-list4">
 							<img src="img/qiangdan-01.png" />
 						</div>
-					</li>
-					<li></li>
+					</li>-->
 				</ul>
 			</div>
 		</div>
@@ -129,3 +94,124 @@
 	</script>
 
 </html>
+<script type="text/javascript">
+	/**
+ * 业主发布的采购列表
+ * 上拉加载，配合init代码
+ */
+	 mui.init({
+		pullRefresh : {
+		    container:'#jianxiuBox',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    up : {
+//		      	height:50,//可选.默认50.触发上拉加载拖动距离
+		      	auto:true,//可选,默认false.自动上拉加载一次
+		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+	  	}
+	});
+	var rootnode = $('[dataGao = "rootcon"]');
+	var childnode = $('[dataGao = "rootchild"]').clone();
+	$('[dataGao = "rootchild"]').remove();
+ 	var i = 1;
+ 	var myUrl = "http://test.cnceshi.com/";
+ 	function mypullFresh() {
+ 		setTimeout(function() {
+		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
+			mui.ajax(myUrl+'index.php?m=Api&c=Goods&a=getGoodsList',{
+				data:{
+					pcurr: i
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:60000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						$commonObj.loadListData({
+							sourceDataList : data.msg.root,
+							dataListRootNode : rootnode,
+							dataListChildNode : childnode,
+							dataAttrName : "dataGao",
+							dataHandleFn : function(){
+								var mySrc = document.getElementsByClassName("myImg");
+								var mySrc1 = document.getElementsByClassName("myimgs");
+								for(var i=0;i<mySrc1.length;i++){
+									for (var j=0;j<mySrc.length;j++){
+										var myStr = myUrl+mySrc1[j].innerHTML; 
+										mySrc[j].setAttribute("src",myStr);
+									}	
+								}
+								var repairId = document.getElementsByClassName("repairId");
+								var rpId = document.getElementsByClassName("rpId");
+								for(var i=0;i<repairId.length;i++){
+									for(var j=0;j<rpId.length;j++){
+										if(repairId[j].innerHTML==1){
+											rpId[j].innerHTML="消缺";
+										}else if(repairId[j].innerHTML==2){
+											rpId[j].innerHTML="定修";
+										}else if(repairId[j].innerHTML==3){
+											rpId[j].innerHTML="小修";
+										}else{
+											rpId[j].innerHTML="大修";
+										}
+									}
+									
+								}
+								var goodsType = document.getElementsByClassName("goodsType");
+								var zhuang = document.getElementsByClassName("zhuang");
+								for(var i=0;i<goodsType.length;i++){
+									for (var j=0;j<zhuang.length;j++){
+										if(goodsType[j].innerHTML==1){
+											zhuang[j].setAttribute("src","img/bid-01.png");
+										}else{
+											zhuang[j].setAttribute("src","img/qiangdan-01.png");
+										}
+										
+									}	
+								}
+								//点击事件
+//								var goodsType1 = document.getElementsByClassName("goodsType1");
+								var mylist = document.getElementsByClassName("task-tol1");
+								for(var i=0;i<goodsType.length;i++){
+									for (var j=0;j<mylist.length;j++){
+										if(goodsType[j].innerHTML==1){
+											mylist[j].addEventListener('tap',function(){
+												var id = $(this).children("p").html();
+												mui.openWindow({
+											    	url:"d-jiangbiao-dai.html?id="+id
+												})
+											});	
+										}else{
+											mylist[j].addEventListener('tap',function(){
+												var id = $(this).children("p").html();
+												mui.openWindow({
+											    	url:"d-qiangdan-dai.html?id="+id
+												})
+											});
+										}	
+									}
+								}
+							}
+						})
+						
+						
+								
+						i++;
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});	    
+			
+	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
+			var count = 0;
+		    mui('#jianxiuBox').pullRefresh().endPullupToRefresh((++count > 2));
+	    },1000)
+	}
+</script>
