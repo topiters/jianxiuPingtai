@@ -146,18 +146,19 @@ public  function addByUser(){
 			$datas['goodsImg']=$v;//获取第一张
 		}
 	}
+
+	 
 	   $datas['goodsThums']=serialize($goodsthumb);
 		}
 		
 		
-      $linkMan=I("linkMan");//联系人
+		
+	 $linkMan=I("linkMan");//联系人
 	  $linkPhone=I("linkPhone");//手机号
 	  $linkAddr=I("linkAddr");//地址
 	   $datas['linkMan']=$linkMan;
 	   $datas['linkPhone']=$linkPhone;
 	   $datas['linkAddr']=$linkAddr;
-		
-		
 		if($goodsTaskId==1){  //采购任务
 		$goodsStock=$_POST['goodsStock'];//数量	
 		if(empty($goodsStock)){//业主不存在
@@ -306,7 +307,34 @@ public  function addByUser(){
 		
 	}
 	
-	//
+	//增加金额
+	
+	public function addMoney(){
+	
+		$result=D('Api/shops')->addMoney();
+	
+	if($result){
+				
+			$data["msg"] = '数据添加成功!';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
+			$this->stringify($data);
+				
+		}else{
+    	$data["msg"] = '数据输入失败，请检查...!';
+    	$data = array('status'=>self::API_ADD_FALSE,'msg'=>$data);
+    	$this->stringify($data);	
+    } 
+	
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	
 
 	/**
      * 跳到业主首页面
@@ -458,17 +486,22 @@ public  function addByUser(){
 	 * 跳到业主中心页面
 	 */
 	public function index(){
-		$this->isShopLogin();
+//		$this->isShopLogin();
 		$spm = D('Home/Shops');
 		$data['shop'] = $spm->loadShopInfo(session('WST_USER.userId'));
 		$obj["shopId"] = $data['shop']['shopId'];
 		$details = $spm->getShopDetails($obj);
 		$data['details'] = $details;
-		
-		$this->assign('shopInfo',$data);
-		
-		$this->display("default/shops/index");
-	}
+        if ($data) {
+//            $data["msg"] = '数据添加成功!';
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $data);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '数据输入失败，请检查...!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
 	/**
 	 * 编辑业主资料
 	 */
