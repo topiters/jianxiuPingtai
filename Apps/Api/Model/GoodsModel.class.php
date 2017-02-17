@@ -85,7 +85,7 @@ public function gooodsPurchase(){
 			$words = explode(" ",$keyWords);
 		}
 		
-		$sqla = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,linkMan,linkPhone,linkAddr,p.shopId,marketPrice,shopPrice,g.attrCatId,saleTime,gt.* ";
+		$sqla = "SELECT  g.goodsId,goodsSn,goodsType,goodsName,goodsImg,goodsStock,g.saleCount,linkMan,linkPhone,linkAddr,repairId,p.shopId,marketPrice,shopPrice,g.attrCatId,saleTime,gt.* ";
 		$sqlb = "SELECT max(shopPrice) maxShopPrice  ";
 		$sqlc = " FROM __PREFIX__goods g left join __PREFIX__shops  p on g.shopId = p.shopId left join __PREFIX__goods_type  gt  on gt.typeId=g.attrCatId  ";
 		if($brandId>0){
