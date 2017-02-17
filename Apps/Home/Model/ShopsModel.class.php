@@ -69,6 +69,7 @@ class ShopsModel extends BaseModel {
 		$shops["serviceEndTime"] = str_replace('.0',':00',$shops["serviceEndTime"]);
 		$shops["serviceStartTime"] = str_replace('.5',':30',$shops["serviceStartTime"]);
 		$shops["serviceStartTime"] = str_replace('.0',':00',$shops["serviceStartTime"]);
+        $shops['shopIdentimg'] = unserialize($shops['shopIdentimg']);
 		return $shops;
 	}
 	

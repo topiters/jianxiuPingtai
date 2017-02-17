@@ -85,15 +85,15 @@ public function gooodsPurchase(){
 			$words = explode(" ",$keyWords);
 		}
 		
-		$sqla = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,p.shopId,marketPrice,shopPrice,ga.id goodsAttrId,saleTime,totalScore,totalUsers,gt.* ";
+		$sqla = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,linkMan,linkPhone,linkAddr,p.shopId,marketPrice,shopPrice,g.attrCatId,saleTime,gt.* ";
 		$sqlb = "SELECT max(shopPrice) maxShopPrice  ";
-		$sqlc = " FROM __PREFIX__goods g left join __PREFIX__shops   left join __PREFIX__goods_type  gt  on gt.typeId=g.attrCatId  ";
+		$sqlc = " FROM __PREFIX__goods g left join __PREFIX__shops  p on g.shopId = p.shopId left join __PREFIX__goods_type  gt  on gt.typeId=g.attrCatId  ";
 		if($brandId>0){
 			$sqlc .=" , __PREFIX__brands bd ";
 		}
 		
 		
-		$where = " WHERE g.shopId = p.shopId AND  g.goodsStatus=0 AND g.goodsFlag = 1 and g.isSale=1 and g.goodsTaskId=$goodstaskId ";
+		$where = " WHERE  g.goodsStatus=0 AND g.goodsFlag = 1 and g.isSale=1 and g.goodsTaskId=$goodstaskId ";
 		if($brandId>0){
 			$where .=" AND bd.brandId=g.brandId AND g.brandId = $brandId ";
 		}
@@ -107,6 +107,7 @@ public function gooodsPurchase(){
 			$where .= " AND (".implode(" or ", $sarr).")";
 		}
 		$sqla=$sqla.$sqlc.$where;
+//		echo $sqla;die;
 		$pages = $this->pageQuery($sqla, $pcurr, 15);
 		//var_dump($pages);
 	

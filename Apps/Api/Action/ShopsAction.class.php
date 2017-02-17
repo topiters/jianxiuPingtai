@@ -54,6 +54,7 @@ public function __construct(){
         $longitude = $_POST['longitude']; //纬度
         $shopHost = $_POST['shopHost'];//企业法人
         $shopUrl = $_POST['shopUrl'];//网址
+        $datas['shopUrl'] = $shopUrl;
         $datas['shopImg'] = $shopImg;
         $datas['shopCompany'] = $shopCompany;
         $datas['goodsCatId1'] = $goodsCatId1;
