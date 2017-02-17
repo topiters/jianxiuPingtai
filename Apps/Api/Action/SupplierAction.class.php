@@ -228,21 +228,8 @@ class SupplierAction extends BaseAction {
      * 消息列表页计数
      */
     public function messageCount() {
-        //新留言
-        $USER = session('WST_USER');
-        $userId = $USER['userId'];
-        $sId = D('supperlier')->field('userId,supplierId')->where("userID = $userId")->find();
-        $message = D('supplier_message')->where("supplierId = {$sId['supplierId']} and isCheck = 1")->count();
-        $result = array();
-        $result['message'] = (int)$message;
-        //成功报价
         $Model = D('Api/supplier');
-        $offer = $Model->getSuccessOfferList();
-        $result['offer'] = count($offer);
-        //新订单
-        //todo sql语句待修改
-        $order = D('order')->where()->count();
-        $result['order'] = (int)$order;
+        $result = $Model->messageCount();
         if ($result) {
             $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
             $this->stringify($data);
@@ -273,16 +260,32 @@ class SupplierAction extends BaseAction {
      * 确认发货
      */
     public function orderSure() {
-        $oId = I('orderId');
-        $USER = session('WST_USER');
-        $userId = $USER['userId'];
-        $sId = D('supperlier')->field('userId,supplierId')->where("userID = $userId")->find();
-        //更新订单状态
-        $datas = array();
-        $datas['orderStatus'] = 1;
-        // TODO 这里暂时将shopId定义为供应商ID 后续再讨论是否修改
-        D('orders')->where("shopId = {$sId['supplierId']} and orderId = $oId")->save($datas);
+        $Model = D('Api/supplier');
+        $result = $Model->orderSure();
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '添加失败!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
     }
 
+    /**
+     * 供应商回复评价
+     */
+    public function commentBack() {
+        $Model = D('Api/supplier');
+        $result = $Model->commentBack();
+        if ($result) {
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '添加失败!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
 }
 ?>
