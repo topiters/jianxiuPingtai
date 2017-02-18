@@ -78,8 +78,19 @@ public function shopgoodsdetails(){
 		
 	}
 	
-	
-	
+	//增加费用
+	public function addMoney(){
+		
+		 $goodsId=I("goodsId");
+		$shopPrice=I("shopPrice");
+		$datas=array();
+		$datas['shopPrice']=$shopPrice;
+		$res=D("goods")->where(array($goodsId=>$goodsId))->save($datas);
+
+		return  $res;
+		
+		
+	}
 	
 	
 	
