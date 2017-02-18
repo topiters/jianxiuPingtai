@@ -1,96 +1,95 @@
 <?php
- namespace Home\Model;
+ namespace Api\Model;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
+ * ==============================================
+ * 版权所有 2010-2016 http://www.chunni168.com
+ * ----------------------------------------------
+ * 这不是一个自由软件，未经授权不许任何使用和传播。
+ * ==============================================
  * 会员地址服务类
  */
 class UserAddressModel extends BaseModel {
     /**
 	  * 新增
 	  */
-	 public function insert(){
-	 	$rd = array('status'=>-1);
-	 	$id = (int)I("id",0);
-		$data = array();
-		$data["userId"] = (int)session('WST_USER.userId');
-		$data["userName"] = I("userName");
-		$data["areaId2"] = (int)I("areaId2");
-		if(I("areaId1")){
-			$data["areaId1"] = (int)I("areaId1");
-		}else{
-			$sql ="SELECT parentId FROM __PREFIX__areas WHERE areaId='".$data["areaId2"]."' AND areaFlag=1";
-			$ars = $this->queryRow($sql);
-			$data["areaId1"] = $ars["parentId"];
-		}
-		
-		$data["areaId3"] = (int)I("areaId3");
-		$data["communityId"] = (int)I("communityId");
-		if(I("userPhone")!=''){
-			$data["userPhone"] = I("userPhone");
-		}else{
-		    $data["userTel"] = I("userTel");
-		}
-		
-		$data["address"] = I("address");
-		$data["isDefault"] = (int)I("isDefault",0);
-		$data["addressFlag"] = 1;
-		$data["createTime"] = date('Y-m-d H:i:s');
-	    if($this->checkEmpty($data,true)){	
-	    	$data["userPhone"] = I("userPhone");
-	    	$data["userTel"] = I("userTel");
-			$m = M('user_address');
-			$rs = $m->add($data);
-			if(false !== $rs){
-				$rd['status']= $rs;
-				if((int)I("isDefault")==1){
-					//修改所有的地址为非默认
-					$m->isDefault = 0;
-					$m->where('userId='.(int)session('WST_USER.userId')." and addressId!=".$rs)->save();
-				}
-			}
-		}
-		return $rd;
-	 } 
+    public function insert() {
+        $rd = array('status' => -1);
+//        $id = (int)I("id" , 0);
+        $data = array();
+        $data["userId"] = (int)session('WST_USER.userId');
+        $data["userName"] = I("userName");
+//        $data["areaId2"] = (int)I("areaId2");
+//        if (I("areaId1")) {
+//            $data["areaId1"] = (int)I("areaId1");
+//        } else {
+//            $sql = "SELECT parentId FROM __PREFIX__areas WHERE areaId='" . $data["areaId2"] . "' AND areaFlag=1";
+//            $ars = $this->queryRow($sql);
+//            $data["areaId1"] = $ars["parentId"];
+//        }
+//
+//        $data["areaId3"] = (int)I("areaId3");
+//        $data["communityId"] = (int)I("communityId");
+//        if (I("userPhone") != '') {
+//            $data["userPhone"] = I("userPhone");
+//        } else {
+//            $data["userTel"] = I("userTel");
+//        }
+        $data["userPhone"] = I("userPhone");
+        $data["address"] = I("address");
+        $data["isDefault"] = (int)I("isDefault" , 0);
+        $data["addressFlag"] = 1;
+        $data["createTime"] = date('Y-m-d H:i:s');
+        if ($this->checkEmpty($data , true)) {
+            $data["userPhone"] = I("userPhone");
+            $data["userTel"] = I("userTel");
+            $m = M('user_address');
+            $rs = $m->add($data);
+            if (false !== $rs) {
+                $rd['status'] = $rs;
+                if ((int)I("isDefault") == 1) {
+                    //修改所有的地址为非默认
+                    $m->isDefault = 0;
+                    $m->where('userId=' . (int)session('WST_USER.userId') . " and addressId!=" . $rs)->save();
+                }
+            }
+        }
+        return $rd;
+    }
      /**
 	  * 修改
 	  */
-	 public function edit(){
-	 	$rd = array('status'=>-1);
-	 	$id = (int)I("id",0);
-		$data = array();
-		$data["userName"] = I("userName");
-		//$data["userPhone"] = I("userPhone");
-	    if(I("userPhone")!=''){
-			$data["userPhone"] = I("userPhone");
-		}else{
-		    $data["userTel"] = I("userTel");
-		}
-		$data["areaId2"] = (int)I("areaId2");
-		$data["areaId3"] = (int)I("areaId3");
-		$data["communityId"] = (int)I("communityId");
-		$data["address"] = I("address");
-		
-		if($this->checkEmpty($data,true)){	
-			$m = M('user_address');
-			$data["userPhone"] = I("userPhone");
-			$data["userTel"] = I("userTel");
-			$data["isDefault"] = (int)I("isDefault");
-			$rs = $m->where("userId=".(int)session('WST_USER.userId')." and addressId=".$id)->save($data);
-			if(false !== $rs){
-				$rd['status']= 1;
-				if((int)I("isDefault")==1){
-					//修改所有的地址为非默认
-					$m->isDefault = 0;
-					$m->where('userId='.(int)session('WST_USER.userId')." and addressId!=".$id)->save();
-				}
-			}
-		}
-		return $rd;
-	 } 
+    public function edit() {
+        $rd = array('status' => -1);
+        $id = (int)I("id" , 0);
+        $data = array();
+        $data["userName"] = I("userName");
+        $data["userPhone"] = I("userPhone");
+//        if (I("userPhone") != '') {
+//            $data["userPhone"] = I("userPhone");
+//        } else {
+//            $data["userTel"] = I("userTel");
+//        }
+//        $data["areaId2"] = (int)I("areaId2");
+//        $data["areaId3"] = (int)I("areaId3");
+//        $data["communityId"] = (int)I("communityId");
+        $data["address"] = I("address");
+
+        if ($this->checkEmpty($data , true)) {
+            $m = M('user_address');
+            $data["userPhone"] = I("userPhone");
+            $data["isDefault"] = (int)I("isDefault");
+            $rs = $m->where("userId=" . (int)session('WST_USER.userId') . " and addressId=" . $id)->save($data);
+            if (false !== $rs) {
+                $rd['status'] = 1;
+                if ((int)I("isDefault") == 1) {
+                    //修改所有的地址为非默认
+                    $m->isDefault = 0;
+                    $m->where('userId=' . (int)session('WST_USER.userId') . " and addressId!=" . $id)->save();
+                }
+            }
+        }
+        return $rd;
+    }
 	 /**
 	  * 获取指定对象
 	  */
@@ -98,6 +97,33 @@ class UserAddressModel extends BaseModel {
 	 	$m = M('user_address');
 		return $m->where("addressId=".(int)I('id')." and userId=".(int)session('WST_USER.userId'))->find();
 	 }
+
+    /**
+     * 获取全部对象
+     */
+    public function getList() {
+        $m = M('user_address');
+        return $m->where(" userId=" . (int)session('WST_USER.userId'))->select();
+    }
+    /**
+     * 设置为默认的地址
+     */
+    public function setDefault() {
+        $rd = array('status' => -1);
+        $id = (int)I("id" , 0);
+        $m = M('user_address');
+        $data["isDefault"] = (int)I("isDefault");
+        $rs = $m->where("userId=" . (int)session('WST_USER.userId') . " and addressId=" . $id)->save($data);
+        if (false !== $rs) {
+            $rd['status'] = 1;
+            if ((int)I("isDefault") == 1) {
+                //修改所有的地址为非默认
+                $m->isDefault = 0;
+                $m->where('userId=' . (int)session('WST_USER.userId') . " and addressId!=" . $id)->save();
+            }
+        }
+        return $rd;
+    }
 	 /**
 	  * 获取列表
 	  */

@@ -1,20 +1,40 @@
 <?php
- namespace Home\Action;;
+ namespace Api\Action;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
+ * ==============================================
+ * 版权所有 2010-2016 http://www.chunni168.com
+ * ----------------------------------------------
+ * 这不是一个自由软件，未经授权不许任何使用和传播。
+ * ==============================================
  * 会员地址控制器
  */
 class UserAddressAction extends BaseAction{
+
+    public function index() {
+        $m = D('Api/UserAddress');
+        $object = array();
+        if ((int)I('id' , 0) > 0) {
+            $object = $m->get();
+        } else {
+            $object = $m->getList();
+        }
+        if ($object != false) {
+//            $data["msg"] = '';
+            $object = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $object);
+            $this->stringify($object);
+        } else {
+            $object["msg"] = '数据请求失败,请重试!';
+            $object = array('status' => self::API_UPDATE_FALSE , 'msg' => $object);
+            $this->stringify($object);
+        }
+    }
+
 	/**
 	 * 跳到新增/编辑页面
 	 */
 	public function toEdit(){
 		$this->isUserLogin();
-	    $m = D('Home/UserAddress');
+	    $m = D('Api/UserAddress');
     	$object = array();
     	if((int)I('id',0)>0){
     		$object = $m->get();
@@ -32,9 +52,8 @@ class UserAddressAction extends BaseAction{
 	 * 新增/修改操作
 	 */
 	public function edit(){
-		
-		$this->isUserLogin();
-		$m = D('Home/UserAddress');
+        //		$this->isUserLogin();
+        $m = D('Api/UserAddress');
     	$rs = array();
     	if((int)I('id',0)>0){
     		$rs = $m->edit();
@@ -47,18 +66,27 @@ class UserAddressAction extends BaseAction{
 	 * 删除操作
 	 */
 	public function del(){
-		$this->isUserLogin();
-		$m = D('Home/UserAddress');
+//		$this->isUserLogin();
+		$m = D('Api/UserAddress');
     	$rs = $m->del();
     	$this->ajaxReturn($rs);
 	}
+
+    /**
+     * 设置为默认的地址
+     */
+    public function setDefault() {
+        $m = D('Api/UserAddress');
+        $rs = $m->setDefault();
+        $this->ajaxReturn($rs);
+    }
 	/**
 	 * 分页查询
 	 */
 	public function queryByPage(){
 		$this->isLogin();
 		$USER = session('WST_USER');
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
     	$list = $m->queryByList($USER['userId']);
     	$this->assign('List',$list);
     	$this->assign("umark","addressQueryByPage");
@@ -69,7 +97,7 @@ class UserAddressAction extends BaseAction{
 	 */
 	public function getUserAddress(){
 		$this->isUserLogin();
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
 		$address = $m->getUserAddressInfo();	
 		$addressInfo = array();
 		$addressInfo["status"] = 1;
@@ -82,7 +110,7 @@ class UserAddressAction extends BaseAction{
 	 */
 	public function getDistricts(){
 		
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
 		$areaId2 = (int)I("areaId2");
 		$communitys = $m->getDistricts($areaId2);	
 		$this->ajaxReturn($communitys);
@@ -94,7 +122,7 @@ class UserAddressAction extends BaseAction{
 	 */
 	public function getCommunitys(){
 		
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
 		$districtId = (int)I("districtId");
 		$communitys = $m->getCommunitys($districtId);	
 		$this->ajaxReturn($communitys);
@@ -106,7 +134,7 @@ class UserAddressAction extends BaseAction{
 	 */
 	public function getDistrictsOption(){
 		
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
 		$areaId2 = (int)I("areaId2");
 		$communitys = $m->getDistrictsOption($areaId2);	
 		$this->ajaxReturn($communitys);
@@ -118,7 +146,7 @@ class UserAddressAction extends BaseAction{
 	 */
 	public function getCommunitysOption(){
 		
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
 		$districtId = (int)I("districtId");
 		$communitys = $m->getCommunitysOption($districtId);	
 		$this->ajaxReturn($communitys);
@@ -130,7 +158,7 @@ class UserAddressAction extends BaseAction{
 	 */
 	public function getShopDistricts(){
 	
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
 		$areaId2 = (int)I("areaId2");
 		$shopId = (int)I("shopId");
 		$communitys = $m->getShopDistricts($areaId2,$shopId);
@@ -143,7 +171,7 @@ class UserAddressAction extends BaseAction{
 	 */
 	public function getShopCommunitys(){
 	
-		$m = D('Home/UserAddress');
+		$m = D('Api/UserAddress');
 		$districtId = (int)I("districtId");
 		$shopId = (int)I("shopId");
 		$communitys = $m->getShopCommunitys($districtId,$shopId);

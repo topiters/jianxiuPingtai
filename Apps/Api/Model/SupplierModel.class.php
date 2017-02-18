@@ -135,12 +135,15 @@ class SupplierModel extends BaseModel{
     public function commentBack() {
         $cId = I('orderId');
         $comment = I('comment');
+        $USER = session('WST_USER');
+        $userId = $USER['userId'];
         $datas = array();
-        $datas['commentId'] = $cId;
+        $datas['orderId'] = $cId;
         $datas['content'] = $comment;
+        $datas['userId'] = $userId;
         $datas['type'] = 2;  //若有类型 则1为发布的评价  2为回复评价
-        // TODO   这里表名待修改
-        $result = D('')->add($datas);
+        $datas['createTime'] = date('Y-m-d H:i:s' , time());
+        $result = D('comment')->add($datas);
         return $result;
     }
 }

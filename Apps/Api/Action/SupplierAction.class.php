@@ -32,6 +32,7 @@ class SupplierAction extends BaseAction {
         $data = array('status' => self::API_REQUEST_SUCCESS);
         $this->stringify($data);
     }
+
     /**
      * 供应商信息完善
      */
@@ -44,13 +45,7 @@ class SupplierAction extends BaseAction {
             $data = array('status' => self::API_PERMISSION_NO_OPERATION , 'msg' => $data);
         }
         $datas = array();
-        //$supplierImg=I('supplierImg');//公司logo
-        if ($_FILES['supplierImg']) {
-            $info = $this->uploadPic();
-            if ($info['status'] == 1) {
-                $shopImg = $info['savename'] . $info['savethumbname'];
-            }
-        }
+        $supplierImg=I('supplierImg');//公司logo
         $shopCompany = $_POST['supplierCompany'];//公司名称
         $goodsCatId1 = $_POST['goodsCatId1'];//行业分类
         $shopTotal = $_POST['supplierTotal'];//注册金额
@@ -61,8 +56,7 @@ class SupplierAction extends BaseAction {
         $longitude = $_POST['longitude']; //纬度
         $shopHost = $_POST['supplierHost'];//企业法人
         $shopUrl = $_POST['supplierUrl'];//网址
-        $shopIdentimg = $_POST['supplierIdentimg'];//公司证明
-        $datas['supplierImg'] = $shopImg;
+        $datas['supplierImg'] = $supplierImg;
         $datas['supplierCompany'] = $shopCompany;
         $datas['goodsCatId1'] = $goodsCatId1;
         $datas['supplierTotal'] = $shopTotal;
@@ -73,32 +67,21 @@ class SupplierAction extends BaseAction {
         $datas['supplierAddr'] = $shopAddr;
         $datas['latitude'] = $latitude;
         $datas['longitude'] = $longitude;
-        $shopIdentimg = array();
-        //附件
-        if ($_FILES) {
-            $supplierIdentimgInfo = $this->uploads();
-            if ($supplierIdentimgInfo) {
-                foreach ($supplierIdentimgInfo as $k => $v) {
-                    $imgs[] = $v['savepath'] . $v['savethumbname'];
-                }
-            }
+        $supplierIdentimg = I("shopIdentimg");//附件
+        if ($supplierIdentimg) {
+            $datas['supplierIdentimg'] = serialize($supplierIdentimg);
         }
-        $datas['supplierIdentimg'] = serialize($shopIdentimg);
-        $datas['createTime'] = date('Y-m-d H:i:s',time());
-
-
+        $datas['createTime'] = date('Y-m-d H:i:s' , time());
         $result = M('supperlier')->where(array('userId' => $userId))->save($datas);
         if ($result != false) {
             $data["msg"] = '数据保存成功';
             $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $data);
             $this->stringify($data);
-
         } else {
             $data["msg"] = '数据没有更新，请更新后保存...!';
             $data = array('status' => self::API_UPDATE_FALSE , 'msg' => $data);
             $this->stringify($data);
         }
-
     }
 
     /**
