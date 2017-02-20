@@ -306,6 +306,24 @@ class UsersModel extends BaseModel {
 	    } 
 		return $rd;
 	}
+
+    /**
+     * 用户反馈
+     */
+    public function feedback() {
+        $USER = session('WST_USER');
+        $comment = WSTAddslashes(I('feedback'));
+        if ($comment == '') {
+            return false;
+        }
+        $data = array();
+        $data['feedbackType'] = 1;
+        $data['content'] = $comment;
+        $data['userId'] = $USER['userId'];
+        $data['createTime'] = date('Y-m-d H:i:s');
+        $result = D('feedbacks')->add($data);
+        return $result;
+    }
 	
 	/**
 	 * 随机生成一个账号

@@ -238,8 +238,24 @@ class UsersAction extends BaseAction {
 		$this->isUserLogin();
 		$this->redirect("Orders/queryByPage");
 	}
-	
-  
+
+    /**
+     * 用户反馈
+     */
+    public function feedback() {
+        $this->isLogin();
+        $m = D('Api/Users');
+        $result = $m->feedback();
+        if ($result) {
+            $data["msg"] = '您的意见已收到,请耐心等待回复!';
+            $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $data);
+            $this->stringify($data);
+        } else {
+            $data["msg"] = '操作失败!';
+            $data = array('status' => self::API_ADD_FALSE , 'msg' => $data);
+            $this->stringify($data);
+        }
+    }
 	
 	/**
 	 * 修改用户密码
