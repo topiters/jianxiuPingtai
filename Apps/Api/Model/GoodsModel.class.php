@@ -107,7 +107,7 @@ public function gooodsPurchase(){
 			$where .= " AND (".implode(" or ", $sarr).")";
 		}
 		$sqla=$sqla.$sqlc.$where;
-//		echo $sqla;die;
+//echo $sqla;die;
 		$pages = $this->pageQuery($sqla, $pcurr, 15);
 		//var_dump($pages);
 	
