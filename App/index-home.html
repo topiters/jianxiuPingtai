@@ -15,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" type="text/css" href="css/message.css"/>
 		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<link rel="stylesheet" type="text/css" href="css/b-login.css" />
 		<!--公共js  ss-->
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui.min.js"></script>
@@ -35,6 +36,12 @@
 //				  }
 			});
 		</script>
+		<style type="text/css">
+			.mui-content{background: #fff;}
+			body{background: #fff;}
+			.nowBlock{display: block;}
+			.nowNone{display: none;}
+		</style>
 	</head>
 	<body>
 <!--底部导航-->
@@ -56,7 +63,7 @@
 		<div class="mui-content">
 			
 			<!--首页HOME-->
-			<div id="home" class="mui-control-content mui-active">
+			<div id="home" class="mui-control-content mui-active" style="background: #efeff4;">
 				<header id="header" class="mui-bar mui-bar-transparent">
 					<span>郑州</span>
 					<a><span class="mui-icon mui-icon-arrowdown"></span></a>
@@ -159,26 +166,6 @@
 									<img src="img/bid-01.png" />
 								</div>
 							</li>
-							<!--<li class="task-tol2">
-								<div class="task-list1 l">
-									<img src="img/logo-01.jpg" />
-								</div>
-								<div class="task-list2 l">
-									<p class="mingcheng">检修名称</p>
-									<p>已有<span>3</span>人抢单</p>
-									<p>发布时间：<span>12-12 12:12</span></p>
-									<p class="cut_str">地址：郑州市索克时代大厦1810</p>
-								</div>
-								<div class="task-list3 r">
-									<p>￥400.00</p>
-									<p>5人</p>
-									<p></p>
-									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
-								</div>
-								<div class="task-list4">
-									<img src="img/qiangdan-01.png" />
-								</div>
-							</li>-->
 						</ul>
 					</div>
 				</div>
@@ -205,131 +192,41 @@
 			<div id="message" class="mui-control-content">
 				<header id="header" class="mui-bar mui-bar-nav">
 					<h1 class="mui-title">消息</h1>
+					<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="reg_btn">注册</button>
 				</header>
-				<div class="cyx1" style="display: block;">
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="baojiaMsg">
-							<p>报价消息</p>
-							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
-					</div>
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="qiangMsg">
-							<p>抢单消息</p>
-							<p class="clearfix"><span class="l">未有抢单消息</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
-					</div>
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="jingMsg">
-							<p>竞标消息</p>
-							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
-						</div>
-					</div> 
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
-						</div>
-						<div class="cyx1-list2 l">
-							<p>提现进度</p>
-							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
-					</div>
+			<!--消息-->
+				<div id="messages" style="display: none;margin-top: 2rem;">
+					消息消息消息消息
 				</div>
-				
-				<!--供应商-->
-				<div class="cyx1" style="display: none;">
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="baojiaMsg">
-							<p>我的留言</p>
-							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
+			<!--登录-->
+				<div class="l-main" id="box1" style="display: block;">
+					<div class="l-main1">
+						<i class="icon iconfont icon-shouji1"></i>
+						<input type="text" name="" id="phone" placeholder="请输入手机号" />
 					</div>
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="qiangMsg">
-							<p>我的报价</p>
-							<p class="clearfix"><span class="l">未有抢单消息</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
+					<div class="l-main2">
+						<i class="icon iconfont icon-suo"></i>
+						<input type="password" name="" id="paslogin" placeholder="请输入密码" />
 					</div>
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="jingMsg">
-							<p>订单消息</p>
-							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
-						</div>
-					</div> 
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
-						</div>
-						<div class="cyx1-list2 l">
-							<p>提现进度</p>
-							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
+					<div class="l-main3 clearfix">
+						<span class="forget l" id="forgetpwd">忘记密码</span>
+						<span class="r" id="p_login">手机登录</span>
 					</div>
-				</div>
-				
-				<!--检修企业检修工程师-->
-				<div class="cyx1" style="display: none;">
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
+					<button class="l-btn" id="l_btn">立即登录</button>
+					<div class="l-main4">
+						<div class="l-main4-t">
+							<span></span>
+							<span>第三方登录</span>
+							<span></span>
 						</div>
-						<div class="cyx1-list2 l" id="baojiaMsg">
-							<p>抢单成功</p>
-							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
+						<div class="l-main4-d"></div>
 					</div>
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
+					<div class="l-main5">
+						<div class="l-main5-list" id="qqlogin">
+							<img src="img/qq.png" />
 						</div>
-						<div class="cyx1-list2 l" id="qiangMsg">
-							<p>抢单失败</p>
-							<p class="clearfix"><span class="l">共有<span class="red">3</span>条消息</span><span class="r">2016-12-12 12:12</span></p>
-						</div>
-					</div>
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="jingMsg">
-							<p>竞标成功</p>
-							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
-						</div>
-					</div> 
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
-						</div>
-						<div class="cyx1-list2 l" id="jingMsg">
-							<p>竞标失败</p>
-							<p class="clearfix"><span class="l">共有<span class="red">2</span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
-						</div>
-					</div> 
-					<div class="cyx1-one-t clearfix">
-						<div class="cyx1-list1 l">
-							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
-						</div>
-						<div class="cyx1-list2 l">
-							<p>提现进度</p>
-							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
+						<div class="l-main5-list" id="weixinlogin">
+							<img src="img/wechat.png" />
 						</div>
 					</div>
 				</div>
@@ -338,13 +235,67 @@
 			<div id="setting" class="mui-control-content">
 				<header id="header" class="mui-bar mui-bar-nav">
 					<h1 class="mui-title">我的</h1>
+					<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="reg_btn1">注册</button>
 				</header>
-				<div class="my1-main">
+			<!--个人中心-->
+			<!--供应商供应商供应商供应商供应商供应商-->	
+				<div class="my1-main" id="gongyingshang" style="display: none;background: #efeff4;">
 					<div class="my1-maintop clearfix" id="myMessage">
 						<div class="my1-img l">
 							<img src="img/touxiang.jpg" />
 						</div>
-						<span class="l">用户名</span>
+						<span class="l">供应商</span>
+						<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
+					</div>
+					<div class="my1-mainbottom">
+						<ul>
+							<li id="mybaojia">
+								<i class="icon iconfont icon-icon-rank"></i>
+								<span>我的报价</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="dingdan">
+								<i class="icon iconfont icon-dingdanzhongxin"></i>
+								<span>订单中心</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myWallet1">
+								<i class="icon iconfont icon-qianbao"></i>
+								<span>我的钱包</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myAddress1">
+								<i class="icon iconfont icon-address"></i>
+								<span>地址管理</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li>
+								<i class="icon iconfont icon-3"></i>
+								<span>绑定QQ</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+								<span class="r">已绑定</span>
+							</li>
+							<li>
+								<i class="icon iconfont icon-weixin"></i>
+								<span>绑定微信</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+								<span class="r">未绑定</span>
+							</li>
+							<li id="mySetting1">
+								<i class="icon iconfont icon-shezhi"></i>
+								<span>我的设置</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+			<!--业主业主业主业主业主业主业-->
+				<div class="my1-main" id="yezhu" style="display: none;background: #efeff4;">
+					<div class="my1-maintop clearfix" id="myMessage">
+						<div class="my1-img l">
+							<img src="img/touxiang.jpg" />
+						</div>
+						<span class="l">业主</span>
 						<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
 					</div>
 					<div class="my1-mainbottom">
@@ -357,6 +308,11 @@
 							<li id="myFabu">
 								<i class="icon iconfont icon-fabu"></i>
 								<span>我发布的</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="mydingdan">
+								<i class="icon iconfont icon-dingdanzhongxin"></i>
+								<span>我的订单</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
 							<li id="myWallet">
@@ -408,284 +364,92 @@
 						<span class="cha"><i class="icon iconfont icon-cha"></i></span>
 					</div>
 				</div>
+			<!--检修检修检修检修检修检修检修检修检修检-->
+				<div class="my1-main" id="jianxiu" style="display: none;background: #efeff4;">
+					<div class="my1-maintop clearfix" id="myMessage">
+						<div class="my1-img l">
+							<img src="img/touxiang.jpg" />
+						</div>
+						<span class="l">检修</span>
+						<span class="r"><i class="icon iconfont icon-jiantouyoujiantou"></i></span>
+					</div>
+					<div class="my1-mainbottom">
+						<ul>
+							<li id="myXunjia">
+								<i class="icon iconfont icon-qiangdan"></i>
+								<span>我的抢单</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myFabu">
+								 <i class="icon iconfont icon-icon-rank"></i>
+								<span>我的竞标</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myWallet">
+								<i class="icon iconfont icon-qianbao"></i>
+								<span>我的钱包</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li id="myAddress">
+								<i class="icon iconfont icon-address"></i>
+								<span>地址管理</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+							<li>
+								<i class="icon iconfont icon-3"></i>
+								<span>绑定QQ</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+								<span class="r">已绑定</span>
+							</li>
+							<li>
+								<i class="icon iconfont icon-weixin"></i>
+								<span>绑定微信</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+								<span class="r">未绑定</span>
+							</li>
+							<li id="mySetting">
+								<i class="icon iconfont icon-shezhi"></i>
+								<span>我的设置</span>
+								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+			<!--登录-->
+				<div class="l-main" id="box2" style="display: block;">
+					<div class="l-main1">
+						<i class="icon iconfont icon-shouji1"></i>
+						<input type="text" name="" id="phone1" placeholder="请输入手机号" />
+					</div>
+					<div class="l-main2">
+						<i class="icon iconfont icon-suo"></i>
+						<input type="password" name="" id="paslogin1" placeholder="请输入密码" />
+					</div>
+					<div class="l-main3 clearfix">
+						<span class="forget l" id="forgetpwd1">忘记密码</span>
+						<span class="r" id="p_login1">手机登录</span>
+					</div>
+					<button class="l-btn" id="l_btn1">立即登录</button>
+					<div class="l-main4">
+						<div class="l-main4-t">
+							<span></span>
+							<span>第三方登录</span>
+							<span></span>
+						</div>
+						<div class="l-main4-d"></div>
+					</div>
+					<div class="l-main5">
+						<div class="l-main5-list" id="qqlogin1">
+							<img src="img/qq.png" />
+						</div>
+						<div class="l-main5-list" id="weixinlogin1">
+							<img src="img/wechat.png" />
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
+	<script src="js/index-home.js"></script>
 </html>
-<script>
-/**
- * 首页js
- */
-	var gallery = mui('.mui-slider');
-	gallery.slider({
-		interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
-	});
-	$(function() {
-		//限制字符个数
-		$(".cut_str , .mingcheng").each(function() {
-			var maxwidth = 10;
-			if($(this).text().length > maxwidth) {
-				$(this).text($(this).text().substring(0, maxwidth));
-				$(this).html($(this).html() + '…');
-			}
-		});
-		function preventDefaultFn(event) {
-			event.preventDefault();
-		}
-//		$(".put").click(function() {
-//			//			$(".jx-alert1").show();
-//			$('.jx-alert1').fadeIn(500);
-//			$('.jx-alert1-t').fadeIn(500);
-//			$('body').css('overflow', 'hidden');
-//			$('body').on('touchmove', preventDefaultFn);
-//		});
-		$('.jx-alert1').click(function() {
-			$(this).fadeOut(500);
-			$('body').off('touchmove', preventDefaultFn);
-			$('.jx-alert1-t').fadeOut(500);
-			$('body').removeAttr('style');
-		})
-		$(".cha").click(function() {
-			$(".jx-alert1").hide();
-		});
-/**
- * 发布按钮判断
- */
-	$("#issue").click(function(){
-		var mphones = localStorage.getItem("mphone");
-		var loginPwds = localStorage.getItem("loginPwd");
-		console.log(mphones+loginPwds);
-		if( mphones == mphones || loginPwds == loginPwds){
-			$('.jx-alert1').fadeIn(500);
-			$('.jx-alert1-t').fadeIn(500);
-			$('body').css('overflow', 'hidden');
-			$('body').on('touchmove', preventDefaultFn);
-		}else{
-			mui.alert('未登录，您还没有权限。请登录...', '提示', function() {
-				mui.openWindow({
-				    url:"b-login2.html",
-				});
-			});
-		}
-	})
-//removeItem(key)		
-		
-		
-	});
-
-	
-	
-	
-	
-/**
- * 轮播图数据请求
- */
-	var myUrl="http://test.cnceshi.com/";
-	mui.ajax(myUrl+'index.php?m=Api&c=Index&a=index',{
-		dataType:'json',//服务器返回json格式数据
-		type:'post',//HTTP请求类型
-		timeout:60000,//超时时间设置为10秒；
-		success:function(data){
-			//服务器返回响应，根据响应结果，分析是否获取数据成功；
-			if( data.status == 200 ){
-				var sliderImgs=document.getElementsByClassName("sliderImgs");
-				for(var i=0; i<sliderImgs.length;i++){
-					var imgs=data.msg.adv;
-					for(var j=0 ;j<imgs.length;j++){
-						sliderImgs[j].setAttribute("src",myUrl+imgs[j].adFile);
-						sliderImgs[j].parentNode.href=imgs[j].adURL;
-					}
-				}
-			}else{
-				alert("数据请求失败，请刷新页面")
-			} 
-		},
-		error:function(xhr,type,errorThrown){
-			//异常处理；
-			console.log(type);
-		}
-	});
-/**
- * 上拉加载，配合init代码
- * 首页推荐任务
- */
-	var rootnode = $('[dataGaoFour = "rootcon"]');
-	var childnode = $('[dataGaoOne = "rootchild"]').clone();
-	$('[dataGao = "rootchild"]').remove();
-	var i = 1;
- 	function pullFresh() {
- 		setTimeout(function() {
-		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
-		    mui.ajax(myUrl+'index.php?m=Api&c=goods&a=getGoodsDetails',{
-				data:{
-					p: i
-				},
-				dataType:'json',//服务器返回json格式数据
-				type:'post',//HTTP请求类型
-				timeout:60000,//超时时间设置为10秒；
-				success:function(data){
-					//服务器返回响应，根据响应结果，分析是否获取数据成功；
-					if( data.status == 200 ){
-						console.log(JSON.stringify(data.msg.root))
-						$commonObj.loadListData({
-							sourceDataList : data.msg.root,
-							dataListRootNode : rootnode,
-							dataListChildNode : childnode,
-							dataAttrName : "dataGao",
-							dataHandleFn : function(){
-//								for(var i=0;i<mySrc1.length;i++){
-//									for (var j=0;j<mySrc.length;j++){
-//										var myStr = myURL+mySrc1[j].innerHTML; 
-//										mySrc[j].setAttribute("src",myStr);
-//									}	
-//								}
-//							//点击事件
-//								for(var j=0;j<mylist.length;j++){
-//									mylist[j].addEventListener('tap',function(){
-//										var id = $(this).children("p").html();
-//										mui.openWindow({
-//									    	url:"d-jiangbiao-dai.html?id="+id
-//										})
-//									});	
-//								}
-							}
-						})
-						i++;
-					}else{
-						alert("数据请求失败，请刷新页面")
-					} 
-				},
-				error:function(xhr,type,errorThrown){
-					//异常处理；
-					console.log(type);
-				}
-			});
-	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
-		    var count = 0;
-		    mui('#pullRef').pullRefresh().endPullupToRefresh((++count > 2));
-	    },1000)
-	}
- 	
-
-//采购任务跳转进入详情页面
-	document.getElementById('buyingTask').addEventListener('tap',function() {
-		mui.openWindow({
-		    url:"a-caigourenwu.html",
-		});
-	});
-//检修任务跳转进入详情页面
-	document.getElementById('maintenanceTask').addEventListener('tap',function() {
-		mui.openWindow({
-		    url:"a-jianxiurenwu.html",
-		});
-	});
-//高价悬赏跳转进入详情页面
-	document.getElementById('highPrice').addEventListener('tap',function() {
-		mui.openWindow({
-		    url:"a-gaojiaxuanshang.html",
-		});
-	});
-//附近GO跳转进入详情页面
-	document.getElementById('nearby').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"a-fujin-yezhu01.html",
-		});
-	});
-	
-</script>
-<script type="text/javascript">
-	$(function() {
-		var t;
-		t = setInterval(function() {
-			var ul = $(".list");
-			var liHeight = ul.find("li:last").height();
-			ul.animate({
-				marginTop: 0
-					//						liHeight + "px"
-			}, 1000, function() {
-				ul.find("li:last").prependTo(ul);
-				ul.find("li:first").hide();
-				ul.css({
-					marginTop: 0
-				});
-				ul.find("li:first").fadeIn(800);
-			});
-		}, 3000);
-	});
-		
-/**
- * 消息js
- */
-//报价消息跳转进入详情页面
-	document.getElementById('baojiaMsg').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"c-yezhu-xunjia.html",
-		});
-	});
-//抢单消息跳转进入详情页面
-	document.getElementById('qiangMsg').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"c-yezhu-qiangdan.html",
-		});
-	});
-//竞标消息跳转进入详情页面
-	document.getElementById('jingMsg').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"c-yezhu-toubiao.html",
-		});
-	});
-
-	
-/**
- * 我的个人信息js
- */
-	$("#myFabu").click(function() {
-		$(".jx-alert122").fadeIn(500);
-		var hh=$(window).height();
-		$(".jx-alert122").css("height",hh+"px") 
-	});
-	$(".cha").click(function() {
-		$(".jx-alert122").fadeOut(500);
-	});
-		
-/**
- * 各页面跳转
- */
-//我的询价跳转进入详情页面
-	document.getElementById('myXunjia').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"d-myxujia1.html",
-		});
-	});
-//我的钱包跳转进入详情页面
-	document.getElementById('myWallet').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"d-mywallet.html",
-		});
-	});
-//地址管理跳转进入详情页面
-	document.getElementById('myAddress').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"d-adress2.html",
-		});
-	});
-//设置跳转进入详情页面
-	document.getElementById('mySetting').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"d-set.html",
-		});
-	});
-//个人信息跳转进入详情页面
-	document.getElementById('myMessage').addEventListener('tap', function() {
-		mui.openWindow({
-		    url:"d-message-qiye.html",
-		});
-	});
-
-
-
-
-
-
-</script>

@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "b-login2.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "index-home.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -250,7 +250,11 @@
 					"d-myqiangdan.html",
 					"d-mybid-list.html",
 					"d-wodejingbiao.html",
-					"d-wodeqiangdan.html"
+					"d-wodeqiangdan.html",
+					"css/b-login.css",
+					"img/qq.png",
+					"img/wechat.png",
+					"js/index-home.js"
 				],
 				"refer": [
 					"d-message-qiye.html",
@@ -262,7 +266,14 @@
 					"a-jianxiurenwu.html",
 					"a-gaojiaxuanshang.html",
 					"d-mywallet.html",
-					"b-login2.html"
+					"b-login2.html",
+					"b-login3.html",
+					"b-login1.html",
+					"b-login4.html",
+					"b-login5.html",
+					"index-home-yezhu.html",
+					"d-adress2.html",
+					"d-set.html"
 				],
 				"priority": 0
 			},
@@ -882,7 +893,9 @@
 					"css/reset.css",
 					"fonts/iconfont.woff"
 				],
-				"refer": [],
+				"refer": [
+					"d-mycharge1.html"
+				],
 				"priority": 0
 			},
 			"d-qiangdan-dai.html": {
@@ -973,7 +986,111 @@
 			},
 			"b-login4.html": {
 				"resources": [
+					"js/mui.min.js",
+					"css/b-login.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index-home-yezhu.html": {
+				"resources": [
+					"img/touxiang.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-mycharge1.html": {
+				"resources": [
+					"img/jianhang-1.png",
 					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-adress2.html": {
+				"resources": [
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-set.html": {
+				"resources": [
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff",
+					"css/b-login.css"
+				],
+				"refer": [
+					"d-set-opinion.html",
+					"d-modifypassword.html"
+				],
+				"priority": 0
+			},
+			"d-set-opinion.html": {
+				"resources": [
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-modifypassword.html": {
+				"resources": [
+					"css/b-login.css",
+					"js/jquery-3.1.1.min.js",
+					"js/rem-w.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index.html": {
+				"resources": [
+					"img/c6538c150f3d4f043a1e382a3a3ef9a0.jpg",
+					"img/qiangdan-01.png",
+					"img/lunbo.png",
+					"img/bid-01.png",
+					"img/gaojia-01.png",
+					"img/caigou-01.png",
+					"css/icons-extra.css",
+					"img/fujin-01.png",
+					"css/index.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"img/shouye-01.png",
+					"js/rem-w.min.js",
+					"img/jianxiu-01.png",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"img/1eca34d5534a658febcec7ca2a723f94.jpg",
+					"css/reset.css",
+					"js/index.js",
+					"img/d9d90c5024e40a4502860d3bf7184cde.jpg",
+					"img/zuixin-01.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -994,13 +1111,11 @@
 				"fonts/iconfont.ttf",
 				"a-fujin-yezhu.html",
 				"js/mui.js",
-				"img/d9d90c5024e40a4502860d3bf7184cde.jpg",
 				"d-comment2.html",
 				"d-my-no-login.html",
 				"d-mybid-histroy.html",
 				"d-my-yezhu.html",
 				"d-order1.html",
-				"index.html",
 				"a-jx-qiangdan-dingdan1.html",
 				"img/bank-change.png",
 				"d-mytask-list.html",
@@ -1008,10 +1123,8 @@
 				"d-adress1.html",
 				"fonts/iconfont.js",
 				"d-mycharge2.html",
-				"d-set.html",
 				"d-mytask.html",
 				"d-my-bank1.html",
-				"d-modifypassword.html",
 				"c-gys-order.html",
 				"d-myfabu-tol.html",
 				"a-fujin-jianxiuqiye-1.4.2.1.html",
@@ -1019,10 +1132,8 @@
 				"img/tubiao-04.png",
 				"d-price1.html",
 				"c-jx-yaoqing2.html",
-				"d-adress2.html",
 				"a-fujin-yezhu1.html",
 				"d-comment1.html",
-				"img/jianhang-1.png",
 				"c.html",
 				"img/tubiao-02.png",
 				"a-search.html",
@@ -1032,7 +1143,6 @@
 				"a-purchase-list-1.1.html",
 				"c-gys-baojia.html",
 				"d-mybank.html",
-				"d-mycharge1.html",
 				"d-my-yezhu-jingbiao2.html",
 				"d-judge1.html",
 				"a-purchase-detail1.html",
@@ -1046,7 +1156,6 @@
 				"img/bg.png",
 				"a-jx-jingjia1.html",
 				"js/mui.picker.js",
-				"d-set-opinion.html",
 				"fonts/demo_symbol.html",
 				"css/mui.css",
 				"c-gys-xiaoxi.html",
@@ -1069,12 +1178,10 @@
 				"c-jx-jingbiao1.html",
 				"fonts/iconfont.svg",
 				"css/mui.poppicker.css",
-				"img/c6538c150f3d4f043a1e382a3a3ef9a0.jpg",
 				"d-fill-bank.html",
 				"a-fujin-gongyingshang.html",
 				"d-my-yezhujingbiao-zhong.html",
 				"c-yezhu-xiaoxi.html",
-				"img/lunbo.png",
 				"d-comment.html",
 				"a-fujin-gongyingshang-1.4.1.1.html",
 				"img/91519ebdfb4a13385bfae49403a0cd6d.jpg",

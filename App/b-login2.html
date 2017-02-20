@@ -71,6 +71,7 @@
 				var suibian = document.getElementById('l_suibian'); //随便逛逛
 				var regphone = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 				//点击登录
+				var myUrl = "http://test.cnceshi.com/";
 				loginbtn.addEventListener('tap', function() {
 					var mphone = document.getElementById('phone').value; //手机号
 					var loginPwd = document.getElementById('paslogin').value; //密码
@@ -81,7 +82,7 @@
 						mui.toast('手机号错误！');
 						return false;
 					} else {
-						mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=Users&a=checkLogin', {
+						mui.ajax(myUrl+'index.php?m=Api&c=Users&a=checkLogin', {
 							data: {
 								loginName: mphone,
 								loginPwd: loginPwd
@@ -96,20 +97,10 @@
 									localStorage.setItem("loginPwd",loginPwd);
 									mui.toast('登录成功');
 									mui.openWindow({
-										url: 'index-home.html',
-										id: 'index-home',
-										show: {
-											aniShow: 'pop-in'
-										},
-										styles: {
-											popGesture: 'hide'
-										},
-										waiting: {
-											autoShow: false
-										}
+										url: 'index-home.html'
 									});
 								} else {
-									mui.toast(data.msg.msg);
+//									mui.toast(data.msg.msg);
 								}
 							}
 						});

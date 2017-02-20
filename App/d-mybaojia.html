@@ -22,16 +22,18 @@
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>-->
 		</header>
 		<div class="dmx1-m">
-			<ul class="dmx1-tol">
+			<ul class="dmx1-tol" id="pullBox">
 				<li class="dmx1-tol1">
+					<p class="myid" dataGao="" style="display: none;"></p>
 					<div class="dmx1-list1 l">
-						<img src="img/logo-01.jpg" />
+						<p class="myimgs" dataGao="" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myImg"/>
 					</div>
 					<div class="dmx1-list2 l">
-						<p>采购名称</p>
-						<p>型&nbsp;&nbsp;号: <span>FGJ-256</span></p>
-						<p>数&nbsp;&nbsp;量: <span>1000</span>件</p>
-						<p>报价: <span class="money">￥4,00000.00</span><span class="times money">04:12:06</span></p>
+						<p dataGao="">采购名称</p>
+						<p>型&nbsp;&nbsp;号: <span dataGao="">FGJ-256</span></p>
+						<p>数&nbsp;&nbsp;量: <span dataGao="">1000</span>件</p>
+						<p>报价: <span class="money" dataGao="">￥4,00000.00</span><span class="times money" dataGao="">04:12:06</span></p>
 					</div>
 				</li>
 			</ul>
@@ -49,3 +51,85 @@
 	}
 </script>
 </html>
+<script type="text/javascript">
+/**
+ * 我的报价
+ * 上拉加载，配合init代码
+ */
+	 mui.init({
+		pullRefresh : {
+		    container:'#pullBox',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    up : {
+//		      	height:50,//可选.默认50.触发上拉加载拖动距离
+		      	auto:true,//可选,默认false.自动上拉加载一次
+		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+	  	}
+	});
+	var rootnode = $('[dataGao = "rootcon"]');
+	var childnode = $('[dataGao = "rootchild"]').clone();
+	$('[dataGao = "rootchild"]').remove();
+ 	var i = 1;
+ 	var myUrl = "http://test.cnceshi.com/";
+ 	function mypullFresh() {
+ 		setTimeout(function() {
+		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
+			mui.ajax(myUrl+'index.php?m=Api&c=Goods&a=gooodsPurchase',{
+				data:{
+					pcurr: i
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:60000,//超时时间设置为10秒；
+//				headers:{'Content-Type':'application/json'},	              
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						$commonObj.loadListData({
+							sourceDataList : data.msg.root,
+							dataListRootNode : rootnode,
+							dataListChildNode : childnode,
+							dataAttrName : "dataGao",
+							dataHandleFn : function(){
+//								var mySrc = document.getElementsByClassName("myImg");
+//								var mySrc1 = document.getElementsByClassName("myimgs");
+//								for(var i=0;i<mySrc1.length;i++){
+//									for (var j=0;j<mySrc.length;j++){
+//										var myStr = myUrl+mySrc1[j].innerHTML; 
+//										mySrc[j].setAttribute("src",myStr);
+//									}	
+//								}
+//								
+//								//点击事件
+//								var mylist = document.getElementsByClassName("pd1-one-t");
+//								for(var j=0;j<mylist.length;j++){
+//									mylist[j].addEventListener('tap',function(){
+//										var id = $(this).children("p").html();
+////											alert(id);
+//										mui.openWindow({
+//									    	url:"a-purchase-detail1a1.html?id="+id
+//										})
+//									});	
+//								}
+							}
+						})
+						i++;
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});	    
+			
+	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
+			var count = 0;
+		    mui('#pullBox').pullRefresh().endPullupToRefresh((++count > 2));
+	    },1000)
+	}
+
+</script>

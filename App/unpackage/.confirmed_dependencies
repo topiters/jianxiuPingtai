@@ -56,7 +56,11 @@
 			"d-myqiangdan.html",
 			"d-mybid-list.html",
 			"d-wodejingbiao.html",
-			"d-wodeqiangdan.html"
+			"d-wodeqiangdan.html",
+			"css/b-login.css",
+			"img/qq.png",
+			"img/wechat.png",
+			"js/index-home.js"
 		],
 		"refer": [
 			"a-fabu-caigou.html",
@@ -76,7 +80,14 @@
 			"d-mywallet.html",
 			"d-wodejingbiao.html",
 			"d-wodeqiangdan.html",
-			"b-login2.html"
+			"b-login2.html",
+			"b-login3.html",
+			"b-login1.html",
+			"b-login4.html",
+			"b-login5.html",
+			"index-home-yezhu.html",
+			"d-adress2.html",
+			"d-set.html"
 		]
 	},
 	"a-fabu-caigou.html": {
@@ -676,7 +687,9 @@
 			"css/reset.css",
 			"fonts/iconfont.woff"
 		],
-		"refer": []
+		"refer": [
+			"d-mycharge1.html"
+		]
 	},
 	"d-qiangdan-dai.html": {
 		"resources": [
@@ -761,7 +774,98 @@
 	},
 	"b-login4.html": {
 		"resources": [
+			"js/mui.min.js",
+			"css/b-login.css",
+			"fonts/iconfont.css",
+			"js/jquery-3.1.1.min.js",
+			"js/rem-w.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"css/reset.css",
+			"fonts/iconfont.woff"
+		]
+	},
+	"index-home-yezhu.html": {
+		"resources": [
+			"img/touxiang.jpg"
+		]
+	},
+	"d-mycharge1.html": {
+		"resources": [
+			"img/jianhang-1.png",
 			"js/mui.min.js"
+		]
+	},
+	"d-adress2.html": {
+		"resources": [
+			"css/my.css",
+			"fonts/iconfont.css",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"css/reset.css",
+			"fonts/iconfont.woff"
+		]
+	},
+	"d-set.html": {
+		"resources": [
+			"css/my.css",
+			"fonts/iconfont.css",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"js/rem-w.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"css/reset.css",
+			"fonts/iconfont.woff",
+			"css/b-login.css"
+		],
+		"refer": [
+			"d-set-opinion.html",
+			"d-modifypassword.html"
+		]
+	},
+	"d-set-opinion.html": {
+		"resources": [
+			"js/mui.min.js"
+		]
+	},
+	"d-modifypassword.html": {
+		"resources": [
+			"css/b-login.css",
+			"js/jquery-3.1.1.min.js",
+			"js/rem-w.min.js"
+		]
+	},
+	"index.html": {
+		"resources": [
+			"img/c6538c150f3d4f043a1e382a3a3ef9a0.jpg",
+			"img/qiangdan-01.png",
+			"img/lunbo.png",
+			"img/bid-01.png",
+			"img/gaojia-01.png",
+			"img/caigou-01.png",
+			"css/icons-extra.css",
+			"img/fujin-01.png",
+			"css/index.css",
+			"fonts/iconfont.css",
+			"js/jquery-3.1.1.min.js",
+			"js/mui.min.js",
+			"img/shouye-01.png",
+			"js/rem-w.min.js",
+			"img/jianxiu-01.png",
+			"css/mui.min.css",
+			"img/logo-01.jpg",
+			"img/1eca34d5534a658febcec7ca2a723f94.jpg",
+			"css/reset.css",
+			"js/index.js",
+			"img/d9d90c5024e40a4502860d3bf7184cde.jpg",
+			"img/zuixin-01.png"
 		]
 	}
 }

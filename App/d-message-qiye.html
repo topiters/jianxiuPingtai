@@ -320,28 +320,26 @@ mui.ajax(myUrl+'index.php?m=Api&c=shops&a=index',{
 		if( data.status == 200 ){
 			var datas = data.msg.shop;
 //			console.log(JSON.stringify(data.msg));
-//			for(var i=0;i<datas.length;i++){
-				$("#shopCompany").val(datas.shopCompany);
-				$("#head-img1").attr("src",myUrl+datas.shopImg);
-				$("#goodsCatId1").val(datas.goodsCatId1);
-				$("#shoptotal").val(datas.shoptotal);
-				$("#shopHost").val(datas.shopHost);
-				$("#shopUrl").val(datas.shopUrl);
-				$("#shopArea").val(datas.shopArea);
-				$("#shopAddr").val(datas.shopAddr);
-				$("#area").val(datas.shopInfo);
-				console.log(datas.shopIdentimg);
-				for(var i=0;i<datas.shopIdentimg.length;i++){
-					var img = document.createElement('img');
-					img.setAttribute('src', myUrl+datas.shopIdentimg[i]);
-					img.style.width="65px";	
-					img.style.height="65px";
-					img.style.float="left";
-					img.style.marginRight="0.2rem";
-					$(".image-list").append(img);
-				}
+			$("#shopCompany").val(datas.shopCompany);
+			$("#head-img1").attr("src",myUrl+datas.shopImg);
+			$("#goodsCatId1").val(datas.goodsCatId1);
+			$("#shoptotal").val(datas.shoptotal);
+			$("#shopHost").val(datas.shopHost);
+			$("#shopUrl").val(datas.shopUrl);
+			$("#shopArea").val(datas.shopArea);
+			$("#shopAddr").val(datas.shopAddr);
+			$("#area").val(datas.shopInfo);
+			console.log(datas.shopIdentimg);
+			for(var i=0;i<datas.shopIdentimg.length;i++){
+				var img = document.createElement('img');
+				img.setAttribute('src', myUrl+datas.shopIdentimg[i]);
+				img.style.width="65px";	
+				img.style.height="65px";
+				img.style.float="left";
+				img.style.marginRight="0.2rem";
+				$(".image-list").append(img);
+			}
 				
-//			}
 		}else{
 			mui.toast(data.msg.msg);
 		} 
