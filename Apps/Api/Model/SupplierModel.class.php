@@ -47,7 +47,7 @@ class SupplierModel extends BaseModel{
     public function getOfferList() {
         $pcurr = (int)I("pcurr") ? (int)I("pcurr") : 1;//当前页
         $user = session('WST_USER');
-        $sql = "SELECT * FROM __PREFIX__offer as oo JOIN __PREFIX__goods as gg ON gg.goodsId = oo.goodsId where  userId = {$user['userId']}";
+        $sql = "SELECT oo.*,goodsName,goodsImg,goodsStock,typeSn FROM __PREFIX__offer as oo JOIN __PREFIX__goods as gg ON gg.goodsId = oo.goodsId JOIN __PREFIX__goods_type t ON gg.attrCatId = t.typeId where  userId = {$user['userId']} ORDER BY offerTime DESC ";
         $result = $this->pageQuery($sql , $pcurr , 5);
         return $result;
     }
@@ -59,7 +59,7 @@ class SupplierModel extends BaseModel{
     public function getSuccessOfferList() {
         $pcurr = (int)I("pcurr") ? (int)I("pcurr") : 1;//当前页
         $user = session('WST_USER');
-        $sql = "SELECT * FROM __PREFIX__offer as oo JOIN __PREFIX__goods as gg ON gg.goodsId = oo.goodsId where  userId = {$user['userId']} AND isCheck = 2";
+        $sql = "SELECT oo.*,goodsName,goodsImg,goodsStock,typeSn FROM __PREFIX__offer as oo JOIN __PREFIX__goods as gg ON gg.goodsId = oo.goodsId JOIN __PREFIX__goods_type t ON gg.attrCatId = t.typeId where  userId = {$user['userId']} AND isCheck = 2 ORDER BY offerTime DESC ";
         $result = $this->pageQuery($sql , $pcurr , 5);
         return $result;
     }

@@ -50,6 +50,7 @@ class SupplierAction extends BaseAction {
         $goodsCatId1 = $_POST['goodsCatId1'];//行业分类
         $shopTotal = $_POST['supplierTotal'];//注册金额
         $shopInfo = $_POST['supplierInfo'];//简介
+        $shopTel = $_POST['supplierTel'];//电话
         $shopArea = $_POST['supplierArea'];//公司所在城市
         $shopAddr = $_POST['supplierAddr'];//公司地址
         $latitude = $_POST['latitude'];  //经度
@@ -61,13 +62,14 @@ class SupplierAction extends BaseAction {
         $datas['goodsCatId1'] = $goodsCatId1;
         $datas['supplierTotal'] = $shopTotal;
         $datas['supplierUrl'] = $shopUrl;
+        $datas['supplierTel'] = $shopTel;
         $datas['supplierInfo'] = $shopInfo;
         $datas['supplierHost'] = $shopHost;
         $datas['supplierArea'] = $shopArea;
         $datas['supplierAddr'] = $shopAddr;
         $datas['latitude'] = $latitude;
         $datas['longitude'] = $longitude;
-        $supplierIdentimg = I("shopIdentimg");//附件
+        $supplierIdentimg = I("supplierIdentimg");//附件
         if ($supplierIdentimg) {
             $datas['supplierIdentimg'] = serialize($supplierIdentimg);
         }
@@ -159,8 +161,16 @@ class SupplierAction extends BaseAction {
      * 供应商详情
      */
     public function detail() {
-        $id = I('supplierId');
-        $result = D('supperlier')->where("supplierId = $id")->find();
+        if (I('supplierId')){
+            $id = I('supplierId');
+            $where = "supplierId = $id";
+        }else{
+            $USER = session('WST_USER');
+            $userId = $USER['userId'];
+            $where = "userId = $userId";
+        }
+
+        $result = D('supperlier')->where($where)->find();
         if ($result) {
             $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
             $this->stringify($data);
