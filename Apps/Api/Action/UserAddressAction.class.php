@@ -52,7 +52,6 @@ class UserAddressAction extends BaseAction{
 	 * 新增/修改操作
 	 */
 	public function edit(){
-        //		$this->isUserLogin();
         $m = D('Api/UserAddress');
     	$rs = array();
     	if((int)I('id',0)>0){
@@ -66,7 +65,6 @@ class UserAddressAction extends BaseAction{
 	 * 删除操作
 	 */
 	public function del(){
-//		$this->isUserLogin();
 		$m = D('Api/UserAddress');
     	$rs = $m->del();
     	$this->ajaxReturn($rs);
