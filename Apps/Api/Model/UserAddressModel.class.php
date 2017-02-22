@@ -93,6 +93,8 @@ class UserAddressModel extends BaseModel {
 	  */
      public function get(){
 	 	$m = M('user_address');
+         $m->where("addressId=" . (int)I('id') . " and userId=" . (int)session('WST_USER.userId'))->find();
+	 	dump($m->getLastSql());
 		return $m->where("addressId=".(int)I('id')." and userId=".(int)session('WST_USER.userId'))->find();
 	 }
 
