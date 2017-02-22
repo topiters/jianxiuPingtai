@@ -34,23 +34,21 @@ class UserAddressModel extends BaseModel {
 //        } else {
 //            $data["userTel"] = I("userTel");
 //        }
-        $data["userPhone"] = I("userPhone");
         $data["address"] = I("address");
+        $data["addr2"] = I("address2");
         $data["isDefault"] = (int)I("isDefault" , 0);
         $data["addressFlag"] = 1;
         $data["createTime"] = date('Y-m-d H:i:s');
-        if ($this->checkEmpty($data , true)) {
-            $data["userPhone"] = I("userPhone");
-            $data["userTel"] = I("userTel");
-            $m = M('user_address');
-            $rs = $m->add($data);
-            if (false !== $rs) {
-                $rd['status'] = $rs;
-                if ((int)I("isDefault") == 1) {
-                    //修改所有的地址为非默认
-                    $m->isDefault = 0;
-                    $m->where('userId=' . (int)session('WST_USER.userId') . " and addressId!=" . $rs)->save();
-                }
+        $data["userPhone"] = I("userPhone");
+        $data["userTel"] = I("userTel");
+        $m = M('user_address');
+        $rs = $m->add($data);
+        if (false !== $rs) {
+            $rd['status'] = $rs;
+            if ((int)I("isDefault") == 1) {
+                //修改所有的地址为非默认
+                $m->isDefault = 0;
+                $m->where('userId=' . (int)session('WST_USER.userId') . " and addressId!=" . $rs)->save();
             }
         }
         return $rd;
@@ -73,7 +71,7 @@ class UserAddressModel extends BaseModel {
 //        $data["areaId3"] = (int)I("areaId3");
 //        $data["communityId"] = (int)I("communityId");
         $data["address"] = I("address");
-
+        $data["addr2"] = I("address2");
         if ($this->checkEmpty($data , true)) {
             $m = M('user_address');
             $data["userPhone"] = I("userPhone");

@@ -171,6 +171,7 @@ class SupplierAction extends BaseAction {
         }
 
         $result = D('supperlier')->where($where)->find();
+        $result['supplierIdentimg'] = unserialize($result['supplierIdentimg']);
         if ($result) {
             $data = array('status' => self::API_REQUEST_SUCCESS , 'msg' => $result);
             $this->stringify($data);
