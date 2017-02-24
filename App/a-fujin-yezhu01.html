@@ -17,9 +17,8 @@
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
 		<!--公共js  ee-->
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" charset="utf-8">
-			mui.init();
-		</script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -54,122 +53,152 @@
 			</div>
 		</div>-->
 		<div class="fujinyz-one">
-			<ul>
-				<li class="fujinyz-one-t clearfix two">
+			<ul dataGao = "rootcon" id="myBox">
+				<li class="fujinyz-one-t clearfix" dataGao = "rootchild">
+					<p dataGao="supplierId" style="display: none;"></p>
 					<div class="fujinyz-list1 l">
-						<img src="img/logo-01.jpg" />
+						<p dataGao="supplierImg" class="myimgs" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myImg" />
 					</div>
 					<div class="fujinyz-list2 l">
-						<p>检修企业名称</p>
-						<p class="fujinyz-list2-m"><span><i class="icon iconfont icon-xingye"></i>五金行业</span><span><i class="icon iconfont icon-qian"></i>1000万</span><span><i class="icon iconfont icon-geren-copy"></i>0-20人</span></p>
-						<p><span class="l">地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
-						<p class="fujinyz-word2">简介：成立于1949年，走过长征路</p>
-					</div>
-				</li>
-				<li class="fujinyz-one-t clearfix one">
-					<div class="fujinyz-list1 l">
-						<img src="img/logo-01.jpg" />
-					</div>
-					<div class="fujinyz-list2 l">
-						<p>检修工程师</p>
-						<p>李三 | 15236252635</p>
-						<p><span>地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
-						<p class="fujinyz-word2">项目经历：致力打假三十年，从未得手</p>
-					</div>
-				</li>
-				<li class="fujinyz-one-t clearfix two">
-					<div class="fujinyz-list1 l">
-						<img src="img/logo-01.jpg" />
-					</div>
-					<div class="fujinyz-list2 l">
-						<p>检修企业名称</p>
-						<p class="fujinyz-list2-m"><span><i class="icon iconfont icon-xingye"></i>五金行业</span><span><i class="icon iconfont icon-qian"></i>1000万</span><span><i class="icon iconfont icon-geren-copy"></i>0-20人</span></p>
-						<p><span class="l">地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
-						<p class="fujinyz-word2">简介：成立于1949年，走过长征路</p>
-					</div>
-				</li>
-				<li class="fujinyz-one-t clearfix one">
-					<div class="fujinyz-list1 l">
-						<img src="img/logo-01.jpg" />
-					</div>
-					<div class="fujinyz-list2 l">
-						<p>检修工程师</p>
-						<p>李三 | 15236252635</p>
-						<p><span>地址：</span><span class="fujinyz-word1">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
-						<p class="fujinyz-word2">项目经历：致力打假三十年，从未得手</p>
+						<p dataGao="supplierCompany">检修企业名称</p>
+						<!--<span><i class="icon iconfont icon-geren-copy"></i>0-20人</span>-->
+						<p class="fujinyz-list2-m"><span><i class="icon iconfont icon-xingye"></i><span dataGao="goodsCatId1">五金行业</span></span><span><i class="icon iconfont icon-qian"></i><span dataGao="supplierTotal">1000万</span></span></p>
+						<p><span class="l">地址：</span><span class="fujinyz-word1" dataGao="supplierArea">郑州市索克时代大厦</span><span><i class="icon iconfont icon-weizhi"></i>0.3km</span></p>
+						<p class="fujinyz-word2">简介：<span dataGao="supplierInfo">成立于1949年，走过长征路</span></p>
 					</div>
 				</li>
 			</ul>
 
 		</div>
 	</body>
-	<script type="text/javascript">
-		$(".fujinyz-tol-t li").click(function() {
-			if($(this).hasClass("this")) {
-				$(this).removeClass("this");
-				//		$(this).find("i").removeClass("fa-caret-up").addClass("fa-sort-desc");
-				$(".fujinyz-hide").hide();
-			} else {
-				$(".fujinyz-hide").show();
-				var y = $(this).index();
-				$(".abbr").hide();
-				$(".abbr").eq(y).show();
-				/*-----------------------------------*/
-				//alert(y);
-				//		$(".abbr").eq(y).find(".second_list ul").eq(0).show();
-				/*-----------------------------------*/
-				$(".fujinyz-tol-t li").removeClass("this");
-				$(".fujinyz-hide").show();
-				//		$(".mall-cate li i").removeClass("fa-caret-up").addClass("fa-sort-desc");
-				$(this).addClass("this");
-				//		$(this).find("i").addClass("fa-caret-up").removeClass("fa-sort-desc");
-			}
-		})
-		$(".abbr-onelist1").click(function() {
-			$(".abbr-onelist1").removeClass("active1");
-			$(this).addClass("active1");
-		})
-		$(".abbr-onelist2").click(function() {
-				$(".abbr-onelist2").removeClass("active1");
-				$(this).addClass("active1");
-			})
-			//		限制字数
-		$(function() {
-			//限制字符个数
-			$(".fujinyz-word1").each(function() {
-				var maxwidth = 7;
-				if($(this).text().length > maxwidth) {
-					$(this).text($(this).text().substring(0, maxwidth));
-					$(this).html($(this).html() + '…');
-				}
-			});
-			$(".fujinyz-word2").each(function() {
-				var maxwidth = 14;
-				if($(this).text().length > maxwidth) {
-					$(this).text($(this).text().substring(0, maxwidth));
-					$(this).html($(this).html() + '…');
-				}
-			});
-		});
-		
-//检修工程师跳转进入详情页面
-		var companyList1=document.getElementsByClassName("one");
-		for(var i=0;i<companyList1.length;i++){
-			companyList1[i].addEventListener('tap', function() {
-				mui.openWindow({
-				    url:"a-fujin-yezhu1.html",
-				});
-			});
-		}
-//捡球企业跳转进入详情页面
-		var companyList2=document.getElementsByClassName("two");
-		for(var i=0;i<companyList2.length;i++){
-			companyList2[i].addEventListener('tap', function() {
-				mui.openWindow({
-				    url:"a-fujin-yezhu2.html",
-				});
-			});
-		}
-	</script>
+
 
 </html>
+<script type="text/javascript">
+	$(".fujinyz-tol-t li").click(function() {
+		if($(this).hasClass("this")) {
+			$(this).removeClass("this");
+			//		$(this).find("i").removeClass("fa-caret-up").addClass("fa-sort-desc");
+			$(".fujinyz-hide").hide();
+		} else {
+			$(".fujinyz-hide").show();
+			var y = $(this).index();
+			$(".abbr").hide();
+			$(".abbr").eq(y).show();
+			/*-----------------------------------*/
+			//alert(y);
+			//		$(".abbr").eq(y).find(".second_list ul").eq(0).show();
+			/*-----------------------------------*/
+			$(".fujinyz-tol-t li").removeClass("this");
+			$(".fujinyz-hide").show();
+			//		$(".mall-cate li i").removeClass("fa-caret-up").addClass("fa-sort-desc");
+			$(this).addClass("this");
+			//		$(this).find("i").addClass("fa-caret-up").removeClass("fa-sort-desc");
+		}
+	})
+	$(".abbr-onelist1").click(function() {
+		$(".abbr-onelist1").removeClass("active1");
+		$(this).addClass("active1");
+	})
+	$(".abbr-onelist2").click(function() {
+			$(".abbr-onelist2").removeClass("active1");
+			$(this).addClass("active1");
+		})
+		//		限制字数
+	$(function() {
+		//限制字符个数
+		$(".fujinyz-word1").each(function() {
+			var maxwidth = 7;
+			if($(this).text().length > maxwidth) {
+				$(this).text($(this).text().substring(0, maxwidth));
+				$(this).html($(this).html() + '…');
+			}
+		});
+		$(".fujinyz-word2").each(function() {
+			var maxwidth = 14;
+			if($(this).text().length > maxwidth) {
+				$(this).text($(this).text().substring(0, maxwidth));
+				$(this).html($(this).html() + '…');
+			}
+		});
+	});
+	
+/**
+ * 附近GO列表
+ */
+	 mui.init({
+		pullRefresh : {
+		    container:'#myBox',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    up : {
+//		      	height:50,//可选.默认50.触发上拉加载拖动距离
+		      	auto:true,//可选,默认false.自动上拉加载一次
+		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+	  	}
+	});
+	var rootnode = $('[dataGao = "rootcon"]');
+	var childnode = $('[dataGao = "rootchild"]').clone();
+	$('[dataGao = "rootchild"]').remove();
+ 	var i = 1;
+ 	var myUrl = "http://test.cnceshi.com/";
+ 	function mypullFresh() {
+ 		setTimeout(function() {
+		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
+			mui.ajax(myUrl+'index.php?m=Api&c=Supplier&a=nearby',{
+				data:{
+					pcurr: i
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:60000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						$commonObj.loadListData({
+							sourceDataList : data.msg.root,
+							dataListRootNode : rootnode,
+							dataListChildNode : childnode,
+							dataAttrName : "dataGao",
+							dataHandleFn : function(){
+								var mySrc = document.getElementsByClassName("myImg");
+								var mySrc1 = document.getElementsByClassName("myimgs");
+								for(var i=0;i<mySrc1.length;i++){
+									for (var j=0;j<mySrc.length;j++){
+										var myStr = mySrc1[j].innerHTML; 
+										mySrc[j].setAttribute("src",myStr);
+									}	
+								}
+								
+								//点击事件
+								var mylist = document.getElementsByClassName("fujinyz-one-t");
+								for(var j=0;j<mylist.length;j++){
+									mylist[j].addEventListener('tap',function(){
+										var id = $(this).children("p").html();
+										mui.openWindow({
+									    	url:"a-fujin-yezhu02.html?id="+id
+										})
+									});	
+								}
+							}
+						})
+						i++;
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});	    
+			
+	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
+			var count = 0;
+		    mui('#myBox').pullRefresh().endPullupToRefresh((++count > 2));
+	    },1000)
+	}	
+	
+</script>

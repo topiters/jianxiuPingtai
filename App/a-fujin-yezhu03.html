@@ -21,19 +21,61 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">填写留言</h1>
 		</header>
-		<div class="leaveMsg">
-			
+		<div class="myBox">	
+			<div class="myInput">
+				<textarea name="" class="leaveMsg" placeholder="请输入留言信息"></textarea>
+				<p class="count"><span id="text-count">200</span>/200</p>
+			</div>	
+			<div class="myBtn" id="myBtn">
+				<button class="pd-btn">发送</button>
+			</div>
 		</div>
 	</body>
-	<script type="text/javascript">
-		$('.fujinyz1-down').click(function() {
-			$('.fujinyz1-two2d').hide();
-			$('.fujinyz1-two2u').show();
-		});
-		$('.fujinyz1-up').click(function() {
-			$('.fujinyz1-two2u').hide();
-			$('.fujinyz1-two2d').show();
-		});
-	</script>
-
 </html>
+<script type="text/javascript">
+/*字数限制*/
+$(".leaveMsg").on("input propertychange", function() {
+	var $this = $(this),
+		_val = $this.val(),
+		count = "";
+	if(_val.length > 200) {
+		$this.val(_val.substring(0, 200));
+	}
+	count = 200 - $this.val().length;
+	$("#text-count").text(count);
+});
+/**
+ * 发送留言
+ */
+var myUrl = "http://test.cnceshi.com/";
+var path = window.location.href;
+var id = path.substring(path.indexOf("=")+1);
+document.getElementById('myBtn').addEventListener('tap', function() {
+	var leaveMsg = $(".leaveMsg").val();
+	mui.ajax(myUrl+'index.php?m=Api&c=Shops&a=message',{
+		data:{
+			supplierId: id,
+			content: leaveMsg
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:60000,//超时时间设置为10秒；
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				mui.toast(data.msg.msg);
+				mui.openWindow({
+					url:"a-fujin-yezhu01.html"
+				})
+			}else{
+				mui.toast(data.msg.msg);
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});		
+});
+
+</script>

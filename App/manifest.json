@@ -254,7 +254,10 @@
 					"css/b-login.css",
 					"img/qq.png",
 					"img/wechat.png",
-					"js/index-home.js"
+					"js/index-home.js",
+					"b-login5.html",
+					"js/myCommon.js",
+					"a-jianxiurenwu.html"
 				],
 				"refer": [
 					"d-message-qiye.html",
@@ -263,17 +266,21 @@
 					"a-caigourenwu.html",
 					"c-yezhu-yaoqing.html",
 					"a-fujin-yezhu01.html",
-					"a-jianxiurenwu.html",
 					"a-gaojiaxuanshang.html",
 					"d-mywallet.html",
 					"b-login2.html",
 					"b-login3.html",
 					"b-login1.html",
 					"b-login4.html",
-					"b-login5.html",
 					"index-home-yezhu.html",
 					"d-adress2.html",
-					"d-set.html"
+					"d-set.html",
+					"c-gys-baojia.html",
+					"c-gys-order122.html",
+					"c-gys-liuyan.html",
+					"d-mybaojia.html",
+					"d-message-qiye-G.html",
+					"d-message-qiye-Y.html"
 				],
 				"priority": 0
 			},
@@ -470,7 +477,8 @@
 					"css/mui.min.css",
 					"css/icons-extra.css",
 					"css/reset.css",
-					"fonts/iconfont.woff"
+					"fonts/iconfont.woff",
+					"index-home.html"
 				],
 				"refer": [
 					"b-login2.html"
@@ -631,10 +639,12 @@
 					"img/logo-01.jpg",
 					"js/index.js",
 					"css/reset.css",
-					"fonts/iconfont.woff"
+					"fonts/iconfont.woff",
+					"js/myCommon.js"
 				],
 				"refer": [
-					"a-fujin-yezhu2.html"
+					"a-fujin-yezhu2.html",
+					"a-fujin-yezhu02.html"
 				],
 				"priority": 0
 			},
@@ -670,7 +680,8 @@
 					"img/logo-01.jpg",
 					"css/reset.css",
 					"js/index.js",
-					"js/myCommon.js"
+					"js/myCommon.js",
+					"index-home.html"
 				],
 				"refer": [
 					"d-jiangbiao-dai.html",
@@ -707,7 +718,8 @@
 					"img/0500bed5f05d2ef66742caec9e2ce5ab.jpg",
 					"img/1eca34d5534a658febcec7ca2a723f94.jpg",
 					"css/reset.css",
-					"fonts/iconfont.woff"
+					"fonts/iconfont.woff",
+					"js/mui.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -815,7 +827,8 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"img/logo-01.jpg",
-					"css/reset.css"
+					"css/reset.css",
+					"js/myCommon.js"
 				],
 				"refer": [
 					"a-purchase-detail1a2.html"
@@ -1026,9 +1039,14 @@
 					"css/mui.min.css",
 					"css/icons-extra.css",
 					"css/reset.css",
-					"fonts/iconfont.woff"
+					"fonts/iconfont.woff",
+					"js/myCommon.js",
+					"img/choose1.png",
+					"img/choose.png"
 				],
-				"refer": [],
+				"refer": [
+					"d-adress1.html"
+				],
 				"priority": 0
 			},
 			"d-set.html": {
@@ -1047,7 +1065,8 @@
 				],
 				"refer": [
 					"d-set-opinion.html",
-					"d-modifypassword.html"
+					"d-modifypassword.html",
+					"index-home.html"
 				],
 				"priority": 0
 			},
@@ -1094,6 +1113,151 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"c-gys-baojia.html": {
+				"resources": [
+					"css/mui.picker.min.css",
+					"css/feedback.css",
+					"fonts/mui.ttf",
+					"css/select2.min.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"css/message.css",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"css/reset.css",
+					"js/index.js",
+					"js/myCommon.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"c-gys-order122.html": {
+				"resources": [
+					"css/feedback.css",
+					"fonts/mui.ttf",
+					"css/select2.min.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"css/message.css",
+					"css/mui.min.css",
+					"css/mui.picker.min.css",
+					"img/logo-01.jpg",
+					"css/reset.css",
+					"js/index.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"c-gys-liuyan.html": {
+				"resources": [
+					"css/feedback.css",
+					"fonts/mui.ttf",
+					"css/select2.min.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"css/message.css",
+					"css/mui.min.css",
+					"css/mui.picker.min.css",
+					"img/logo-01.jpg",
+					"css/reset.css",
+					"js/index.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-message-qiye-G.html": {
+				"resources": [
+					"js/feedback-geren-G.js",
+					"css/my.css",
+					"css/feedback.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/mui.ttf",
+					"fonts/iconfont.woff"
+				],
+				"refer": [
+					"index-home.html"
+				],
+				"priority": 0
+			},
+			"a-fujin-yezhu02.html": {
+				"resources": [
+					"css/index.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"img/logo-01.jpg",
+					"css/reset.css",
+					"fonts/iconfont.woff",
+					"img/12.jpg"
+				],
+				"refer": [
+					"a-fujin-yezhu03.html"
+				],
+				"priority": 0
+			},
+			"a-fujin-yezhu03.html": {
+				"resources": [
+					"css/index.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/reset.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-adress1.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/my.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"d-adress2.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"d-message-qiye-Y.html": {
+				"resources": [
+					"css/my.css",
+					"css/feedback.css",
+					"fonts/iconfont.css",
+					"js/jquery-3.1.1.min.js",
+					"js/mui.min.js",
+					"js/rem-w.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/feedback-geren-Y.js",
+					"css/icons-extra.css",
+					"css/reset.css",
+					"fonts/iconfont.woff"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -1120,7 +1284,6 @@
 				"img/bank-change.png",
 				"d-mytask-list.html",
 				"c-yezhu-qiangdan.html",
-				"d-adress1.html",
 				"fonts/iconfont.js",
 				"d-mycharge2.html",
 				"d-mytask.html",
@@ -1141,7 +1304,6 @@
 				"c-jx-tixian.html",
 				"img/tubiao-03.png",
 				"a-purchase-list-1.1.html",
-				"c-gys-baojia.html",
 				"d-mybank.html",
 				"d-my-yezhu-jingbiao2.html",
 				"d-judge1.html",

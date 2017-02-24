@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -9,55 +10,39 @@
 		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="css/my.css"/>
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
 	</head>
+
 	<body>
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">地址管理</h1>
-			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>
 		</header>
 		<div class="adr2-main">
-			<ul>
-				<li>
-					<p>
-						<span class="l">李四</span>
-						<span class="r">15236255896</span>
-					</p>
-					<p>河南省郑州市索克时代大厦1810</p>
-					<p>
-						<input type="radio" name="adress1" id="adress1" value="" class="l" checked=""/>设为默认地址
-						<span class="r"><i class="icon iconfont icon-shanchu"></i>删除</span>
-						<span class="r" style="margin-right: 0.2rem;"><i class="icon iconfont icon-bianji"></i>编辑</span>
-					</p>
-				</li>
-				<li>
-					<p>
-						<span class="l">李四</span>
-						<span class="r">15236255896</span>
-					</p>
-					<p>河南省郑州市索克时代大厦1810</p>
-					<p>
-						<input type="radio" name="adress1" id="adress1" value="" class="l"/>设为默认地址
-						<span class="r"><i class="icon iconfont icon-shanchu"></i>删除</span>
-						<span class="r" style="margin-right: 0.2rem;"><i class="icon iconfont icon-bianji"></i>编辑</span>
-					</p>
-				</li>
-				<li>
-					<p>
-						<span class="l">李四</span>
-						<span class="r">15236255896</span>
-					</p>
-					<p>河南省郑州市索克时代大厦1810</p>
-					<p>
-						<input type="radio" name="adress1" id="adress1" value="" class="l"/>设为默认地址
-						<span class="r"><i class="icon iconfont icon-shanchu"></i>删除</span>
-						<span class="r" style="margin-right: 0.2rem;"><i class="icon iconfont icon-bianji"></i>编辑</span>
+			<ul dataGao="rootcon" style="margin-bottom: 1.2rem;">
+				<li dataGao="rootchild" class="list">
+					<span dataGao="addressId" style="display: none;"></span>
+					<p dataGao="isDefault" style="display: none;"></p>
+					<div class="everyL">
+						<p>
+							<span class="l" dataGao="userName">李四</span>
+							<span class="r" dataGao="userPhone">15236255896</span>
+						</p>
+						<p dataGao="address" style="display: none;" class="address"></p>
+						<p dataGao="addr2" style="display: none;" class="address2"></p>
+						<p class="address3">河南省郑州市索克时代大厦1810</p>
+					</div>
+					<p class="actions">
+						<span class="choose"></span><span style="margin-left: 0.5rem;">设为默认地址</span>
+						<span class="del r"><i class="icon iconfont icon-shanchu"></i>删除</span>
+						<span class="bian r" style="margin-right: 0.2rem;"><i class="icon iconfont icon-bianji"></i>编辑</span>
 					</p>
 				</li>
 			</ul>
@@ -66,12 +51,185 @@
 			</div>
 		</div>
 	</body>
+
 </html>
 <script type="text/javascript">
-	//地址管理跳转进入详情页面
-		document.getElementById('addAddress').addEventListener('tap', function() {
-			mui.openWindow({
-			    url:"d-adress1.html",
-			});
-		});
+//location.reload();
+/**
+ * ****************列表*****************
+ */
+var rootnode = $('[dataGao = "rootcon"]');
+var childnode = $('[dataGao = "rootchild"]').clone();
+$('[dataGao = "rootchild"]').remove();
+var i = 1;
+var myUrl = "http://test.cnceshi.com/";
+
+function myfun(){
+	
+
+mui.ajax(myUrl + 'index.php?m=Api&c=UserAddress&a=index', {
+	dataType: 'json', //服务器返回json格式数据
+	type: 'post', //HTTP请求类型
+	timeout: 60000, //超时时间设置为10秒；
+	success: function(data) {
+		//服务器返回响应，根据响应结果，分析是否获取数据成功；
+		if(data.status == 200) {
+			$commonObj.loadListData({
+				sourceDataList: data.msg,
+				dataListRootNode: rootnode,
+				dataListChildNode: childnode,
+				dataAttrName: "dataGao",
+				dataHandleFn: function(domNode,index) {
+					//地址拼接
+					var address = document.getElementsByClassName("address");
+					var address2 = document.getElementsByClassName("address2");
+					var address3 = document.getElementsByClassName("address3");
+					for(var i = 0; i < address.length; i++) {
+						for(var j = 0; j < address2.length; j++) {
+							for(var k = 0; k < address3.length; k++) {
+								address3[k].innerHTML = address[k].innerHTML + address2[k].innerHTML;
+							}
+						}
+					}
+					//点击事件
+					mui(domNode).on('tap','.everyL',function(){
+						var id = $(domNode).children("span").html();
+						mui.openWindow({
+							url: "d-adress1.html?id=" + id
+						})
+					});
+/**
+ * ****************************************删除*****************
+ */
+					mui(domNode).on('tap','.del',function(){
+						var btnArray = ['否', '是'];
+						var id = $(domNode).children("span").html();
+						console.log(id);
+						mui.confirm('确认删除？', '提示', btnArray, function(e) {
+							if (e.index == 1) {
+								mui.ajax(myUrl+'index.php?m=Api&c=UserAddress&a=del',{
+									data:{
+										id: id
+									},
+									dataType:'json',//服务器返回json格式数据
+									type:'post',//HTTP请求类型
+									timeout:60000,//超时时间设置为10秒；
+									success:function(data){
+										//服务器返回响应，根据响应结果，分析是否获取数据成功；
+										if( data.status > 0 ){
+											mui.toast("删除成功！");
+											$(domNode).remove();
+										}else{
+											mui.toast("删除失败！");
+										} 
+									},
+									error:function(xhr,type,errorThrown){
+										//异常处理；
+										console.log(type);
+									}
+								});		
+							} else {
+								mui.toast("您取消了操作");	     
+							}
+						});
+					});
+/**
+ * ****************************************编辑*****************
+ */
+					mui(domNode).on('tap','.bian',function(){
+						var id = $(domNode).children("span").html();
+						mui.openWindow({
+							url: "d-adress1.html?id=" + id
+						})
+					});
+/**
+ * *************************************是否设为默认地址********************
+ */					
+ 					var isD = $(domNode).children("p").html();
+ 					if(isD == 0){
+ 						$(domNode).children("p.actions").children("span.choose").css("background-image", "url(img/choose1.png)");
+ 						$(domNode).children("p.actions").children("span.choose").attr("title","0");
+ 					}else{
+ 						$(domNode).children("p.actions").children("span.choose").css("background-image", "url(img/choose.png)");
+ 						$(domNode).children("p.actions").children("span.choose").attr("title","1");
+ 					}
+					mui(domNode).on('tap','.choose',function(){
+						var id = $(domNode).children("span").html();
+						var bgImg = $(this).attr("title");
+						console.log(bgImg);
+						if(bgImg == "0") {
+							$(this).css("background-image", "url(img/choose.png)");
+							$(this).attr("title","1");
+							mui.ajax(myUrl + 'index.php?m=Api&c=UserAddress&a=setDefault', {
+								data: {
+									id: id,
+									isDefault: 1
+								},
+								dataType: 'json', //服务器返回json格式数据
+								type: 'post', //HTTP请求类型
+								timeout: 60000, //超时时间设置为10秒；
+								success: function(data) {
+									//服务器返回响应，根据响应结果，分析是否获取数据成功；
+									if(data.status > 0) {
+										mui.toast("设置默认地址成功！");
+										location.reload();
+									} else {
+										mui.toast("设置默认地址失败！");
+									}
+								},
+								error: function(xhr, type, errorThrown) {
+									//异常处理；
+									console.log(type);
+								}
+							});
+						} else {
+							$(this).css("background-image", "url(img/choose1.png)");
+							$(this).attr("title","0");
+							mui.ajax(myUrl + 'index.php?m=Api&c=UserAddress&a=setDefault', {
+								data: {
+									id: id,
+									isDefault: 0
+								},
+								dataType: 'json', //服务器返回json格式数据
+								type: 'post', //HTTP请求类型
+								timeout: 60000, //超时时间设置为10秒；
+								success: function(data) {
+									//服务器返回响应，根据响应结果，分析是否获取数据成功；
+									if(data.status > 0) {
+										mui.toast("取消默认地址成功！");
+										location.reload();
+									} else {
+										mui.toast("取消默认地址失败！");
+									}
+								},
+								error: function(xhr, type, errorThrown) {
+									//异常处理；
+									console.log(type);
+								}
+							});
+						}
+					});
+				}
+			})
+		} else {
+			mui.toast(data.msg.msg);
+		}
+	},
+	error: function(xhr, type, errorThrown) {
+		//异常处理；
+		console.log(type);
+	}
+});
+
+}
+setTimeout(myfun,1000);
+/**
+ * **************新增地址********************
+ */
+document.getElementById('addAddress').addEventListener('tap', function() {
+	mui.openWindow({
+		url: "d-adress1.html"
+	});
+});
+
 </script>

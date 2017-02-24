@@ -138,22 +138,12 @@
 	};
 	feedback.newPlaceholder();
 	feedback.submitBtn.addEventListener('tap', function(event) {
-//		if (feedback.question.value == '' ||
-//			(feedback.contact.value != '' &&
-//				feedback.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
-//			return mui.toast('信息填写不符合规范');
-//		}
-//		if (feedback.question.value.length > 200 || feedback.contact.value.length > 200) {
-//			return mui.toast('信息超长,请重新填写~')
-//		}
 //		//判断网络连接
 		if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
 			return mui.toast("连接网络失败，请稍后再试");
 		}
 		console.log(feedback.files)
 		feedback.send(mui.extend({}, feedback.deviceInfo, {
-//			content: feedback.question.value,      
-//			contact: feedback.contact.value,
 			images: feedback.files,
 			score:''+starIndex
 		}))
@@ -189,6 +179,7 @@
 				var linkPhone = document.getElementById("linkPhone").value;
 				var linkAddr = document.getElementById("linkAddr").value;
 				var goodsDesc = document.getElementById("goodsDesc").value;
+				console.log(productSize);
 				mui.ajax('http://test.cnceshi.com/index.php?m=Api&c=shops&a=addgoods', {
 					data: {
 						goodsCatId1: goodsCatId1,
@@ -215,7 +206,6 @@
 								url: "d-myxujia1.html"
 							});
 						} else {
-							mui.toast("错啦");
 							mui.toast(data.msg.msg);
 						}
 					},
@@ -258,24 +248,6 @@
 //		plus.nativeUI.showWaiting();
 	};
 	
-	 //应用评分
-//	 mui('.icons').on('tap','i',function(){
-//	  	var index = parseInt(this.getAttribute("data-index"));
-//	  	var parent = this.parentNode;
-//	  	var children = parent.children;
-//	  	if(this.classList.contains("mui-icon-star")){
-//	  		for(var i=0;i<index;i++){
-//				children[i].classList.remove('mui-icon-star');
-//				children[i].classList.add('mui-icon-star-filled');
-//	  		}
-//	  	}else{
-//	  		for (var i = index; i < 5; i++) {
-//	  			children[i].classList.add('mui-icon-star')
-//	  			children[i].classList.remove('mui-icon-star-filled')
-//	  		}
-//	  	}
-//	  	starIndex = index;
-//});
   	//选择快捷输入
 	mui('.mui-popover').on('tap','li',function(e){
 	  document.getElementById("question").value = document.getElementById("question").value + this.children[0].innerHTML;

@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>添加地址</title>
-		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
@@ -12,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="css/my.css"/>
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
@@ -22,32 +22,159 @@
 			<h1 class="mui-title">添加地址</h1>
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">登录</button>-->
 		</header>
-		<form action="" method="post">
-			<div class="adr-main">
-				<ul>
-					<li>
-						<span>联系人</span>
-						<input type="text" name="" id="" placeholder="收货人姓名" />
-					</li>
-					<li>
-						<span>联系电话</span>
-						<input type="text" name="" id="" placeholder="收货人电话" />
-					</li>
-					<li>
-						<span>收货地址</span>
-						<input type="text" name="" id="" placeholder="请选择收货人地址" />
-					</li>
-					<li>
-						<textarea name="" rows="" cols="" placeholder="详细地址(如门牌号)"></textarea>
-					</li>
-					<li>
-						<p>是否设置为默认地址</p>
-						<input type="radio" name="name3" id="" value="" />是
-						<input type="radio" name="name3" id="" value="" / style="margin-left: 0.1rem;">否
-					</li>
-				</ul>
-				<button class="adr-btn">确定</button>
-			</div>
-		</form>
+		<div class="adr-main">
+			<ul>
+				<li>
+					<span>联系人</span>
+					<input type="text" name="" id="userName" placeholder="收货人姓名" />
+				</li>
+				<li>
+					<span>联系电话</span>
+					<input type="text" name="" id="userPhone" placeholder="收货人电话" />
+				</li>
+				<li>
+					<span>收货地址</span>
+					<input type="text" name="" id="address" placeholder="请选择收货人地址" />
+				</li>
+				<li>
+					<textarea name="" rows="" id="address2" cols="" placeholder="详细地址(如门牌号)"></textarea>
+				</li>
+				<li>
+					<p>是否设置为默认地址</p>
+					<input type="radio" name="name3" id="yes" value="1" />是
+					<input type="radio" name="name3" id="no" value="0" / style="margin-left: 0.1rem;">否
+				</li>
+			</ul>
+			<button class="adr-btn" id="sureBtn">确定</button>
+		</div>
 	</body>
 </html>
+<script type="text/javascript">
+/**
+ * ****************地址详情*******************
+ */
+var path = window.location.href;
+var myUrl = "http://test.cnceshi.com/";
+if(path.indexOf("=") > 0){
+	//地址详情
+	var id = path.substring(path.indexOf("=")+1);
+	mui.ajax(myUrl+'index.php?m=Api&c=UserAddress&a=index',{
+		data:{
+			id: id
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:60000,//超时时间设置为10秒；
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status > 0 ){
+				$("#userName").val(data.msg.userName);
+				$("#userPhone").val(data.msg.userPhone);
+				$("#address").val(data.msg.address);	
+				$("#address2").val(data.msg.addr2);	
+				if(data.msg.isDefault == 1){
+					$("#yes").attr("checked","checked");
+				}else{
+					$("#no").attr("checked","checked");
+				}
+			}else{
+				mui.toast("未知错误！");
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});	
+	/**
+	 * ****************编辑*******************
+	 */
+	document.getElementById('sureBtn').addEventListener('tap', function() {
+		var btnArray = ['否', '是'];
+		mui.confirm('确认修改？', '提示', btnArray, function(e) {
+			if (e.index == 1) {
+				var userName = $("#userName").val();
+				var userPhone = $("#userPhone").val();
+				var address = $("#address").val();
+				var address2 = $("#address2").val();
+				var isDefault = $("input[name='name3']:checked").val();
+				mui.ajax(myUrl+'index.php?m=Api&c=UserAddress&a=edit',{
+					data:{
+						id: id,
+						userName: userName,
+						userPhone: userPhone,
+						address: address,
+						address2: address2,
+						isDefault: isDefault
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:60000,//超时时间设置为10秒；
+					success:function(data){
+						//服务器返回响应，根据响应结果，分析是否获取数据成功；
+						if( data.status > 0 ){
+							mui.toast("修改成功！");
+							location.href="d-adress2.html";
+						}else{
+							mui.toast("修改失败！");
+						} 
+					},
+					error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(type);
+					}
+				});	
+			} else {
+				mui.toast("您取消了操作");	     
+			}
+		})	
+	});	
+}else{
+	/**
+	 * **************新增地址**************
+	 */
+	document.getElementById('sureBtn').addEventListener('tap', function() {
+		var btnArray = ['否', '是'];
+		var userName = $("#userName").val();
+		var userPhone = $("#userPhone").val();
+		var address = $("#address").val();
+		var address2 = $("#address2").val();
+		var isDefault = $("input[name='name3']:checked").val();
+		mui.confirm('确认添加？', '提示', btnArray, function(e) {
+			if (e.index == 1) {
+				mui.ajax(myUrl+'index.php?m=Api&c=UserAddress&a=edit',{
+					data:{
+						userName: userName,
+						userPhone: userPhone,
+						address: address,
+						address2: address2,
+						isDefault: isDefault
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:60000,//超时时间设置为10秒；
+					success:function(data){
+						//服务器返回响应，根据响应结果，分析是否获取数据成功；
+						if( data.status > 0 ){
+							mui.toast("添加成功！");
+							location.href="d-adress2.html";
+						}else{
+							mui.toast("添加失败！");
+						} 
+					},
+					error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(type);
+					}
+				});	
+			} else {
+				mui.toast("您取消了操作");	     
+			}
+		})
+	});	
+}
+
+
+
+
+</script>

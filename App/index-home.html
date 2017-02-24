@@ -22,20 +22,8 @@
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
 		<!--公共js  ee-->
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" charset="utf-8">
-			mui.init({
-//				  	pullRefresh : {
-//				    container:'#pullrefresh',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
-//				    up : {
-//				      height:50,//可选.默认50.触发上拉加载拖动距离
-//				      auto:true,//可选,默认false.自动上拉加载一次
-//				      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
-//				      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
-//				      callback :pullfresh-function //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-//				    }
-//				  }
-			});
-		</script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			.mui-content{background: #fff;}
 			body{background: #fff;}
@@ -51,7 +39,7 @@
 				<span class="mui-tab-label">首页</span>
 			</a>
 			<a class="mui-tab-item" href="#message">
-				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
+				<span class="mui-icon mui-icon-email"><span class="mui-badge" id="tipsNum">9</span></span>
 				<span class="mui-tab-label">消息</span>
 			</a>
 			<a class="mui-tab-item" href="#setting">
@@ -142,10 +130,10 @@
 				<div class="index-task">
 					<div class="index-taskt clearfix">
 						<span class="l">任务推荐</span>
-						<span class="r">更多></span>
+						<span class="r"><a href="a-jianxiurenwu.html">更多></a></span>
 					</div>
 					<div class="index-taskd">
-						<ul class="task-tol" dataGao="rootcon">
+						<!--<ul class="task-tol" dataGao="rootcon">
 							<li class="task-tol1" dataGao="rootchild">
 								<div class="task-list1 l">
 									<img src="img/logo-01.jpg" />
@@ -160,6 +148,28 @@
 									<p dataGao="">消缺</p>
 									<p></p>
 									<p id="1" class="settime" endTime="2017-02-20 10:00:00"></p>
+									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
+								</div>
+								<div class="task-list4">
+									<img src="img/bid-01.png" />
+								</div>
+							</li>
+						</ul>-->
+						<ul class="task-tol">
+							<li class="task-tol1">
+								<div class="task-list1 l">
+									<img src="img/logo-01.jpg" />
+								</div>
+								<div class="task-list2 l">
+									<p class="mingcheng">检修名称检修名称检修名称</p>
+									<p><span>张三</span> | <span >15625362563</span></p>
+									<p>已有<span>2</span>人投标</p>
+									<p class="cut_str">地址：<span>郑州市索克时代大厦1810</span></p>
+								</div>
+								<div class="task-list3 r">
+									<p dataGao="">消缺</p>
+									<p></p>
+									<p id="1" class="settime" endTime="2017-02-25 10:00:00"></p>
 									<p><i class="icon iconfont icon-weizhi"></i><span>0.3km</span></p>
 								</div>
 								<div class="task-list4">
@@ -192,11 +202,135 @@
 			<div id="message" class="mui-control-content">
 				<header id="header" class="mui-bar mui-bar-nav">
 					<h1 class="mui-title">消息</h1>
-					<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="reg_btn">注册</button>
+					<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="reg_btn">注册</button>-->
 				</header>
-			<!--消息-->
-				<div id="messages" style="display: none;margin-top: 2rem;">
-					消息消息消息消息
+			<!--消息业主-->
+				<div class="cyx1" id="messagesY" style="display: none;">
+					<div class="cyx1-one-t clearfix" id="yBaojiaMsg">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>报价消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red"></span>条消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix" id="yQiangMsg">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>抢单消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red"></span>条消息</span></span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix" id="yJingMsg">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>竞标消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red"></span>条消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>提现进度</p>
+							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+				</div>
+				
+				<!--消息供应商-->
+				<div class="cyx1" id="messagesG" style="display: none;">
+					<div class="cyx1-one-t clearfix" id="gLeaveMsg">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>我的留言</p>
+							<p class="clearfix"><span class="l">共有<span class="red" id="gLMsg"></span>条新消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix" id="gBaojiaMsg">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>我的报价</p>
+							<p class="clearfix"><span class="l">共有<span class="red" id="gBMsg"></span>条新消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix" id="gDingdanMsg">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-caigou"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>订单消息</p>
+							<p class="clearfix"><span class="l">共有<span class="red" id="gDMsg"></span>条新消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>提现进度</p>
+							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+				</div>
+				
+				<!--消息检修企业检修工程师-->
+				<div class="cyx1" id="messagesJ" style="display: none;">
+					<div class="cyx1-one-t clearfix" id="jQiangMsg1">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-xiaoxi2" style="color: #FF9A00;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>抢单成功</p>
+							<p class="clearfix"><span class="l">共有<span class="red"></span>条消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix" id="JQiangMsg0">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-qiangdan" style="color: #4cb4fb;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>抢单失败</p>
+							<p class="clearfix"><span class="l">共有<span class="red"></span>条新消息</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
+					<div class="cyx1-one-t clearfix" id="yJingMsg1">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>竞标成功</p>
+							<p class="clearfix"><span class="l">共有<span class="red"></span>条新消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix" id="yJingMsg0">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-icon-rank" style="color: #59ce99;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>竞标失败</p>
+							<p class="clearfix"><span class="l">共有<span class="red"></span>条新消息</span><span class="r" class="grey">2016-12-12 12:12</span></p>
+						</div>
+					</div> 
+					<div class="cyx1-one-t clearfix">
+						<div class="cyx1-list1 l">
+							<i class="icon iconfont icon-purse" style="color: #71cb45;"></i>
+						</div>
+						<div class="cyx1-list2 l">
+							<p>提现进度</p>
+							<p class="clearfix"><span class="l">提现成功</span><span class="r">2016-12-12 12:12</span></p>
+						</div>
+					</div>
 				</div>
 			<!--登录-->
 				<div class="l-main" id="box1" style="display: block;">
@@ -213,6 +347,7 @@
 						<span class="r" id="p_login">手机登录</span>
 					</div>
 					<button class="l-btn" id="l_btn">立即登录</button>
+					<p id="reg">没有账号？立即注册</p>
 					<div class="l-main4">
 						<div class="l-main4-t">
 							<span></span>
@@ -235,12 +370,12 @@
 			<div id="setting" class="mui-control-content">
 				<header id="header" class="mui-bar mui-bar-nav">
 					<h1 class="mui-title">我的</h1>
-					<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="reg_btn1">注册</button>
+					<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="reg_btn1">注册</button>-->
 				</header>
 			<!--个人中心-->
 			<!--供应商供应商供应商供应商供应商供应商-->	
 				<div class="my1-main" id="gongyingshang" style="display: none;background: #efeff4;">
-					<div class="my1-maintop clearfix" id="myMessage">
+					<div class="my1-maintop clearfix" id="gMessage">
 						<div class="my1-img l">
 							<img src="img/touxiang.jpg" />
 						</div>
@@ -249,22 +384,22 @@
 					</div>
 					<div class="my1-mainbottom">
 						<ul>
-							<li id="mybaojia">
+							<li id="gBaojia">
 								<i class="icon iconfont icon-icon-rank"></i>
 								<span>我的报价</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="dingdan">
+							<li id="gDingdan">
 								<i class="icon iconfont icon-dingdanzhongxin"></i>
 								<span>订单中心</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myWallet1">
+							<li id="gWallet">
 								<i class="icon iconfont icon-qianbao"></i>
 								<span>我的钱包</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myAddress1">
+							<li id="gAddress">
 								<i class="icon iconfont icon-address"></i>
 								<span>地址管理</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
@@ -281,7 +416,7 @@
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 								<span class="r">未绑定</span>
 							</li>
-							<li id="mySetting1">
+							<li id="gSetting">
 								<i class="icon iconfont icon-shezhi"></i>
 								<span>我的设置</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
@@ -291,7 +426,7 @@
 				</div>
 			<!--业主业主业主业主业主业主业-->
 				<div class="my1-main" id="yezhu" style="display: none;background: #efeff4;">
-					<div class="my1-maintop clearfix" id="myMessage">
+					<div class="my1-maintop clearfix" id="yMessage">
 						<div class="my1-img l">
 							<img src="img/touxiang.jpg" />
 						</div>
@@ -300,27 +435,27 @@
 					</div>
 					<div class="my1-mainbottom">
 						<ul>
-							<li id="myXunjia">
+							<li id="yXunjia">
 								<i class="icon iconfont icon-xiaoxi2"></i>
 								<span>我的询价</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myFabu">
+							<li id="yFabu">
 								<i class="icon iconfont icon-fabu"></i>
 								<span>我发布的</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="mydingdan">
+							<li id="ydingdan">
 								<i class="icon iconfont icon-dingdanzhongxin"></i>
 								<span>我的订单</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myWallet">
+							<li id="yWallet">
 								<i class="icon iconfont icon-qianbao"></i>
 								<span>我的钱包</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myAddress">
+							<li id="yAddress">
 								<i class="icon iconfont icon-address"></i>
 								<span>地址管理</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
@@ -337,7 +472,7 @@
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 								<span class="r">未绑定</span>
 							</li>
-							<li id="mySetting">
+							<li id="ySetting">
 								<i class="icon iconfont icon-shezhi"></i>
 								<span>我的设置</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
@@ -366,7 +501,7 @@
 				</div>
 			<!--检修检修检修检修检修检修检修检修检修检-->
 				<div class="my1-main" id="jianxiu" style="display: none;background: #efeff4;">
-					<div class="my1-maintop clearfix" id="myMessage">
+					<div class="my1-maintop clearfix" id="jMessage">
 						<div class="my1-img l">
 							<img src="img/touxiang.jpg" />
 						</div>
@@ -375,22 +510,22 @@
 					</div>
 					<div class="my1-mainbottom">
 						<ul>
-							<li id="myXunjia">
+							<li id="jQiangdan">
 								<i class="icon iconfont icon-qiangdan"></i>
 								<span>我的抢单</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myFabu">
+							<li id="jJingbiao">
 								 <i class="icon iconfont icon-icon-rank"></i>
 								<span>我的竞标</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myWallet">
+							<li id="jWallet">
 								<i class="icon iconfont icon-qianbao"></i>
 								<span>我的钱包</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 							</li>
-							<li id="myAddress">
+							<li id="jAddress">
 								<i class="icon iconfont icon-address"></i>
 								<span>地址管理</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
@@ -407,7 +542,7 @@
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
 								<span class="r">未绑定</span>
 							</li>
-							<li id="mySetting">
+							<li id="jSetting">
 								<i class="icon iconfont icon-shezhi"></i>
 								<span>我的设置</span>
 								<i class="icon iconfont icon-jiantouyoujiantou r"></i>
@@ -430,6 +565,7 @@
 						<span class="r" id="p_login1">手机登录</span>
 					</div>
 					<button class="l-btn" id="l_btn1">立即登录</button>
+					<p id="reg1">没有账号？立即注册</p>
 					<div class="l-main4">
 						<div class="l-main4-t">
 							<span></span>

@@ -64,13 +64,14 @@
 	padding: 0.2rem 0;
 }
 
-.adr2-main ul li p:nth-child(1) {
+.adr2-main ul li div {
 	font-size: 0.32rem;
 }
 
-.adr2-main ul li p:nth-child(2) {
+.adr2-main ul li p {
 	font-size: 0.3rem;
 	border-bottom: 1px solid #e4e4e4;
+	position: relative;
 }
 
 .adr2-main ul li p input {
@@ -93,6 +94,19 @@
 	height: 0.8rem;
 	background-color: #4EB145;
 	color: #fff;
+}
+
+.choose{
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	/*background-image: url(../img/choose1.png);*/
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	position: absolute;
+	bottom: 0.2rem;
+	left: 0;
+	
 }
 
 
@@ -1710,6 +1724,8 @@
 
 .dmx1-list1 img {
 	width: 100%;
+	height: 100%;
+	border-radius: 0.2rem;
 }
 
 .dmx1-list2 {

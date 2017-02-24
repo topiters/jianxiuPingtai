@@ -13,9 +13,8 @@
 		<link rel="stylesheet" type="text/css" href="css/my.css" />
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" charset="utf-8">
-			mui.init();
-		</script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -26,83 +25,365 @@
 		</header>
 		<div class="order1-top">
 			<ul>
-				<li class="order1-top-list active4">全部</li>
-				<li class="order1-top-list">已投标</li>
-				<li class="order1-top-list">已中标</li>
-				<li class="order1-top-list">已完成</li>
+				<li class="order1-top-list active4" id="0">全部</li>
+				<li class="order1-top-list" id="1">待发货</li>
+				<li class="order1-top-list" id="2">待收货</li>
+				<li class="order1-top-list" id="3">待评价</li>
 			</ul>
 		</div>
 		<div class="dm-list-m">
-			<ul class="dm-list-tol">
-				<li class="dm-list-tol1">
+			<ul class="dm-list-tol" dataGaoOne = "rootcon1">
+				<li class="dm-list-tol1" dataGaoOne = "rootchild1">
+					<p dataGaoOne = "goodsId" class="myid" style="display: none;"></p>
 					<div class="dm-list-list1 l">
-						<img src="img/logo-01.jpg" />
+						<p dataGaoOne = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs"/>
 					</div>
 					<div class="dm-list-list2 l">
-						<p>检修名称</p>
-						<p>李四 | 15236256585</p>
-						<p>已投标<span>2</span>次</p>
-						<p>投标金额：<span>￥1，000</span></p>
-					</div>
-					<div class="dm-list-list3 r">
-						<p>消缺</p>
-						<p></p>
-						<p>已投标</p>
-						<p id="timer">12:12:12</p>
+						<p dataGaoOne = ""></p>
+						<p>型&nbsp;&nbsp;号：<span dataGaoOne = ""></span></p>
+						<p>状&nbsp;&nbsp;态：<span dataGaoOne = ""></span></p>
+						<p>合&nbsp;&nbsp;计：<span class="red">￥</span><span dataGaoOne = "" class="red"></span></p>
 					</div>
 				</li>
-				<li class="dm-list-tol1">
+			</ul>
+			<ul class="dm-list-tol" dataGaoTwo = "rootcon2">
+				<li class="dm-list-tol1" dataGaoTwo = "rootchild2">
+					<p dataGaoTwo = "goodsId" class="myid" style="display: none;"></p>
 					<div class="dm-list-list1 l">
-						<img src="img/logo-01.jpg" />
+						<p dataGaoTwo = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs"/>
 					</div>
 					<div class="dm-list-list2 l">
-						<p>检修名称</p>
-						<p>李四 | 15236256585</p>
-						<p>已投标<span>2</span>次</p>
-						<p>投标金额：<span>￥1，000</span></p>
-					</div>
-					<div class="dm-list-list3 r">
-						<p>消缺</p>
-						<p></p>
-						<p>已中标</p>
-						<p id="timer">12:12:12</p>
+						<p dataGaoTwo = ""></p>
+						<p>型&nbsp;&nbsp;号：<span dataGaoTwo = ""></span></p>
+						<p>状&nbsp;&nbsp;态：<span dataGaoTwo = ""></span></p>
+						<p>合&nbsp;&nbsp;计：<span class="red">￥</span><span dataGaoTwo = "" class="red"></span></p>
 					</div>
 				</li>
-				<li class="dm-list-tol1">
+			</ul>
+			<ul class="dm-list-tol" dataGaoThree = "rootcon3">
+				<li class="dm-list-tol1" dataGaoThree = "rootchild3">
+					<p dataGaoThree = "goodsId" class="myid" style="display: none;"></p>
 					<div class="dm-list-list1 l">
-						<img src="img/logo-01.jpg" />
+						<p dataGaoThree = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs"/>
 					</div>
 					<div class="dm-list-list2 l">
-						<p>检修名称</p>
-						<p>李四 | 15236256585</p>
-						<p>已投标<span>2</span>次</p>
-						<p>投标金额：<span>￥1，000</span></p>
+						<p dataGaoThree = ""></p>
+						<p>型&nbsp;&nbsp;号：<span dataGaoThree = ""></span></p>
+						<p>状&nbsp;&nbsp;态：<span dataGaoThree = ""></span></p>
+						<p>合&nbsp;&nbsp;计：<span class="red">￥</span><span dataGaoThree = "" class="red"></span></p>
 					</div>
-					<div class="dm-list-list3 r">
-						<p>消缺</p>
-						<p></p>
-						<p>已投标</p>
-						<p id="timer">12:12:12</p>
+				</li>
+			</ul>
+			<ul class="dm-list-tol" dataGaoFour = "rootcon4">
+				<li class="dm-list-tol1" dataGaoFour = "rootchild4">
+					<p dataGaoFour = "goodsId" class="myid" style="display: none;"></p>
+					<div class="dm-list-list1 l">
+						<p dataGaoFour = "goodsImg" class="mySrc" style="display: none;"></p>
+						<img src="img/logo-01.jpg" class="myimgs"/>
+					</div>
+					<div class="dm-list-list2 l">
+						<p dataGaoFour = ""></p>
+						<p>型&nbsp;&nbsp;号：<span dataGaoFour = ""></span></p>
+						<p>状&nbsp;&nbsp;态：<span dataGaoFour = ""></span></p>
+						<p>合&nbsp;&nbsp;计：<span class="red">￥</span><span dataGaoFour = "" class="red"></span></p>
 					</div>
 				</li>
 			</ul>
 		</div>
 	</body>
-	<script type="text/javascript">
-		$(function() {
-			$(".order1-top ul").on("click", "li", function() {
-				$(".order1-top ul").children("li").removeClass('active4');
-				$(this).addClass("active4");
-			});
-			$(".order1-top ul").find("li").eq(0).click(function() {
-				$(".mes").show();
-				$(".notice").hide();
-			});
-			$(".order1-top ul").find("li").eq(1).click(function() {
-				$(".notice").show();
-				$(".mes").hide();
-			});
-		});
-	</script>
-
 </html>
+<script type="text/javascript">
+/**
+ * 供应商订单中心
+ */
+	var myURL = "http://test.cnceshi.com/";
+	mui.init({
+//		pullRefresh : {
+//		    container:'.dmyj-list-tol',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+//		    up : {
+////		      	height:50,//可选.默认50.触发上拉加载拖动距离
+//		      	auto:true,//可选,默认false.自动上拉加载一次
+//		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+//		     	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+//		      	callback :mypullFresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//		    }
+//	  	}
+	});
+	var rootnode1 = $('[dataGaoOne = "rootcon1"]');
+	var rootnode2 = $('[dataGaoTwo = "rootcon2"]');
+	var rootnode3 = $('[dataGaoThree = "rootcon3"]');
+	var rootnode4 = $('[dataGaoFour = "rootcon4"]');
+	var childnode1 = $('[dataGaoOne = "rootchild1"]').clone();
+	var childnode2 = $('[dataGaoTwo = "rootchild2"]').clone();
+	var childnode3 = $('[dataGaoThree = "rootchild3"]').clone();
+	var childnode4 = $('[dataGaoFour = "rootchild4"]').clone();
+	$('[dataGaoOne = "rootchild1"]').remove();	
+	$('[dataGaoTwo = "rootchild2"]').remove();	
+	$('[dataGaoThree = "rootchild3"]').remove();	
+	$('[dataGaoFour = "rootchild4"]').remove();	  
+	
+	var mySrc1 = document.getElementsByClassName("mySrc");
+	var mySrc = document.getElementsByClassName("myimgs");
+	var mylist = document.getElementsByClassName("dm-list-tol1");
+	mui.ajax(myURL+'index.php?m=Api&c=Supplier&a=orderList',{
+		data:{
+			unSend: 0,
+			pcurr: 1
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				
+				console.log(JSON.stringify(data.msg.root))
+				$commonObj.loadListData({
+					sourceDataList : data.msg.root,
+					dataListRootNode : rootnode1,
+					dataListChildNode : childnode1,
+					dataAttrName : "dataGaoOne",
+					dataHandleFn : function(){
+						for(var i=0;i<mySrc1.length;i++){
+							for (var j=0;j<mySrc.length;j++){
+								var myStr = myURL+mySrc1[j].innerHTML; 
+								mySrc[j].setAttribute("src",myStr);
+							}	
+						}
+					//点击事件
+						for(var j=0;j<mylist.length;j++){
+							mylist[j].addEventListener('tap',function(){
+								var id = $(this).children("p").html();
+								mui.openWindow({
+							    	url:"d-jiangbiao-dai.html?id="+id,
+							    	preload: true
+								})
+							});	
+						}
+					}
+				})	
+				
+			}else{
+				mui.toast(data.msg.msg);
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});
+	
+	
+	$(function(){
+		$(".order1-top ul").on("click", "li", function() {
+			$(".order1-top ul").children("li").removeClass('active4');
+			$(this).addClass("active4");
+			var num=$(this).index();
+			$(".dm-list-m .dm-list-tol").eq(num).addClass("now").siblings().removeClass("now");
+			var unSend=$(this).attr("id");
+			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+				data:{
+					pcurr:1,
+					unSend: unSend
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						var mySrc1 = document.getElementsByClassName("mySrc");
+						var mySrc = document.getElementsByClassName("myimgs");
+						var mylist = document.getElementsByClassName("dm-list-tol1");
+						if(goodStatus==""){
+							$(".dm-list-tol").empty();
+							console.log(JSON.stringify(data.msg.root))
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode1,
+								dataListChildNode : childnode1,
+								dataAttrName : "dataGaoOne",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+								//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-jiangbiao-dai.html?id="+id,
+										    	preload: true
+											})
+										});	
+									}
+								}
+							})	
+						}else if(goodStatus==0){
+							$(".dm-list-tol").empty();
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode2,
+								dataListChildNode : childnode2,
+								dataAttrName : "dataGaoTwo",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+									//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-jiangbiao-dai.html?id="+id,
+										    	preload: true
+											})
+										});	
+									}
+								}
+							})	
+						}else if(goodStatus==1){
+							$(".dm-list-tol").empty();
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode3,
+								dataListChildNode : childnode3,
+								dataAttrName : "dataGaoThree",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+									//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-jingbiao-xuanze.html?id="+id,
+										    	preload: true
+											})
+										});	
+									}
+								}
+							})	
+						}else{
+							$(".dm-list-tol").empty();
+							$commonObj.loadListData({
+								sourceDataList : data.msg.root,
+								dataListRootNode : rootnode4,
+								dataListChildNode : childnode4,
+								dataAttrName : "dataGaoFour",
+								dataHandleFn : function(){
+									for(var i=0;i<mySrc1.length;i++){
+										for (var j=0;j<mySrc.length;j++){
+											var myStr = myURL+mySrc1[j].innerHTML; 
+											mySrc[j].setAttribute("src",myStr);
+										}	
+									}
+									//点击事件
+									for(var j=0;j<mylist.length;j++){
+										mylist[j].addEventListener('tap',function(){
+											var id = $(this).children("p").html();
+											mui.openWindow({
+										    	url:"d-jingbiao-pingjia.html?id="+id,
+										    	preload: true
+											})
+										});	
+									}
+								}
+							})	
+						}
+						
+					}else{
+						mui.toast(data.msg.msg);
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
+			
+			
+		});
+	})	
+	
+// 	var i = 2;
+// 	function mypullFresh() {
+// 		setTimeout(function() {
+// 			mui.ajax(myURL+'index.php?m=Api&c=shops&a=getshopgoodslist',{
+//				data:{
+//					goodsTaskId: 2,
+//					goodsType: "",
+//					p:i,
+//					goodsStatus: goodStatus
+//				},
+//				dataType:'json',//服务器返回json格式数据
+//				type:'post',//HTTP请求类型
+//				timeout:10000,//超时时间设置为10秒；
+//				success:function(data){
+//					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+//					if( data.status == 200 ){
+//						if(goodStatus==""){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode1,
+//								dataListChildNode : childnode1,
+//								dataAttrName : "dataGaoOne",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else if(goodStatus==1){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode2,
+//								dataListChildNode : childnode2,
+//								dataAttrName : "dataGaoTwo",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else if(goodStatus==2){
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode3,
+//								dataListChildNode : childnode3,
+//								dataAttrName : "dataGaoThree",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}else{
+//							$commonObj.loadListData({
+//								sourceDataList : data.msg.root,
+//								dataListRootNode : rootnode4,
+//								dataListChildNode : childnode4,
+//								dataAttrName : "dataGaoFour",
+//								dataHandleFn : function(){
+//								}
+//							})	
+//						}
+//						
+//						i++;
+//					}else{
+//						mui.toast(data.msg.msg);
+//					} 
+//				},
+//				error:function(xhr,type,errorThrown){
+//					//异常处理；
+//					console.log(type);
+//				}
+//			});
+// 			
+// 		},1000)
+//	}
+</script>

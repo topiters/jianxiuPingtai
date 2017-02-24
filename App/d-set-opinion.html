@@ -21,13 +21,11 @@
 			<h1 class="mui-title">意见反馈</h1>
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
 		</header>
-		<form action="" method="post">
-			<div class="opinion-tol">
-				<textarea id="area" name="" placeholder="请输入遇到的问题和建议..."></textarea>
-				<p class="r"><span id="text-count">200</span>/200</p>
-			</div>
-			<button class="opinion-down">完成</button>
-		</form>
+		<div class="opinion-tol">
+			<textarea id="area" name="" placeholder="请输入遇到的问题和建议..."></textarea>
+			<p class="r"><span id="text-count">200</span>/200</p>
+		</div>
+		<button class="opinion-down">完成</button>
 	</body>
 	<script type="text/javascript">
 		/*字数限制*/
@@ -43,3 +41,36 @@
 		});
 	</script>
 </html>
+<script type="text/javascript">
+/**
+ * 发送留言
+ */
+var myUrl = "http://test.cnceshi.com/";
+var path = window.location.href;
+var id = path.substring(path.indexOf("=")+1);
+document.getElementById('myBtn').addEventListener('tap', function() {
+	var feedback = $("#area").val();
+	mui.ajax(myUrl+'index.php?m=Api&c=Users&a=feedback',{
+		data:{
+			feedback: feedback
+		},
+		dataType:'json',//服务器返回json格式数据
+		type:'post',//HTTP请求类型
+		timeout:60000,//超时时间设置为10秒；
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否获取数据成功；
+			if( data.status == 200 ){
+				mui.alert(data.msg.msg, '提示', function() {
+					mui.back();
+				});
+			}else{
+				mui.toast(data.msg.msg);
+			} 
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			console.log(type);
+		}
+	});		
+});
+</script>

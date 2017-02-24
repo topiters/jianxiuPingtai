@@ -20,9 +20,8 @@
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
 		<!--公共js  ee-->
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" charset="utf-8">
-			mui.init();
-		</script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -32,30 +31,93 @@
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</button>-->
 		</header>
 		<div class="cgo1-m">
-			<ul class="cgo1-tol">
-				<li class="cgo1-tol1">
+			<ul class="cgo1-tol" dataGao="rootcon">
+				<li class="cgo1-tol1" dataGao="rootchild">
 					<div class="cgo1-list1 l">
 						<img src="img/logo-01.jpg" />
 					</div>
 					<div class="cgo1-list2 l">
-						<p>采购名称</p>
-						<p>型&nbsp;&nbsp;号: <span>FGJ-256</span></p>
-						<p>恭喜你成功向李四报价 <span style="color: #FF3D10;">￥400.00</span></p>
-						<p>报价时间: <span>2016-12-12 12:12</span></p>
-					</div>
-				</li>
-				<li class="cgo1-tol1">
-					<div class="cgo1-list1 l">
-						<img src="img/logo-01.jpg" />
-					</div>
-					<div class="cgo1-list2 l">
-						<p>采购名称</p>
-						<p>型&nbsp;&nbsp;号: <span>FGJ-256</span></p>
-						<p>恭喜你成功向李四报价 <span style="color: #FF3D10;">￥400.00</span></p>
-						<p>报价时间: <span>2016-12-12 12:12</span></p>
+						<p dataGao="">采购名称</p>
+						<p dataGao="">型&nbsp;&nbsp;号: <span>FGJ-256</span></p>
+						<p dataGao="">恭喜你成功向李四报价 <span style="color: #FF3D10;">￥400.00</span></p>
+						<p dataGao="">报价时间: <span>2016-12-12 12:12</span></p>
 					</div>
 				</li>
 			</ul>
 		</div>
 	</body>
 </html>
+<!--<script type="text/javascript">
+mui.init({
+	  	pullRefresh : {
+	    container:'.cgo1-tol',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+	    up : {
+	      height:50,//可选.默认50.触发上拉加载拖动距离
+	      auto:true,//可选,默认false.自动上拉加载一次
+	      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+	      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+	      callback : pullFresh//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+	    }
+	  }
+});
+//我的留言列表
+	var myUrl="http://test.cnceshi.com/";
+	var rootnode = $('[dataGaoFour = "rootcon"]');
+	var childnode = $('[dataGaoOne = "rootchild"]').clone();
+	$('[dataGao = "rootchild"]').remove();
+	var i = 1;
+ 	function pullFresh() {
+ 		setTimeout(function() {
+		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
+		    mui.ajax(myUrl+'index.php?m=Api&c=Supplier&a=myMessage',{
+				data:{
+					p: i
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:60000,//超时时间设置为10秒；
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否获取数据成功；
+					if( data.status == 200 ){
+						console.log(JSON.stringify(data.msg.root))
+						$commonObj.loadListData({
+							sourceDataList : data.msg.root,
+							dataListRootNode : rootnode,
+							dataListChildNode : childnode,
+							dataAttrName : "dataGao",
+							dataHandleFn : function(){
+//								var myimg = document.getElementById("myimg")
+//								var mySrc = document.getElementById("myimgs")
+//								for(var i=0;i<mySrc1.length;i++){
+//									for (var j=0;j<mySrc.length;j++){
+//										var myStr = myURL+mySrc1[j].innerHTML; 
+//										mySrc[j].setAttribute("src",myStr);
+//									}	
+//								}
+//							//点击事件
+//								for(var j=0;j<mylist.length;j++){
+//									mylist[j].addEventListener('tap',function(){
+//										var id = $(this).children("p").html();
+//										mui.openWindow({
+//									    	url:"d-jiangbiao-dai.html?id="+id
+//										})
+//									});	
+//								}
+							}
+						})
+						i++;
+					}else{
+						alert("数据请求失败，请刷新页面")
+					} 
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
+	//	     加载完新数据后，必须执行如下代码，true表示没有更多数据了：
+		    var count = 0;
+		    mui('.cgo1-tol').pullRefresh().endPullupToRefresh((++count > 2));
+	    },1000)
+	}
+</script>-->

@@ -1,3 +1,10 @@
+#reg,#reg1{
+	text-decoration: underline;
+	float: right;
+	margin-top: 0.3rem;
+	color: #999999;
+}
+
 .index-serch {
 	text-align: center;
 	width: 60%;
@@ -535,6 +542,8 @@
 
 .fujinyz-list1 img {
 	width: 100%;
+	height: 100%;
+	border-radius: 0.2rem;
 }
 
 .fujinyz-list2 {
@@ -584,6 +593,8 @@
 
 .fujinyz1-list1 img {
 	width: 100%;
+	height: 100%;
+	border-radius: 0.2rem;
 }
 
 .fujinyz1-list2 {
@@ -1571,6 +1582,20 @@ p img {
 	margin-left:0.35rem;
 	border-radius: 0.06rem;
 	text-align: center;
-	/*line-height: 0.7rem;*/
 	color: #fff;
+}
+.myInput textarea{
+	width: 5.8rem;
+	height: 3rem;
+	margin: 0 0 0.2rem 0.35rem;
+	border-radius:0.06rem ;
+	padding: 0.2rem;
+}
+.myInput {
+	position: relative;
+}
+.count{
+	position: absolute;
+	right: 0.3rem;
+	bottom: 0.3rem;
 }

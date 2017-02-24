@@ -95,7 +95,9 @@
 		var myUrl = "http://test.cnceshi.com/";
 		var path = window.location.href;
 		var id = path.substring(path.indexOf("=")+1); 
-		
+		/**
+		 * 信息详情
+		 */
 		mui.ajax(myUrl+'index.php?m=Api&c=Goods&a=gooodsPurchaseDetails',{
 			data:{
 				goodsId:id
@@ -135,7 +137,7 @@
 			}
 		});
 	/**
-	 * 我要报价，供应商身份选择
+	 * 我要报价，判断供应商身份
 	 */
 	
 		document.getElementById('quote').addEventListener('tap',function() {
@@ -150,7 +152,7 @@
 						    url:"a-quedingbaojia.html?goodsId="+id,
 						});
 					}else{
-						alert(data.msg.msg);
+						$("#quote").hide();
 					} 
 				},
 				error:function(xhr,type,errorThrown){

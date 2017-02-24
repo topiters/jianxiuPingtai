@@ -11,9 +11,8 @@
 		<link rel="stylesheet" type="text/css" href="css/my.css" />
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/rem-w.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" charset="utf-8">
-			mui.init();
-		</script>
+		<!--数据展示js-->
+		<script src="js/myCommon.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<header id="header" class="mui-bar mui-bar-nav">
@@ -22,18 +21,19 @@
 			<!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><i class="icon iconfont icon-jiahao"></i></button>-->
 		</header>
 		<div class="dmx1-m">
-			<ul class="dmx1-tol" id="pullBox">
-				<li class="dmx1-tol1">
-					<p class="myid" dataGao="" style="display: none;"></p>
+			<ul class="dmx1-tol" id="pullBox" dataGao = "rootcon">
+				<li class="dmx1-tol1" dataGao = "rootchild">
+					<!--<p class="myid" dataGao="" style="display: none;"></p>-->
 					<div class="dmx1-list1 l">
-						<p class="myimgs" dataGao="" style="display: none;"></p>
+						<p class="myimgs" dataGao="goodsImg" style="display: none;"></p>
 						<img src="img/logo-01.jpg" class="myImg"/>
 					</div>
 					<div class="dmx1-list2 l">
-						<p dataGao="">采购名称</p>
-						<p>型&nbsp;&nbsp;号: <span dataGao="">FGJ-256</span></p>
-						<p>数&nbsp;&nbsp;量: <span dataGao="">1000</span>件</p>
-						<p>报价: <span class="money" dataGao="">￥4,00000.00</span><span class="times money" dataGao="">04:12:06</span></p>
+						<p dataGao="goodsName">采购名称</p>
+						<p>型&nbsp;&nbsp;号: <span dataGao="typeSn">FGJ-256</span></p>
+						<p>数&nbsp;&nbsp;量: <span dataGao="goodsStock">1000</span>件</p>
+						<p dataGao="offerTime" class="time" style="display: none;"></p>
+						<p>报价: <span class="money">￥</span><span class="money" dataGao="shopPrice">4,00000.00</span><span class="times money">04:12:06</span></p>
 					</div>
 				</li>
 			</ul>
@@ -71,48 +71,55 @@
 	var rootnode = $('[dataGao = "rootcon"]');
 	var childnode = $('[dataGao = "rootchild"]').clone();
 	$('[dataGao = "rootchild"]').remove();
- 	var i = 1;
- 	var myUrl = "http://test.cnceshi.com/";
- 	function mypullFresh() {
- 		setTimeout(function() {
+   	var i = 1;
+   	var myUrl = "http://test.cnceshi.com/";
+   	function mypullFresh() {
+   		setTimeout(function() {
 		    //业务逻辑代码，比如通过ajax从服务器获取新数据；
-			mui.ajax(myUrl+'index.php?m=Api&c=Goods&a=gooodsPurchase',{
+			mui.ajax(myUrl+'index.php?m=Api&c=Supplier&a=myOffer',{
 				data:{
 					pcurr: i
 				},
 				dataType:'json',//服务器返回json格式数据
 				type:'post',//HTTP请求类型
 				timeout:60000,//超时时间设置为10秒；
-//				headers:{'Content-Type':'application/json'},	              
 				success:function(data){
 					//服务器返回响应，根据响应结果，分析是否获取数据成功；
 					if( data.status == 200 ){
+						
 						$commonObj.loadListData({
 							sourceDataList : data.msg.root,
 							dataListRootNode : rootnode,
 							dataListChildNode : childnode,
 							dataAttrName : "dataGao",
 							dataHandleFn : function(){
-//								var mySrc = document.getElementsByClassName("myImg");
-//								var mySrc1 = document.getElementsByClassName("myimgs");
-//								for(var i=0;i<mySrc1.length;i++){
-//									for (var j=0;j<mySrc.length;j++){
-//										var myStr = myUrl+mySrc1[j].innerHTML; 
-//										mySrc[j].setAttribute("src",myStr);
-//									}	
-//								}
-//								
-//								//点击事件
-//								var mylist = document.getElementsByClassName("pd1-one-t");
-//								for(var j=0;j<mylist.length;j++){
-//									mylist[j].addEventListener('tap',function(){
-//										var id = $(this).children("p").html();
-////											alert(id);
-//										mui.openWindow({
-//									    	url:"a-purchase-detail1a1.html?id="+id
-//										})
-//									});	
-//								}
+								var mySrc = document.getElementsByClassName("myImg");
+								var mySrc1 = document.getElementsByClassName("myimgs");
+								for(var i=0;i<mySrc1.length;i++){
+									for (var j=0;j<mySrc.length;j++){
+										var myStr = myUrl+mySrc1[j].innerHTML; 
+										mySrc[j].setAttribute("src",myStr);
+									}	
+								}
+								var mytime = document.getElementsByClassName("time");
+								var mytimes = document.getElementsByClassName("times");
+								for(var i=0;i<mytime.length;i++){
+									for (var j=0;j<mytimes.length;j++){
+										mytimes[j].innerHTML=mytime[j].innerHTML.slice(11);
+									}	
+								}
+								
+								//点击事件
+								var mylist = document.getElementsByClassName("pd1-one-t");
+								for(var j=0;j<mylist.length;j++){
+									mylist[j].addEventListener('tap',function(){
+										var id = $(this).children("p").html();
+//											alert(id);
+										mui.openWindow({
+									    	url:"a-purchase-detail1a1.html?id="+id
+										})
+									});	
+								}
 							}
 						})
 						i++;

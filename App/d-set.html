@@ -61,16 +61,50 @@
 	</body>
 </html>
 <script type="text/javascript">
-	//意见反馈跳转进入详情页面
-		document.getElementById('myAdvice').addEventListener('tap', function() {
-			mui.openWindow({
-			    url:"d-set-opinion.html",
-			});
+//意见反馈跳转进入详情页面
+	document.getElementById('myAdvice').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-set-opinion.html",
 		});
-	//修改密码跳转进入详情页面
-		document.getElementById('mPwd').addEventListener('tap', function() {
-			mui.openWindow({
-			    url:"d-modifypassword.html",
-			});
+	});
+//修改密码跳转进入详情页面
+	document.getElementById('mPwd').addEventListener('tap', function() {
+		mui.openWindow({
+		    url:"d-modifypassword.html",
 		});
+	});
+	var myUrl = "http://test.cnceshi.com/";
+	document.getElementById('finallybtn').addEventListener('tap', function() {
+		var btnArray = ['否', '是'];
+		mui.confirm('确认退出？', '提示', btnArray, function(e) {
+			if (e.index == 1) {
+				mui.ajax(myUrl+'index.php?m=Api&c=Users&a=logout',{
+					type:'post',//HTTP请求类型
+					timeout:60000,//超时时间设置为10秒；
+					success:function(data){
+						//服务器返回响应，根据响应结果，分析是否获取数据成功；
+						if( data == 1 ){
+							mui.toast("退出成功！");
+							
+							localStorage.clear();
+							localStorage.clear();
+//							mui.openWindow({
+//							    url:"index-home.html",
+//							});
+//							location.href = "index-home.html";
+							mui.back();
+						}else{
+							mui.toast("未知错误！");
+						} 
+					},
+					error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(type);
+					}
+				});	
+		} else {
+				mui.toast("您取消了操作");	     
+			}
+		})
+	});
 </script>
