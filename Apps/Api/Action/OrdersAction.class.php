@@ -1,14 +1,42 @@
 <?php
 namespace Home\Action;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 订单控制器
- */
+*  订单控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年2月20日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class OrdersAction extends BaseAction {
+	
+	
+	
+	public function addToOrder(){
+		$m = D('Api/Order');
+		$rs = $m->addToOrder();
+		if($rs['status']==1){ 
+			$data["msg"] = '恭喜您成功参与该检修任务!';
+			$data = array('status'=>self::API_REQUEST_SUCCESS,'msg'=>$data);
+			$this->stringify($data);
+			 
+		}else{
+			//$data["msg"] = '数据输入失败，请检查...!';
+			$data = array('status'=>self::API_ADD_FALSE,'msg'=>$rs['msg']);
+			$this->stringify($data);
+		}
+		 
+		 
+		 
+	}
+	
+	
+	
+	
+	
 	/**
 	 * 获取待付款的订单列表
 	 */

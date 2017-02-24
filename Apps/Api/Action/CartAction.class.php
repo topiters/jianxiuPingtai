@@ -1,19 +1,22 @@
 <?php
-namespace Home\Action;
+namespace Api\Action;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 购物车控制器
- */
+*  抢单控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年2月20日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class CartAction extends BaseAction {
 	/**
 	 * 跳到购物车列表
 	 */
     public function toCart(){
-   		$m = D('Home/Cart');
+   		$m = D('Api/Cart');
 		$cartInfo = $m->getCartInfo();
    		$pnow = (int)I("pnow",0);
    		$this->assign('cartInfo',$cartInfo);
@@ -22,19 +25,15 @@ class CartAction extends BaseAction {
     }
     
     /**
-     * 添加商品到购物车(ajax)
+     * 添加任务到购物车(ajax)
      */
-	public function addToCartAjax(){
-   		$m = D('Home/Cart');
-   		$rs = $m->addToCart();
-   		$this->ajaxReturn($rs);
-    }
+	
     
     /**
      * 添加优惠套餐到购物车(ajax)
      */
     public function addCartPackage(){
-    	$m = D('Home/Cart');
+    	$m = D('Api/Cart');
     	$rs = $m->addCartPackage();
     	$this->ajaxReturn($rs);
     }
@@ -44,7 +43,7 @@ class CartAction extends BaseAction {
      * 
      */
     public function changeCartGoods(){
-    	$m = D('Home/Cart');
+    	$m = D('Api/Cart');
    		$res = $m->addToCart();
    		echo "{status:1}";
     }
@@ -54,7 +53,7 @@ class CartAction extends BaseAction {
 	 * 
 	 */
 	public function getCartInfo() {
-		$m = D('Home/Cart');
+		$m = D('Api/Cart');
 		$cartInfo = $m->getCartInfo();
 		$axm = (int)I("axm",0);
 		if($axm ==1){
@@ -78,7 +77,7 @@ class CartAction extends BaseAction {
 	 * 
 	 */
 	public function checkCartGoodsStock(){
-		$m = D('Home/Cart');
+		$m = D('Api/Cart');
 		$res = $m->checkCatGoodsStock();
 		echo json_encode($res);
 
@@ -91,7 +90,7 @@ class CartAction extends BaseAction {
 	 * 
 	 */
 	public function delCartGoods(){	
-		$m = D('Home/Cart');	
+		$m = D('Api/Cart');	
 		$res = $m->delCartGoods();
 		$cartInfo = $m->getCartInfo();
 		echo json_encode($cartInfo);
@@ -102,7 +101,7 @@ class CartAction extends BaseAction {
 	 *
 	 */
 	public function delPckCatGoods(){
-		$m = D('Home/Cart');
+		$m = D('Api/Cart');
 		$res = $m->delPckCatGoods();
 		$cartInfo = $m->getCartInfo();
 		echo json_encode($cartInfo);
@@ -118,7 +117,7 @@ class CartAction extends BaseAction {
 		$data['goodsId'] = (int)I('goodsId');
 		$data['isBook'] = (int)I('isBook');
 		$data['goodsAttrId'] = (int)I('goodsAttrId');
-		$goods = D('Home/Goods');
+		$goods = D('Api/Goods');
 		$goodsStock = $goods->getGoodsStock($data);
 		$num = (int)I("num");
 		if($goodsStock["goodsStock"]>=$num){
@@ -126,7 +125,7 @@ class CartAction extends BaseAction {
 		}else{
 			$num = (int)$goodsStock["goodsStock"];
 		}
-		$m = D('Home/Cart');
+		$m = D('Api/Cart');
 		$rs = $m->changeCartGoodsnum(abs($num));
 		$this->ajaxReturn($goodsStock);
 		
@@ -141,7 +140,7 @@ class CartAction extends BaseAction {
 		$data = array();
 		$data['packageId'] = (int)I('packageId');
 		$data['batchNo'] = (int)I('batchNo');
-		$goods = D('Home/Goods');
+		$goods = D('Api/Goods');
 		$goodsStock = $goods->getPkgGoodsStock($data);
 		$num = (int)I("num");
 		if($goodsStock["goodsStock"]>=$num){
@@ -149,7 +148,7 @@ class CartAction extends BaseAction {
 		}else{
 			$num = (int)$goodsStock["goodsStock"];
 		}
-		$m = D('Home/Cart');
+		$m = D('Api/Cart');
 		$rs = $m->changePkgCartGoodsNum(abs($num));
 		$this->ajaxReturn($goodsStock);
 	
@@ -160,7 +159,7 @@ class CartAction extends BaseAction {
 	 * 
 	 */
 	public function toCatpaylist(){	
-		$m = D('Home/Cart');
+		$m = D('Api/Cart');
 		$cartInfo = $m->getCartInfo();
 		$this->assign("cartInfo",$cartInfo);
 		

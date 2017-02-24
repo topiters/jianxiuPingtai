@@ -1,13 +1,16 @@
 <?php
-namespace Home\Model;
+namespace Api\Model;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 购物车服务类
- */
+*  抢单控制器
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年2月20日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class CartModel extends BaseModel {
 
 	/**
@@ -17,29 +20,30 @@ class CartModel extends BaseModel {
 		$rd = array('status'=>-1);
 		$m = M('cart');
 		//判断一下该商品是否正常	出售
-		$userId = (int)session('WST_USER.userId');
+		 $userId = (int)session('WST_USER.userId');
+		 $userType=session('WST_USER.userType');
+		if(($userType!=3)||($userType!=4)){//判断用户类型
+			$rd=array('status'=>-1,'msg'=>'你还不是检修企业或检修工程师，不能抢单或投标');
+			return $rd ;
+		} 
+		 
 		$goodsId = (int)I("goodsId");
-		$goodsAttrId = (int)I("goodsAttrId");
-        $goods = D('Home/Goods')->getGoodsSimpInfo($goodsId,$goodsAttrId);
-        if(empty($goods))return array('status'=>-1,'msg'=>'找不到指定的商品!');
-        if($goods['goodsStock']<=0)return array('status'=>-1,'msg'=>'对不起，商品'.$goods['goodsName'].'库存不足!');
-		$goodsCnt = ((int)I("gcount")>0)?(int)I("gcount"):1;
-		$isCheck = 1;
+        $goods = D('Api/Goods')->getGoodsSimpInfo($goodsId);
+        if(empty($goods))return array('status'=>-1,'msg'=>'找不到指定的检修任务!');
+        if($goods['goodsStatus']!=0)return array('status'=>-1,'msg'=>'对不起，该任务'.$goods['goodsName'].'已完成!');
+		
 		$rs = false;
-		$sql = "select * from __PREFIX__cart where userId=$userId and goodsId=$goodsId and goodsAttrId=$goodsAttrId and packageId=0";
+		$sql = "select * from __PREFIX__cart where userId=$userId and goodsId=$goodsId";
 		$row = $this->queryRow($sql);
 		if($row["cartId"]>0){
-			$data = array();
-			$data["goodsCnt"] = $row["goodsCnt"]+$goodsCnt;
-			$rs = $m->where("userId=$userId and goodsId=$goodsId and goodsAttrId=$goodsAttrId and packageId=0")->save($data);
-			
+			return array('status'=>-1,'msg'=>'你已经参与过该任务不能再次参与!');
 		}else{
 			$data = array();
 			$data["userId"] = $userId;
 			$data["goodsId"] = $goodsId;
-			$data["isCheck"] = $isCheck;
-			$data["goodsAttrId"] = $goodsAttrId;
-			$data["goodsCnt"] = $goodsCnt;
+			$data["isCheck"] = 1;
+
+			//$data["goodsCnt"] = $goodsCnt;
 			$rs = $m->add($data);
 		}
 		if(false !== $rs){
@@ -93,7 +97,7 @@ class CartModel extends BaseModel {
 				$goodsAttrId = (int)$gIds[1];
 				$goodsCnt = ((int)$gIds[2]>0)?(int)$gIds[2]:1;
 			
-				$goods = D('Home/Goods')->getGoodsSimpInfo($goodsId,$goodsAttrId);
+				$goods = D('Api/Goods')->getGoodsSimpInfo($goodsId,$goodsAttrId);
 				if(empty($goods)){
 					self::delCartPackage($userId,$packageId,$batchNo);
 					return array('status'=>-1,'msg'=>'找不到指定的商品!');
@@ -127,7 +131,7 @@ class CartModel extends BaseModel {
 				$goodsAttrId = (int)$gIds[1];
 				$goodsCnt = ((int)$gIds[2]>0)?(int)$gIds[2]:1;
 					
-				$goods = D('Home/Goods')->getGoodsSimpInfo($goodsId,$goodsAttrId);
+				$goods = D('Api/Goods')->getGoodsSimpInfo($goodsId,$goodsAttrId);
 				if(empty($goods)){
 					self::updCartPackage($userId, $cartIds, $goodsCnt);
 					return array('status'=>-1,'msg'=>'找不到指定的商品!');
@@ -193,7 +197,7 @@ class CartModel extends BaseModel {
 	 */
 	public function getCartInfo(){
 		
-		$mgoods = D('Home/Goods');
+		$mgoods = D('Api/Goods');
 		$userId = (int)session('WST_USER.userId');
 		$totalMoney = 0;
 		$cartgoods = array();
@@ -357,8 +361,8 @@ class CartModel extends BaseModel {
 	public function getPayCart(){
 		
 		$userId = (int)session('WST_USER.userId');
-		$mgoods = D('Home/Goods');
-		$maddress = D('Home/UserAddress');
+		$mgoods = D('Api/Goods');
+		$maddress = D('Api/UserAddress');
 		
 		$cartgoods = array();
 		
@@ -503,7 +507,7 @@ class CartModel extends BaseModel {
 	 */
 	public function checkCatGoodsStock(){
 
-		$mgoods = D('Home/Goods');
+		$mgoods = D('Api/Goods');
 		$userId = (int)session('WST_USER.userId');
 		$cartgoods = array();
 		$sql = "select * from __PREFIX__cart where userId = $userId";
@@ -536,7 +540,7 @@ class CartModel extends BaseModel {
 	 */
 	public function checkGoodsStock(){
 	
-		$mgoods = D('Home/Goods');
+		$mgoods = D('Api/Goods');
 		$userId = (int)session('WST_USER.userId');
 		$cartgoods = array();
 		$sql = "select * from __PREFIX__cart where userId = $userId and isCheck=1 ";

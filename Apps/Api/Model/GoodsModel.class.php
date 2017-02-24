@@ -19,7 +19,7 @@ class GoodsModel extends BaseModel {
 	public function getGoodsIndex(){
 		 
 		$isAdminRecom=1;//推荐,正在进行的任务
-		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId  where  g.isAdminRecom =$isAdminRecom AND g.goodStatus=1 ";
+		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId  where  g.isAdminRecom =$isAdminRecom AND g.goodStatus=0 ";
 		$result=D('goods')->pageQuery($sql,I("p"),30);
 		//var_dump(D('goods')->getLastSql());
 		//exit;
@@ -35,7 +35,7 @@ class GoodsModel extends BaseModel {
 		
 		$goodsId=I("goodsId");
 		
-		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId   where g.isAdminRecom =1 AND g.goodStatus=1 ";
+		$sql = "SELECT g.*,s.* FROM __PREFIX__goods  g LEFT JOIN __PREFIX__shops s  ON g.shopId=s.shopId   where g.isAdminRecom =1 AND g.goodStatus=0 ";
 		$result=D('goods')->query($sql);
 		//var_dump(D('goods')->getLastSql());
 		//exit;
@@ -130,6 +130,42 @@ public function gooodsPurchase(){
 		
 		return $rs;
 	}
+	
+	
+	/**
+	 * 查询检修任务简单信息
+	 */
+	public function getGoodsSimpInfo($goodsId){
+		$sql = "SELECT g.*,sp.shopId,sp.deliveryFreeMoney,sp.deliveryMoney,sp.deliveryStartMoney,sp.isInvoice,sp.serviceStartTime startTime,sp.serviceEndTime endTime,sp.deliveryType
+		FROM __PREFIX__goods g, __PREFIX__shops sp
+		WHERE g.shopId = sp.shopId AND g.goodsId = $goodsId AND g.isSale=1 AND g.goodsFlag = 1 AND g.goodsStatus = 0";
+		$rs = $this->queryRow($sql);
+		if(empty($rs))return array();
+		return $rs;
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 获取商品信息-购物车/核对订单用
@@ -937,33 +973,7 @@ public function gooodsPurchase(){
 		
 	}
 	
-	/**
-	 * 查询商品简单信息
-	 */
-	public function getGoodsSimpInfo($goodsId,$goodsAttrId){
-		$sql = "SELECT g.*,sp.shopId,sp.shopName,sp.deliveryFreeMoney,sp.deliveryMoney,sp.deliveryStartMoney,sp.isInvoice,sp.serviceStartTime startTime,sp.serviceEndTime endTime,sp.deliveryType 
-				FROM __PREFIX__goods g, __PREFIX__shops sp 
-				WHERE g.shopId = sp.shopId AND g.goodsId = $goodsId AND g.isSale=1 AND g.goodsFlag = 1 AND g.goodsStatus = 1";
-		$rs = $this->queryRow($sql);
-		if(empty($rs))return array();
-	    if($rs['attrCatId']>0){
-        	$sql = "select ga.id,ga.attrPrice,ga.attrStock,a.attrName,ga.attrVal,ga.attrId from __PREFIX__attributes a,__PREFIX__goods_attributes ga
-			        where a.attrId=ga.attrId and a.catId=".$rs['attrCatId']." 
-			        and ga.goodsId=".$rs['goodsId']." and id=".$goodsAttrId;
-			$priceAttrs = $this->queryRow($sql);
-			if(!empty($priceAttrs)){
-				$rs['attrId'] = $priceAttrs['attrId'];
-				$rs['goodsAttrId'] = $priceAttrs['id'];
-				$rs['attrName'] = $priceAttrs['attrName'];
-				$rs['attrVal'] = $priceAttrs['attrVal'];
-				$rs['shopPrice'] = $priceAttrs['attrPrice'];
-				$rs['goodsStock'] = $priceAttrs['attrStock'];
-			}
-        }
-        $rs['goodsAttrId'] = (int)$rs['goodsAttrId'];
-		return $rs;
-		
-	}
+
 	
 	
 	/**

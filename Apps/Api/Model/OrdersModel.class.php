@@ -1,14 +1,63 @@
 <?php
 namespace Home\Model;
 /**
- * ============================================================================
- * WSTMall开源商城
- * 官网地址:http://www.wstmall.net
- * 联系QQ:707563272
- * ============================================================================
- * 订单服务类
- */
+*  订单模型
+* ==============================================
+* 版权所有 2010-2016 http://www.chunni168.com
+* ----------------------------------------------
+* 这不是一个自由软件，未经授权不许任何使用和传播。
+* ==============================================
+* @date: 2017年2月20日
+* @author: top_iter 2504585798@qq.com
+* @version:1.0
+*/
 class OrdersModel extends BaseModel {
+	/**
+	 * 添加[正常]商品到购物车
+	 */
+	public function addToOrder(){
+		$rd = array('status'=>-1);
+		$m = M('orders');
+		//判断一下该商品是否正常	出售
+		$userId = (int)session('WST_USER.userId');
+		if(empty($userId)){
+			$rd=array('status'=>-1,'msg'=>'你还没有登录');
+		}
+		$userType=session('WST_USER.userType');
+		if(($userType!=3)||($userType!=4)){//判断用户类型
+			$rd=array('status'=>-1,'msg'=>'你还不是检修企业或检修工程师，不能抢单或投标');
+			return $rd ;
+		}	
+		$goodsId = (int)I("goodsId");
+		$goods = D('Api/Goods')->getGoodsSimpInfo($goodsId);
+		if(empty($goods))return array('status'=>-1,'msg'=>'找不到指定的检修任务!');
+		if($goods['goodsStatus']!=0)return array('status'=>-1,'msg'=>'对不起，该任务'.$goods['goodsName'].'已完成!');
+		$rs = false;
+		$sql = "select * from __PREFIX__orders where userId=$userId and goodsId=$goodsId";
+		$row = $this->queryRow($sql);
+		if($row["orderId"]>0){
+			return array('status'=>-1,'msg'=>'你已经参与过该任务不能再次参与!');
+		}else{
+			$data = array();
+			$data["userId"] = $userId;
+			$data["goodsId"] = $goodsId;
+			//$data["isCheck"] = 1;
+			$data["orderNo"]=time().rand(1000,9999);//随机订单号
+			$data["shopId"]=$goods["shopId"];
+			$data["totalMoney"]=$goods["shopPrice"];//金额
+			$data["createTime"]=date("Y-m-d H:i:s");
+			//$data["goodsCnt"] = $goodsCnt;
+			$rs = $m->add($data);
+		}
+		if(false !== $rs){
+			$rd['status']= 1;
+		}
+		return $rd;
+	}
+	
+	
+	
+	
 	/**
 	 * 获以订单列表
 	 */
